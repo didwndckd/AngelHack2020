@@ -17,6 +17,9 @@
 		314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */; };
 		314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FD24BCD2DA00A6D492 /* InProcessView.swift */; };
 		314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */; };
+		314E850224BCD69500A6D492 /* PlayerInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850124BCD69500A6D492 /* PlayerInformationView.swift */; };
+		314E850424BCD7A600A6D492 /* PlayerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850324BCD7A600A6D492 /* PlayerProgressView.swift */; };
+		314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850524BCD8EE00A6D492 /* DoubleExtension.swift */; };
 		4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */; };
 		4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */; };
 		4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D424BBFE5E0035BD5B /* MainVC.swift */; };
@@ -42,6 +45,9 @@
 		314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProcessStudyVC.swift; sourceTree = "<group>"; };
 		314E84FD24BCD2DA00A6D492 /* InProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProcessView.swift; sourceTree = "<group>"; };
 		314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlayerView.swift; sourceTree = "<group>"; };
+		314E850124BCD69500A6D492 /* PlayerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationView.swift; sourceTree = "<group>"; };
+		314E850324BCD7A600A6D492 /* PlayerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProgressView.swift; sourceTree = "<group>"; };
+		314E850524BCD8EE00A6D492 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Fastcampus/Views/Study/InProcess/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FB756CD24BBFE5E0035BD5B /* Fastcampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fastcampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +121,8 @@
 			children = (
 				314E84FD24BCD2DA00A6D492 /* InProcessView.swift */,
 				314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */,
+				314E850124BCD69500A6D492 /* PlayerInformationView.swift */,
+				314E850324BCD7A600A6D492 /* PlayerProgressView.swift */,
 			);
 			path = InProcess;
 			sourceTree = "<group>";
@@ -196,6 +204,7 @@
 		CF29217324BC051C001318CB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				314E850524BCD8EE00A6D492 /* DoubleExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -345,12 +354,15 @@
 				CF29217824BC056C001318CB /* View.swift in Sources */,
 				314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */,
 				CF29217624BC053B001318CB /* ViewController.swift in Sources */,
+				314E850424BCD7A600A6D492 /* PlayerProgressView.swift in Sources */,
 				CFE3C9AD24BC6CAF009E8E2F /* SampleVC.swift in Sources */,
+				314E850224BCD69500A6D492 /* PlayerInformationView.swift in Sources */,
 				314E84F824BCBC9A00A6D492 /* WaitingStudyContentView.swift in Sources */,
 				314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */,
 				CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */,
 				4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */,
 				314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */,
+				314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */,
 				314E84EE24BCA29600A6D492 /* StudyFrameView.swift in Sources */,
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				314E84E224BC8A7400A6D492 /* Study.swift in Sources */,
