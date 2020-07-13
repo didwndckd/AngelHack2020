@@ -19,11 +19,11 @@ class WaitingView: StudyFrameView<TimerView, WaitingStudyContentView> {
   
   
   func updateTimer(timeInterval: Double) {
-    topView.configure(timeInterval: timeInterval)
+    headerView.configure(timeInterval: timeInterval)
   }
   
   func updateContent(study: Study) {
-    bottomView.configure(rule: study.rule, unitTitle: study.unitTitle, unitContent: study.unitContent)
+    bodyView.configure(rule: study.rule, unitTitle: study.unitTitle, unitContent: study.unitContent)
   }
   
 }

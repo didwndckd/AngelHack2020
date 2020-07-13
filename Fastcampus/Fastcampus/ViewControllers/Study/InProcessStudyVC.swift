@@ -7,7 +7,12 @@
 //
 
 import UIKit
+import AVFoundation
 
-class InProcessStudyVC: View {
+class InProcessStudyVC: ViewController<InProcessView> {
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+  }
 }
