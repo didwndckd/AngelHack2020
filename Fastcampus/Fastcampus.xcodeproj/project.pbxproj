@@ -47,7 +47,7 @@
 		314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlayerView.swift; sourceTree = "<group>"; };
 		314E850124BCD69500A6D492 /* PlayerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationView.swift; sourceTree = "<group>"; };
 		314E850324BCD7A600A6D492 /* PlayerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProgressView.swift; sourceTree = "<group>"; };
-		314E850524BCD8EE00A6D492 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Fastcampus/Views/Study/InProcess/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
+		314E850524BCD8EE00A6D492 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Fastcampus/Extension/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FB756CD24BBFE5E0035BD5B /* Fastcampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fastcampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +127,14 @@
 			path = InProcess;
 			sourceTree = "<group>";
 		};
+		314E850824BCDAF700A6D492 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				314E850524BCD8EE00A6D492 /* DoubleExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		4FB756C424BBFE5E0035BD5B = {
 			isa = PBXGroup;
 			children = (
@@ -149,9 +157,9 @@
 			isa = PBXGroup;
 			children = (
 				4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */,
+				314E850824BCDAF700A6D492 /* Extension */,
 				314E84E324BC9CA100A6D492 /* Resource */,
 				CF29217424BC0521001318CB /* Classes */,
-				CF29217324BC051C001318CB /* Extensions */,
 				CF29217224BC0512001318CB /* ViewControllers */,
 				CF29217124BC050D001318CB /* Views */,
 				CF29217024BC0509001318CB /* Cells */,
@@ -199,14 +207,6 @@
 				4FB756D424BBFE5E0035BD5B /* MainVC.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		CF29217324BC051C001318CB /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				314E850524BCD8EE00A6D492 /* DoubleExtension.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CF29217424BC0521001318CB /* Classes */ = {
