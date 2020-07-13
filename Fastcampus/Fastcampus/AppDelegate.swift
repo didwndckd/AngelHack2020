@@ -19,7 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     FirebaseApp.configure()
     
     window = UIWindow(frame: UIScreen.main.bounds)
-    window?.rootViewController = MainVC()
+    let navigationController = UINavigationController(rootViewController: MainVC())
+    navigationController.navigationBar.barTintColor = #colorLiteral(red: 0.9263463616, green: 0.9208396077, blue: 0.9305793047, alpha: 1)
+    navigationController.navigationBar.prefersLargeTitles = true
+    window?.rootViewController = navigationController
     window?.makeKeyAndVisible()
     return true
   }

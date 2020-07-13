@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol MainViewDelegate: class {
+protocol SampleViewDelegate: class {
   func test()
 }
 
-class MainView: View {
-  weak var delegate: MainViewDelegate?
+class SampleView: View {
+  weak var delegate: SampleViewDelegate?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -32,7 +32,7 @@ class MainView: View {
   }
 }
 
-private extension MainView {
+private extension SampleView {
   @objc private func testFunc() {
     delegate?.test()
   }

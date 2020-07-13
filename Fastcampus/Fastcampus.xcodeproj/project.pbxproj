@@ -15,7 +15,11 @@
 		4FB756DD24BBFE5E0035BD5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB756DB24BBFE5E0035BD5B /* LaunchScreen.storyboard */; };
 		CF29217624BC053B001318CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217524BC053B001318CB /* ViewController.swift */; };
 		CF29217824BC056C001318CB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217724BC056C001318CB /* View.swift */; };
-		CF29217A24BC05C7001318CB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217924BC05C7001318CB /* MainView.swift */; };
+		CF29217A24BC05C7001318CB /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217924BC05C7001318CB /* SampleView.swift */; };
+		CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A624BC6482009E8E2F /* MainCell.swift */; };
+		CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A824BC6603009E8E2F /* Lecture.swift */; };
+		CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9AA24BC660E009E8E2F /* User.swift */; };
+		CFE3C9AD24BC6CAF009E8E2F /* SampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9AC24BC6CAF009E8E2F /* SampleVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +35,11 @@
 		A917C66ED4E895A9EED20662 /* Pods-Fastcampus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fastcampus.debug.xcconfig"; path = "Target Support Files/Pods-Fastcampus/Pods-Fastcampus.debug.xcconfig"; sourceTree = "<group>"; };
 		CF29217524BC053B001318CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CF29217724BC056C001318CB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		CF29217924BC05C7001318CB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		CF29217924BC05C7001318CB /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		CFE3C9A624BC6482009E8E2F /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
+		CFE3C9A824BC6603009E8E2F /* Lecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lecture.swift; sourceTree = "<group>"; };
+		CFE3C9AA24BC660E009E8E2F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CFE3C9AC24BC6CAF009E8E2F /* SampleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,8 @@
 		CF29216F24BC0503001318CB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CFE3C9A824BC6603009E8E2F /* Lecture.swift */,
+				CFE3C9AA24BC660E009E8E2F /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -92,6 +102,7 @@
 		CF29217024BC0509001318CB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				CFE3C9A624BC6482009E8E2F /* MainCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -99,7 +110,7 @@
 		CF29217124BC050D001318CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CF29217924BC05C7001318CB /* MainView.swift */,
+				CF29217924BC05C7001318CB /* SampleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -107,6 +118,7 @@
 		CF29217224BC0512001318CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CFE3C9AC24BC6CAF009E8E2F /* SampleVC.swift */,
 				4FB756D424BBFE5E0035BD5B /* MainVC.swift */,
 			);
 			path = ViewControllers;
@@ -262,8 +274,12 @@
 			files = (
 				CF29217824BC056C001318CB /* View.swift in Sources */,
 				CF29217624BC053B001318CB /* ViewController.swift in Sources */,
+				CFE3C9AD24BC6CAF009E8E2F /* SampleVC.swift in Sources */,
+				CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */,
 				4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */,
-				CF29217A24BC05C7001318CB /* MainView.swift in Sources */,
+				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
+				CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */,
+				CF29217A24BC05C7001318CB /* SampleView.swift in Sources */,
 				4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,7 +418,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KTUDJ7GBJC;
 				INFOPLIST_FILE = Fastcampus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -422,7 +438,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KTUDJ7GBJC;
 				INFOPLIST_FILE = Fastcampus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
