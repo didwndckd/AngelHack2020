@@ -34,34 +34,12 @@ class TimerView: View {
   
   func configure(timeInterval: Double) {
     let isTimeOver = timeInterval <= 0
-    let ratingTime = isTimeOver ? intervalToString(interval: 0): intervalToString(interval: timeInterval)
+    let remainingTime = isTimeOver ? Double(0).remainingTime: timeInterval.remainingTime
     let textColor: UIColor = isTimeOver ? .red: .blue
     
     timerLabel.textColor = textColor
-    timerLabel.text = ratingTime
+    timerLabel.text = remainingTime
   }
   
-  private func intervalToString(interval: Double) -> String {
-    let interval = Int(interval)
-    let oneMinute = 60
-    let oneHour = oneMinute * 60
-    let oneday = oneHour * 24
-    
-    let days = interval / oneday
-    let daysToString = days != 0 ? "\(days)일 ": ""
-    
-    let hours = (interval - (days * oneday)) / oneHour
-    let hoursToString = hours < 10 ? "0\(hours)": "\(hours)"
-    
-    let minutes = (interval - (days * oneday) - (hours * oneHour)) / oneMinute
-    let minuteToString = minutes < 10 ? "0\(minutes)": "\(minutes)"
-    
-    let sec = (interval - (days * oneday) - (hours * oneHour) - (minutes * oneMinute))
-    let secToString = sec < 10 ? "0\(sec)": "\(sec)"
-
-    let result = daysToString + hoursToString + ":" + minuteToString + ":" + secToString
-    
-    return result
-  }
   
 }
