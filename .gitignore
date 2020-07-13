@@ -1,6 +1,8 @@
 
+
 # Created by https://www.toptal.com/developers/gitignore/api/swift,cocoapods,macos,xcode
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,cocoapods,macos,xcode
+
 
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
@@ -93,7 +95,7 @@ playground.xcworkspace
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 # Pods/
 # Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
+*.xcworkspace
 
 # Carthage
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
@@ -139,4 +141,6 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+
 # End of https://www.toptal.com/developers/gitignore/api/swift,cocoapods,macos,xcode
+
