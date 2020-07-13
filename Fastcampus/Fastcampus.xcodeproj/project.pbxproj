@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		102EF4C3E448C56051ADCE3B /* Pods_Fastcampus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB106B0C03588AC2F402DA2 /* Pods_Fastcampus.framework */; };
 		314E84E224BC8A7400A6D492 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E124BC8A7400A6D492 /* Study.swift */; };
+		314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */; };
+		314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E924BCA07800A6D492 /* WaitingView.swift */; };
 		4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */; };
 		4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */; };
 		4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D424BBFE5E0035BD5B /* MainVC.swift */; };
@@ -25,6 +27,9 @@
 
 /* Begin PBXFileReference section */
 		314E84E124BC8A7400A6D492 /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
+		314E84E424BC9CC200A6D492 /* test.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.MP4; sourceTree = "<group>"; };
+		314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingStudyVC.swift; sourceTree = "<group>"; };
+		314E84E924BCA07800A6D492 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FB756CD24BBFE5E0035BD5B /* Fastcampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fastcampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +61,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		314E84E324BC9CA100A6D492 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				314E84E424BC9CC200A6D492 /* test.MP4 */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		314E84E524BC9DC600A6D492 /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
+		314E84E624BC9FA600A6D492 /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				314E84E924BCA07800A6D492 /* WaitingView.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
 		4FB756C424BBFE5E0035BD5B = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */,
+				314E84E324BC9CA100A6D492 /* Resource */,
 				CF29217424BC0521001318CB /* Classes */,
 				CF29217324BC051C001318CB /* Extensions */,
 				CF29217224BC0512001318CB /* ViewControllers */,
@@ -113,6 +143,7 @@
 		CF29217124BC050D001318CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				314E84E624BC9FA600A6D492 /* Study */,
 				CF29217924BC05C7001318CB /* SampleView.swift */,
 			);
 			path = Views;
@@ -121,6 +152,7 @@
 		CF29217224BC0512001318CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				314E84E524BC9DC600A6D492 /* Study */,
 				CFE3C9AC24BC6CAF009E8E2F /* SampleVC.swift */,
 				4FB756D424BBFE5E0035BD5B /* MainVC.swift */,
 			);
@@ -275,7 +307,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */,
 				CF29217824BC056C001318CB /* View.swift in Sources */,
+				314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */,
 				CF29217624BC053B001318CB /* ViewController.swift in Sources */,
 				CFE3C9AD24BC6CAF009E8E2F /* SampleVC.swift in Sources */,
 				CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */,

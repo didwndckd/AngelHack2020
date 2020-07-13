@@ -26,9 +26,4 @@ struct Study: Codable {
     case finished
   }
   
-  
-  func test() {
-    
-  }
-  
 }
