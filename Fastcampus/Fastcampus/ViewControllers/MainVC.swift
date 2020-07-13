@@ -8,13 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainVC: ViewController<MainView> {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
+    customView.delegate = self
   }
-
-
 }
 
+extension MainVC: MainViewDelegate {
+  func test() {
+    
+  }
+}
