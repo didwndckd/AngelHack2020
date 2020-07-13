@@ -8,14 +8,33 @@
 
 import UIKit
 
-class PlayerProgressView: UIView {
+class PlayerProgressView: View {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+  let progressBar = UIProgressView()
+  let remainingTimeLabel = UILabel()
+  
+  override func attribute() {
+    remainingTimeLabel.text = "00:00:00"
+    progressBar.tintColor = .red
+    progressBar.setProgress(0.5, animated: true)
+  }
+  
+  override func setupUI() {
+    super.setupUI()
+    [progressBar, remainingTimeLabel].forEach({
+      addSubview($0)
+      $0.translatesAutoresizingMaskIntoConstraints = false
+    })
+    let margin: CGFloat = 4
+    
+    remainingTimeLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    remainingTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    remainingTimeLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    
+    progressBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    progressBar.centerYAnchor.constraint(equalTo: remainingTimeLabel.centerYAnchor).isActive = true
+    progressBar.trailingAnchor.constraint(equalTo: remainingTimeLabel.leadingAnchor, constant: margin).isActive = true
+    
+  }
 
 }

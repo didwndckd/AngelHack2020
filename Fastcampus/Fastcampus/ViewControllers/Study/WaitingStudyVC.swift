@@ -27,6 +27,8 @@ class WaitingStudyVC: ViewController<WaitingView> {
   override func viewDidLoad() {
     super.viewDidLoad()
     attribute()
+    // test용 함수 호출
+    pushInProcessStudyVC()
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -69,7 +71,10 @@ class WaitingStudyVC: ViewController<WaitingView> {
     customView.updateTimer(timeInterval: timeInterval)
   }
   
-  
+  private func pushInProcessStudyVC() {
+    let vc = InProcessStudyVC()
+    navigationController?.pushViewController(vc, animated: true)
+  }
   
   
   

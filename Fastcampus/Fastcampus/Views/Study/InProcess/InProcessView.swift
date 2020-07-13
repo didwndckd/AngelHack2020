@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InProcessView: StudyFrameView<UIView, UITableView> {
+class InProcessView: StudyFrameView<StudyPlayerView, UITableView> {
 
   
     
