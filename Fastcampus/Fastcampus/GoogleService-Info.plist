@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>522568355515-i7e7ektrs9iqfe1rpuk1na2sfh8mvnqa.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.522568355515-i7e7ektrs9iqfe1rpuk1na2sfh8mvnqa</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDvVl8VHPQcgb_GrRUer9SCg6s1GWNqSa8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>522568355515</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.TeamQED.Fastcampus</string>
+	<key>PROJECT_ID</key>
+	<string>angelhack2020-b58b4</string>
+	<key>STORAGE_BUCKET</key>
+	<string>angelhack2020-b58b4.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:522568355515:ios:b641d31c3f4cb3133ba39e</string>
+	<key>DATABASE_URL</key>
+	<string>https://angelhack2020-b58b4.firebaseio.com</string>
+</dict>
+</plist>

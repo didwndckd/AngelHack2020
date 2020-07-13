@@ -6,5 +6,14 @@ target 'Fastcampus' do
   use_frameworks!
 
   # Pods for Fastcampus
+
   pod 'SnapKit'
+
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Messaging'
+
 end
