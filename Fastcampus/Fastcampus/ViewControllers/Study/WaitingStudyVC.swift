@@ -9,22 +9,69 @@
 import UIKit
 
 class WaitingStudyVC: ViewController<WaitingView> {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+  
+  typealias UnitInformation = (title: String, content: String)
+  
+  private var study: Study
+  private var timer: Timer?
+  
+  init(study: Study) {
+    self.study = study
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    attribute()
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    startTimer()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(true)
+    stopTimer()
+  }
+  
+  private func attribute() {
+    self.title = study.title
+    self.navigationItem.largeTitleDisplayMode = .never
+    customView.updateContent(study: study)
+  }
+  
+  private func startTimer() {
+    if let timer = self.timer, !timer.isValid {
+      self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerCallBack(_:)), userInfo: nil, repeats: true)
+    } else {
+      self.timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerCallBack(_:)), userInfo: nil, repeats: true)
+    }
+  }
+  
+  private func stopTimer() {
+    timer?.invalidate()
+    timer = nil
+  }
+  
+  @objc private func timerCallBack(_ sender: Timer) {
+    let timeInterval = study.date.timeIntervalSince(Date())
+    
+    guard timeInterval > 0 else {
+      customView.updateTimer(timeInterval: timeInterval)
+      stopTimer()
+      return
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    customView.updateTimer(timeInterval: timeInterval)
+  }
+  
+  
+  
+  
+  
 }
+

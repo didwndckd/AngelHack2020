@@ -15,10 +15,12 @@ struct Study: Codable {
   let id: Int
   let title: String
   let date: Date
-  let Rule: String
+  let rule: String
   var userIDs: [String]
   var qnaIDs: [String]
   var inProcess: ProcessStatus
+  let unitTitle: String
+  let unitContent: String
   
   enum ProcessStatus: Int, Codable {
     case wait
@@ -27,3 +29,4 @@ struct Study: Codable {
   }
   
 }
+
