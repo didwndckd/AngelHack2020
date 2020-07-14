@@ -10,6 +10,8 @@ import UIKit
 
 class InProcessView: StudyFrameView<StudyPlayerView, UITableView> {
 
-  
+  func addPlayerLayer(playerLayer: CALayer) {
+    headerView.addPlayerLayer(playerLayer: playerLayer)
+  }
     
 }

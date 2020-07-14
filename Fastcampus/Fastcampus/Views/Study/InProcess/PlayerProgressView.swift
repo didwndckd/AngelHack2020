@@ -33,7 +33,7 @@ class PlayerProgressView: View {
     
     progressBar.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     progressBar.centerYAnchor.constraint(equalTo: remainingTimeLabel.centerYAnchor).isActive = true
-    progressBar.trailingAnchor.constraint(equalTo: remainingTimeLabel.leadingAnchor, constant: margin).isActive = true
+    progressBar.trailingAnchor.constraint(equalTo: remainingTimeLabel.leadingAnchor, constant: -margin).isActive = true
     
   }
 
