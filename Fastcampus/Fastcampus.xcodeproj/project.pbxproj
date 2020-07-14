@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		102EF4C3E448C56051ADCE3B /* Pods_Fastcampus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB106B0C03588AC2F402DA2 /* Pods_Fastcampus.framework */; };
+		314E84E224BC8A7400A6D492 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E124BC8A7400A6D492 /* Study.swift */; };
+		314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */; };
+		314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E924BCA07800A6D492 /* WaitingView.swift */; };
+		314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84EB24BCA1FD00A6D492 /* TimerView.swift */; };
+		314E84EE24BCA29600A6D492 /* StudyFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84ED24BCA29600A6D492 /* StudyFrameView.swift */; };
+		314E84F824BCBC9A00A6D492 /* WaitingStudyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84F724BCBC9A00A6D492 /* WaitingStudyContentView.swift */; };
+		314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */; };
+		314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FD24BCD2DA00A6D492 /* InProcessView.swift */; };
+		314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */; };
+		314E850224BCD69500A6D492 /* PlayerInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850124BCD69500A6D492 /* PlayerInformationView.swift */; };
+		314E850424BCD7A600A6D492 /* PlayerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850324BCD7A600A6D492 /* PlayerProgressView.swift */; };
+		314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850524BCD8EE00A6D492 /* DoubleExtension.swift */; };
 		4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */; };
 		4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */; };
 		4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D424BBFE5E0035BD5B /* MainVC.swift */; };
@@ -23,6 +35,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		314E84E124BC8A7400A6D492 /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
+		314E84E424BC9CC200A6D492 /* test.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.MP4; sourceTree = "<group>"; };
+		314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingStudyVC.swift; sourceTree = "<group>"; };
+		314E84E924BCA07800A6D492 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
+		314E84EB24BCA1FD00A6D492 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		314E84ED24BCA29600A6D492 /* StudyFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyFrameView.swift; sourceTree = "<group>"; };
+		314E84F724BCBC9A00A6D492 /* WaitingStudyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingStudyContentView.swift; sourceTree = "<group>"; };
+		314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProcessStudyVC.swift; sourceTree = "<group>"; };
+		314E84FD24BCD2DA00A6D492 /* InProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProcessView.swift; sourceTree = "<group>"; };
+		314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlayerView.swift; sourceTree = "<group>"; };
+		314E850124BCD69500A6D492 /* PlayerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationView.swift; sourceTree = "<group>"; };
+		314E850324BCD7A600A6D492 /* PlayerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProgressView.swift; sourceTree = "<group>"; };
+		314E850524BCD8EE00A6D492 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Fastcampus/Extension/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FB756CD24BBFE5E0035BD5B /* Fastcampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fastcampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +79,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		314E84E324BC9CA100A6D492 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				314E84E424BC9CC200A6D492 /* test.MP4 */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		314E84E524BC9DC600A6D492 /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */,
+				314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
+		314E84E624BC9FA600A6D492 /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				314E84FC24BCD2B100A6D492 /* InProcess */,
+				314E84FB24BCD29800A6D492 /* Waiting */,
+				314E84ED24BCA29600A6D492 /* StudyFrameView.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
+		314E84FB24BCD29800A6D492 /* Waiting */ = {
+			isa = PBXGroup;
+			children = (
+				314E84E924BCA07800A6D492 /* WaitingView.swift */,
+				314E84EB24BCA1FD00A6D492 /* TimerView.swift */,
+				314E84F724BCBC9A00A6D492 /* WaitingStudyContentView.swift */,
+			);
+			path = Waiting;
+			sourceTree = "<group>";
+		};
+		314E84FC24BCD2B100A6D492 /* InProcess */ = {
+			isa = PBXGroup;
+			children = (
+				314E84FD24BCD2DA00A6D492 /* InProcessView.swift */,
+				314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */,
+				314E850124BCD69500A6D492 /* PlayerInformationView.swift */,
+				314E850324BCD7A600A6D492 /* PlayerProgressView.swift */,
+			);
+			path = InProcess;
+			sourceTree = "<group>";
+		};
+		314E850824BCDAF700A6D492 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				314E850524BCD8EE00A6D492 /* DoubleExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		4FB756C424BBFE5E0035BD5B = {
 			isa = PBXGroup;
 			children = (
@@ -76,8 +157,9 @@
 			isa = PBXGroup;
 			children = (
 				4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */,
+				314E850824BCDAF700A6D492 /* Extension */,
+				314E84E324BC9CA100A6D492 /* Resource */,
 				CF29217424BC0521001318CB /* Classes */,
-				CF29217324BC051C001318CB /* Extensions */,
 				CF29217224BC0512001318CB /* ViewControllers */,
 				CF29217124BC050D001318CB /* Views */,
 				CF29217024BC0509001318CB /* Cells */,
@@ -95,6 +177,7 @@
 			children = (
 				CFE3C9A824BC6603009E8E2F /* Lecture.swift */,
 				CFE3C9AA24BC660E009E8E2F /* User.swift */,
+				314E84E124BC8A7400A6D492 /* Study.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -110,6 +193,7 @@
 		CF29217124BC050D001318CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				314E84E624BC9FA600A6D492 /* Study */,
 				CF29217924BC05C7001318CB /* SampleView.swift */,
 			);
 			path = Views;
@@ -118,17 +202,11 @@
 		CF29217224BC0512001318CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				314E84E524BC9DC600A6D492 /* Study */,
 				CFE3C9AC24BC6CAF009E8E2F /* SampleVC.swift */,
 				4FB756D424BBFE5E0035BD5B /* MainVC.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		CF29217324BC051C001318CB /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CF29217424BC0521001318CB /* Classes */ = {
@@ -272,12 +350,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */,
 				CF29217824BC056C001318CB /* View.swift in Sources */,
+				314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */,
 				CF29217624BC053B001318CB /* ViewController.swift in Sources */,
+				314E850424BCD7A600A6D492 /* PlayerProgressView.swift in Sources */,
 				CFE3C9AD24BC6CAF009E8E2F /* SampleVC.swift in Sources */,
+				314E850224BCD69500A6D492 /* PlayerInformationView.swift in Sources */,
+				314E84F824BCBC9A00A6D492 /* WaitingStudyContentView.swift in Sources */,
+				314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */,
 				CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */,
 				4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */,
+				314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */,
+				314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */,
+				314E84EE24BCA29600A6D492 /* StudyFrameView.swift in Sources */,
+				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
+				314E84E224BC8A7400A6D492 /* Study.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
+				314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */,
 				CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */,
 				CF29217A24BC05C7001318CB /* SampleView.swift in Sources */,
 				4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */,

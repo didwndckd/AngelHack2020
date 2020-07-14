@@ -72,5 +72,23 @@ class MainVC: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
+    if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
+      let vc = WaitingStudyVC(
+        study: Study(
+        id: 1,
+        title: "Let's Swift 스터디",
+        date: Date(timeIntervalSinceNow: 3600),
+        rule: "비방, 욕설 하지마세요 ~ ",
+        userIDs: [],
+        qnaIDs: [],
+        inProcess: .wait,
+        unitTitle: lecture[indexPath.row].title,
+        unitContent: "강의\nSwift 기초 강의\n잘해봐요~")
+      )
+      
+      navigationController?.pushViewController(vc, animated: true)
+      
+    }
+    
   }
 }
