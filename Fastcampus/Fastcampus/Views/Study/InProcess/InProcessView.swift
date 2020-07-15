@@ -8,13 +8,64 @@
 
 import UIKit
 
+
+protocol InProcessViewDelegate: StudyPlayerViewDelegate {
+  
+}
+
 class InProcessView: StudyFrameView<StudyPlayerView, UITableView> {
   
-  func updatePlaySection(time: Int64) {
-    headerView.updatePlaySection(time: time)
+  private weak var delegate: InProcessViewDelegate?
+  
+  override func attribute() {
+    super.attribute()
+    bringSubviewToFront(headerView)
   }
+  
+  override func setupUI() {
+    super.setupUI()
+  }
+  
   func configurePlayerView(maximumValue: Int64, layer: CALayer) {
     headerView.configure(maximumTime: maximumValue, layer: layer)
   }
-    
+  
+  func setupDelegate(vc: StudyPlayerViewDelegate & UITableViewDelegate & UITableViewDataSource) {
+    bodyView.dataSource = vc
+    bodyView.delegate = vc
+    headerView.delegate = vc
+  }
+  
+  
+  // MARK: Action
+  func updatePlaySection(time: Int64) {
+    headerView.updatePlaySection(time: time)
+  }
+  
+  func switchScreenMode(isFull: Bool) {
+    if isFull {
+      changeFullScreen()
+    } else {
+      changeMiniScreen()
+    }
+  }
+  
+  private func changeFullScreen() {
+    bringSubviewToFront(headerView)
+    headerView.snp.remakeConstraints({
+      $0.leading.top.trailing.bottom.equalToSuperview()
+    })
+    self.layoutIfNeeded()
+  }
+  
+  private func changeMiniScreen() {
+    headerView.snp.remakeConstraints({
+      let guide = safeAreaLayoutGuide
+      $0.top.leading.trailing.equalTo(guide)
+      $0.height.equalTo(guide).multipliedBy(0.3)
+    })
+    self.layoutIfNeeded()
+  }
+  
+  
 }
