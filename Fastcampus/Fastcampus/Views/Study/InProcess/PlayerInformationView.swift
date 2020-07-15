@@ -15,9 +15,15 @@ class PlayerInformationView: View {
   private let progressView = PlayerProgressView()
   private let screenModeButton = UIButton()
   
+  var isAppear = false {
+    didSet {
+      appearAnimation(isAppear: self.isAppear)
+    }
+  }
   
   override func attribute() {
     super.attribute()
+    backgroundColor = .clear
     backgroundView.backgroundColor = .black
     backgroundView.alpha = 0.2
     
@@ -39,6 +45,7 @@ class PlayerInformationView: View {
     
     let margin: CGFloat = 8
     
+    
     backgroundView.topAnchor.constraint(equalTo: topAnchor).isActive = true
     backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -54,6 +61,19 @@ class PlayerInformationView: View {
     questionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: margin).isActive = true
     questionButton.bottomAnchor.constraint(equalTo: progressView.topAnchor, constant: -margin).isActive = true
     
+  }
+  
+  private func appearAnimation(isAppear: Bool) {
+    let alpha: CGFloat = isAppear ? 1: 0
+    UIView.animate(withDuration: 0.2, animations: {
+      [weak self] in
+      self?.alpha = alpha
+    })
+  }
+  
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    isAppear = false
   }
   
 }
