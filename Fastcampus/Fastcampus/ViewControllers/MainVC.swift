@@ -20,6 +20,8 @@ class MainVC: UITableViewController {
   private let db = Firestore.firestore()
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    createStudy()
     populatorLectureData()
     attribute()
   }
@@ -90,5 +92,22 @@ class MainVC: UITableViewController {
       
     }
     
+  }
+}
+
+
+
+// MARK: - 임시 스터디 생성 / 작성자: UPs
+
+extension MainVC {
+  private func createStudy() {
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "스터디 생성", style: .done, target: self, action: #selector(createStudyDidTap))
+  }
+  
+  
+  @objc private func createStudyDidTap() {
+    let studyConfigureVC = StudyConfigureVC()
+    studyConfigureVC.modalPresentationStyle = .overFullScreen
+    self.present(studyConfigureVC, animated: true)
   }
 }
