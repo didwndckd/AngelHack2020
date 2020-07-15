@@ -22,6 +22,9 @@
 		316C502E24BE129500D7F59A /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = 316C502D24BE129500D7F59A /* test.mov */; };
 		316C502F24BE169300D7F59A /* SODA_1594647376.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */; };
 		4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */; };
+		4F649B2724BEEA5200E0B073 /* StudyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F649B2624BEEA5200E0B073 /* StudyService.swift */; };
+		4F8838FA24BEB0A7009EF09A /* StudyConfigureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8838F924BEB0A7009EF09A /* StudyConfigureVC.swift */; };
+		4F8838FC24BEB0DB009EF09A /* StudyConfigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8838FB24BEB0DB009EF09A /* StudyConfigureView.swift */; };
 		4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */; };
 		4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D424BBFE5E0035BD5B /* MainVC.swift */; };
 		4FB756DA24BBFE5E0035BD5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FB756D924BBFE5E0035BD5B /* Assets.xcassets */; };
@@ -50,6 +53,9 @@
 		316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SODA_1594647376.MP4; sourceTree = "<group>"; };
 		316C502D24BE129500D7F59A /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4F649B2624BEEA5200E0B073 /* StudyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyService.swift; path = Fastcampus/Views/Study/StudyService.swift; sourceTree = SOURCE_ROOT; };
+		4F8838F924BEB0A7009EF09A /* StudyConfigureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyConfigureVC.swift; sourceTree = "<group>"; };
+		4F8838FB24BEB0DB009EF09A /* StudyConfigureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyConfigureView.swift; sourceTree = "<group>"; };
 		4FB756CD24BBFE5E0035BD5B /* Fastcampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fastcampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FB756D424BBFE5E0035BD5B /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
@@ -94,6 +100,7 @@
 			children = (
 				314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */,
 				314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */,
+				4F8838F924BEB0A7009EF09A /* StudyConfigureVC.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -101,6 +108,7 @@
 		314E84E624BC9FA600A6D492 /* Study */ = {
 			isa = PBXGroup;
 			children = (
+				4F8838FB24BEB0DB009EF09A /* StudyConfigureView.swift */,
 				314E84FC24BCD2B100A6D492 /* InProcess */,
 				314E84FB24BCD29800A6D492 /* Waiting */,
 				314E84ED24BCA29600A6D492 /* StudyFrameView.swift */,
@@ -139,6 +147,7 @@
 		316C502724BE03BA00D7F59A /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				4F649B2624BEEA5200E0B073 /* StudyService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -373,14 +382,17 @@
 				4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */,
 				314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */,
 				314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */,
+				4F8838FC24BEB0DB009EF09A /* StudyConfigureView.swift in Sources */,
 				314E84EE24BCA29600A6D492 /* StudyFrameView.swift in Sources */,
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				314E84E224BC8A7400A6D492 /* Study.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
 				314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */,
+				4F8838FA24BEB0A7009EF09A /* StudyConfigureVC.swift in Sources */,
 				CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */,
 				CF29217A24BC05C7001318CB /* SampleView.swift in Sources */,
 				4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */,
+				4F649B2724BEEA5200E0B073 /* StudyService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,7 +530,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Fastcampus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -538,7 +550,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Fastcampus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
