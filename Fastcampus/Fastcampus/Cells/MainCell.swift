@@ -13,7 +13,11 @@ class MainCell: UITableViewCell {
   private let lectureContainerView = UIView()
   private let lectureImageView = UIImageView()
   private let textContainerView = UIView()
+  private lazy var lectureStatusStackView = UIStackView(arrangedSubviews: [statusLabel, kindLabel])
+  private let statusLabel = UILabel()
+  private let kindLabel = UILabel()
   private let lectureTitleLabel = UILabel()
+  private let lectureProgressBar = UIProgressView()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,7 +34,7 @@ class MainCell: UITableViewCell {
     lectureTitleLabel.textColor = .white
     lectureTitleLabel.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
     
-    lectureContainerView.layer.cornerRadius = 14
+    lectureContainerView.layer.cornerRadius = 5
     lectureContainerView.clipsToBounds = true
     
     lectureImageView.backgroundColor = .blue
@@ -44,7 +48,7 @@ class MainCell: UITableViewCell {
     let sideMargins: CGFloat = 15
     
     contentView.addSubview(lectureContainerView)
-    [lectureImageView, textContainerView, lectureTitleLabel]
+    [lectureImageView, textContainerView, lectureStatusStackView, lectureTitleLabel, lectureProgressBar]
       .forEach { lectureContainerView.addSubview($0) }
     
     lectureContainerView.snp.makeConstraints {
@@ -63,9 +67,17 @@ class MainCell: UITableViewCell {
       $0.height.equalTo(lectureContainerView).multipliedBy(0.4)
     }
     
+    lectureStatusStackView.snp.makeConstraints {
+      
+    }
+    
     lectureTitleLabel.snp.makeConstraints {
       $0.leading.equalTo(textContainerView).offset(margins)
       $0.trailing.bottom.equalTo(textContainerView).offset(-margins)
+    }
+    
+    lectureProgressBar.snp.makeConstraints {
+      
     }
   }
   
