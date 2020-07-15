@@ -17,7 +17,6 @@
 		314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */; };
 		314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FD24BCD2DA00A6D492 /* InProcessView.swift */; };
 		314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */; };
-		314E850224BCD69500A6D492 /* PlayerInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850124BCD69500A6D492 /* PlayerInformationView.swift */; };
 		314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850524BCD8EE00A6D492 /* DoubleExtension.swift */; };
 		316C502E24BE129500D7F59A /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = 316C502D24BE129500D7F59A /* test.mov */; };
 		316C502F24BE169300D7F59A /* SODA_1594647376.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */; };
@@ -48,7 +47,6 @@
 		314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProcessStudyVC.swift; sourceTree = "<group>"; };
 		314E84FD24BCD2DA00A6D492 /* InProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProcessView.swift; sourceTree = "<group>"; };
 		314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlayerView.swift; sourceTree = "<group>"; };
-		314E850124BCD69500A6D492 /* PlayerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationView.swift; sourceTree = "<group>"; };
 		314E850524BCD8EE00A6D492 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Fastcampus/Extension/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
 		316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SODA_1594647376.MP4; sourceTree = "<group>"; };
 		316C502D24BE129500D7F59A /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 			children = (
 				314E84FD24BCD2DA00A6D492 /* InProcessView.swift */,
 				314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */,
-				314E850124BCD69500A6D492 /* PlayerInformationView.swift */,
 			);
 			path = InProcess;
 			sourceTree = "<group>";
@@ -375,7 +372,6 @@
 				314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */,
 				CF29217624BC053B001318CB /* ViewController.swift in Sources */,
 				CFE3C9AD24BC6CAF009E8E2F /* SampleVC.swift in Sources */,
-				314E850224BCD69500A6D492 /* PlayerInformationView.swift in Sources */,
 				314E84F824BCBC9A00A6D492 /* WaitingStudyContentView.swift in Sources */,
 				314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */,
 				CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */,
