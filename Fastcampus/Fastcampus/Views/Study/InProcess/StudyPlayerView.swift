@@ -14,6 +14,12 @@ class StudyPlayerView: View {
   private let informationView = PlayerInformationView()
   private let videoView = UIView()
 
+  // MARK: Setup
+  
+  override func attribute() {
+    super.attribute()
+    backgroundColor = .black
+  }
   
   override func setupUI() {
     super.setupUI()
@@ -31,16 +37,21 @@ class StudyPlayerView: View {
     })
   }
   
-  func addPlayerLayer(playerLayer: CALayer) {
-    playerLayer.frame = videoView.bounds
-    videoView.layer.addSublayer(playerLayer)
+  func configure(maximumTime: Int64, layer: CALayer) {
+    layer.frame = videoView.bounds
+    videoView.layer.addSublayer(layer)
     
+    informationView.configure(maximumValue: maximumTime)
   }
   
+  // MARK: Action
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesEnded(touches, with: event)
     informationView.isAppear = true
   }
   
+  func updatePlaySection(time: Int64) {
+    informationView.updatePlaySection(time: time)
+  }
     
 }

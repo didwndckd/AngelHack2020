@@ -9,9 +9,12 @@
 import UIKit
 
 class InProcessView: StudyFrameView<StudyPlayerView, UITableView> {
-
-  func addPlayerLayer(playerLayer: CALayer) {
-    headerView.addPlayerLayer(playerLayer: playerLayer)
+  
+  func updatePlaySection(time: Int64) {
+    headerView.updatePlaySection(time: time)
+  }
+  func configurePlayerView(maximumValue: Int64, layer: CALayer) {
+    headerView.configure(maximumTime: maximumValue, layer: layer)
   }
     
 }
