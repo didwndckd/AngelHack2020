@@ -80,6 +80,9 @@ class MainVC: UIViewController {
   }
   
   private func attribute() {
+    //Temp
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "사이드메뉴", style: .done, target: self, action: #selector(sideMenuDidTap))
+    
     self.view.backgroundColor = .white
     
     mainScrollView.delegate = self
@@ -215,6 +218,11 @@ private extension MainVC {
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "스터디 생성", style: .done, target: self, action: #selector(createStudyDidTap))
   }
   
+  @objc private func sideMenuDidTap() {
+    let sideMenuVC = SideMenuVC()
+    sideMenuVC.modalPresentationStyle = .overFullScreen
+    self.present(sideMenuVC, animated: false)
+  }
   
   @objc private func createStudyDidTap() {
     let studyConfigureVC = StudyConfigureVC()
