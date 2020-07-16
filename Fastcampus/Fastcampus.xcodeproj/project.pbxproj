@@ -50,6 +50,9 @@
 		CFE3C9C424BF4A88009E8E2F /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9C324BF4A88009E8E2F /* SideMenuVC.swift */; };
 		CFE3C9C624BF4E12009E8E2F /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9C524BF4E12009E8E2F /* SideMenuCell.swift */; };
 		CFE3C9C824BF5282009E8E2F /* SideMenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9C724BF5282009E8E2F /* SideMenuHeaderView.swift */; };
+		CFE3C9CC24C060B1009E8E2F /* SummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9CB24C060B1009E8E2F /* SummaryVC.swift */; };
+		CFE3C9CE24C07395009E8E2F /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9CD24C07395009E8E2F /* SummaryCell.swift */; };
+		CFE3C9D024C076B7009E8E2F /* SummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9CF24C076B7009E8E2F /* SummaryHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +103,9 @@
 		CFE3C9C324BF4A88009E8E2F /* SideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		CFE3C9C524BF4E12009E8E2F /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
 		CFE3C9C724BF5282009E8E2F /* SideMenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuHeaderView.swift; sourceTree = "<group>"; };
+		CFE3C9CB24C060B1009E8E2F /* SummaryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryVC.swift; sourceTree = "<group>"; };
+		CFE3C9CD24C07395009E8E2F /* SummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCell.swift; sourceTree = "<group>"; };
+		CFE3C9CF24C076B7009E8E2F /* SummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +264,7 @@
 			children = (
 				CFE3C9A624BC6482009E8E2F /* MainCell.swift */,
 				CFE3C9C524BF4E12009E8E2F /* SideMenuCell.swift */,
+				CFE3C9CD24C07395009E8E2F /* SummaryCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -269,6 +276,7 @@
 				314E84E624BC9FA600A6D492 /* Study */,
 				CF29217924BC05C7001318CB /* SampleView.swift */,
 				CFE3C9C724BF5282009E8E2F /* SideMenuHeaderView.swift */,
+				CFE3C9CF24C076B7009E8E2F /* SummaryHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -281,6 +289,7 @@
 				CFE3C9AC24BC6CAF009E8E2F /* SampleVC.swift */,
 				4FB756D424BBFE5E0035BD5B /* MainVC.swift */,
 				CFE3C9C324BF4A88009E8E2F /* SideMenuVC.swift */,
+				CFE3C9CB24C060B1009E8E2F /* SummaryVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -453,15 +462,18 @@
 				4F88E3AC24C0110D000967EE /* QnAModel.swift in Sources */,
 				314E84E224BC8A7400A6D492 /* Study.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
+				CFE3C9CE24C07395009E8E2F /* SummaryCell.swift in Sources */,
 				314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */,
 				4F88E3B224C01384000967EE /* FirebaseMaker.swift in Sources */,
 				4F8838FA24BEB0A7009EF09A /* StudyConfigureVC.swift in Sources */,
 				CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */,
 				CFE3C9C624BF4E12009E8E2F /* SideMenuCell.swift in Sources */,
 				CF29217A24BC05C7001318CB /* SampleView.swift in Sources */,
+				CFE3C9CC24C060B1009E8E2F /* SummaryVC.swift in Sources */,
 				4F88E3AE24C0111C000967EE /* UnitModel.swift in Sources */,
 				4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */,
 				4F88E3AA24C010F3000967EE /* ChapterModel.swift in Sources */,
+				CFE3C9D024C076B7009E8E2F /* SummaryHeaderView.swift in Sources */,
 				4F88E3B024C011BC000967EE /* UserModel.swift in Sources */,
 				4F649B2724BEEA5200E0B073 /* StudyService.swift in Sources */,
 				CFE3C9C424BF4A88009E8E2F /* SideMenuVC.swift in Sources */,

@@ -26,8 +26,19 @@ class MainCell: UITableViewCell {
     setupUI()
   }
   
+  func setGradientBackground() {
+    let gradient: CAGradientLayer = CAGradientLayer()
+    gradient.colors = [UIColor.black.cgColor, UIColor.lightGray.cgColor]
+    gradient.locations = [0.0, 1.0]
+    gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+    gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+    gradient.frame = CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: self.contentView.frame.height * 0.4)
+    self.textContainerView.layer.insertSublayer(gradient, at: 0)
+  }
+  
   func setProperties(lecture: Lecture) {
     lectureTitleLabel.text = lecture.title
+    kindLabel.setTitle("\(lecture.type)강의", for: .normal)
   }
   
   private func attribute() {
@@ -35,10 +46,9 @@ class MainCell: UITableViewCell {
     lectureContainerView.clipsToBounds = true
     
     lectureImageView.backgroundColor = #colorLiteral(red: 0.8062266707, green: 0.8064672351, blue: 0.8251868486, alpha: 1)
-    
-    textContainerView.backgroundColor = .black
+
     textContainerView.alpha = 0.3
-    
+        
     enterImageView.image = #imageLiteral(resourceName: "icon_enter_white")
     
     lectureStatusStackView.axis = .horizontal
@@ -47,15 +57,14 @@ class MainCell: UITableViewCell {
     lectureStatusStackView.spacing = 5
     
     statusLabel.setTitle("수강중", for: .normal)
-    kindLabel.setTitle("온라인강의", for: .normal)
     [statusLabel, kindLabel].forEach {
-      let titleColor = $0 == statusLabel ? UIColor.white : UIColor.black
+      let titleColor = $0 == statusLabel ? UIColor.black : UIColor.white
       $0.setTitleColor(titleColor, for: .normal)
-      let backgroundColor = $0 == statusLabel ? UIColor.black : UIColor.clear
+      let backgroundColor = $0 == statusLabel ? UIColor.white : UIColor.clear
       $0.backgroundColor = backgroundColor
       $0.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .semibold)
       $0.layer.borderWidth = 1
-      $0.layer.borderColor = UIColor.black.cgColor
+      $0.layer.borderColor = UIColor.white.cgColor
       $0.isUserInteractionEnabled = false
       $0.contentEdgeInsets = UIEdgeInsets(top: 2, left: 5, bottom: 2, right: 5)
     }

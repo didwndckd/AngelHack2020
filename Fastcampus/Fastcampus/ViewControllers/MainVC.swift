@@ -170,6 +170,7 @@ extension MainVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.identifier, for: indexPath) as! MainCell
     cell.setProperties(lecture: lecture[indexPath.row])
+    cell.setGradientBackground()
     return cell
   }
 }
@@ -224,9 +225,12 @@ private extension MainVC {
   }
   
   @objc private func sideMenuDidTap() {
-    let sideMenuVC = SideMenuVC()
-    sideMenuVC.modalPresentationStyle = .overFullScreen
-    self.present(sideMenuVC, animated: false)
+    let summaryVC = SummaryVC()
+    summaryVC.modalPresentationStyle = .fullScreen
+    self.present(summaryVC, animated: true, completion: nil)
+//    let sideMenuVC = SideMenuVC()
+//    sideMenuVC.modalPresentationStyle = .overFullScreen
+//    self.present(sideMenuVC, animated: false)
   }
   
   @objc private func createStudyDidTap() {
