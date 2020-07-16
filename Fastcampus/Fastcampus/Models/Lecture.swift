@@ -11,6 +11,7 @@ import Foundation
 struct Lecture: Codable {
   let id: Int
   let title: String
-//  let imageURL: String
-//  let unitID: [Int]
+  let imageURL: String
+  let type: String
+  let chapters: [ChapterModel]?
 }

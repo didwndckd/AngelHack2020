@@ -80,6 +80,9 @@ class MainVC: UIViewController {
   }
   
   private func attribute() {
+    //Temp
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "사이드메뉴", style: .done, target: self, action: #selector(sideMenuDidTap))
+    
     self.view.backgroundColor = .white
     
     mainScrollView.delegate = self
@@ -167,6 +170,7 @@ extension MainVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.identifier, for: indexPath) as! MainCell
     cell.setProperties(lecture: lecture[indexPath.row])
+    cell.setGradientBackground()
     return cell
   }
 }
@@ -177,6 +181,11 @@ extension MainVC: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if lecture[indexPath.row].id == 3 {
+      let vc = ChapterVC(lectureID: "QEULxiXwlzDu5nOsH7Kl")
+      self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
       let vc = WaitingStudyVC(
         study: Study(
@@ -215,6 +224,14 @@ private extension MainVC {
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "스터디 생성", style: .done, target: self, action: #selector(createStudyDidTap))
   }
   
+  @objc private func sideMenuDidTap() {
+    let summaryVC = SummaryVC()
+    summaryVC.modalPresentationStyle = .fullScreen
+    self.present(summaryVC, animated: true, completion: nil)
+//    let sideMenuVC = SideMenuVC()
+//    sideMenuVC.modalPresentationStyle = .overFullScreen
+//    self.present(sideMenuVC, animated: false)
+  }
   
   @objc private func createStudyDidTap() {
     let studyConfigureVC = StudyConfigureVC()
