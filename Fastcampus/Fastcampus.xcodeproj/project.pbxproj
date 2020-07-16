@@ -282,11 +282,8 @@
 				314E84E524BC9DC600A6D492 /* Study */,
 				CFE3C9AC24BC6CAF009E8E2F /* SampleVC.swift */,
 				4FB756D424BBFE5E0035BD5B /* MainVC.swift */,
-<<<<<<< HEAD
 				4F88E3B924C01D85000967EE /* IndicatorViewController.swift */,
-=======
 				CFE3C9C324BF4A88009E8E2F /* SideMenuVC.swift */,
->>>>>>> abe2cf400cae7110319973881f4a04f654bae7e6
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
