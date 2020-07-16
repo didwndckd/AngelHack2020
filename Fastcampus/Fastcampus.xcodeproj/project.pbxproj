@@ -35,7 +35,6 @@
 		4F88E3B224C01384000967EE /* FirebaseMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88E3B124C01384000967EE /* FirebaseMaker.swift */; };
 		4F88E3B524C01B51000967EE /* ChapterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88E3B424C01B51000967EE /* ChapterVC.swift */; };
 		4F88E3B824C01D33000967EE /* ExtensionUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88E3B724C01D33000967EE /* ExtensionUIViewController.swift */; };
-		4F88E3BA24C01D85000967EE /* IndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88E3B924C01D85000967EE /* IndicatorViewController.swift */; };
 		4F88E3BC24C0377A000967EE /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F88E3BB24C0377A000967EE /* ExtensionUIView.swift */; };
 		4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */; };
 		4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB756D424BBFE5E0035BD5B /* MainVC.swift */; };
@@ -81,7 +80,6 @@
 		4F88E3B124C01384000967EE /* FirebaseMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FirebaseMaker.swift; path = Fastcampus/Models/FirebaseMaker.swift; sourceTree = SOURCE_ROOT; };
 		4F88E3B424C01B51000967EE /* ChapterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterVC.swift; sourceTree = "<group>"; };
 		4F88E3B724C01D33000967EE /* ExtensionUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIViewController.swift; sourceTree = "<group>"; };
-		4F88E3B924C01D85000967EE /* IndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorViewController.swift; sourceTree = "<group>"; };
 		4F88E3BB24C0377A000967EE /* ExtensionUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		4FB756CD24BBFE5E0035BD5B /* Fastcampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fastcampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -282,7 +280,6 @@
 				314E84E524BC9DC600A6D492 /* Study */,
 				CFE3C9AC24BC6CAF009E8E2F /* SampleVC.swift */,
 				4FB756D424BBFE5E0035BD5B /* MainVC.swift */,
-				4F88E3B924C01D85000967EE /* IndicatorViewController.swift */,
 				CFE3C9C324BF4A88009E8E2F /* SideMenuVC.swift */,
 			);
 			path = ViewControllers;
@@ -431,7 +428,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F88E3BA24C01D85000967EE /* IndicatorViewController.swift in Sources */,
 				4F88E3B824C01D33000967EE /* ExtensionUIViewController.swift in Sources */,
 				4F88E3A624C010D6000967EE /* StudyModel.swift in Sources */,
 				314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */,
