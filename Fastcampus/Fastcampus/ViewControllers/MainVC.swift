@@ -73,6 +73,11 @@ class MainVC: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if lecture[indexPath.row].id == 3 {
+      let vc = ChapterVC(lectureID: "QEULxiXwlzDu5nOsH7Kl")
+      self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
       let vc = WaitingStudyVC(
