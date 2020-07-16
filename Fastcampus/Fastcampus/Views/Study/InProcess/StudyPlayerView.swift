@@ -17,6 +17,8 @@ class StudyPlayerView: View {
   
   weak var delegate: StudyPlayerViewDelegate?
   
+  private var pins: [UIView] = []
+  
   private var playerLayer: CALayer?
   
   private let questionButton = UIButton()
@@ -125,14 +127,11 @@ class StudyPlayerView: View {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    print(#function)
     playerLayer?.frame = videoView.frame
-//    layoutIfNeeded()
   }
   
   override func layoutSublayers(of layer: CALayer) {
     super.layoutSublayers(of: layer)
-    print(#function)
   }
   
   // MARK: Action
@@ -150,6 +149,7 @@ class StudyPlayerView: View {
     informationViewIsHidden.toggle()
   }
   
+  // 재생 정보 창 애니메이션
   private func informationViewSwitchAnimation(isHidden: Bool) {
     let alpha: CGFloat = isHidden ? 0: 1
     UIView.animate(withDuration: 0.2, animations: {
@@ -164,8 +164,25 @@ class StudyPlayerView: View {
     restTimeLabel.text = Double(slider.maximumValue - value).toTimeString
   }
   
-  func switchScreenMode(isFull: Bool) {
+  func updatePins(_ qnas: [QnAModel]) {
     
+    pins.forEach({
+      $0.removeFromSuperview()
+    })
+    qnas.forEach({
+      addPin($0.playTime)
+    })
   }
-    
+  
+  private func addPin(_ playTime: Int64) {
+    let imageView = UIImageView(image: UIImage(systemName: "mappin"))
+    let multiplied = CGFloat(playTime) / CGFloat(slider.maximumValue)
+    slider.addSubview(imageView)
+    print(multiplied)
+    imageView.snp.makeConstraints({
+      $0.bottom.equalTo(slider.snp.top)
+      $0.centerX.equalTo(slider.snp.trailing).multipliedBy(multiplied)
+    })
+  }
+  
 }
