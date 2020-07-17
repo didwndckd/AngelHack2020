@@ -34,7 +34,7 @@ class TimerView: View {
   
   func configure(timeInterval: Double) {
     let isTimeOver = timeInterval <= 0
-    let remainingTime = isTimeOver ? Double(0).remainingTime: timeInterval.remainingTime
+    let remainingTime = isTimeOver ? Double(0).toTimeString: timeInterval.toTimeString
     let textColor: UIColor = isTimeOver ? .red: .blue
     
     timerLabel.textColor = textColor

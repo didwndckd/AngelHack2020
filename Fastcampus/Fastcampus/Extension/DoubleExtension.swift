@@ -9,7 +9,7 @@
 import Foundation
 
 extension Double {
-  var remainingTime: String {
+  var toTimeString: String {
     let interval = Int(self)
     let oneMinute = 60
     let oneHour = oneMinute * 60
