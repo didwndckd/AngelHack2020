@@ -192,18 +192,21 @@ extension MainVC: UITableViewDelegate {
     }
     
     if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
-      let vc = WaitingStudyVC(
-        study: Study(
-        id: 1,
-        title: "Let's Swift 스터디",
-        date: Date(timeIntervalSinceNow: 3600),
-        rule: "비방, 욕설 하지마세요 ~ ",
-        userIDs: [],
+      let vc = WaitingStudyVC(studyModel: StudyModel(
+        title: "1회차 같이 완주해요!",
+        documentID: "documentID",
+        lectureTitle: "UX/UI 디자인 올인원 패키지 Online.",
+        unitTitle: "01. 디자인 개론-01. 강사, 강의소개",
+        unitDescription: """
+        UX/UI 디자인 올인원 패키지의 첫번째 강의입니다.\n
+        앞으로 공부할 UX/ UI의 기초개념을 알아보고 강사님을 소개합니다.
+        """,
+        date: Timestamp(date: Date(timeInterval: 3600, since: Date())),
+        fixed: 10,
+        rule: "욕설 비방 하지마세요\n질문 많이 올려주세요\n요약 무조건 올리기 입니다.",
+        userIDs: ["중창", "업스", "현철", "현영", "예은"],
         qnaIDs: [],
-        inProcess: .wait,
-        unitTitle: lecture[indexPath.row].title,
-        unitContent: "강의\nSwift 기초 강의\n잘해봐요~")
-      )
+        inProcess: .wait))
       
       navigationController?.pushViewController(vc, animated: true)
     }
