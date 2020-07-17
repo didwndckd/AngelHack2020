@@ -227,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */,
+				CFE3C9D124C08B1B009E8E2F /* Utils */,
 				316C502724BE03BA00D7F59A /* Service */,
 				314E850824BCDAF700A6D492 /* Extension */,
 				314E84E324BC9CA100A6D492 /* Resource */,
@@ -301,6 +302,13 @@
 				CF29217724BC056C001318CB /* View.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		CFE3C9D124C08B1B009E8E2F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		E4C77A2DA7BD6AC208EB2B5A /* Frameworks */ = {
