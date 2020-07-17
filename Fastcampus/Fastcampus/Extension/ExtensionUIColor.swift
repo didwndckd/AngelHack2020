@@ -10,4 +10,5 @@ import UIKit
 
 extension UIColor {
   class var myGray: UIColor { UIColor(named: "MyGray") ?? .red }
+  class var myRed: UIColor { UIColor(named: "MyRed") ?? .red }
 }

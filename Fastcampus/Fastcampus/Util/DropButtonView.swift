@@ -9,21 +9,17 @@
 import UIKit
 
 protocol DropButtonViewDelegate: class {
-  func titlButtonDidTap()
+  func titlButtonDidTap(_ view: UIView)
+  func selectedElement(_ view: UIView, _ element: Int)
 }
 
 class DropButtonView: UIView {
   
   weak var delegate: DropButtonViewDelegate?
   
-  var isFold = true {
-    didSet {
-      animationFold()
-      superview?.bringSubviewToFront(self)
-      delegate?.titlButtonDidTap()
-    }
-  }
+  var isFold = true { didSet { animationFold() } }
   private let amount: Int
+  private let title: String
   
   private let titleButton = UIButton()
   private let guideLine = UIView()
@@ -31,8 +27,9 @@ class DropButtonView: UIView {
   
   private var bottomConstraint: NSLayoutConstraint?
 
-  init(amount: Int) {
+  init(amount: Int, title: String) {
     self.amount = amount
+    self.title = title
     super.init(frame: .zero)
     
     setUI()
@@ -55,12 +52,15 @@ extension DropButtonView {
     self.shadow()
     self.backgroundColor = .myGray
     
+    titleButton.setTitle("  " + title, for: .normal)
     titleButton.backgroundColor = .clear
     titleButton.setTitleColor(.black, for: .normal)
+    titleButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
     titleButton.addTarget(self, action: #selector(titleButtonDidTap), for: .touchUpInside)
     
     guideLine.isHidden = true
     guideLine.backgroundColor = .gray
+    guideLine.shadow()
     
     elementTableView.isHidden = true
     elementTableView.backgroundColor = .clear
@@ -75,7 +75,7 @@ extension DropButtonView {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    let space: CGFloat = 4
+    let space: CGFloat = 8
     
     NSLayoutConstraint.activate([
       titleButton.topAnchor.constraint(equalTo: self.topAnchor),
@@ -106,12 +106,7 @@ extension DropButtonView {
   private func animationFold() {
     guideLine.isHidden = isFold
     elementTableView.isHidden = isFold
-    
-    UIView.animate(withDuration: 1) {
-      self.bottomConstraint?.priority = self.isFold ? .defaultLow : .defaultHigh
-      
-      self.layoutIfNeeded()
-    }
+    bottomConstraint?.priority = isFold ? .defaultLow : .defaultHigh
   }
   
   func setTitle(_ title: String) {
@@ -126,6 +121,8 @@ extension DropButtonView {
 extension DropButtonView {
   @objc private func titleButtonDidTap() {
     isFold.toggle()
+    superview?.bringSubviewToFront(self)
+    delegate?.titlButtonDidTap(self)
   }
 }
 
@@ -142,6 +139,7 @@ extension DropButtonView: UITableViewDataSource {
     cell.backgroundColor = .clear
     cell.textLabel?.text = String(indexPath.row + 1)
     cell.textLabel?.textAlignment = .center
+    cell.textLabel?.font = .boldSystemFont(ofSize: 15)
     cell.selectionStyle = .none
     return cell
   }
@@ -153,4 +151,10 @@ extension DropButtonView: UITableViewDataSource {
 
 extension DropButtonView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat { 32 }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    titleButton.setTitle("\(indexPath.row + 1) \(title)", for: .normal)
+    delegate?.selectedElement(self, indexPath.row + 1)
+    isFold = true
+  }
 }

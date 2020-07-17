@@ -10,14 +10,20 @@ import UIKit
 
 protocol StudyConfigureViewDelegate: class {
   func cancelDidTap()
-  func createDidTap()
+  func createDidTap(title: String?, moth: Int?, day: Int?, hour: Int?, minute: Int?, fixed: Int?, rule: String?)
 }
 
 class StudyConfigureView: View {
   
   weak var delegate: StudyConfigureViewDelegate?
   
-  private var fixedCount = 0
+  var title: String?
+  var moth: Int?
+  var day: Int?
+  var hour: Int?
+  var minute: Int?
+  var fixed: Int?
+  var rule: String?
   
   private let baseView = UIView()
   
@@ -29,14 +35,13 @@ class StudyConfigureView: View {
   private let titleTextField = UITextField()
   
   private let dateDisplayLabel = UILabel()
-  private let dateStackView = UIStackView()
-  private let mothDropView = DropButtonView(amount: 12)
-  private let dayDropView = DropButtonView(amount: 31)
-  private let hourDropView = DropButtonView(amount: 24)
-  private let minuteDropView = DropButtonView(amount: 60)
+  private let mothDropView = DropButtonView(amount: 12, title: "월 ▾")
+  private let dayDropView = DropButtonView(amount: 31, title: "일 ▾")
+  private let hourDropView = DropButtonView(amount: 24, title: "시 ▾")
+  private let minuteDropView = DropButtonView(amount: 60, title: "분 ▾")
   
   private let fixedDisplayLabel = UILabel()
-  private let fixedDropView = DropButtonView(amount: 12)
+  private let fixedDropView = DropButtonView(amount: 10, title: "명 ▾")
   
   private let ruleDisplayLabel = UILabel()
   private let ruleTextView = UITextView()
@@ -70,41 +75,29 @@ class StudyConfigureView: View {
     titleDisplayLabel.text = "스터디 제목"
     titleTextField.font = .boldSystemFont(ofSize: 20)
     titleTextField.layer.cornerRadius = 4
-    titleTextField.backgroundColor = .gray
+    titleTextField.backgroundColor = .myGray
+    titleTextField.delegate = self
     
-    dateDisplayLabel.text = "스터디 오픈시간"
-    mothDropView.setTitle("  월 ▾")
-    dayDropView.setTitle("  일 ▾")
-    hourDropView.setTitle("  시 ▾")
-    minuteDropView.setTitle("  분 ▾")
-    [mothDropView, dayDropView, hourDropView, minuteDropView].forEach {
-      $0.delegate = self
-      dateStackView.addArrangedSubview($0)
-    }
-    dateStackView.axis = .horizontal
-    dateStackView.distribution = .fillEqually
-    dateStackView.spacing = 8
-    dateStackView.alignment = .fill
+    dateDisplayLabel.text = "스터디 오픈"
     
     fixedDisplayLabel.text = "정원"
-    fixedDropView.setTitle("  명 ▾")
     fixedDropView.delegate = self
-    
     
     ruleDisplayLabel.text = "규칙"
     
-    ruleTextView.backgroundColor = .gray
+    ruleTextView.backgroundColor = .myGray
     ruleTextView.layer.cornerRadius = 8
     ruleTextView.layer.masksToBounds = true
+    ruleTextView.delegate = self
     
     cancelButton.setTitle("취소", for: .normal)
-    cancelButton.setTitleColor(.white, for: .normal)
-    cancelButton.backgroundColor = .gray
+    cancelButton.setTitleColor(.gray, for: .normal)
+    cancelButton.backgroundColor = .myGray
     cancelButton.addTarget(self, action: #selector(buttonDidTap(_:)), for: .touchUpInside)
     
     createButton.setTitle("스터디방 만들기", for: .normal)
     createButton.setTitleColor(.white, for: .normal)
-    createButton.backgroundColor = .darkGray
+    createButton.backgroundColor = .myRed
     createButton.addTarget(self, action: #selector(buttonDidTap(_:)), for: .touchUpInside)
   }
   
@@ -123,7 +116,7 @@ class StudyConfigureView: View {
     
     [masterDisplayLabel, masterBadgeLabel, masterNameLabel,
      titleDisplayLabel, titleTextField,
-     dateDisplayLabel, dateStackView,
+     dateDisplayLabel, mothDropView, dayDropView, hourDropView, minuteDropView,
      fixedDisplayLabel, fixedDropView,
      ruleDisplayLabel, ruleTextView,
      cancelButton, createButton].forEach {
@@ -135,6 +128,28 @@ class StudyConfigureView: View {
     let ySpace: CGFloat = 16
     let toSpace: CGFloat = 4
     let buttonHeight: CGFloat = 32
+    let ySpace2: CGFloat = ySpace + toSpace + buttonHeight
+    
+    let dateDropViews = [mothDropView, dayDropView, hourDropView, minuteDropView]
+      
+    dateDropViews.enumerated().forEach {
+      $1.delegate = self
+      $1.topAnchor.constraint(equalTo: dateDisplayLabel.bottomAnchor, constant: toSpace).isActive = true
+      
+      switch $0 {
+      case 0:
+        $1.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace).isActive = true
+        
+      case 3:
+        $1.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -xSpace).isActive = true
+        fallthrough
+        
+      default:
+        $1.leadingAnchor.constraint(equalTo: dateDropViews[$0 - 1].trailingAnchor, constant: 12).isActive = true
+        $1.widthAnchor.constraint(equalTo: dateDropViews[$0 - 1].widthAnchor).isActive = true
+      }
+    }
+    
     
     [cancelButton, createButton].forEach {
       $0.topAnchor.constraint(equalTo: ruleTextView.bottomAnchor, constant: ySpace).isActive = true
@@ -160,30 +175,25 @@ class StudyConfigureView: View {
       titleTextField.topAnchor.constraint(equalTo: titleDisplayLabel.bottomAnchor, constant: toSpace),
       titleTextField.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       titleTextField.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -xSpace),
+      titleTextField.heightAnchor.constraint(equalToConstant: buttonHeight),
       
       
       
       dateDisplayLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: ySpace),
       dateDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
-      dateStackView.topAnchor.constraint(equalTo: dateDisplayLabel.bottomAnchor, constant: toSpace),
-      dateStackView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
-      dateStackView.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -xSpace),
-      dateStackView.heightAnchor.constraint(equalToConstant: buttonHeight),
       
       
-      
-      fixedDisplayLabel.topAnchor.constraint(equalTo: dateStackView.bottomAnchor, constant: ySpace),
+      fixedDisplayLabel.topAnchor.constraint(equalTo: dateDisplayLabel.bottomAnchor, constant: ySpace2),
       fixedDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
       fixedDropView.topAnchor.constraint(equalTo: fixedDisplayLabel.bottomAnchor, constant: toSpace),
       fixedDropView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       fixedDropView.widthAnchor.constraint(equalTo: mothDropView.widthAnchor),
-//      fixedButton.heightAnchor.constraint(equalToConstant: buttonHeight),
       
       
       
-      ruleDisplayLabel.topAnchor.constraint(equalTo: fixedDisplayLabel.bottomAnchor, constant: 64),
+      ruleDisplayLabel.topAnchor.constraint(equalTo: fixedDisplayLabel.bottomAnchor, constant: ySpace2),
       ruleDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
       ruleTextView.topAnchor.constraint(equalTo: ruleDisplayLabel.bottomAnchor, constant: toSpace),
@@ -210,14 +220,29 @@ class StudyConfigureView: View {
 
 extension StudyConfigureView {
   @objc private func stepperDidTap(_ sender: UIStepper) {
-    fixedCount = Int(sender.value)
+    fixed = Int(sender.value)
   }
   
   
   @objc private func buttonDidTap(_ sender: UIButton) {
-    sender == cancelButton ? delegate?.cancelDidTap() : delegate?.createDidTap()
+    sender == cancelButton ?
+      delegate?.cancelDidTap() :
+      delegate?.createDidTap(title: title, moth: moth, day: day, hour: hour, minute: minute, fixed: fixed, rule: rule)
   }
 }
+
+
+
+extension StudyConfigureView: UITextViewDelegate, UITextFieldDelegate {
+  func textFieldDidChangeSelection(_ textField: UITextField) {
+    title = textField.text
+  }
+  
+  func textViewDidChange(_ textView: UITextView) {
+    rule = textView.text
+  }
+}
+
 
 
 
@@ -253,6 +278,23 @@ extension StudyConfigureView {
 }
 
 extension StudyConfigureView: DropButtonViewDelegate {
-  func titlButtonDidTap() {
+  func selectedElement(_ view: UIView, _ element: Int) {
+    switch view {
+    case mothDropView:    moth = element
+    case dayDropView:     day = element
+    case hourDropView:    hour = element
+    case minuteDropView:  minute = element
+    case fixedDropView:   fixed = element
+    default:              break
+    }
+  }
+  
+  func titlButtonDidTap(_ view: UIView) {
+    let dropViews = [mothDropView, dayDropView, hourDropView, minuteDropView, fixedDropView]
+    
+    dropViews.forEach {
+      guard $0 != view else { return }
+      $0.isFold = true
+    }
   }
 }
