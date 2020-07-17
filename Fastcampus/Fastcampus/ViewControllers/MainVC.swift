@@ -47,7 +47,7 @@ class MainVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.navigationController?.isNavigationBarHidden = false
+    self.navigationController?.isNavigationBarHidden = true
   }
   
   private func makeTitleStackView() {
@@ -129,7 +129,6 @@ class MainVC: UIViewController {
     mainScrollView.snp.makeConstraints {
       $0.top.bottom.equalTo(guide)
       $0.leading.trailing.equalToSuperview()
-      $0.height.equalTo(UIScreen.main.bounds.height)
     }
     
     headerContainerView.snp.makeConstraints {

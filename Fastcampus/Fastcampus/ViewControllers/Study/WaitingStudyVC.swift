@@ -30,9 +30,11 @@ class WaitingStudyVC: ViewController<WaitingView> {
     // test용 함수 호출
     pushInProcessStudyVC()
   }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     startTimer()
+    self.navigationController?.isNavigationBarHidden = false
   }
   
   override func viewDidDisappear(_ animated: Bool) {

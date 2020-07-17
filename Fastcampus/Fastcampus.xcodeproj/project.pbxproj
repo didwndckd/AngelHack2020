@@ -49,6 +49,7 @@
 		CF29217624BC053B001318CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217524BC053B001318CB /* ViewController.swift */; };
 		CF29217824BC056C001318CB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217724BC056C001318CB /* View.swift */; };
 		CF29217A24BC05C7001318CB /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217924BC05C7001318CB /* SampleView.swift */; };
+		CFAAB31F24C22898002BB6B9 /* ExtensionUINavigationItem in Sources */ = {isa = PBXBuildFile; fileRef = CFAAB31E24C22898002BB6B9 /* ExtensionUINavigationItem */; };
 		CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A624BC6482009E8E2F /* MainCell.swift */; };
 		CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A824BC6603009E8E2F /* Lecture.swift */; };
 		CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9AA24BC660E009E8E2F /* User.swift */; };
@@ -108,6 +109,7 @@
 		CF29217524BC053B001318CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CF29217724BC056C001318CB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		CF29217924BC05C7001318CB /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		CFAAB31E24C22898002BB6B9 /* ExtensionUINavigationItem */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExtensionUINavigationItem; sourceTree = "<group>"; };
 		CFE3C9A624BC6482009E8E2F /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		CFE3C9A824BC6603009E8E2F /* Lecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lecture.swift; sourceTree = "<group>"; };
 		CFE3C9AA24BC660E009E8E2F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				4F88E3B724C01D33000967EE /* ExtensionUIViewController.swift */,
 				4F88E3BB24C0377A000967EE /* ExtensionUIView.swift */,
 				4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */,
+				CFAAB31E24C22898002BB6B9 /* ExtensionUINavigationItem */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */,
 				314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */,
 				4F6CD20824C21F31004E26B6 /* SignInCollectionViewCell.swift in Sources */,
+				CFAAB31F24C22898002BB6B9 /* ExtensionUINavigationItem in Sources */,
 				314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */,
 				4F8838FC24BEB0DB009EF09A /* StudyConfigureView.swift in Sources */,
 				314E84EE24BCA29600A6D492 /* StudyFrameView.swift in Sources */,
