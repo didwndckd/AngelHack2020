@@ -12,6 +12,16 @@ import CodableFirebase
 
 class StudyService {
   
+  class func createStudy(studyModel: StudyModel, completion: @escaping () -> Void) {
+    guard let model = try? FirestoreEncoder().encode(studyModel) else { return }
+    
+    Firestore
+      .firestore()
+      .collection("Study")
+      .addDocument(data: model) { (error) in
+        completion()
+    }
+  }
   
   class func getStudy(completion: @escaping () -> Void) {
     Firestore.firestore().collection("Study").getDocuments { (snapshot, error) in

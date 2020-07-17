@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class StudyConfigureVC: ViewController<StudyConfigureView> {
   
@@ -52,8 +53,47 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
     self.dismiss(animated: true)
   }
   
-  func createDidTap() {
-    StudyService.getStudy { }
+  func createDidTap(title: String?, moth: Int?, day: Int?, hour: Int?, minute: Int?, fixed: Int?, rule: String?) {
+    guard let title = title else {
+      alertNormal(title: "스터디 제목을 입력해주세요")
+      return
+    }
+    
+    guard
+      let moth = moth, let day = day, let hour = hour, let minute = minute,
+      let date = DateComponents(calendar: Calendar(identifier: .gregorian), year: 2020, month: moth, day: day, hour: hour, minute: minute).date
+      else {
+        alertNormal(title: "스터디 오픈 시간을 입력해주세요")
+        return
+    }
+    
+    guard let fixed = fixed else {
+      alertNormal(title: "정원을 정해주세요")
+      return
+    }
+    
+    
+    guard let rule = rule else {
+      alertNormal(title: "규틱을 정해주세요")
+      return
+    }
+    
+    let mStudy = StudyModel(
+      documentID: "test",
+      title: title,
+      date: Timestamp(date: date),
+      fixed: fixed,
+      rule: rule,
+      userIDs: ["방장uuid"],
+      qnaIDs: [String](),
+      inProcess: .wait
+    )
+    
+    presentIndicatorViewController()
+    StudyService.createStudy(studyModel: mStudy) {
+      self.dismissIndicatorViewController()
+      self.dismiss(animated: true)
+    }
   }
 }
 

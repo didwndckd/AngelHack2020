@@ -13,9 +13,10 @@ struct StudyModel: Codable {
   let documentID: String
   let title: String
   let date: Timestamp
+  let fixed: Int
   let rule: String
-  var userIDs: [String]?
-  var qnaIDs: [String]?
+  var userIDs: [String]
+  var qnaIDs: [String]
   var inProcess: ProcessStatus
   
   enum ProcessStatus: Int, Codable {

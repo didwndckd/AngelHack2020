@@ -25,9 +25,10 @@ class BadgeLabel: UILabel {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    self.layer.borderColor = UIColor.black.cgColor
+    self.layer.borderColor = UIColor.myRed.cgColor
     self.layer.borderWidth = 1
     self.layer.cornerRadius = 4
+    self.textColor = .myRed
   }
   
   required init?(coder: NSCoder) {

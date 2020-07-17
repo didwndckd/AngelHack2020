@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     FirebaseApp.configure()
     
-    window = UIWindow(frame: UIScreen.main.bounds)
-    let navigationController = UINavigationController(rootViewController: MainVC())
-    window?.rootViewController = navigationController
-    window?.makeKeyAndVisible()
+    Auth.auth().currentUser == nil ?
+      WindowManager.set(.sign) :
+      WindowManager.set(.main)
+    
     return true
   }
 }
