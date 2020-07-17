@@ -8,21 +8,41 @@
 
 import UIKit
 
-class WaitingView: StudyFrameView<TimerView, WaitingStudyContentView> {
+class WaitingView: View {
   
+  private let headerView = TimerView()
+  private let bodyView = WaitingStudyContentView()
+  
+  override func setupUI() {
+    super.setupUI()
     
-  override func attribute() {
-    super.attribute()
+    [headerView, bodyView].forEach({
+      addSubview($0)
+    })
     
+    let guide = safeAreaLayoutGuide
+    let topMargin: CGFloat = 32
+    
+    headerView.snp.makeConstraints({
+      $0.top.equalTo(guide).offset(topMargin)
+      $0.centerX.equalTo(guide)
+      $0.width.equalTo(guide).multipliedBy(0.7)
+      $0.height.equalTo(headerView.snp.width)
+    })
+    
+    bodyView.snp.makeConstraints({
+      $0.top.equalTo(headerView.snp.bottom).offset(topMargin)
+      $0.leading.trailing.bottom.equalTo(guide)
+    })
     
   }
-  
   
   func updateTimer(timeInterval: Double) {
     headerView.configure(timeInterval: timeInterval)
   }
   
   func updateContent(study: StudyModel) {
+    headerView.configure(startTime: study.dateValue)
     bodyView.configure(rule: study.rule, unitTitle: study.unitTitle, unitContent: study.unitDescription)
   }
   

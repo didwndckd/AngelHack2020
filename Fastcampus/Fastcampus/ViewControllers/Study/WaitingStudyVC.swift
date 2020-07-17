@@ -28,8 +28,7 @@ class WaitingStudyVC: ViewController<WaitingView> {
   override func viewDidLoad() {
     super.viewDidLoad()
     attribute()
-    // test용 함수 호출
-    pushInProcessStudyVC()
+//    pushInProcessStudyVC()
   }
   
   override func viewWillAppear(_ animated: Bool) {

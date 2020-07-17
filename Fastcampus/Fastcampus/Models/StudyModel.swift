@@ -23,6 +23,10 @@ struct StudyModel: Codable {
   var qnaIDs: [String]
   var inProcess: ProcessStatus
   
+  var dateValue: Date {
+    date.dateValue()
+  }
+  
   enum ProcessStatus: Int, Codable {
     case wait
     case inProcess
