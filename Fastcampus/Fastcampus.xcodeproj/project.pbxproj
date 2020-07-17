@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		102EF4C3E448C56051ADCE3B /* Pods_Fastcampus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB106B0C03588AC2F402DA2 /* Pods_Fastcampus.framework */; };
 		312AA94824C0BE0400032507 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312AA94724C0BE0400032507 /* QuestionCell.swift */; };
+		314AD16224C23960002A22B7 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AD16124C23960002A22B7 /* CircleView.swift */; };
+		314AD16424C243F5002A22B7 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AD16324C243F5002A22B7 /* DateExtension.swift */; };
+		314AD16624C246F5002A22B7 /* StudyInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AD16524C246F5002A22B7 /* StudyInformationView.swift */; };
 		314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */; };
 		314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E924BCA07800A6D492 /* WaitingView.swift */; };
 		314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84EB24BCA1FD00A6D492 /* TimerView.swift */; };
@@ -64,6 +67,9 @@
 
 /* Begin PBXFileReference section */
 		312AA94724C0BE0400032507 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		314AD16124C23960002A22B7 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		314AD16324C243F5002A22B7 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		314AD16524C246F5002A22B7 /* StudyInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyInformationView.swift; sourceTree = "<group>"; };
 		314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingStudyVC.swift; sourceTree = "<group>"; };
 		314E84E924BCA07800A6D492 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		314E84EB24BCA1FD00A6D492 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -170,6 +176,7 @@
 				314E84E924BCA07800A6D492 /* WaitingView.swift */,
 				314E84EB24BCA1FD00A6D492 /* TimerView.swift */,
 				314E84F724BCBC9A00A6D492 /* WaitingStudyContentView.swift */,
+				314AD16524C246F5002A22B7 /* StudyInformationView.swift */,
 			);
 			path = Waiting;
 			sourceTree = "<group>";
@@ -190,6 +197,7 @@
 				4F88E3B724C01D33000967EE /* ExtensionUIViewController.swift */,
 				4F88E3BB24C0377A000967EE /* ExtensionUIView.swift */,
 				4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */,
+				314AD16324C243F5002A22B7 /* DateExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -210,6 +218,7 @@
 				4F575D6E24C1965300F35888 /* DropButtonView.swift */,
 				4F575D7224C1DFDD00F35888 /* IndicatorViewController.swift */,
 				4F26281E24C2292200D20BF7 /* WindowManager.swift */,
+				314AD16124C23960002A22B7 /* CircleView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -498,6 +507,7 @@
 				CFE3C9C824BF5282009E8E2F /* MypageHeaderView.swift in Sources */,
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				4F88E3AC24C0110D000967EE /* QnAModel.swift in Sources */,
+				314AD16224C23960002A22B7 /* CircleView.swift in Sources */,
 				4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
 				4F575D7A24C1F7AA00F35888 /* SignView.swift in Sources */,
@@ -509,6 +519,7 @@
 				4F575D6F24C1965300F35888 /* DropButtonView.swift in Sources */,
 				4F8838FA24BEB0A7009EF09A /* StudyConfigureVC.swift in Sources */,
 				CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */,
+				314AD16424C243F5002A22B7 /* DateExtension.swift in Sources */,
 				CFE3C9C624BF4E12009E8E2F /* MypageCell.swift in Sources */,
 				CF29217A24BC05C7001318CB /* SampleView.swift in Sources */,
 				4F6CD20A24C21F3A004E26B6 /* SignUpCollectionViewCell.swift in Sources */,
@@ -519,6 +530,7 @@
 				CFE3C9D024C076B7009E8E2F /* SummaryHeaderView.swift in Sources */,
 				4F575D7124C1B3E200F35888 /* ExtensionUIColor.swift in Sources */,
 				4F88E3B024C011BC000967EE /* UserModel.swift in Sources */,
+				314AD16624C246F5002A22B7 /* StudyInformationView.swift in Sources */,
 				4F649B2724BEEA5200E0B073 /* StudyService.swift in Sources */,
 				CFE3C9C424BF4A88009E8E2F /* MypageVC.swift in Sources */,
 			);
