@@ -14,6 +14,11 @@ class SampleVC: ViewController<SampleView> {
     super.viewDidLoad()
     customView.delegate = self
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.navigationController?.isNavigationBarHidden = false
+  }
 }
 
 extension SampleVC: SampleViewDelegate {
