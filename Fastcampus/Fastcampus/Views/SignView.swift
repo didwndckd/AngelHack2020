@@ -24,7 +24,6 @@ class SignView: View {
     return UICollectionView(frame: .zero, collectionViewLayout: layout)
   }()
   
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
   }

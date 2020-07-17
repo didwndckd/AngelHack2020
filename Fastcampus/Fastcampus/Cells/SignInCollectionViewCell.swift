@@ -12,6 +12,8 @@ class SignInCollectionViewCell: UICollectionViewCell {
     
   static let identifier = "SignInCollectionViewCell"
   
+  private var isAuto = false
+  
   private let emailDisplayLabel = UILabel()
   private let emailTextField = UITextField()
   private let passwordDisplayLabel = UILabel()
@@ -21,7 +23,7 @@ class SignInCollectionViewCell: UICollectionViewCell {
   private let autoSignInButton = UIButton()
   private let resetPasswordButton = UIButton()
   
-  private let signInButton = UIButton()
+  let signInButton = UIButton()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -46,8 +48,10 @@ class SignInCollectionViewCell: UICollectionViewCell {
     passwordTextField.isSecureTextEntry = true
     
     [emailTextField, passwordTextField].forEach {
-      $0.leftView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 16, height: 24)))
+      $0.leftView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 16, height: 48)))
       $0.leftViewMode = .always
+      $0.rightView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 16, height: 48)))
+      $0.rightViewMode = .always
       $0.layer.borderColor = UIColor.myGray.cgColor
       $0.layer.borderWidth = 2
     }
@@ -62,6 +66,7 @@ class SignInCollectionViewCell: UICollectionViewCell {
     autoSignInButton.setTitle("자동 로그인 하기", for: .normal)
     autoSignInButton.setTitleColor(.black, for: .normal)
     autoSignInButton.titleLabel?.font = .boldSystemFont(ofSize: 15)
+    autoSignInButton.addTarget(self, action: #selector(autoSignButtonDidTap(_:)), for: .touchUpInside)
     
     resetPasswordButton.setTitle("비밀번호 찾기", for: .normal)
     resetPasswordButton.setTitleColor(.gray, for: .normal)
@@ -127,5 +132,14 @@ class SignInCollectionViewCell: UICollectionViewCell {
       signInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -xSpace),
       signInButton.heightAnchor.constraint(equalToConstant: 48)
     ])
+  }
+}
+
+
+
+extension SignInCollectionViewCell {
+  @objc private func autoSignButtonDidTap(_ sender: UIButton) {
+    isAuto.toggle()
+    autoSignInImage.backgroundColor = isAuto ? .myRed : .myGray
   }
 }

@@ -36,7 +36,6 @@ class StudyService {
             let model = try FirestoreDecoder().decode(StudyModel.self, from: documnet.data())
             print(model)
             
-            
           } catch {
             print("Error")
             print(error)
