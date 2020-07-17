@@ -20,6 +20,7 @@
 		314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850524BCD8EE00A6D492 /* DoubleExtension.swift */; };
 		316C502E24BE129500D7F59A /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = 316C502D24BE129500D7F59A /* test.mov */; };
 		316C502F24BE169300D7F59A /* SODA_1594647376.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */; };
+		4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26281E24C2292200D20BF7 /* WindowManager.swift */; };
 		4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */; };
 		4F575D6D24C1573D00F35888 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F575D6C24C1573D00F35888 /* BadgeLabel.swift */; };
 		4F575D6F24C1965300F35888 /* DropButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F575D6E24C1965300F35888 /* DropButtonView.swift */; };
@@ -75,6 +76,7 @@
 		314E850524BCD8EE00A6D492 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Fastcampus/Extension/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
 		316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SODA_1594647376.MP4; sourceTree = "<group>"; };
 		316C502D24BE129500D7F59A /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
+		4F26281E24C2292200D20BF7 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F575D6C24C1573D00F35888 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
 		4F575D6E24C1965300F35888 /* DropButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropButtonView.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				4F575D6C24C1573D00F35888 /* BadgeLabel.swift */,
 				4F575D6E24C1965300F35888 /* DropButtonView.swift */,
 				4F575D7224C1DFDD00F35888 /* IndicatorViewController.swift */,
+				4F26281E24C2292200D20BF7 /* WindowManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				4F88E3AC24C0110D000967EE /* QnAModel.swift in Sources */,
 				314E84E224BC8A7400A6D492 /* Study.swift in Sources */,
+				4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
 				4F575D7A24C1F7AA00F35888 /* SignView.swift in Sources */,
 				CFE3C9CE24C07395009E8E2F /* SummaryCell.swift in Sources */,
