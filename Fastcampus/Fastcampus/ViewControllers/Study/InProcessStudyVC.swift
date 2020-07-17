@@ -148,8 +148,8 @@ extension InProcessStudyVC: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let headerView = UIView()
-    
+    let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: QuestionCell.identifier) as! QuestionCell
+    headerView.configure(qna: qnas[section])
     return headerView
   }
   
@@ -158,7 +158,7 @@ extension InProcessStudyVC: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    UITableViewCell()
+    return UITableViewCell()
   }
   
   
@@ -167,5 +167,8 @@ extension InProcessStudyVC: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension InProcessStudyVC: UITableViewDelegate {
   
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return tableView.bounds.height / 1.5
+  }
 }
 

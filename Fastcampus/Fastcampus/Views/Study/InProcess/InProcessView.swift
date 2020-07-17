@@ -22,6 +22,8 @@ class InProcessView: StudyFrameView<StudyPlayerView, UITableView> {
     bringSubviewToFront(headerView)
     bodyView.backgroundColor = #colorLiteral(red: 0.8064444661, green: 0.8065617681, blue: 0.8240631223, alpha: 1)
     bodyView.separatorStyle = .none
+    
+    bodyView.register(QuestionCell.self, forHeaderFooterViewReuseIdentifier: QuestionCell.identifier)
   }
   
   override func setupUI() {
