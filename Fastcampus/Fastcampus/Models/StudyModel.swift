@@ -9,9 +9,13 @@
 import Foundation
 import Firebase
 
+
 struct StudyModel: Codable {
-  let documentID: String
   let title: String
+  let documentID: String
+  let lectureTitle: String
+  let unitTitle: String
+  let unitDescription: String
   let date: Timestamp
   let fixed: Int
   let rule: String
