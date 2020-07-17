@@ -30,9 +30,11 @@ class WaitingStudyVC: ViewController<WaitingView> {
     attribute()
 //    pushInProcessStudyVC()
   }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     startTimer()
+    self.navigationController?.isNavigationBarHidden = false
   }
   
   override func viewDidDisappear(_ animated: Bool) {

@@ -11,7 +11,7 @@ import UIKit
 class SummaryCell: UITableViewCell {
   static let identifier = "SummaryCell"
   private let profileImageView = UIImageView()
-  private let replyLabel = UILabel()
+  private let commentLabel = UILabel()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,15 +25,15 @@ class SummaryCell: UITableViewCell {
     profileImageView.layer.cornerRadius = 15
     profileImageView.clipsToBounds = true
     
-    replyLabel.text = "큰 도움이 됐어요."
-    replyLabel.textColor = .black
-    replyLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-    replyLabel.numberOfLines = 0
+    commentLabel.text = "큰 도움이 됐어요."
+    commentLabel.textColor = .black
+    commentLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+    commentLabel.numberOfLines = 0
   }
   
   private func setupUI() {
     let margins: CGFloat = 15
-    [profileImageView, replyLabel]
+    [profileImageView, commentLabel]
       .forEach { contentView.addSubview($0) }
     
     profileImageView.snp.makeConstraints {
@@ -42,7 +42,7 @@ class SummaryCell: UITableViewCell {
       $0.width.height.equalTo(30)
     }
     
-    replyLabel.snp.makeConstraints {
+    commentLabel.snp.makeConstraints {
       $0.top.equalTo(contentView).offset(margins)
       $0.leading.equalTo(profileImageView.snp.trailing).offset(margins)
       $0.trailing.equalTo(contentView).offset(-margins)
@@ -55,14 +55,22 @@ class SummaryCell: UITableViewCell {
   }
 }
 
-class RelayInputCell: UITableViewCell {
+protocol CommentInputCellDelegate: class {
+  func addcomment(text: String)
+}
+
+class CommentInputCell: UITableViewCell {
   static let identifier = "RelayInputCell"
+  weak var delegate: CommentInputCellDelegate?
   private let relayInputTextField = UITextField()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     contentView.backgroundColor = #colorLiteral(red: 0.9452976584, green: 0.9455571771, blue: 0.9636406302, alpha: 1)
     relayInputTextField.borderStyle = .roundedRect
+    relayInputTextField.returnKeyType = .done
+    relayInputTextField.delegate = self
+    
     contentView.addSubview(relayInputTextField)
     relayInputTextField.snp.makeConstraints {
       $0.top.leading.equalTo(contentView).offset(10)
@@ -72,5 +80,14 @@ class RelayInputCell: UITableViewCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+}
+
+extension CommentInputCell: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if let text = textField.text {
+      delegate?.addcomment(text: text)
+    }
+    return true
   }
 }
