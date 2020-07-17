@@ -14,6 +14,11 @@ class SummaryVC: UITableViewController {
     attribute()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.navigationController?.isNavigationBarHidden = false
+  }
+  
   private func attribute() {
     self.view.backgroundColor = .white
 
@@ -22,7 +27,7 @@ class SummaryVC: UITableViewController {
     self.tableView.backgroundColor = #colorLiteral(red: 0.9452976584, green: 0.9455571771, blue: 0.9636406302, alpha: 1)
     self.tableView.dataSource = self
     self.tableView.delegate = self
-    self.tableView.register(RelayInputCell.self, forCellReuseIdentifier: RelayInputCell.identifier)
+    self.tableView.register(CommentInputCell.self, forCellReuseIdentifier: CommentInputCell.identifier)
     self.tableView.register(SummaryCell.self, forCellReuseIdentifier: SummaryCell.identifier)
   }
   
@@ -32,7 +37,9 @@ class SummaryVC: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.row == 0 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: RelayInputCell.identifier, for: indexPath) as! RelayInputCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: CommentInputCell.identifier, for: indexPath) as!
+      CommentInputCell
+      cell.delegate = self
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: SummaryCell.identifier, for: indexPath) as! SummaryCell
@@ -43,5 +50,11 @@ class SummaryVC: UITableViewController {
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let summaryHeaderView = SummaryHeaderView()
     return summaryHeaderView
+  }
+}
+
+extension SummaryVC: CommentInputCellDelegate {
+  func addcomment(text: String) {
+    //TODO:- 댓글 추가
   }
 }

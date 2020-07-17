@@ -50,7 +50,12 @@
 		CF29217624BC053B001318CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217524BC053B001318CB /* ViewController.swift */; };
 		CF29217824BC056C001318CB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217724BC056C001318CB /* View.swift */; };
 		CF29217A24BC05C7001318CB /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217924BC05C7001318CB /* SampleView.swift */; };
-		CFAAB31F24C22898002BB6B9 /* ExtensionUINavigationItem in Sources */ = {isa = PBXBuildFile; fileRef = CFAAB31E24C22898002BB6B9 /* ExtensionUINavigationItem */; };
+		CF7F562D24C22B2D0041DAAD /* ExtensionUINavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F562C24C22B2D0041DAAD /* ExtensionUINavigationItem.swift */; };
+		CF7F562F24C238640041DAAD /* SummaryEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F562E24C238640041DAAD /* SummaryEditorVC.swift */; };
+		CF7F563124C239E80041DAAD /* SummaryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563024C239E80041DAAD /* SummaryEditorView.swift */; };
+		CF7F563324C23A140041DAAD /* DisignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563224C23A140041DAAD /* DisignableTextField.swift */; };
+		CF7F563624C23CDF0041DAAD /* KeyboardControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563524C23CDF0041DAAD /* KeyboardControllable.swift */; };
+		CF7F563824C240EE0041DAAD /* SummaryEditorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563724C240EE0041DAAD /* SummaryEditorCell.swift */; };
 		CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A624BC6482009E8E2F /* MainCell.swift */; };
 		CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A824BC6603009E8E2F /* Lecture.swift */; };
 		CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9AA24BC660E009E8E2F /* User.swift */; };
@@ -111,7 +116,12 @@
 		CF29217524BC053B001318CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CF29217724BC056C001318CB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		CF29217924BC05C7001318CB /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
-		CFAAB31E24C22898002BB6B9 /* ExtensionUINavigationItem */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExtensionUINavigationItem; sourceTree = "<group>"; };
+		CF7F562C24C22B2D0041DAAD /* ExtensionUINavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUINavigationItem.swift; sourceTree = "<group>"; };
+		CF7F562E24C238640041DAAD /* SummaryEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEditorVC.swift; sourceTree = "<group>"; };
+		CF7F563024C239E80041DAAD /* SummaryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEditorView.swift; sourceTree = "<group>"; };
+		CF7F563224C23A140041DAAD /* DisignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisignableTextField.swift; sourceTree = "<group>"; };
+		CF7F563524C23CDF0041DAAD /* KeyboardControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardControllable.swift; sourceTree = "<group>"; };
+		CF7F563724C240EE0041DAAD /* SummaryEditorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEditorCell.swift; sourceTree = "<group>"; };
 		CFE3C9A624BC6482009E8E2F /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		CFE3C9A824BC6603009E8E2F /* Lecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lecture.swift; sourceTree = "<group>"; };
 		CFE3C9AA24BC660E009E8E2F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -192,7 +202,7 @@
 				4F88E3B724C01D33000967EE /* ExtensionUIViewController.swift */,
 				4F88E3BB24C0377A000967EE /* ExtensionUIView.swift */,
 				4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */,
-				CFAAB31E24C22898002BB6B9 /* ExtensionUINavigationItem */,
+				CF7F562C24C22B2D0041DAAD /* ExtensionUINavigationItem.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -213,6 +223,7 @@
 				4F575D6E24C1965300F35888 /* DropButtonView.swift */,
 				4F575D7224C1DFDD00F35888 /* IndicatorViewController.swift */,
 				4F26281E24C2292200D20BF7 /* WindowManager.swift */,
+				CF7F563224C23A140041DAAD /* DisignableTextField.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -255,6 +266,7 @@
 			children = (
 				4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */,
 				CFE3C9D124C08B1B009E8E2F /* Utils */,
+				CF7F563424C23CC20041DAAD /* Protocol */,
 				4F575D6B24C156CD00F35888 /* Util */,
 				316C502724BE03BA00D7F59A /* Service */,
 				314E850824BCDAF700A6D492 /* Extension */,
@@ -294,6 +306,7 @@
 				CFE3C9A624BC6482009E8E2F /* MainCell.swift */,
 				CFE3C9C524BF4E12009E8E2F /* MypageCell.swift */,
 				CFE3C9CD24C07395009E8E2F /* SummaryCell.swift */,
+				CF7F563724C240EE0041DAAD /* SummaryEditorCell.swift */,
 				4F6CD20724C21F31004E26B6 /* SignInCollectionViewCell.swift */,
 				4F6CD20924C21F3A004E26B6 /* SignUpCollectionViewCell.swift */,
 			);
@@ -308,6 +321,7 @@
 				CF29217924BC05C7001318CB /* SampleView.swift */,
 				CFE3C9C724BF5282009E8E2F /* MypageHeaderView.swift */,
 				CFE3C9CF24C076B7009E8E2F /* SummaryHeaderView.swift */,
+				CF7F563024C239E80041DAAD /* SummaryEditorView.swift */,
 				4F575D7924C1F7AA00F35888 /* SignView.swift */,
 			);
 			path = Views;
@@ -323,6 +337,7 @@
 				4FB756D424BBFE5E0035BD5B /* MainVC.swift */,
 				CFE3C9C324BF4A88009E8E2F /* MypageVC.swift */,
 				CFE3C9CB24C060B1009E8E2F /* SummaryVC.swift */,
+				CF7F562E24C238640041DAAD /* SummaryEditorVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -334,6 +349,14 @@
 				CF29217724BC056C001318CB /* View.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		CF7F563424C23CC20041DAAD /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				CF7F563524C23CDF0041DAAD /* KeyboardControllable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		CFE3C9D124C08B1B009E8E2F /* Utils */ = {
@@ -479,6 +502,7 @@
 			files = (
 				4F88E3B824C01D33000967EE /* ExtensionUIViewController.swift in Sources */,
 				4F88E3A624C010D6000967EE /* StudyModel.swift in Sources */,
+				CF7F563124C239E80041DAAD /* SummaryEditorView.swift in Sources */,
 				4F575D7824C1F6F600F35888 /* SignVC.swift in Sources */,
 				314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */,
 				CF29217824BC056C001318CB /* View.swift in Sources */,
@@ -489,19 +513,23 @@
 				4F575D7324C1DFDD00F35888 /* IndicatorViewController.swift in Sources */,
 				CFE3C9AD24BC6CAF009E8E2F /* SampleVC.swift in Sources */,
 				314E84F824BCBC9A00A6D492 /* WaitingStudyContentView.swift in Sources */,
+				CF7F562D24C22B2D0041DAAD /* ExtensionUINavigationItem.swift in Sources */,
 				4F88E3B524C01B51000967EE /* ChapterVC.swift in Sources */,
 				314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */,
+				CF7F563824C240EE0041DAAD /* SummaryEditorCell.swift in Sources */,
 				CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */,
 				4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */,
 				314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */,
 				4F6CD20824C21F31004E26B6 /* SignInCollectionViewCell.swift in Sources */,
-				CFAAB31F24C22898002BB6B9 /* ExtensionUINavigationItem in Sources */,
 				314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */,
+				CF7F562F24C238640041DAAD /* SummaryEditorVC.swift in Sources */,
 				4F8838FC24BEB0DB009EF09A /* StudyConfigureView.swift in Sources */,
+				CF7F563624C23CDF0041DAAD /* KeyboardControllable.swift in Sources */,
 				314E84EE24BCA29600A6D492 /* StudyFrameView.swift in Sources */,
 				CFE3C9C824BF5282009E8E2F /* MypageHeaderView.swift in Sources */,
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				4F88E3AC24C0110D000967EE /* QnAModel.swift in Sources */,
+				CF7F563324C23A140041DAAD /* DisignableTextField.swift in Sources */,
 				314E84E224BC8A7400A6D492 /* Study.swift in Sources */,
 				4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,

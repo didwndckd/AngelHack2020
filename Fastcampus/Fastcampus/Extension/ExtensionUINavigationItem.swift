@@ -1,5 +1,5 @@
 //
-//  ExtensionUINavigationController.swift
+//  ExtensionUINavigationItem.swift
 //  Fastcampus
 //
 //  Created by Fury on 2020/07/18.
@@ -15,19 +15,20 @@ extension UINavigationItem {
 
     let titleLabel = UILabel()
     titleLabel.text = title
-    titleLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.headline)
+    titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     titleLabel.textColor = textColor
 
     let subtitleLabel = UILabel()
     subtitleLabel.text = subtitle
-    subtitleLabel.font = .preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
-    subtitleLabel.textColor = textColor.withAlphaComponent(0.75)
+    subtitleLabel.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+    subtitleLabel.textColor = #colorLiteral(red: 0.6806092858, green: 0.6802064776, blue: 0.6997460127, alpha: 1)
 
     let stackView = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
     stackView.distribution = .equalCentering
-    stackView.alignment = .center
+    stackView.alignment = .leading
     stackView.axis = .vertical
 
     self.titleView = stackView
   }
 }
+

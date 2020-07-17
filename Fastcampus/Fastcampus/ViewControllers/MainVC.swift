@@ -23,6 +23,11 @@ class MainVC: UIViewController {
   private var currentCategory: MainCategory = .all {
     didSet {
       print("[Log] currentCategory :", currentCategory)
+      if currentCategory == .finish {
+        self.navigationController?.pushViewController(SummaryVC(), animated: true)
+      } else if currentCategory == .studying {
+        self.navigationController?.pushViewController(SummaryEditorVC(), animated: true)
+      }
     }
   }
   private var lecture: [Lecture] = [] {
