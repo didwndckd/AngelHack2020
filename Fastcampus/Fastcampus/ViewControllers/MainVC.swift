@@ -181,7 +181,7 @@ extension MainVC: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if lecture[indexPath.row].id == 3 {
+    if lecture[indexPath.row].id == 5 {
       let vc = ChapterVC(lectureID: "QEULxiXwlzDu5nOsH7Kl")
       self.navigationController?.pushViewController(vc, animated: true)
     }

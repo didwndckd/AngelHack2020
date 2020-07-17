@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow(frame: UIScreen.main.bounds)
     let navigationController = UINavigationController(rootViewController: MainVC())
-    window?.rootViewController = navigationController
+//    window?.rootViewController = navigationController
+    window?.rootViewController = SignVC()
     window?.makeKeyAndVisible()
     return true
   }
