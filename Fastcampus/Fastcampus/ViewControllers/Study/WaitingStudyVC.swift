@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class WaitingStudyVC: ViewController<WaitingView> {
   
   typealias UnitInformation = (title: String, content: String)
   
-  private var study: Study
+  private var model: StudyModel
   private var timer: Timer?
   
-  init(study: Study) {
-    self.study = study
+  init(studyModel: StudyModel) {
+    self.model = studyModel
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -41,9 +42,9 @@ class WaitingStudyVC: ViewController<WaitingView> {
   }
   
   private func attribute() {
-    self.title = study.title
+    self.title = model.title
     self.navigationItem.largeTitleDisplayMode = .never
-    customView.updateContent(study: study)
+    customView.updateContent(study: model)
   }
   
   private func startTimer() {
@@ -60,7 +61,7 @@ class WaitingStudyVC: ViewController<WaitingView> {
   }
   
   @objc private func timerCallBack(_ sender: Timer) {
-    let timeInterval = study.date.timeIntervalSince(Date())
+    let timeInterval = model.date.dateValue().timeIntervalSince(Date())
     
     guard timeInterval > 0 else {
       customView.updateTimer(timeInterval: timeInterval)

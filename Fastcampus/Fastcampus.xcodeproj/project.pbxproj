@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		102EF4C3E448C56051ADCE3B /* Pods_Fastcampus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB106B0C03588AC2F402DA2 /* Pods_Fastcampus.framework */; };
-		314E84E224BC8A7400A6D492 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E124BC8A7400A6D492 /* Study.swift */; };
+		312AA94824C0BE0400032507 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312AA94724C0BE0400032507 /* QuestionCell.swift */; };
 		314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */; };
 		314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E924BCA07800A6D492 /* WaitingView.swift */; };
 		314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84EB24BCA1FD00A6D492 /* TimerView.swift */; };
@@ -64,7 +64,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		314E84E124BC8A7400A6D492 /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
+		312AA94724C0BE0400032507 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
 		314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingStudyVC.swift; sourceTree = "<group>"; };
 		314E84E924BCA07800A6D492 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		314E84EB24BCA1FD00A6D492 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -277,7 +277,6 @@
 			children = (
 				CFE3C9A824BC6603009E8E2F /* Lecture.swift */,
 				CFE3C9AA24BC660E009E8E2F /* User.swift */,
-				314E84E124BC8A7400A6D492 /* Study.swift */,
 				4F88E3AF24C011BC000967EE /* UserModel.swift */,
 				4F88E3A724C010E7000967EE /* LectureModel.swift */,
 				4F88E3A924C010F3000967EE /* ChapterModel.swift */,
@@ -294,6 +293,7 @@
 				CFE3C9A624BC6482009E8E2F /* MainCell.swift */,
 				CFE3C9C524BF4E12009E8E2F /* MypageCell.swift */,
 				CFE3C9CD24C07395009E8E2F /* SummaryCell.swift */,
+				312AA94724C0BE0400032507 /* QuestionCell.swift */,
 				4F6CD20724C21F31004E26B6 /* SignInCollectionViewCell.swift */,
 				4F6CD20924C21F3A004E26B6 /* SignUpCollectionViewCell.swift */,
 			);
@@ -501,11 +501,11 @@
 				CFE3C9C824BF5282009E8E2F /* MypageHeaderView.swift in Sources */,
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				4F88E3AC24C0110D000967EE /* QnAModel.swift in Sources */,
-				314E84E224BC8A7400A6D492 /* Study.swift in Sources */,
 				4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
 				4F575D7A24C1F7AA00F35888 /* SignView.swift in Sources */,
 				CFE3C9CE24C07395009E8E2F /* SummaryCell.swift in Sources */,
+				312AA94824C0BE0400032507 /* QuestionCell.swift in Sources */,
 				4F575D6D24C1573D00F35888 /* BadgeLabel.swift in Sources */,
 				314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */,
 				4F88E3B224C01384000967EE /* FirebaseMaker.swift in Sources */,

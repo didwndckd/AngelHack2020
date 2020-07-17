@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+
+struct QnAModel: Codable {
+  let documentID: String
+  let playTime: Int64
+  let title: String
+  let userID: String
+  var isDone: Bool
+  var messages: [Message]
+//  var selectedMessageID
+}
+
+struct Message: Codable {
+  let userID: String
+  let message: String
+}
