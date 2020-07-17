@@ -10,33 +10,41 @@ import UIKit
 
 protocol StudyConfigureViewDelegate: class {
   func cancelDidTap()
-  func createDidTap()
+  func createDidTap(title: String?, moth: Int?, day: Int?, hour: Int?, minute: Int?, fixed: Int?, rule: String?)
 }
 
 class StudyConfigureView: View {
   
   weak var delegate: StudyConfigureViewDelegate?
   
-  private var fixedCount = 0 {
-    didSet { fixedCountLabel.text = String(fixedCount) + " 명" }
-  }
-  
+  var title: String?
+  var moth: Int?
+  var day: Int?
+  var hour: Int?
+  var minute: Int?
+  var fixed: Int?
+  var rule: String?
   
   private let baseView = UIView()
   
-  private let titleLabel = UILabel()
-  private let datePicker = UIDatePicker()
-  
-  private let fixedTitleLabel = UILabel()
-  private let fixedCountLabel = UILabel()
-  private let fixedStepper = UIStepper()
-  
-  private let ruleTitleLabel = UILabel()
-  private let ruleTextView = UITextView()
-  
-  private let masterTitleLabel = UILabel()
+  private let masterDisplayLabel = UILabel()
+  private let masterBadgeLabel = BadgeLabel()
   private let masterNameLabel = UILabel()
-  private let masterBadgeImageView = UIImageView()
+  
+  private let titleDisplayLabel = UILabel()
+  private let titleTextField = UITextField()
+  
+  private let dateDisplayLabel = UILabel()
+  private let mothDropView = DropButtonView(amount: 12, title: "월 ▾")
+  private let dayDropView = DropButtonView(amount: 31, title: "일 ▾")
+  private let hourDropView = DropButtonView(amount: 24, title: "시 ▾")
+  private let minuteDropView = DropButtonView(amount: 60, title: "분 ▾")
+  
+  private let fixedDisplayLabel = UILabel()
+  private let fixedDropView = DropButtonView(amount: 10, title: "명 ▾")
+  
+  private let ruleDisplayLabel = UILabel()
+  private let ruleTextView = UITextView()
   
   private let cancelButton = UIButton()
   private let createButton = UIButton()
@@ -55,45 +63,41 @@ class StudyConfigureView: View {
     baseView.layer.cornerRadius = 8
     baseView.layer.masksToBounds = true
     
-    [titleLabel, fixedTitleLabel, ruleTitleLabel, masterTitleLabel].forEach {
+    [masterDisplayLabel, titleDisplayLabel, dateDisplayLabel, fixedDisplayLabel, ruleDisplayLabel].forEach {
       $0.font = .boldSystemFont(ofSize: 16)
     }
     
-    titleLabel.text = "스터디 오픈시간"
-    
-    datePicker.datePickerMode = .countDownTimer
-    datePicker.locale = Locale(identifier: "ko_KR")
-    datePicker.setDate(Date(), animated: true)
-    
-    fixedTitleLabel.text = "정원"
-    
-    fixedCountLabel.text = String(fixedCount) + " 명"
-    
-    fixedStepper.minimumValue = 0
-    fixedStepper.maximumValue = 10
-    fixedStepper.stepValue = 1
-    fixedStepper.addTarget(self, action: #selector(stepperDidTap(_:)), for: .valueChanged)
-    
-    ruleTitleLabel.text = "규칙"
-    
-    ruleTextView.backgroundColor = .lightGray
-    ruleTextView.layer.cornerRadius = 8
-    ruleTextView.layer.masksToBounds = true
-    
-    masterTitleLabel.text = "방장"
-    
+    masterDisplayLabel.text = "방장"
+    masterBadgeLabel.text = "Lv.9"
+    masterBadgeLabel.font = .boldSystemFont(ofSize: 12)
     masterNameLabel.text = "업쓰"
     
-    masterBadgeImageView.image = UIImage(systemName: "tortoise.fill")
+    titleDisplayLabel.text = "스터디 제목"
+    titleTextField.font = .boldSystemFont(ofSize: 20)
+    titleTextField.layer.cornerRadius = 4
+    titleTextField.backgroundColor = .myGray
+    titleTextField.delegate = self
+    
+    dateDisplayLabel.text = "스터디 오픈"
+    
+    fixedDisplayLabel.text = "정원"
+    fixedDropView.delegate = self
+    
+    ruleDisplayLabel.text = "규칙"
+    
+    ruleTextView.backgroundColor = .myGray
+    ruleTextView.layer.cornerRadius = 8
+    ruleTextView.layer.masksToBounds = true
+    ruleTextView.delegate = self
     
     cancelButton.setTitle("취소", for: .normal)
-    cancelButton.setTitleColor(.white, for: .normal)
-    cancelButton.backgroundColor = .gray
+    cancelButton.setTitleColor(.gray, for: .normal)
+    cancelButton.backgroundColor = .myGray
     cancelButton.addTarget(self, action: #selector(buttonDidTap(_:)), for: .touchUpInside)
     
     createButton.setTitle("스터디방 만들기", for: .normal)
     createButton.setTitleColor(.white, for: .normal)
-    createButton.backgroundColor = .darkGray
+    createButton.backgroundColor = .myRed
     createButton.addTarget(self, action: #selector(buttonDidTap(_:)), for: .touchUpInside)
   }
   
@@ -110,10 +114,11 @@ class StudyConfigureView: View {
     baseViewCenterY = baseView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
     baseViewCenterY?.isActive = true
     
-    [titleLabel, datePicker,
-     fixedTitleLabel, fixedCountLabel, fixedStepper,
-     ruleTitleLabel, ruleTextView,
-     masterTitleLabel, masterNameLabel, masterBadgeImageView,
+    [masterDisplayLabel, masterBadgeLabel, masterNameLabel,
+     titleDisplayLabel, titleTextField,
+     dateDisplayLabel, mothDropView, dayDropView, hourDropView, minuteDropView,
+     fixedDisplayLabel, fixedDropView,
+     ruleDisplayLabel, ruleTextView,
      cancelButton, createButton].forEach {
       baseView.addSubview($0)
       $0.translatesAutoresizingMaskIntoConstraints = false
@@ -121,51 +126,80 @@ class StudyConfigureView: View {
     
     let xSpace: CGFloat = 24
     let ySpace: CGFloat = 16
+    let toSpace: CGFloat = 4
+    let buttonHeight: CGFloat = 32
+    let ySpace2: CGFloat = ySpace + toSpace + buttonHeight
     
-    [ruleTitleLabel, ruleTextView].forEach {
-      $0.topAnchor.constraint(equalTo: fixedStepper.bottomAnchor, constant: ySpace).isActive = true
+    let dateDropViews = [mothDropView, dayDropView, hourDropView, minuteDropView]
+      
+    dateDropViews.enumerated().forEach {
+      $1.delegate = self
+      $1.topAnchor.constraint(equalTo: dateDisplayLabel.bottomAnchor, constant: toSpace).isActive = true
+      
+      switch $0 {
+      case 0:
+        $1.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace).isActive = true
+        
+      case 3:
+        $1.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -xSpace).isActive = true
+        fallthrough
+        
+      default:
+        $1.leadingAnchor.constraint(equalTo: dateDropViews[$0 - 1].trailingAnchor, constant: 12).isActive = true
+        $1.widthAnchor.constraint(equalTo: dateDropViews[$0 - 1].widthAnchor).isActive = true
+      }
     }
     
-    [masterTitleLabel, masterNameLabel, masterBadgeImageView].forEach {
-      $0.topAnchor.constraint(equalTo: ruleTextView.bottomAnchor, constant: ySpace).isActive = true
-    }
     
     [cancelButton, createButton].forEach {
-      $0.topAnchor.constraint(equalTo: masterTitleLabel.bottomAnchor, constant: ySpace).isActive = true
+      $0.topAnchor.constraint(equalTo: ruleTextView.bottomAnchor, constant: ySpace).isActive = true
       $0.bottomAnchor.constraint(equalTo: baseView.bottomAnchor).isActive = true
       $0.heightAnchor.constraint(equalToConstant: 48).isActive = true
     }
     
-    
     NSLayoutConstraint.activate([
-      titleLabel.topAnchor.constraint(equalTo: baseView.topAnchor, constant: ySpace),
-      titleLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      masterDisplayLabel.topAnchor.constraint(equalTo: baseView.topAnchor, constant: ySpace),
+      masterDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
-      datePicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-      datePicker.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
-      datePicker.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -xSpace),
-      datePicker.heightAnchor.constraint(equalToConstant: 144),
+      masterBadgeLabel.centerYAnchor.constraint(equalTo: masterDisplayLabel.centerYAnchor),
+      masterBadgeLabel.leadingAnchor.constraint(equalTo: masterDisplayLabel.trailingAnchor, constant: toSpace),
       
-      fixedTitleLabel.centerYAnchor.constraint(equalTo: fixedStepper.centerYAnchor),
-      fixedTitleLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      masterNameLabel.centerYAnchor.constraint(equalTo: masterDisplayLabel.centerYAnchor),
+      masterNameLabel.leadingAnchor.constraint(equalTo: masterBadgeLabel.trailingAnchor, constant: toSpace),
       
-      fixedCountLabel.centerYAnchor.constraint(equalTo: fixedStepper.centerYAnchor),
-      fixedCountLabel.leadingAnchor.constraint(equalTo: fixedTitleLabel.trailingAnchor, constant: xSpace),
       
-      fixedStepper.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -xSpace),
-      fixedStepper.topAnchor.constraint(equalTo: datePicker.bottomAnchor),
       
-      ruleTitleLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      titleDisplayLabel.topAnchor.constraint(equalTo: masterDisplayLabel.bottomAnchor, constant: ySpace),
+      titleDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
-      ruleTextView.leadingAnchor.constraint(equalTo: ruleTitleLabel.trailingAnchor, constant: xSpace),
-      ruleTextView.widthAnchor.constraint(equalTo: baseView.widthAnchor, multiplier: 0.6),
-      ruleTextView.heightAnchor.constraint(equalToConstant: 160),
+      titleTextField.topAnchor.constraint(equalTo: titleDisplayLabel.bottomAnchor, constant: toSpace),
+      titleTextField.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      titleTextField.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -xSpace),
+      titleTextField.heightAnchor.constraint(equalToConstant: buttonHeight),
       
-      masterTitleLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
-      masterNameLabel.leadingAnchor.constraint(equalTo: masterTitleLabel.trailingAnchor, constant: xSpace),
       
-      masterBadgeImageView.leadingAnchor.constraint(equalTo: masterNameLabel.trailingAnchor, constant: xSpace),
+      dateDisplayLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: ySpace),
+      dateDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      
+      
+      
+      fixedDisplayLabel.topAnchor.constraint(equalTo: dateDisplayLabel.bottomAnchor, constant: ySpace2),
+      fixedDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      
+      fixedDropView.topAnchor.constraint(equalTo: fixedDisplayLabel.bottomAnchor, constant: toSpace),
+      fixedDropView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      fixedDropView.widthAnchor.constraint(equalTo: mothDropView.widthAnchor),
+      
+      
+      
+      ruleDisplayLabel.topAnchor.constraint(equalTo: fixedDisplayLabel.bottomAnchor, constant: ySpace2),
+      ruleDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      
+      ruleTextView.topAnchor.constraint(equalTo: ruleDisplayLabel.bottomAnchor, constant: toSpace),
+      ruleTextView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      ruleTextView.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -xSpace),
+      ruleTextView.heightAnchor.constraint(equalToConstant: 72),
       
       cancelButton.leadingAnchor.constraint(equalTo: baseView.leadingAnchor),
       
@@ -178,7 +212,6 @@ class StudyConfigureView: View {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
 }
 
 
@@ -187,14 +220,29 @@ class StudyConfigureView: View {
 
 extension StudyConfigureView {
   @objc private func stepperDidTap(_ sender: UIStepper) {
-    fixedCount = Int(sender.value)
+    fixed = Int(sender.value)
   }
   
   
   @objc private func buttonDidTap(_ sender: UIButton) {
-    sender == cancelButton ? delegate?.cancelDidTap() : delegate?.createDidTap()
+    sender == cancelButton ?
+      delegate?.cancelDidTap() :
+      delegate?.createDidTap(title: title, moth: moth, day: day, hour: hour, minute: minute, fixed: fixed, rule: rule)
   }
 }
+
+
+
+extension StudyConfigureView: UITextViewDelegate, UITextFieldDelegate {
+  func textFieldDidChangeSelection(_ textField: UITextField) {
+    title = textField.text
+  }
+  
+  func textViewDidChange(_ textView: UITextView) {
+    rule = textView.text
+  }
+}
+
 
 
 
@@ -226,5 +274,27 @@ extension StudyConfigureView {
         }
         self?.layoutIfNeeded()
     })
+  }
+}
+
+extension StudyConfigureView: DropButtonViewDelegate {
+  func selectedElement(_ view: UIView, _ element: Int) {
+    switch view {
+    case mothDropView:    moth = element
+    case dayDropView:     day = element
+    case hourDropView:    hour = element
+    case minuteDropView:  minute = element
+    case fixedDropView:   fixed = element
+    default:              break
+    }
+  }
+  
+  func titlButtonDidTap(_ view: UIView) {
+    let dropViews = [mothDropView, dayDropView, hourDropView, minuteDropView, fixedDropView]
+    
+    dropViews.forEach {
+      guard $0 != view else { return }
+      $0.isFold = true
+    }
   }
 }

@@ -33,5 +33,21 @@ extension UIViewController {
     alert.addAction(cancel)
     self.present(alert, animated: true)
   }
+  
+  
+  
+  // MARK: - IndicatoerViewController
+  
+  func presentIndicatorViewController() {
+    let vcIndicator = IndicatorViewController()
+    vcIndicator.modalPresentationStyle = .overFullScreen
+    present(vcIndicator, animated: false)
+  }
+  
+  func dismissIndicatorViewController() {
+    guard let vcIndicator = presentedViewController as? IndicatorViewController else { return }
+    vcIndicator.dismiss(animated: false)
+  }
+
 }
 

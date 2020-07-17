@@ -25,20 +25,19 @@ class StudyFrameView<TopView: UIView, BottomView: UIView>: View {
     
     [_headerView, _bodyView].forEach({
       addSubview($0)
-      $0.translatesAutoresizingMaskIntoConstraints = false
     })
     
     let guide = safeAreaLayoutGuide
+    _headerView.snp.makeConstraints({
+      $0.top.leading.trailing.equalTo(guide)
+      $0.height.equalTo(guide).multipliedBy(0.3)
+    })
     
-    _headerView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
-    _headerView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
-    _headerView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
-    _headerView.heightAnchor.constraint(equalTo: guide.heightAnchor, multiplier: 0.3).isActive = true
+    _bodyView.snp.makeConstraints({
+      $0.height.equalTo(guide).multipliedBy(0.7)
+      $0.leading.trailing.bottom.equalTo(guide)
+    })
     
-    _bodyView.topAnchor.constraint(equalTo: _headerView.bottomAnchor).isActive = true
-    _bodyView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
-    _bodyView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
-    _bodyView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
   }
   
 }

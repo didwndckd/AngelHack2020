@@ -17,12 +17,14 @@
 		314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */; };
 		314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FD24BCD2DA00A6D492 /* InProcessView.swift */; };
 		314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */; };
-		314E850224BCD69500A6D492 /* PlayerInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850124BCD69500A6D492 /* PlayerInformationView.swift */; };
-		314E850424BCD7A600A6D492 /* PlayerProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850324BCD7A600A6D492 /* PlayerProgressView.swift */; };
 		314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850524BCD8EE00A6D492 /* DoubleExtension.swift */; };
 		316C502E24BE129500D7F59A /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = 316C502D24BE129500D7F59A /* test.mov */; };
 		316C502F24BE169300D7F59A /* SODA_1594647376.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */; };
 		4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */; };
+		4F575D6D24C1573D00F35888 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F575D6C24C1573D00F35888 /* BadgeLabel.swift */; };
+		4F575D6F24C1965300F35888 /* DropButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F575D6E24C1965300F35888 /* DropButtonView.swift */; };
+		4F575D7124C1B3E200F35888 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */; };
+		4F575D7324C1DFDD00F35888 /* IndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F575D7224C1DFDD00F35888 /* IndicatorViewController.swift */; };
 		4F649B2724BEEA5200E0B073 /* StudyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F649B2624BEEA5200E0B073 /* StudyService.swift */; };
 		4F8838FA24BEB0A7009EF09A /* StudyConfigureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8838F924BEB0A7009EF09A /* StudyConfigureVC.swift */; };
 		4F8838FC24BEB0DB009EF09A /* StudyConfigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8838FB24BEB0DB009EF09A /* StudyConfigureView.swift */; };
@@ -65,12 +67,14 @@
 		314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProcessStudyVC.swift; sourceTree = "<group>"; };
 		314E84FD24BCD2DA00A6D492 /* InProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProcessView.swift; sourceTree = "<group>"; };
 		314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlayerView.swift; sourceTree = "<group>"; };
-		314E850124BCD69500A6D492 /* PlayerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationView.swift; sourceTree = "<group>"; };
-		314E850324BCD7A600A6D492 /* PlayerProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerProgressView.swift; sourceTree = "<group>"; };
 		314E850524BCD8EE00A6D492 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Fastcampus/Extension/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
 		316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SODA_1594647376.MP4; sourceTree = "<group>"; };
 		316C502D24BE129500D7F59A /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4F575D6C24C1573D00F35888 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
+		4F575D6E24C1965300F35888 /* DropButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropButtonView.swift; sourceTree = "<group>"; };
+		4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
+		4F575D7224C1DFDD00F35888 /* IndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorViewController.swift; sourceTree = "<group>"; };
 		4F649B2624BEEA5200E0B073 /* StudyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyService.swift; path = Fastcampus/Views/Study/StudyService.swift; sourceTree = SOURCE_ROOT; };
 		4F8838F924BEB0A7009EF09A /* StudyConfigureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyConfigureVC.swift; sourceTree = "<group>"; };
 		4F8838FB24BEB0DB009EF09A /* StudyConfigureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyConfigureView.swift; sourceTree = "<group>"; };
@@ -165,8 +169,6 @@
 			children = (
 				314E84FD24BCD2DA00A6D492 /* InProcessView.swift */,
 				314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */,
-				314E850324BCD7A600A6D492 /* PlayerProgressView.swift */,
-				314E850124BCD69500A6D492 /* PlayerInformationView.swift */,
 			);
 			path = InProcess;
 			sourceTree = "<group>";
@@ -177,6 +179,7 @@
 				314E850524BCD8EE00A6D492 /* DoubleExtension.swift */,
 				4F88E3B724C01D33000967EE /* ExtensionUIViewController.swift */,
 				4F88E3BB24C0377A000967EE /* ExtensionUIView.swift */,
+				4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -188,6 +191,16 @@
 				4F88E3B124C01384000967EE /* FirebaseMaker.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		4F575D6B24C156CD00F35888 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				4F575D6C24C1573D00F35888 /* BadgeLabel.swift */,
+				4F575D6E24C1965300F35888 /* DropButtonView.swift */,
+				4F575D7224C1DFDD00F35888 /* IndicatorViewController.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		4F88E3B324C01B36000967EE /* Lecture */ = {
@@ -228,6 +241,7 @@
 			children = (
 				4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */,
 				CFE3C9D124C08B1B009E8E2F /* Utils */,
+				4F575D6B24C156CD00F35888 /* Util */,
 				316C502724BE03BA00D7F59A /* Service */,
 				314E850824BCDAF700A6D492 /* Extension */,
 				314E84E324BC9CA100A6D492 /* Resource */,
@@ -451,11 +465,10 @@
 				CF29217824BC056C001318CB /* View.swift in Sources */,
 				314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */,
 				CF29217624BC053B001318CB /* ViewController.swift in Sources */,
-				314E850424BCD7A600A6D492 /* PlayerProgressView.swift in Sources */,
 				4F88E3A824C010E7000967EE /* LectureModel.swift in Sources */,
 				4F88E3BC24C0377A000967EE /* ExtensionUIView.swift in Sources */,
+				4F575D7324C1DFDD00F35888 /* IndicatorViewController.swift in Sources */,
 				CFE3C9AD24BC6CAF009E8E2F /* SampleVC.swift in Sources */,
-				314E850224BCD69500A6D492 /* PlayerInformationView.swift in Sources */,
 				314E84F824BCBC9A00A6D492 /* WaitingStudyContentView.swift in Sources */,
 				4F88E3B524C01B51000967EE /* ChapterVC.swift in Sources */,
 				314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */,
@@ -471,8 +484,10 @@
 				314E84E224BC8A7400A6D492 /* Study.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
 				CFE3C9CE24C07395009E8E2F /* SummaryCell.swift in Sources */,
+				4F575D6D24C1573D00F35888 /* BadgeLabel.swift in Sources */,
 				314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */,
 				4F88E3B224C01384000967EE /* FirebaseMaker.swift in Sources */,
+				4F575D6F24C1965300F35888 /* DropButtonView.swift in Sources */,
 				4F8838FA24BEB0A7009EF09A /* StudyConfigureVC.swift in Sources */,
 				CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */,
 				CFE3C9C624BF4E12009E8E2F /* SideMenuCell.swift in Sources */,
@@ -482,6 +497,7 @@
 				4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */,
 				4F88E3AA24C010F3000967EE /* ChapterModel.swift in Sources */,
 				CFE3C9D024C076B7009E8E2F /* SummaryHeaderView.swift in Sources */,
+				4F575D7124C1B3E200F35888 /* ExtensionUIColor.swift in Sources */,
 				4F88E3B024C011BC000967EE /* UserModel.swift in Sources */,
 				4F649B2724BEEA5200E0B073 /* StudyService.swift in Sources */,
 				CFE3C9C424BF4A88009E8E2F /* SideMenuVC.swift in Sources */,
