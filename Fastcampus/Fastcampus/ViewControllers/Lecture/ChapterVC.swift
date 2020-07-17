@@ -109,6 +109,7 @@ extension ChapterVC: UITableViewDataSource {
     let unitIndex = String(format: "%02d", unit.index)
     let text = unitIndex + ". " + unit.title
     cell.textLabel?.text = text
+    cell.textLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
     cell.accessoryType = .disclosureIndicator
     
     return cell
@@ -121,42 +122,42 @@ extension ChapterVC: UITableViewDataSource {
 
 extension ChapterVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let button = UIButton()
-    button.backgroundColor = .white
-    button.tag = section
-    
+    let chapterHeaderView = ChapterHeaderView()
+    chapterHeaderView.tag = section
     let chapter = chapters[section]
     let chapterIndex = String(format: "%02d", chapter.index)
     let text = chapterIndex + ". " + chapter.title
-    button.setTitle(text, for: .normal)
-    button.setTitleColor(.black, for: .normal)
-    button.addTarget(self, action: #selector(sectionDidTap), for: .touchUpInside)
-    button.titleLabel?.adjustsFontSizeToFitWidth = true
-    button.contentHorizontalAlignment = .left
+    chapterHeaderView.setTitle(text: text)
+    chapterHeaderView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sectionDidTap(_:))))
+    chapterHeaderView.isUserInteractionEnabled = true
     
-    return button
+    return chapterHeaderView
   }
   
-  @objc private func sectionDidTap(_ sender: UIButton) {
+  @objc private func sectionDidTap(_ sender: UITapGestureRecognizer) {
+    
     var indexPath = [IndexPath]()
     
-    for row in chapters[sender.tag].Units.indices {
-      let tempIndexPath = IndexPath(row: row, section: sender.tag)
+    for row in chapters[sender.view!.tag].Units.indices {
+      let tempIndexPath = IndexPath(row: row, section: sender.view!.tag)
       indexPath.append(tempIndexPath)
     }
     
-    let isFold = isFoldCache[sender.tag] ?? true
-    isFoldCache[sender.tag] = !isFold
+    let isFold = isFoldCache[sender.view!.tag] ?? true
+    isFoldCache[sender.view!.tag] = !isFold
     
     isFold ?
       tableView.insertRows(at: indexPath, with: .fade):
       tableView.deleteRows(at: indexPath, with: .fade)
-      
+    
+    if let headerView = sender.view as? ChapterHeaderView {
+      headerView.toggleBottomSeparatorView(isHidden: isFoldCache[sender.view!.tag] ?? true)
+    }
   }
   
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    48
+    58
   }
   
   func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -167,4 +168,69 @@ extension ChapterVC: UITableViewDelegate {
     0
   }
   
+}
+
+class ChapterHeaderView: UIView {
+  private let containerView = UIView()
+  private let titleLabel = UILabel()
+  private let rightImageView = UIImageView()
+  private let bottomSeparatorView = UIView()
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    attribute()
+    setupUI()
+  }
+  
+  func setTitle(text: String) {
+    titleLabel.text = text
+  }
+  
+  func toggleBottomSeparatorView(isHidden: Bool) {
+    print("[Log] isHidden :", isHidden)
+    bottomSeparatorView.isHidden = isHidden
+  }
+  
+  private func attribute() {
+    titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+    
+    bottomSeparatorView.backgroundColor = .lightGray
+    bottomSeparatorView.isHidden = true
+  }
+  
+  private func setupUI() {
+    let margins: CGFloat = 15
+    [containerView, titleLabel, rightImageView, bottomSeparatorView]
+      .forEach { self.addSubview($0) }
+    
+    containerView.snp.makeConstraints {
+      $0.top.equalTo(self).offset(margins / 3)
+      $0.leading.equalTo(self).offset(margins)
+      $0.trailing.equalTo(self).offset(-margins)
+      $0.bottom.equalTo(self).offset(-margins / 3)
+    }
+    
+    titleLabel.snp.makeConstraints {
+      $0.centerY.equalTo(containerView)
+      $0.leading.equalTo(containerView).offset(margins)
+      $0.trailing.equalTo(rightImageView.snp.leading).offset(-margins)
+    }
+    
+    rightImageView.snp.makeConstraints {
+      $0.centerY.equalTo(containerView)
+      $0.trailing.equalTo(containerView).offset(-margins)
+      $0.width.height.equalTo(30)
+    }
+    
+    bottomSeparatorView.snp.makeConstraints {
+      $0.leading.equalTo(self).offset(margins)
+      $0.trailing.equalTo(self).offset(-margins)
+      $0.bottom.equalTo(self)
+      $0.height.equalTo(1)
+    }
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 }
