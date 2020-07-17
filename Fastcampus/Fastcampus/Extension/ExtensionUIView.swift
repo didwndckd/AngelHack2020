@@ -22,7 +22,7 @@ extension UIView {
   
   func shadow() {
     self.layer.shadowRadius = 5.0
-    self.layer.shadowOpacity = 0.7
+    self.layer.shadowOpacity = 0.4
     self.layer.shadowOffset = .zero
     self.layer.shadowColor = UIColor.darkGray.cgColor
   }
