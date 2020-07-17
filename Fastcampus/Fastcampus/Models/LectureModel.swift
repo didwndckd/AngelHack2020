@@ -9,9 +9,8 @@
 import Foundation
 
 struct LectureModel: Codable {
-  let documentID: String
   let title: String
   let imageURL: String
-  let chapters: [ChapterModel]
+  let type: String
 }
 

@@ -9,7 +9,6 @@
 import Foundation
 
 struct UserModel: Codable {
-  let documentID: String
   let nickName: String
   let lectures: [String]
   let studys: [String]

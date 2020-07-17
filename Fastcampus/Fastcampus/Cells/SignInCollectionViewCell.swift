@@ -23,7 +23,7 @@ class SignInCollectionViewCell: UICollectionViewCell {
   private let autoSignInButton = UIButton()
   private let resetPasswordButton = UIButton()
   
-  let signInButton = UIButton()
+  private let signInButton = UIButton()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -54,6 +54,7 @@ class SignInCollectionViewCell: UICollectionViewCell {
       $0.rightViewMode = .always
       $0.layer.borderColor = UIColor.myGray.cgColor
       $0.layer.borderWidth = 2
+      $0.delegate = self
     }
     
     autoSignInImage.backgroundColor = .myGray
@@ -74,6 +75,7 @@ class SignInCollectionViewCell: UICollectionViewCell {
     
     signInButton.setTitle("로그인하기", for: .normal)
     signInButton.backgroundColor = .gray
+    signInButton.addTarget(self, action: #selector(signInButtonDidTap), for: .touchUpInside)
   }
   
   private struct Standard {
@@ -137,9 +139,28 @@ class SignInCollectionViewCell: UICollectionViewCell {
 
 
 
-extension SignInCollectionViewCell {
+extension SignInCollectionViewCell: UITextFieldDelegate {
   @objc private func autoSignButtonDidTap(_ sender: UIButton) {
     isAuto.toggle()
     autoSignInImage.backgroundColor = isAuto ? .myRed : .myGray
   }
+  
+  @objc private func signInButtonDidTap() {
+    guard let vc = self.parentViewController as? SignVC else { return }
+    vc.signIn(emailTextField: emailTextField, passwordTextField: passwordTextField)
+  }
+  
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    switch textField {
+    case emailTextField:
+      passwordTextField.becomeFirstResponder()
+      
+    default:
+      passwordTextField.resignFirstResponder()
+    }
+    
+    return true
+  }
 }
+
