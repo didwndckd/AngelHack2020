@@ -78,22 +78,22 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
       return
     }
     
-    let mStudy = StudyModel(
-      documentID: "test",
-      title: title,
-      date: Timestamp(date: date),
-      fixed: fixed,
-      rule: rule,
-      userIDs: ["방장uuid"],
-      qnaIDs: [String](),
-      inProcess: .wait
-    )
+//    let mStudy = StudyModel(
+//      documentID: "test",
+//      title: title,
+//      date: Timestamp(date: date),
+//      fixed: fixed,
+//      rule: rule,
+//      userIDs: ["방장uuid"],
+//      qnaIDs: [String](),
+//      inProcess: .wait
+//    )
     
-    presentIndicatorViewController()
-    StudyService.createStudy(studyModel: mStudy) {
-      self.dismissIndicatorViewController()
-      self.dismiss(animated: true)
-    }
+//    presentIndicatorViewController()
+//    StudyService.createStudy(studyModel: mStudy) {
+//      self.dismissIndicatorViewController()
+//      self.dismiss(animated: true)
+//    }
   }
 }
 

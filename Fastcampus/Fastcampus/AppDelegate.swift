@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     FirebaseApp.configure()
     
-    Auth.auth().currentUser == nil ?
+    Auth.auth().currentUser != nil ?
       WindowManager.set(.sign) :
       WindowManager.set(.main)
     

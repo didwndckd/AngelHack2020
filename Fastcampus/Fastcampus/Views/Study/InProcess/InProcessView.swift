@@ -20,6 +20,10 @@ class InProcessView: StudyFrameView<StudyPlayerView, UITableView> {
   override func attribute() {
     super.attribute()
     bringSubviewToFront(headerView)
+    bodyView.backgroundColor = #colorLiteral(red: 0.8064444661, green: 0.8065617681, blue: 0.8240631223, alpha: 1)
+    bodyView.separatorStyle = .none
+    
+    bodyView.register(QuestionCell.self, forHeaderFooterViewReuseIdentifier: QuestionCell.identifier)
   }
   
   override func setupUI() {
@@ -67,5 +71,9 @@ class InProcessView: StudyFrameView<StudyPlayerView, UITableView> {
     self.layoutIfNeeded()
   }
   
+  func reloadData(_ qnas: [QnAModel]) {
+    bodyView.reloadData()
+    headerView.updatePins(qnas)
+  }
   
 }
