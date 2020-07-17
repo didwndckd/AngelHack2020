@@ -13,7 +13,12 @@ class InProcessStudyVC: ViewController<InProcessView> {
   
   private var player: AVPlayer?
   private var timeObserverToken: Any?
-  
+  private var qnas: [QnAModel] = [] {
+    didSet {
+      customView.reloadData(self.qnas)
+    }
+  }
+  var count = 0
   
   // MARK: Setup
   override func viewDidLoad() {
@@ -73,6 +78,11 @@ class InProcessStudyVC: ViewController<InProcessView> {
     print(#function)
   }
   
+  
+  private func setupQnAModel() {
+    
+  }
+  
   // MARK: Action
   
   
@@ -99,8 +109,31 @@ extension InProcessStudyVC: InProcessViewDelegate {
     
   }
   
+  
   func question(_ sender: UIButton) {
-    print(#function)
+    alertSingleTextField(message: "질문 내용", actionTitle: "확인", completion: {
+      [weak self] title in
+      guard let title = title else { return }
+      self?.addQustion(title)
+    })
+  }
+  
+  private func addQustion(_ title: String) {
+  
+    guard let playCMTime = player?.currentTime() else { return }
+    
+    let playTime = playCMTime.value / Int64(playCMTime.timescale)
+    let qna = QnAModel(
+      documentID: "documentid: \(count)",
+      playTime: playTime,
+      title: title,
+      userID: "userID \(count)",
+      isDone: false,
+      messages: []
+    )
+    qnas.append(qna)
+    count += 1
+    
   }
   
   
@@ -109,12 +142,23 @@ extension InProcessStudyVC: InProcessViewDelegate {
 // MARK: UITableViewDataSource
 
 extension InProcessStudyVC: UITableViewDataSource {
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    qnas.count
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: QuestionCell.identifier) as! QuestionCell
+    headerView.configure(qna: qnas[section])
+    return headerView
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    0
+    qnas[section].messages.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    UITableViewCell()
+    return UITableViewCell()
   }
   
   
@@ -123,5 +167,8 @@ extension InProcessStudyVC: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension InProcessStudyVC: UITableViewDelegate {
   
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return tableView.bounds.height / 1.5
+  }
 }
 
