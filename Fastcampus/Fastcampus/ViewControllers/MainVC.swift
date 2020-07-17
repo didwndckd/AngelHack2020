@@ -45,6 +45,11 @@ class MainVC: UIViewController {
     setupUI()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.navigationController?.isNavigationBarHidden = false
+  }
+  
   private func makeTitleStackView() {
     for idx in 0..<4 {
       let button = UIButton()
@@ -52,10 +57,10 @@ class MainVC: UIViewController {
       button.setTitle(titleList[idx], for: .normal)
       let titleColor = idx == 0 ? UIColor.white : #colorLiteral(red: 0.5986129642, green: 0.5988268256, blue: 0.6187592149, alpha: 1)
       button.setTitleColor(titleColor, for: .normal)
-      let backgroundColor = idx == 0 ? UIColor.black : #colorLiteral(red: 0.9109585881, green: 0.9112133384, blue: 0.929444015, alpha: 1)
+      let backgroundColor = idx == 0 ? UIColor.myRed : #colorLiteral(red: 0.9109585881, green: 0.9112133384, blue: 0.929444015, alpha: 1)
       button.backgroundColor = backgroundColor
       button.layer.cornerRadius = 12
-      button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+      button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
       button.addTarget(self, action: #selector(menuDidTap(_:)), for: .touchUpInside)
       titleStackView.addArrangedSubview(button)
     }
@@ -244,7 +249,7 @@ private extension MainVC {
       let menuButton = view as! UIButton
       let titleColor = sender.tag == idx ? UIColor.white : #colorLiteral(red: 0.5986129642, green: 0.5988268256, blue: 0.6187592149, alpha: 1)
       menuButton.setTitleColor(titleColor, for: .normal)
-      let backgroundColor = sender.tag == idx ? UIColor.black : #colorLiteral(red: 0.9109585881, green: 0.9112133384, blue: 0.929444015, alpha: 1)
+      let backgroundColor = sender.tag == idx ? UIColor.myRed : #colorLiteral(red: 0.9109585881, green: 0.9112133384, blue: 0.929444015, alpha: 1)
       menuButton.backgroundColor = backgroundColor
     }
     currentCategory = MainCategory(rawValue: sender.tag)!
