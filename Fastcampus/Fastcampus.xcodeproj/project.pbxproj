@@ -22,6 +22,8 @@
 		316C502F24BE169300D7F59A /* SODA_1594647376.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */; };
 		4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */; };
 		4F575D6D24C1573D00F35888 /* BadgeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F575D6C24C1573D00F35888 /* BadgeLabel.swift */; };
+		4F575D6F24C1965300F35888 /* DropButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F575D6E24C1965300F35888 /* DropButtonView.swift */; };
+		4F575D7124C1B3E200F35888 /* ExtensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */; };
 		4F649B2724BEEA5200E0B073 /* StudyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F649B2624BEEA5200E0B073 /* StudyService.swift */; };
 		4F8838FA24BEB0A7009EF09A /* StudyConfigureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8838F924BEB0A7009EF09A /* StudyConfigureVC.swift */; };
 		4F8838FC24BEB0DB009EF09A /* StudyConfigureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8838FB24BEB0DB009EF09A /* StudyConfigureView.swift */; };
@@ -69,6 +71,8 @@
 		316C502D24BE129500D7F59A /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F575D6C24C1573D00F35888 /* BadgeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabel.swift; sourceTree = "<group>"; };
+		4F575D6E24C1965300F35888 /* DropButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropButtonView.swift; sourceTree = "<group>"; };
+		4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIColor.swift; sourceTree = "<group>"; };
 		4F649B2624BEEA5200E0B073 /* StudyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyService.swift; path = Fastcampus/Views/Study/StudyService.swift; sourceTree = SOURCE_ROOT; };
 		4F8838F924BEB0A7009EF09A /* StudyConfigureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyConfigureVC.swift; sourceTree = "<group>"; };
 		4F8838FB24BEB0DB009EF09A /* StudyConfigureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyConfigureView.swift; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 				314E850524BCD8EE00A6D492 /* DoubleExtension.swift */,
 				4F88E3B724C01D33000967EE /* ExtensionUIViewController.swift */,
 				4F88E3BB24C0377A000967EE /* ExtensionUIView.swift */,
+				4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				4F575D6C24C1573D00F35888 /* BadgeLabel.swift */,
+				4F575D6E24C1965300F35888 /* DropButtonView.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -469,6 +475,7 @@
 				4F575D6D24C1573D00F35888 /* BadgeLabel.swift in Sources */,
 				314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */,
 				4F88E3B224C01384000967EE /* FirebaseMaker.swift in Sources */,
+				4F575D6F24C1965300F35888 /* DropButtonView.swift in Sources */,
 				4F8838FA24BEB0A7009EF09A /* StudyConfigureVC.swift in Sources */,
 				CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */,
 				CFE3C9C624BF4E12009E8E2F /* SideMenuCell.swift in Sources */,
@@ -478,6 +485,7 @@
 				4FB756D124BBFE5E0035BD5B /* AppDelegate.swift in Sources */,
 				4F88E3AA24C010F3000967EE /* ChapterModel.swift in Sources */,
 				CFE3C9D024C076B7009E8E2F /* SummaryHeaderView.swift in Sources */,
+				4F575D7124C1B3E200F35888 /* ExtensionUIColor.swift in Sources */,
 				4F88E3B024C011BC000967EE /* UserModel.swift in Sources */,
 				4F649B2724BEEA5200E0B073 /* StudyService.swift in Sources */,
 				CFE3C9C424BF4A88009E8E2F /* SideMenuVC.swift in Sources */,

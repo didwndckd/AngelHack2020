@@ -30,13 +30,13 @@ class StudyConfigureView: View {
   
   private let dateDisplayLabel = UILabel()
   private let dateStackView = UIStackView()
-  private let mothButton = UIButton()
-  private let dayButton = UIButton()
-  private let hourButton = UIButton()
-  private let minuteButton = UIButton()
+  private let mothDropView = DropButtonView(amount: 12)
+  private let dayDropView = DropButtonView(amount: 31)
+  private let hourDropView = DropButtonView(amount: 24)
+  private let minuteDropView = DropButtonView(amount: 60)
   
   private let fixedDisplayLabel = UILabel()
-  private let fixedButton = UIButton()
+  private let fixedDropView = DropButtonView(amount: 12)
   
   private let ruleDisplayLabel = UILabel()
   private let ruleTextView = UITextView()
@@ -73,13 +73,12 @@ class StudyConfigureView: View {
     titleTextField.backgroundColor = .gray
     
     dateDisplayLabel.text = "스터디 오픈시간"
-    mothButton.setTitle("  월 ▾", for: .normal)
-    dayButton.setTitle("  일 ▾", for: .normal)
-    hourButton.setTitle("  시 ▾", for: .normal)
-    minuteButton.setTitle("  분 ▾", for: .normal)
-    [mothButton, dayButton, hourButton, minuteButton].forEach {
-      $0.layer.cornerRadius = 4
-      $0.backgroundColor = .gray
+    mothDropView.setTitle("  월 ▾")
+    dayDropView.setTitle("  일 ▾")
+    hourDropView.setTitle("  시 ▾")
+    minuteDropView.setTitle("  분 ▾")
+    [mothDropView, dayDropView, hourDropView, minuteDropView].forEach {
+      $0.delegate = self
       dateStackView.addArrangedSubview($0)
     }
     dateStackView.axis = .horizontal
@@ -88,9 +87,9 @@ class StudyConfigureView: View {
     dateStackView.alignment = .fill
     
     fixedDisplayLabel.text = "정원"
-    fixedButton.setTitle("  명 ▾", for: .normal)
-    fixedButton.layer.cornerRadius = 4
-    fixedButton.backgroundColor = .gray
+    fixedDropView.setTitle("  명 ▾")
+    fixedDropView.delegate = self
+    
     
     ruleDisplayLabel.text = "규칙"
     
@@ -125,7 +124,7 @@ class StudyConfigureView: View {
     [masterDisplayLabel, masterBadgeLabel, masterNameLabel,
      titleDisplayLabel, titleTextField,
      dateDisplayLabel, dateStackView,
-     fixedDisplayLabel, fixedButton,
+     fixedDisplayLabel, fixedDropView,
      ruleDisplayLabel, ruleTextView,
      cancelButton, createButton].forEach {
       baseView.addSubview($0)
@@ -177,14 +176,14 @@ class StudyConfigureView: View {
       fixedDisplayLabel.topAnchor.constraint(equalTo: dateStackView.bottomAnchor, constant: ySpace),
       fixedDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
-      fixedButton.topAnchor.constraint(equalTo: fixedDisplayLabel.bottomAnchor, constant: toSpace),
-      fixedButton.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
-      fixedButton.widthAnchor.constraint(equalTo: mothButton.widthAnchor),
-      fixedButton.heightAnchor.constraint(equalToConstant: buttonHeight),
+      fixedDropView.topAnchor.constraint(equalTo: fixedDisplayLabel.bottomAnchor, constant: toSpace),
+      fixedDropView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
+      fixedDropView.widthAnchor.constraint(equalTo: mothDropView.widthAnchor),
+//      fixedButton.heightAnchor.constraint(equalToConstant: buttonHeight),
       
       
       
-      ruleDisplayLabel.topAnchor.constraint(equalTo: fixedButton.bottomAnchor, constant: ySpace),
+      ruleDisplayLabel.topAnchor.constraint(equalTo: fixedDisplayLabel.bottomAnchor, constant: 64),
       ruleDisplayLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
       ruleTextView.topAnchor.constraint(equalTo: ruleDisplayLabel.bottomAnchor, constant: toSpace),
@@ -250,5 +249,10 @@ extension StudyConfigureView {
         }
         self?.layoutIfNeeded()
     })
+  }
+}
+
+extension StudyConfigureView: DropButtonViewDelegate {
+  func titlButtonDidTap() {
   }
 }
