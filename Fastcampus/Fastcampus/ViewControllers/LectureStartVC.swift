@@ -55,6 +55,21 @@ class LectureStartVC: UIViewController {
   private let tabTableView = UITableView()
   private let makeStudyButton = UIButton()
   
+  private var study: [StudyModel] = [] {
+    didSet {
+      if study.count == 0 {
+        tabTableView.setEmptyView(
+          title: "요약 없음",
+          message: "작성된 요약이 없어요 ㅠㅠ\n요약본을 올려보세요."
+        )
+      } else {
+        tabTableView.restore()
+      }
+      DispatchQueue.main.async {
+        self.tabTableView.reloadData()
+      }
+    }
+  }
   private var summary: [Summary] = [] {
     didSet {
       if summary.count == 0 {
@@ -65,7 +80,9 @@ class LectureStartVC: UIViewController {
       } else {
         tabTableView.restore()
       }
-      tabTableView.reloadData()
+      DispatchQueue.main.async {
+        self.tabTableView.reloadData()
+      }
     }
   }
   private let lecture: Lecture
@@ -97,9 +114,28 @@ class LectureStartVC: UIViewController {
     //TODO:- Get All User Info
   }
   
+  private func getStudyList() {
+    self.study = []
+    db.collection("Study")
+      .whereField("lectureID", isEqualTo: lecture.documentID)
+      .whereField("chapterID", isEqualTo: chapter.index)
+      .whereField("unitID", isEqualTo: unit.index)
+      .getDocuments { [weak self] (querySnapshot, err) in
+        guard let self = self else { return }
+        if let err = err {
+          print("[Log] Error :", err.localizedDescription)
+        } else {
+          if let documents = querySnapshot?.documents {
+            for document in documents {
+              let studyData = try! FirestoreDecoder().decode(StudyModel.self, from: document.data())
+              self.study.append(studyData)
+            }
+          }
+        }
+    }
+  }
+  
   private func getSummaryList() {
-    summary = []
-    
     db.collection("Summary")
       .document("\(lecture.id)")
       .collection("\(chapter.index)").getDocuments { [weak self] (querySnapshot, err) in
@@ -176,6 +212,7 @@ class LectureStartVC: UIViewController {
     tabTableView.delegate = self
     tabTableView.register(LectureStudyCell.self, forCellReuseIdentifier: LectureStudyCell.identifier)
     tabTableView.register(LectureSummaryCell.self, forCellReuseIdentifier: LectureSummaryCell.identifier)
+    tabTableView.register(LectureIntroduceCell.self, forCellReuseIdentifier: LectureIntroduceCell.identifier)
     
     makeStudyButton.setTitle("스터디 만들기  >", for: .normal)
     makeStudyButton.setTitleColor(UIColor.myRed, for: .normal)
@@ -185,6 +222,8 @@ class LectureStartVC: UIViewController {
     makeStudyButton.layer.borderColor = UIColor.myRed.cgColor
     makeStudyButton.layer.cornerRadius = 14
     makeStudyButton.addTarget(self, action: #selector(touchUpMakeButton), for: .touchUpInside)
+    
+    makeStudyButton.isHidden = true
   }
   
   private func setupUI() {
@@ -238,22 +277,31 @@ class LectureStartVC: UIViewController {
 
 extension LectureStartVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return summary.count
+    switch currentTab {
+      case .introduce:
+        return 1
+      case .study:
+        return study.count
+      case .summary:
+        return summary.count
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if currentTab == .introduce {
-      let cell = tableView.dequeueReusableCell(withIdentifier: LectureStudyCell.identifier, for: indexPath) as! LectureStudyCell
-      cell.makeGradientJoinButton()
+      let cell = tableView.dequeueReusableCell(withIdentifier: LectureIntroduceCell.identifier, for: indexPath) as! LectureIntroduceCell
+      cell.updateHeight(height: tableView.frame.height - self.view.safeAreaInsets.bottom)
       return cell
     } else if currentTab == .study {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureStudyCell.identifier, for: indexPath) as! LectureStudyCell
       cell.delegate = self
+      cell.selectionStyle = .none
       cell.makeGradientJoinButton()
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureSummaryCell.identifier, for: indexPath) as! LectureSummaryCell
       cell.delegate = self
+      cell.selectionStyle = .none
       cell.setProperties(summary: summary[indexPath.row])
       return cell
     }
@@ -280,6 +328,7 @@ private extension LectureStartVC {
     currentTab = .introduce
     tabTableView.reloadData()
     updateSelectButtonStyle(lectureTabType: .introduce)
+    makeStudyButton.isHidden = true
   }
   
   @objc private func touchUpStudyButton() {
@@ -288,6 +337,8 @@ private extension LectureStartVC {
     tabTableView.reloadData()
     makeStudyButton.setTitle("스터디 만들기  >", for: .normal)
     updateSelectButtonStyle(lectureTabType: .study)
+    getStudyList()
+    makeStudyButton.isHidden = false
   }
   
   @objc private func touchUpSummaryButton() {
@@ -297,6 +348,7 @@ private extension LectureStartVC {
     makeStudyButton.setTitle("요약본 올리기  >", for: .normal)
     updateSelectButtonStyle(lectureTabType: .summary)
     getSummaryList()
+    makeStudyButton.isHidden = false
   }
   
   @objc private func touchUpMakeButton() {

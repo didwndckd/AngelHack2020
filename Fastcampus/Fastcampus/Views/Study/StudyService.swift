@@ -121,6 +121,23 @@ class StudyService {
       .document(documnetID)
   }
   
+  
+  
+  class func qnaUpdate(model: QnAModel) {
+    guard let data = try? FirestoreEncoder().encode(model) else { return }
+    
+    Firestore
+      .firestore()
+      .collection("QnA")
+      .addDocument(data: data)
+  }
+  
+  
+  class func qnaAddListener(completion: @escaping ([QnAModel]) -> Void) {
+    Firestore.firestore().collection("QnA").whereField(<#T##field: String##String#>, isEqualTo: <#T##Any#>)
+    
+    
+  }
 }
 
 

@@ -63,6 +63,7 @@
 		CF29217824BC056C001318CB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217724BC056C001318CB /* View.swift */; };
 		CF29217A24BC05C7001318CB /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217924BC05C7001318CB /* SampleView.swift */; };
 		CF65FFF424C37D4F00B5B8AE /* DecodedExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65FFF324C37D4F00B5B8AE /* DecodedExtension.swift */; };
+		CF65FFF624C37FF800B5B8AE /* LectureIntroduceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65FFF524C37FF800B5B8AE /* LectureIntroduceCell.swift */; };
 		CF7F562D24C22B2D0041DAAD /* ExtensionUINavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F562C24C22B2D0041DAAD /* ExtensionUINavigationItem.swift */; };
 		CF7F562F24C238640041DAAD /* SummaryEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F562E24C238640041DAAD /* SummaryEditorVC.swift */; };
 		CF7F563124C239E80041DAAD /* SummaryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563024C239E80041DAAD /* SummaryEditorView.swift */; };
@@ -146,6 +147,7 @@
 		CF29217724BC056C001318CB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		CF29217924BC05C7001318CB /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
 		CF65FFF324C37D4F00B5B8AE /* DecodedExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodedExtension.swift; sourceTree = "<group>"; };
+		CF65FFF524C37FF800B5B8AE /* LectureIntroduceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureIntroduceCell.swift; sourceTree = "<group>"; };
 		CF7F562C24C22B2D0041DAAD /* ExtensionUINavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUINavigationItem.swift; sourceTree = "<group>"; };
 		CF7F562E24C238640041DAAD /* SummaryEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEditorVC.swift; sourceTree = "<group>"; };
 		CF7F563024C239E80041DAAD /* SummaryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEditorView.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 		CF7F563D24C314D70041DAAD /* LectureStartCell */ = {
 			isa = PBXGroup;
 			children = (
+				CF65FFF524C37FF800B5B8AE /* LectureIntroduceCell.swift */,
 				CF7F563B24C3039D0041DAAD /* LectureStudyCell.swift */,
 				CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */,
 			);
@@ -591,6 +594,7 @@
 				314AD16F24C38DB2002A22B7 /* ChattingInputView.swift in Sources */,
 				314AD16224C23960002A22B7 /* CircleView.swift in Sources */,
 				CF7F563324C23A140041DAAD /* DisignableTextField.swift in Sources */,
+				CF65FFF624C37FF800B5B8AE /* LectureIntroduceCell.swift in Sources */,
 				4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
 				4F575D7A24C1F7AA00F35888 /* SignView.swift in Sources */,
