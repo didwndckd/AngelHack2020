@@ -8,14 +8,32 @@
 
 import UIKit
 
+class StudyInformationTitleLabel: UILabel {
+  var padding: UIEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+  
+  override func drawText(in rect: CGRect) {
+    let paddingRect = rect.inset(by: padding)
+    super.drawText(in: paddingRect)
+  }
+  
+  override var intrinsicContentSize: CGSize {
+    var contentSize = super.intrinsicContentSize
+    contentSize.height += padding.top + padding.bottom
+    contentSize.width += padding.left + padding.right
+    return contentSize
+  }
+
+}
+
 class StudyInformationView: View {
 
-  private let titleLabel = UILabel()
+  private let titleLabel = StudyInformationTitleLabel()
   private let contentLabel = UILabel()
   private let isLongType: Bool
   
-  init(isLongType: Bool) {
+  init(isLongType: Bool, title: String) {
     self.isLongType = isLongType
+    titleLabel.text = title
     super.init(frame: .zero)
   }
   
@@ -26,15 +44,18 @@ class StudyInformationView: View {
   override func attribute() {
     super.attribute()
     
-    let titleFont = UIFont.systemFont(ofSize: 16, weight: .regular)
+    let titleFont = UIFont.systemFont(ofSize: 16, weight: .semibold)
     
-    let contentFont: UIFont = isLongType ? .systemFont(ofSize: 16, weight: .semibold): .systemFont(ofSize: 14, weight: .regular)
+    let contentFont: UIFont = !isLongType ? .systemFont(ofSize: 16, weight: .semibold): .systemFont(ofSize: 14, weight: .regular)
     
     titleLabel.backgroundColor = .myRed
     titleLabel.font = titleFont
     titleLabel.textColor = .white
     
+    contentLabel.numberOfLines = isLongType ? 0: 1
     contentLabel.font = contentFont
+    
+    
   }
   
   override func setupUI() {
@@ -44,20 +65,32 @@ class StudyInformationView: View {
       addSubview($0)
     })
     
-    titleLabel.snp.makeConstraints({
-      $0.leading.top.equalToSuperview()
-    })
     
-    contentLabel.snp.makeConstraints({
-      let leading = isLongType ? snp.leading: titleLabel.snp.trailing
-      let leftMargin: CGFloat = isLongType ? 0: 8
-      
-      let top = isLongType ? titleLabel.snp.bottom: snp.top
-      let topMargin: CGFloat = isLongType ? 8: 0
-      $0.leading.equalTo(leading).offset(leftMargin)
-      $0.trailing.bottom.equalToSuperview()
-      $0.top.equalTo(top).offset(topMargin)
-    })
+    let margin: CGFloat = 8
+    
+    
+    if isLongType {
+      titleLabel.snp.makeConstraints({
+        $0.top.leading.equalToSuperview()
+      })
+      contentLabel.snp.makeConstraints({
+        $0.leading.trailing.equalToSuperview()
+        $0.top.equalTo(titleLabel.snp.bottom).offset(margin)
+        $0.bottom.equalToSuperview()
+      })
+    } else {
+      titleLabel.snp.makeConstraints({
+        $0.top.leading.bottom.equalToSuperview()
+      })
+      contentLabel.snp.makeConstraints({
+        $0.leading.equalTo(titleLabel.snp.trailing).offset(margin)
+        $0.top.bottom.equalToSuperview()
+      })
+    }
+  }
+  
+  func configure(description: String?) {
+    contentLabel.text = description
   }
   
 }
