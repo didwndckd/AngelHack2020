@@ -246,9 +246,17 @@ private extension MainVC {
   }
   
   @objc private func createStudyDidTap() {
-    let studyConfigureVC = StudyConfigureVC()
-    studyConfigureVC.modalPresentationStyle = .overFullScreen
-    self.present(studyConfigureVC, animated: true)
+    do {
+      try SignService.signOut()
+      WindowManager.set(.splash)
+      
+    } catch {
+      print("Sign Out", error.localizedDescription)
+    }
+    
+//    let studyConfigureVC = StudyConfigureVC()
+//    studyConfigureVC.modalPresentationStyle = .overFullScreen
+//    self.present(studyConfigureVC, animated: true)
   }
   
   @objc private func menuDidTap(_ sender: UIButton) {

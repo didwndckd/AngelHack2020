@@ -10,11 +10,6 @@ import UIKit
 
 class SignVC: ViewController<SignView> {
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-  }
-  
   func signIn(emailTextField: UITextField, passwordTextField: UITextField) {
     guard let email = emailTextField.text, !email.isEmpty else {
       alertNormal(title: "이메일을 입력해 주세요") { _ in

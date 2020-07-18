@@ -25,8 +25,18 @@ class SignService {
           guard let data = snapshot?.data() else { return }
           let model = try! FirestoreDecoder().decode(UserModel.self, from: data)
           user = model
+          
+          UserDefaults.standard.set(email, forKey: "email")
+          UserDefaults.standard.set(password, forKey: "password")
+          
           completion()
       }
     }
   }
+  
+  
+  class func signOut() throws {
+    try Auth.auth().signOut()
+  }
 }
+
