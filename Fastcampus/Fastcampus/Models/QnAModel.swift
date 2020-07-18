@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct Qna {
+  let documentID: String
+  let data: QnAModel
+}
+
 struct QnAModel: Codable {
   let playTime: Int64
   let title: String

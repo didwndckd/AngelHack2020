@@ -44,7 +44,7 @@ class ChattingInpuView: View {
       $0.leading.equalToSuperview().offset(leftMargin)
       $0.top.bottom.equalToSuperview()
     })
-    inputTextField.backgroundColor = .green
+    
     sendButton.snp.makeConstraints({
       $0.trailing.top.bottom.equalToSuperview().inset(inset)
       $0.leading.equalTo(inputTextField.snp.trailing).offset(inset)
