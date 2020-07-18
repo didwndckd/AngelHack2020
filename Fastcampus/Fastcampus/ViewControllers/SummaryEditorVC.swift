@@ -9,7 +9,6 @@
 import UIKit
 
 class SummaryEditorVC: ViewController<SummaryEditorView>, KeyboardObserving {
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     registerForKeyboardEvents()
@@ -34,6 +33,9 @@ class SummaryEditorVC: ViewController<SummaryEditorView>, KeyboardObserving {
   }
   
   private func attribute() {
+    self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(endEditing)))
+    self.view.isUserInteractionEnabled = true
+    
     let photoButton = UIButton(type: .custom)
     photoButton.setImage(#imageLiteral(resourceName: "icon_photo_black"), for: .normal)
     photoButton.addTarget(self, action: #selector(touchUpPhotoButton), for: .touchUpInside)
@@ -57,5 +59,9 @@ private extension SummaryEditorVC {
   
   @objc private func touchUpPhotoButton() {
     print("[Log] : touchUpPhotoButton")
+  }
+  
+  @objc private func endEditing() {
+    self.view.endEditing(true)
   }
 }

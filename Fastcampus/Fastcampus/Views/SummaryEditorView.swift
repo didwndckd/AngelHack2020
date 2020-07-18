@@ -14,12 +14,6 @@ class SummaryEditorView: View, KeyboardControllable {
   private let titleTextField = DisignableTextField(placeHolder: "제목을 입력해 주세요.")
   private let contextLabel = UILabel()
   private let contextTextView = UITextView()
-  private let summaryCollectionView: UICollectionView = {
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    return collectionView
-  }()
   private let cancelButton = UIButton()
   private let registButton = UIButton()
   
@@ -67,10 +61,6 @@ class SummaryEditorView: View, KeyboardControllable {
     contextTextView.layer.borderColor = UIColor.lightGray.cgColor
     contextTextView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
     
-    summaryCollectionView.dataSource = self
-    summaryCollectionView.delegate = self
-    summaryCollectionView.register(SummaryEditorCell.self, forCellWithReuseIdentifier: SummaryEditorCell.identifier)
-    
     cancelButton.setTitle("취소", for: .normal)
     cancelButton.setTitleColor(.gray, for: .normal)
     cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
@@ -87,7 +77,7 @@ class SummaryEditorView: View, KeyboardControllable {
     let guide = self.safeAreaLayoutGuide
     let margins: CGFloat = 15
     
-    [titleLabel, titleTextField, contextLabel, contextTextView, summaryCollectionView, cancelButton, registButton]
+    [titleLabel, titleTextField, contextLabel, contextTextView, cancelButton, registButton]
       .forEach { self.addSubview($0) }
     
     titleLabel.snp.makeConstraints {
@@ -112,14 +102,7 @@ class SummaryEditorView: View, KeyboardControllable {
       $0.top.equalTo(contextLabel.snp.bottom).offset(margins / 2)
       $0.leading.equalTo(self).offset(margins)
       $0.trailing.equalTo(self).offset(-margins)
-      $0.bottom.equalTo(summaryCollectionView.snp.top).offset(-margins / 2)
-    }
-    
-    summaryCollectionView.snp.makeConstraints {
-      $0.leading.equalTo(self).offset(margins)
-      $0.trailing.equalTo(self).offset(-margins)
-      $0.bottom.equalTo(cancelButton.snp.top).offset(-margins)
-      $0.height.equalTo(80)
+      $0.bottom.equalTo(cancelButton.snp.top).offset(-margins / 2)
     }
     
     cancelButton.snp.makeConstraints {
@@ -139,31 +122,5 @@ class SummaryEditorView: View, KeyboardControllable {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-}
-
-extension SummaryEditorView: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 2
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SummaryEditorCell.identifier, for: indexPath) as! SummaryEditorCell
-    return cell
-  }
-  
-}
-
-extension SummaryEditorView: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.frame.width / 2, height: 80)
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 8
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 8
   }
 }
