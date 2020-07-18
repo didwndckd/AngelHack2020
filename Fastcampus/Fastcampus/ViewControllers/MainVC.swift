@@ -24,7 +24,8 @@ class MainVC: UIViewController {
     didSet {
       print("[Log] currentCategory :", currentCategory)
       if currentCategory == .finish {
-        self.navigationController?.pushViewController(SummaryVC(), animated: true)
+//        self.navigationController?.pushViewController(SummaryVC(), animated: true)
+        self.navigationController?.pushViewController(LectureStartVC(), animated: true)
       } else if currentCategory == .studying {
         self.navigationController?.pushViewController(SummaryEditorVC(), animated: true)
       }
