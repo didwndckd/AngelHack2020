@@ -269,13 +269,6 @@
 			path = Lecture;
 			sourceTree = "<group>";
 		};
-		4F88E3B624C01B66000967EE /* Lecture */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Lecture;
-			sourceTree = "<group>";
-		};
 		4FB756C424BBFE5E0035BD5B = {
 			isa = PBXGroup;
 			children = (
@@ -298,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				4FB756D024BBFE5E0035BD5B /* AppDelegate.swift */,
-				CFE3C9D124C08B1B009E8E2F /* Utils */,
 				CF7F563424C23CC20041DAAD /* Protocol */,
 				4F575D6B24C156CD00F35888 /* Util */,
 				316C502724BE03BA00D7F59A /* Service */,
@@ -352,7 +344,6 @@
 		CF29217124BC050D001318CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4F88E3B624C01B66000967EE /* Lecture */,
 				314E84E624BC9FA600A6D492 /* Study */,
 				CF29217924BC05C7001318CB /* SampleView.swift */,
 				CFE3C9C724BF5282009E8E2F /* MypageHeaderView.swift */,
@@ -404,13 +395,6 @@
 				CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */,
 			);
 			path = LectureStartCell;
-			sourceTree = "<group>";
-		};
-		CFE3C9D124C08B1B009E8E2F /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		E4C77A2DA7BD6AC208EB2B5A /* Frameworks */ = {
