@@ -30,11 +30,11 @@ class StudyFrameView<TopView: UIView, BottomView: UIView>: View {
     let guide = safeAreaLayoutGuide
     _headerView.snp.makeConstraints({
       $0.top.leading.trailing.equalTo(guide)
-      $0.height.equalTo(guide).multipliedBy(0.3)
+      $0.height.equalTo(guide).multipliedBy(0.4)
     })
     
     _bodyView.snp.makeConstraints({
-      $0.height.equalTo(guide).multipliedBy(0.7)
+      $0.height.equalTo(guide).multipliedBy(0.6)
       $0.leading.trailing.bottom.equalTo(guide)
     })
     

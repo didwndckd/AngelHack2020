@@ -13,11 +13,11 @@ class WaitingStudyVC: ViewController<WaitingView> {
   
   typealias UnitInformation = (title: String, content: String)
   
-  private var model: StudyModel
+  private var model: Study
   private var timer: Timer?
   
-  init(studyModel: StudyModel) {
-    self.model = studyModel
+  init(study: Study) {
+    self.model = study
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -42,10 +42,15 @@ class WaitingStudyVC: ViewController<WaitingView> {
     stopTimer()
   }
   
-  private func attribute() {
-    self.title = model.title
+  private func setNavigation() {
+    self.title = "입장 대기"
     self.navigationItem.largeTitleDisplayMode = .never
-    customView.updateContent(study: model)
+    setBackButton(selector: #selector(popViewController(sender:)))
+  }
+  
+  private func attribute() {
+    setNavigation()
+    customView.updateContent(study: model.data)
   }
   
   private func startTimer() {
@@ -62,11 +67,12 @@ class WaitingStudyVC: ViewController<WaitingView> {
   }
   
   @objc private func timerCallBack(_ sender: Timer) {
-    let timeInterval = model.date.dateValue().timeIntervalSince(Date())
+    let timeInterval = model.data.date.dateValue().timeIntervalSince(Date())
     
     guard timeInterval > 0 else {
       customView.updateTimer(timeInterval: timeInterval)
       stopTimer()
+      pushInProcessStudyVC()
       return
     }
     
@@ -74,8 +80,12 @@ class WaitingStudyVC: ViewController<WaitingView> {
   }
   
   private func pushInProcessStudyVC() {
-    let vc = InProcessStudyVC()
+    let vc = InProcessStudyVC(study: self.model)
     navigationController?.pushViewController(vc, animated: true)
+  }
+  
+  @objc private func popViewController(sender: UIBarButtonItem) {
+    navigationController?.popViewController(animated: true)
   }
   
   

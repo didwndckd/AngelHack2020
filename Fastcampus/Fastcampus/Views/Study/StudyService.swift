@@ -134,7 +134,7 @@ class StudyService {
   
   
   class func qnaAddListener(completion: @escaping ([QnAModel]) -> Void) {
-    Firestore.firestore().collection("QnA").whereField(<#T##field: String##String#>, isEqualTo: <#T##Any#>)
+//    Firestore.firestore().collection("QnA").whereField(<#T##field: String##String#>, isEqualTo: <#T##Any#>)
     
     
   }
