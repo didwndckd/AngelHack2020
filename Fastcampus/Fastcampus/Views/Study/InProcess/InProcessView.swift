@@ -109,7 +109,7 @@ class InProcessView: View {
     self.layoutIfNeeded()
   }
   
-  func reloadData(_ qnas: [QnAModel]) {
+  func reloadData(_ qnas: [QnA]) {
     questionTableView.reloadData()
     playerView.updatePins(qnas)
   }
@@ -118,4 +118,7 @@ class InProcessView: View {
     delegate?.question(sender)
   }
   
+  func tableViewBottomScroll(row: Int) {
+    questionTableView.scrollToRow(at: (IndexPath(row: row, section: 0)), at: .bottom, animated: true)
+  }
 }

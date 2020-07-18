@@ -15,7 +15,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
   private var timeObserverToken: Any?
   private var model: Study
   
-  private var qnas: [QnAModel] = [] {
+  private var qnas: [QnA] = [] {
     didSet {
       customView.reloadData(self.qnas)
     }
@@ -36,6 +36,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
     setupPlayer()
     customView.setupDelegate(vc: self)
     setNavigation()
+    setupQnAModel()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +50,8 @@ class InProcessStudyVC: ViewController<InProcessView> {
     super.viewWillAppear(animated)
     player?.pause()
     removeObservers()
+    
+    StudyService.qnaListenerRemove()
   }
   
   private func setNavigation() {
@@ -112,7 +115,18 @@ class InProcessStudyVC: ViewController<InProcessView> {
   
   
   private func setupQnAModel() {
+    self.qnas.removeAll()
+    StudyService.qnaAddListener(studyDocumentID: model.documentID) { (result) in
+      self.qnas = result
+      self.qnas.sort { $0.data.playTime < $1.data.playTime }
+      self.tableViewBottomScroll()
+    }
+  }
+  
+  private func tableViewBottomScroll() {
+    guard !qnas.isEmpty else { return }
     
+    customView.tableViewBottomScroll(row: qnas.count - 1)
   }
   
   // MARK: Action
@@ -175,17 +189,15 @@ extension InProcessStudyVC: InProcessViewDelegate {
     
     let playTime = playCMTime.value / Int64(playCMTime.timescale)
     let qna = QnAModel(
+      studyDocumentID: model.documentID,
       playTime: playTime,
       title: title,
       userID: SignService.user.nickName,
-      isDone: false,
-      messages: []
+      isDone: false
     )
     
     StudyService.qnaUpdate(model: qna)
   }
-  
-  
 }
 
 // MARK: UITableViewDataSource
@@ -199,7 +211,7 @@ extension InProcessStudyVC: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: QuestionCell.identifier, for: indexPath) as! QuestionCell
-    cell.configure(qna: qnas[indexPath.row])
+    cell.configure(qna: qnas[indexPath.row].data)
     return cell
   }
   

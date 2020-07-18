@@ -133,10 +133,30 @@ class StudyService {
   }
   
   
-  class func qnaAddListener(completion: @escaping ([QnAModel]) -> Void) {
-//    Firestore.firestore().collection("QnA").whereField(<#T##field: String##String#>, isEqualTo: <#T##Any#>)
-    
-    
+  private static var qnaListener: ListenerRegistration?
+  
+  class func qnaAddListener(studyDocumentID: String, completion: @escaping ([QnA]) -> Void) {
+    qnaListener = Firestore
+      .firestore()
+      .collection("QnA")
+      .whereField("studyDocumentID", isEqualTo: studyDocumentID)
+      .addSnapshotListener { (snapshot, _) in
+        guard let documents = snapshot?.documents else { return }
+
+        var arr = [QnA]()
+        
+        for document in documents {
+          let data = try! FirestoreDecoder().decode(QnAModel.self, from: document.data())
+          let temp = QnA(documentID: document.documentID, data: data)
+          arr.append(temp)
+        }
+        
+        completion(arr)
+    }
+  }
+  
+  class func qnaListenerRemove() {
+    qnaListener?.remove()
   }
 }
 

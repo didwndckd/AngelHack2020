@@ -154,13 +154,13 @@ class StudyPlayerView: View {
     restTimeLabel.text = Double(slider.maximumValue - value).toTimeString
   }
   
-  func updatePins(_ qnas: [QnAModel]) {
+  func updatePins(_ qnas: [QnA]) {
     
     pins.forEach({
       $0.removeFromSuperview()
     })
     qnas.forEach({
-      addPin($0.playTime)
+      addPin($0.data.playTime)
     })
   }
   
