@@ -69,7 +69,7 @@ class SummaryEditorView: View, KeyboardControllable {
     registButton.setTitle("요약본 올리기", for: .normal)
     registButton.setTitleColor(.white, for: .normal)
     registButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-    registButton.backgroundColor = UIColor.myRed
+    registButton.makeGradient()
   }
   
   override func setupUI() {
@@ -122,5 +122,10 @@ class SummaryEditorView: View, KeyboardControllable {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func draw(_ rect: CGRect) {
+    super.draw(rect)
+    registButton.makeGradient()
   }
 }
