@@ -9,16 +9,29 @@
 import UIKit
 import Firebase
 
+enum StudyConfigureType {
+  case create
+  case join
+}
+
 class StudyConfigureVC: ViewController<StudyConfigureView> {
-  
+  var studyConfigureType: StudyConfigureType = .create {
+    didSet {
+      if studyConfigureType == .join {
+        customView.setJoinStyle(study: study!)
+      }
+    }
+  }
   private let lecture: Lecture
   private let chapter: ChapterModel
   private let unit: UnitModel
+  private let study: StudyModel?
   
-  init(lecture: Lecture, chapter: ChapterModel, unit: UnitModel) {
+  init(lecture: Lecture, chapter: ChapterModel, unit: UnitModel, study: StudyModel? = nil) {
     self.lecture = lecture
     self.chapter = chapter
     self.unit = unit
+    self.study = study
     super.init(nibName: nil, bundle: nil)
   }
   

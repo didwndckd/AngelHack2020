@@ -32,11 +32,23 @@ class LectureSummaryCell: UITableViewCell {
   
   func setProperties(summary: Summary) {
     titleLabel.text = summary.title
-    nameLabel.text = "작성자 \(summary.userID)"
+    
+    UserService.getData(uid: summary.userID) { [weak self] result in
+      guard let self = self else { return }
+      switch result {
+        case .success(let user):
+          self.nameLabel.text = "작성자 \(user.nickName)"
+          self.nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+          let attributedStr = NSMutableAttributedString(string: self.nameLabel.text!)
+          attributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: (self.nameLabel.text! as NSString as NSString).range(of: "작성자"))
+          self.nameLabel.attributedText = attributedStr
+        case .failure(let err):
+          print("[Log] Error :", err.localizedDescription)
+      }
+    }
   }
   
   private func attribute() {
-    titleLabel.text = "2회차 요약정리"
     titleLabel.textColor = .black
     titleLabel.numberOfLines = 0
     titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
@@ -45,12 +57,8 @@ class LectureSummaryCell: UITableViewCell {
     pageLabel.textColor = #colorLiteral(red: 0.676876843, green: 0.6769082546, blue: 0.6965678334, alpha: 1)
     pageLabel.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
     
-    nameLabel.text = "작성자 이유업"
+    nameLabel.text = "작성자"
     nameLabel.textColor = .black
-    nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-    let attributedStr = NSMutableAttributedString(string: nameLabel.text!)
-    attributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: (nameLabel.text! as NSString as NSString).range(of: "작성자"))
-    nameLabel.attributedText = attributedStr
     
     levelButton.setTitle("Lv.9", for: .normal)
     levelButton.setTitleColor(.black, for: .normal)
@@ -59,11 +67,11 @@ class LectureSummaryCell: UITableViewCell {
     levelButton.layer.borderColor = UIColor.black.cgColor
     levelButton.layer.borderWidth = 1
     
-    recommendCountLabel.text = "추천수 : 99개"
+    recommendCountLabel.text = "추천수 : 0개"
     recommendCountLabel.textColor = #colorLiteral(red: 0.6805432439, green: 0.6805752516, blue: 0.7002126575, alpha: 1)
     recommendCountLabel.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
     
-    commentsCountLabel.text = "댓글수 : 34개"
+    commentsCountLabel.text = "댓글수 : 0개"
     commentsCountLabel.textColor = #colorLiteral(red: 0.6805432439, green: 0.6805752516, blue: 0.7002126575, alpha: 1)
     commentsCountLabel.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
     
