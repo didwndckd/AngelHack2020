@@ -61,8 +61,15 @@ extension SplashVC {
         let email = UserDefaults.standard.string(forKey: "email"),
         let password = UserDefaults.standard.string(forKey: "password")
         else { return }
-      SignService.signIn(email: email, password: password) {
-        WindowManager.set(.main)
+      
+      SignService.signIn(email: email, password: password) { result in
+        switch result {
+        case true:
+          WindowManager.set(.main)
+          
+        case false:
+          self.alertNormal(title: "잠시 후 다시 시도해주세요")
+        }
       }
     }
   }
