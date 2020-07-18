@@ -9,12 +9,13 @@
 import UIKit
 
 protocol LectureStudyCellDelegate: class {
-  func joinStudy(studyID: Int)
+  func joinStudy(studyID: String)
 }
 
 class LectureStudyCell: UITableViewCell {
   static let identifier = "LectureStudyCell"
   weak var delegate: LectureStudyCellDelegate?
+  private var studyID: String = ""
   private let levelButton = UIButton()
   private let nameLabel = UILabel()
   private let titleLabel = UILabel()
@@ -27,6 +28,32 @@ class LectureStudyCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     attribute()
     setupUI()
+  }
+  
+  func setProperties(study: StudyModel) {
+    titleLabel.text = study.title
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MM월 dd일 HH시 mm분"
+    let date = formatter.string(from: study.date.dateValue())
+    let dateList = date.split(separator: " ")
+    startDateLabel.text = "\(dateList[0].dropLast()).\(dateList[1].dropLast()) \(dateList[2].dropLast()):\(dateList[3].dropLast()) 시작"
+    peopleLabel.text = "\(study.userIDs.count)명 / \(study.fixed)명"
+    if study.userIDs.count == study.fixed {
+      joinButton.setTitle("모집마감", for: .normal)
+      joinButton.setTitleColor(.darkGray, for: .normal)
+      joinButton.backgroundColor = UIColor.lightGray
+      joinButton.isUserInteractionEnabled = false
+    }
+    
+    UserService.getData(uid: study.userIDs[0]) { [weak self] result in
+      guard let self = self else { return }
+      switch result {
+        case .success(let user):
+          self.nameLabel.text = user.nickName
+        case .failure(let err):
+          print("[Log] Error :", err.localizedDescription)
+      }
+    }
   }
   
   func makeGradientJoinButton() {
@@ -125,6 +152,6 @@ class LectureStudyCell: UITableViewCell {
 
 private extension LectureStudyCell {
   @objc private func touchUpJoinButton() {
-    delegate?.joinStudy(studyID: 0)
+    delegate?.joinStudy(studyID: "0")
   }
 }

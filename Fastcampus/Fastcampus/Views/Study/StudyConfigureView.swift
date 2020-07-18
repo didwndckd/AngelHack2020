@@ -56,6 +56,15 @@ class StudyConfigureView: View {
     super.init(frame: frame)
   }
   
+  func setJoinStyle(study: StudyModel) {
+    titleTextField.text = study.title
+    let formatter = DateFormatter()
+    formatter.dateFormat = "YYYY년 M월 d일 h시 m분"
+    let date = formatter.string(from: study.date.dateValue())
+    print(date)
+//    mothDropView.setTitle(<#T##title: String##String#>)
+  }
+  
   override func attribute() {
     super.attribute()
     
@@ -218,7 +227,7 @@ class StudyConfigureView: View {
 
 // MARK: - Action
 
-extension StudyConfigureView {
+private extension StudyConfigureView {
   @objc private func stepperDidTap(_ sender: UIStepper) {
     fixed = Int(sender.value)
   }
