@@ -8,21 +8,20 @@
 
 import UIKit
 
-class QuestionCell: UITableViewHeaderFooterView {
+
+
+class QuestionCell: UITableViewCell {
 
   static let identifier = "QuestionCell"
   
-  private let userIDLabel = UILabel()
-  private let titleLabel = UILabel()
+  private let userNameLabel = UILabel()
+  private let questionTimeLabel = UILabel()
+  private let questionDescriptionLabel = UILabel()
+  private let deleteButton = UIButton()
+  private let cardView = UIView()
   
-  private let topView = UIView()
-  private let bottomButton = UIButton()
-  private let bodyView = UIView()
-  
-  private let closeButton = UIButton()
-  
-  override init(reuseIdentifier: String?) {
-    super.init(reuseIdentifier: reuseIdentifier)
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
     attribute()
     setupUI()
   }
@@ -32,85 +31,66 @@ class QuestionCell: UITableViewHeaderFooterView {
   }
   
   private func attribute() {
-//    backgroundColor = .clear
-    [bodyView, closeButton].forEach({
-      contentView.addSubview($0)
-    })
-    [topView, bottomButton].forEach({
-      bodyView.addSubview($0)
-    })
-    [userIDLabel, titleLabel].forEach({
-      topView.addSubview($0)
-    })
     
-    let backgroundView = UIView()
-    backgroundView.backgroundColor = .clear
+    backgroundColor = .clear
     
-    self.backgroundView = backgroundView
+    cardView.backgroundColor = .white
+    cardView.shadow()
+    cardView.layer.cornerRadius = 8
     
-    bodyView.layer.cornerRadius = 8
-    bodyView.shadow()
-    bodyView.clipsToBounds = true
+    userNameLabel.font = .systemFont(ofSize: 14, weight: .regular)
+    userNameLabel.textColor = #colorLiteral(red: 0.3254901961, green: 0.3254901961, blue: 0.3254901961, alpha: 1)
     
-    topView.backgroundColor = .white
+    questionTimeLabel.font = .systemFont(ofSize: 14, weight: .light)
+    questionTimeLabel.textColor = #colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)
     
-    let inset: CGFloat = 16
-    bottomButton.backgroundColor = #colorLiteral(red: 0.9455112815, green: 0.9456472993, blue: 0.9625509381, alpha: 1)
-    bottomButton.setTitle("aa", for: .normal)
-//    bottomButton.tintColor = .black
-    bottomButton.titleLabel?.font = .systemFont(ofSize: 20, weight: .light)
-    bottomButton.titleLabel?.textColor = .black
-    bottomButton.titleLabel?.textAlignment = .natural
-    bottomButton.contentHorizontalAlignment = .leading
-    bottomButton.contentEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+    questionDescriptionLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+    questionDescriptionLabel.textColor = #colorLiteral(red: 0.3254901961, green: 0.3254901961, blue: 0.3254901961, alpha: 1)
     
-    userIDLabel.font = .systemFont(ofSize: 16, weight: .light)
-    userIDLabel.textColor = .gray
+    deleteButton.setTitle("X", for: .normal)
+    deleteButton.setTitleColor(.black, for: .normal)
     
-    closeButton.setTitle("X", for: .normal)
-    closeButton.titleLabel?.font = .systemFont(ofSize: 24)
-    closeButton.setTitleColor(.black, for: .normal)
-    closeButton.tintColor = .black
-    
-    titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
   }
   
   private func setupUI() {
-    let margin: CGFloat = 8
     
-    closeButton.snp.makeConstraints({
-      $0.top.trailing.equalToSuperview().inset(margin)
+    let inset: CGFloat = 8
+    let margin: CGFloat = 24
+    let padding: CGFloat = 8
+    
+    contentView.addSubview(cardView)
+    
+    [deleteButton, userNameLabel, questionTimeLabel, questionDescriptionLabel].forEach({
+      cardView.addSubview($0)
     })
     
-    bodyView.snp.makeConstraints({
-      $0.top.equalTo(closeButton.snp.bottom).offset(margin)
-      $0.leading.trailing.bottom.equalToSuperview().inset(margin)
+    cardView.snp.makeConstraints({
+      $0.top.bottom.leading.trailing.equalToSuperview().inset(inset)
     })
-    bodyView.backgroundColor = .red
     
-    topView.snp.makeConstraints({
-      $0.top.leading.trailing.equalToSuperview()
-      $0.height.equalToSuperview().multipliedBy(0.7)
+    deleteButton.snp.makeConstraints({
+      $0.top.trailing.equalToSuperview()
     })
-
-    bottomButton.snp.makeConstraints({
-      $0.bottom.leading.trailing.equalToSuperview()
-      $0.top.equalTo(topView.snp.bottom)
-    })
-
-    userIDLabel.snp.makeConstraints({
+    
+    userNameLabel.snp.makeConstraints({
       $0.top.leading.equalToSuperview().offset(margin)
     })
-
-    titleLabel.snp.makeConstraints({
-      $0.leading.trailing.equalToSuperview().inset(margin)
-      $0.centerY.equalToSuperview()
+    
+    questionTimeLabel.snp.makeConstraints({
+      $0.centerY.equalTo(userNameLabel.snp.centerY)
+      $0.leading.equalTo(userNameLabel.snp.trailing).offset(padding)
     })
+    
+    questionDescriptionLabel.snp.makeConstraints({
+      $0.leading.trailing.bottom.equalToSuperview().inset(margin)
+      $0.top.equalTo(userNameLabel.snp.bottom).offset(padding)
+    })
+    
   }
   
   func configure(qna: QnAModel) {
-    titleLabel.text = qna.title
-    userIDLabel.text = qna.userID
-    bottomButton.titleLabel?.text = "등록된 답변 \(3)개  좋아요 \(25)개"
+    userNameLabel.text = qna.userID
+    questionTimeLabel.text = Double(qna.playTime).toTimeString
+    questionDescriptionLabel.text = qna.title
   }
 }

@@ -199,7 +199,7 @@ extension MainVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let chapterVC = ChapterVC(lecture: lecture[indexPath.row])
     self.navigationController?.pushViewController(chapterVC, animated: true)
-    
+  
     
 //    if lecture[indexPath.row].id == 2 {
 //      let chapterVC = ChapterVC(lecture: lecture[indexPath.row])
@@ -229,6 +229,7 @@ extension MainVC: UITableViewDelegate {
 //
 //      navigationController?.pushViewController(vc, animated: true)
 //    }
+
   }
 }
 

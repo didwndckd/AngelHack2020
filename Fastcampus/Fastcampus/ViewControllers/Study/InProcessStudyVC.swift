@@ -13,29 +13,50 @@ class InProcessStudyVC: ViewController<InProcessView> {
   
   private var player: AVPlayer?
   private var timeObserverToken: Any?
-  private var qnas: [QnAModel] = [] {
+  private var model: Study
+  
+  private var qnas: [QnA] = [] {
     didSet {
       customView.reloadData(self.qnas)
     }
   }
-  var count = 0
+  
+  init(study: Study) {
+    self.model = study
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   // MARK: Setup
   override func viewDidLoad() {
     super.viewDidLoad()
     setupPlayer()
     customView.setupDelegate(vc: self)
+    setNavigation()
+    setupQnAModel()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    player?.play()
-    addTimeObserver()
+    let interval = Date().timeIntervalSince(model.data.dateValue)
+    seekPlayer(to: Int64(interval))
+    addObservers()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    removeTimeObserver()
+    player?.pause()
+    removeObservers()
+    
+    StudyService.qnaListenerRemove()
+  }
+  
+  private func setNavigation() {
+    navigationItem.setTitle(model.data.lectureTitle, subtitle: model.data.unitTitle)
+    setBackButton(selector: #selector(popRootViewController(sender:)))
   }
   
   private func setupAsset() -> AVAsset? {
@@ -60,6 +81,15 @@ class InProcessStudyVC: ViewController<InProcessView> {
     customView.configurePlayerView(maximumValue: duration, layer: playerLayer)
   }
   
+  private func addObservers() {
+    addPlayerDidPlayToEndTimeObserver()
+    addTimeObserver()
+  }
+  
+  private func addPlayerDidPlayToEndTimeObserver() {
+    NotificationCenter.default.addObserver(self, selector: #selector(pushStudyReviewVC), name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
+  }
+  
   private func addTimeObserver() {
     let timeScale = CMTimeScale(NSEC_PER_SEC)
     let interval = CMTime(seconds: 0.5, preferredTimescale: timeScale)
@@ -78,9 +108,25 @@ class InProcessStudyVC: ViewController<InProcessView> {
     print(#function)
   }
   
+  private func removeObservers() {
+    removeTimeObserver()
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   
   private func setupQnAModel() {
+    self.qnas.removeAll()
+    StudyService.qnaAddListener(studyDocumentID: model.documentID) { (result) in
+      self.qnas = result
+      self.qnas.sort { $0.data.playTime < $1.data.playTime }
+      self.tableViewBottomScroll()
+    }
+  }
+  
+  private func tableViewBottomScroll() {
+    guard !qnas.isEmpty else { return }
     
+    customView.tableViewBottomScroll(row: qnas.count - 1)
   }
   
   // MARK: Action
@@ -90,6 +136,25 @@ class InProcessStudyVC: ViewController<InProcessView> {
     let orientation: UIInterfaceOrientation = isFull ? .landscapeRight: .portrait
     let value = orientation.rawValue
     UIDevice.current.setValue(value, forKey: "orientation")
+  }
+  
+  private func seekPlayer(to: Int64) {
+    let seekTime = CMTime(value: to * Int64(NSEC_PER_SEC), timescale: Int32(NSEC_PER_SEC))
+    guard let player = player else { return }
+    print(seekTime)
+    player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
+    if player.timeControlStatus.rawValue != 2 {
+      player.play()
+    }
+  }
+  
+  @objc private func popRootViewController(sender: UIBarButtonItem) {
+    navigationController?.popToRootViewController(animated: true)
+  }
+  
+  @objc private func pushStudyReviewVC() {
+//    let reviewVC = StudyReviewVC()
+//    navigationController?.pushViewController(reviewVC, animated: true)
   }
   
 }
@@ -124,41 +189,30 @@ extension InProcessStudyVC: InProcessViewDelegate {
     
     let playTime = playCMTime.value / Int64(playCMTime.timescale)
     let qna = QnAModel(
-      documentID: "documentid: \(count)",
+      studyDocumentID: model.documentID,
       playTime: playTime,
       title: title,
-      userID: "userID \(count)",
-      isDone: false,
-      messages: []
+      userID: SignService.user.nickName,
+      isDone: false
     )
-    qnas.append(qna)
-    count += 1
     
+    StudyService.qnaUpdate(model: qna)
   }
-  
-  
 }
 
 // MARK: UITableViewDataSource
 
 extension InProcessStudyVC: UITableViewDataSource {
   
-  func numberOfSections(in tableView: UITableView) -> Int {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     qnas.count
   }
   
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: QuestionCell.identifier) as! QuestionCell
-    headerView.configure(qna: qnas[section])
-    return headerView
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    qnas[section].messages.count
-  }
-  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    let cell = tableView.dequeueReusableCell(withIdentifier: QuestionCell.identifier, for: indexPath) as! QuestionCell
+    cell.configure(qna: qnas[indexPath.row].data)
+    return cell
   }
   
   
@@ -167,8 +221,6 @@ extension InProcessStudyVC: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension InProcessStudyVC: UITableViewDelegate {
   
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return tableView.bounds.height / 1.5
-  }
+  
 }
 

@@ -9,6 +9,10 @@
 import Foundation
 import Firebase
 
+struct Study {
+  let documentID: String
+  let data: StudyModel
+}
 
 struct StudyModel: Codable {
   let title: String

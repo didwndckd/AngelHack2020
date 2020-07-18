@@ -121,6 +121,43 @@ class StudyService {
       .document(documnetID)
   }
   
+  
+  
+  class func qnaUpdate(model: QnAModel) {
+    guard let data = try? FirestoreEncoder().encode(model) else { return }
+    
+    Firestore
+      .firestore()
+      .collection("QnA")
+      .addDocument(data: data)
+  }
+  
+  
+  private static var qnaListener: ListenerRegistration?
+  
+  class func qnaAddListener(studyDocumentID: String, completion: @escaping ([QnA]) -> Void) {
+    qnaListener = Firestore
+      .firestore()
+      .collection("QnA")
+      .whereField("studyDocumentID", isEqualTo: studyDocumentID)
+      .addSnapshotListener { (snapshot, _) in
+        guard let documents = snapshot?.documents else { return }
+
+        var arr = [QnA]()
+        
+        for document in documents {
+          let data = try! FirestoreDecoder().decode(QnAModel.self, from: document.data())
+          let temp = QnA(documentID: document.documentID, data: data)
+          arr.append(temp)
+        }
+        
+        completion(arr)
+    }
+  }
+  
+  class func qnaListenerRemove() {
+    qnaListener?.remove()
+  }
 }
 
 

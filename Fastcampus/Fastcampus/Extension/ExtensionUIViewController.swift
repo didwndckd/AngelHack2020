@@ -49,5 +49,14 @@ extension UIViewController {
     vcIndicator.dismiss(animated: false)
   }
 
+  
+  // MARK: - Make BackButton
+  func setBackButton(selector: Selector) {
+    let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: selector)
+    backButton.tintColor = .black
+    navigationItem.leftBarButtonItem = backButton
+    
+  }
+  
 }
 

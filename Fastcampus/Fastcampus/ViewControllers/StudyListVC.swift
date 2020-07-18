@@ -11,7 +11,7 @@ import Firebase
 
 class StudyListVC: UITableViewController {
   
-  private var studys = [StudyModel]()
+  private var studys = [Study]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,8 +44,9 @@ class StudyListVC: UITableViewController {
           self.alertNormal(title: error.localizedDescription)
           
         case .success(let data):
-          self.studys.append(data)
-          self.studys.sort { $0.dateValue < $1.dateValue }
+          let temp = Study(documentID: studyID, data: data)
+          self.studys.append(temp)
+          self.studys.sort { $0.data.dateValue < $1.data.dateValue }
           self.tableView.reloadData()
         }
       }
@@ -65,7 +66,17 @@ extension StudyListVC {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: StudyListTableViewCell.identifier, for: indexPath) as! StudyListTableViewCell
-    cell.configure(data: studys[indexPath.row])
+    cell.configure(data: studys[indexPath.row].data)
     return cell
+  }
+}
+
+// MARK: - UITableViewDelegate
+
+extension StudyListVC {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let study = studys[indexPath.row]
+    let studyVC = WaitingStudyVC(study: study)
+    navigationController?.pushViewController(studyVC, animated: true)
   }
 }
