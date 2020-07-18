@@ -63,6 +63,9 @@
 		CF7F563324C23A140041DAAD /* DisignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563224C23A140041DAAD /* DisignableTextField.swift */; };
 		CF7F563624C23CDF0041DAAD /* KeyboardControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563524C23CDF0041DAAD /* KeyboardControllable.swift */; };
 		CF7F563824C240EE0041DAAD /* SummaryEditorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563724C240EE0041DAAD /* SummaryEditorCell.swift */; };
+		CF7F563A24C300840041DAAD /* LectureStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563924C300840041DAAD /* LectureStartVC.swift */; };
+		CF7F563C24C3039D0041DAAD /* LectureStudyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563B24C3039D0041DAAD /* LectureStudyCell.swift */; };
+		CF7F563F24C3151F0041DAAD /* LectureSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */; };
 		CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A624BC6482009E8E2F /* MainCell.swift */; };
 		CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A824BC6603009E8E2F /* Lecture.swift */; };
 		CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9AA24BC660E009E8E2F /* User.swift */; };
@@ -136,6 +139,9 @@
 		CF7F563224C23A140041DAAD /* DisignableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisignableTextField.swift; sourceTree = "<group>"; };
 		CF7F563524C23CDF0041DAAD /* KeyboardControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardControllable.swift; sourceTree = "<group>"; };
 		CF7F563724C240EE0041DAAD /* SummaryEditorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEditorCell.swift; sourceTree = "<group>"; };
+		CF7F563924C300840041DAAD /* LectureStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureStartVC.swift; sourceTree = "<group>"; };
+		CF7F563B24C3039D0041DAAD /* LectureStudyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureStudyCell.swift; sourceTree = "<group>"; };
+		CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureSummaryCell.swift; sourceTree = "<group>"; };
 		CFE3C9A624BC6482009E8E2F /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		CFE3C9A824BC6603009E8E2F /* Lecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lecture.swift; sourceTree = "<group>"; };
 		CFE3C9AA24BC660E009E8E2F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -329,6 +335,7 @@
 				4F6CD20724C21F31004E26B6 /* SignInCollectionViewCell.swift */,
 				4F6CD20924C21F3A004E26B6 /* SignUpCollectionViewCell.swift */,
 				4FD71D9324C30AF8003EFD30 /* StudyListTableViewCell.swift */,
+				CF7F563D24C314D70041DAAD /* LectureStartCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -359,6 +366,7 @@
 				CF7F562E24C238640041DAAD /* SummaryEditorVC.swift */,
 				4FD71D8F24C2FF83003EFD30 /* SplashVC.swift */,
 				4FD71D9124C308D9003EFD30 /* StudyListVC.swift */,
+				CF7F563924C300840041DAAD /* LectureStartVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -378,6 +386,15 @@
 				CF7F563524C23CDF0041DAAD /* KeyboardControllable.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		CF7F563D24C314D70041DAAD /* LectureStartCell */ = {
+			isa = PBXGroup;
+			children = (
+				CF7F563B24C3039D0041DAAD /* LectureStudyCell.swift */,
+				CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */,
+			);
+			path = LectureStartCell;
 			sourceTree = "<group>";
 		};
 		CFE3C9D124C08B1B009E8E2F /* Utils */ = {
@@ -548,6 +565,7 @@
 				4F8838FC24BEB0DB009EF09A /* StudyConfigureView.swift in Sources */,
 				CF7F563624C23CDF0041DAAD /* KeyboardControllable.swift in Sources */,
 				314E84EE24BCA29600A6D492 /* StudyFrameView.swift in Sources */,
+				CF7F563A24C300840041DAAD /* LectureStartVC.swift in Sources */,
 				CFE3C9C824BF5282009E8E2F /* MypageHeaderView.swift in Sources */,
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				4F88E3AC24C0110D000967EE /* QnAModel.swift in Sources */,
@@ -563,12 +581,14 @@
 				314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */,
 				4F88E3B224C01384000967EE /* FirebaseMaker.swift in Sources */,
 				4F575D6F24C1965300F35888 /* DropButtonView.swift in Sources */,
+				CF7F563F24C3151F0041DAAD /* LectureSummaryCell.swift in Sources */,
 				4F8838FA24BEB0A7009EF09A /* StudyConfigureVC.swift in Sources */,
 				4FD71D9424C30AF8003EFD30 /* StudyListTableViewCell.swift in Sources */,
 				CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */,
 				314AD16424C243F5002A22B7 /* DateExtension.swift in Sources */,
 				CFE3C9C624BF4E12009E8E2F /* MypageCell.swift in Sources */,
 				CF29217A24BC05C7001318CB /* SampleView.swift in Sources */,
+				CF7F563C24C3039D0041DAAD /* LectureStudyCell.swift in Sources */,
 				4F6CD20A24C21F3A004E26B6 /* SignUpCollectionViewCell.swift in Sources */,
 				CFE3C9CC24C060B1009E8E2F /* SummaryVC.swift in Sources */,
 				4F88E3AE24C0111C000967EE /* UnitModel.swift in Sources */,
@@ -718,7 +738,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZLN97H98PA;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Fastcampus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
