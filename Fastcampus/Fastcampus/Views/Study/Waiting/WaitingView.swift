@@ -26,7 +26,7 @@ class WaitingView: View {
     headerView.snp.makeConstraints({
       $0.top.equalTo(guide).offset(topMargin)
       $0.centerX.equalTo(guide)
-      $0.width.equalTo(guide).multipliedBy(0.7)
+      $0.width.equalTo(guide).multipliedBy(0.6)
       $0.height.equalTo(headerView.snp.width)
     })
     
@@ -43,7 +43,7 @@ class WaitingView: View {
   
   func updateContent(study: StudyModel) {
     headerView.configure(startTime: study.dateValue)
-    bodyView.configure(rule: study.rule, unitTitle: study.unitTitle, unitContent: study.unitDescription)
+    bodyView.configure(study: study)
   }
   
 }
