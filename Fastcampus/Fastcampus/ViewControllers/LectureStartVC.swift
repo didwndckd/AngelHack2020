@@ -134,7 +134,8 @@ class LectureStartVC: UIViewController {
     tabTableView.bounces = false
     tabTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     tabTableView.dataSource = self
-    tabTableView.register(LectureStartCell.self, forCellReuseIdentifier: LectureStartCell.identifier)
+    tabTableView.delegate = self
+    tabTableView.register(LectureStudyCell.self, forCellReuseIdentifier: LectureStudyCell.identifier)
     tabTableView.register(LectureSummaryCell.self, forCellReuseIdentifier: LectureSummaryCell.identifier)
     
     makeStudyButton.setTitle("스터디 만들기  >", for: .normal)
@@ -198,17 +199,32 @@ extension LectureStartVC: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if currentTab == .introduce {
-      let cell = tableView.dequeueReusableCell(withIdentifier: LectureStartCell.identifier, for: indexPath) as! LectureStartCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: LectureStudyCell.identifier, for: indexPath) as! LectureStudyCell
       cell.makeGradientJoinButton()
       return cell
     } else if currentTab == .study {
-      let cell = tableView.dequeueReusableCell(withIdentifier: LectureStartCell.identifier, for: indexPath) as! LectureStartCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: LectureStudyCell.identifier, for: indexPath) as! LectureStudyCell
+      cell.delegate = self
       cell.makeGradientJoinButton()
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureSummaryCell.identifier, for: indexPath) as! LectureSummaryCell
       cell.delegate = self
       return cell
+    }
+  }
+}
+
+extension LectureStartVC: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    switch currentTab {
+      case .introduce:
+        break
+      case .study:
+        break
+      case .summary:
+        //TODO:- 요약정리 눌렀을 때 처리
+        break
     }
   }
 }
@@ -238,10 +254,18 @@ private extension LectureStartVC {
   }
 }
 
+extension LectureStartVC: LectureStudyCellDelegate {
+  func joinStudy(studyID: Int) {
+    //TODO:- 참여하기 버튼 눌렀을 때
+  }
+}
+
 extension LectureStartVC: LectureSummaryCellDelegate {
   func favoriteSummary(summaryID: Int, sender: UIButton) {
+    //TODO:- 즐겨찾기 버튼을 눌렀을 때
     let image = sender.isSelected ? #imageLiteral(resourceName: "icon_favorite_deselected") : #imageLiteral(resourceName: "icon_favorite_selected")
     sender.setImage(image, for: .normal)
     sender.isSelected.toggle()
   }
 }
+
