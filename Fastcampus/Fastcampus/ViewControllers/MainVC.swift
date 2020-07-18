@@ -138,6 +138,11 @@ class MainVC: UIViewController {
       .forEach { headerContainerView.addSubview($0) }
     
     mainScrollView.snp.makeConstraints {
+      $0.top.leading.equalToSuperview()
+      $0.trailing.bottom.equalToSuperview().offset(-8)
+    }
+    
+    mainScrollView.snp.makeConstraints {
       $0.top.bottom.equalTo(guide)
       $0.leading.trailing.equalToSuperview()
     }
@@ -184,6 +189,7 @@ extension MainVC: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.identifier, for: indexPath) as! MainCell
+    cell.selectionStyle = .none
     cell.setProperties(lecture: lecture[indexPath.row])
     cell.setGradientBackground()
     return cell
@@ -192,38 +198,42 @@ extension MainVC: UITableViewDataSource {
 
 extension MainVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return tableView.frame.height / 2.2
+    return tableView.frame.height / 2.5
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if lecture[indexPath.row].id == 2 {
-      let chapterVC = ChapterVC(lecture: lecture[indexPath.row])
-      self.navigationController?.pushViewController(chapterVC, animated: true)
-    }
+    let chapterVC = ChapterVC(lecture: lecture[indexPath.row])
+    self.navigationController?.pushViewController(chapterVC, animated: true)
     
     
-    
-    if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
-      let vc = WaitingStudyVC(studyModel: StudyModel(
-        title: "1회차 같이 완주해요!",
-        lectureID: "lectureID",
-        lectureTitle: "UX/UI 디자인 올인원 패키지 Online.",
-        chapterID: 1,
-        unitID: 1,
-        unitTitle: "01. 디자인 개론-01. 강사, 강의소개",
-        unitDescription: """
-        UX/UI 디자인 올인원 패키지의 첫번째 강의입니다.\n
-        앞으로 공부할 UX/ UI의 기초개념을 알아보고 강사님을 소개합니다.
-        """,
-        date: Timestamp(date: Date(timeInterval: 3600, since: Date())),
-        fixed: 10,
-        rule: "욕설 비방 하지마세요\n질문 많이 올려주세요\n요약 무조건 올리기 입니다.",
-        userIDs: ["중창", "업스", "현철", "현영", "예은"],
-        qnaIDs: [],
-        inProcess: .wait))
-      
-      navigationController?.pushViewController(vc, animated: true)
-    }
+//    if lecture[indexPath.row].id == 2 {
+//      let chapterVC = ChapterVC(lecture: lecture[indexPath.row])
+//      self.navigationController?.pushViewController(chapterVC, animated: true)
+//    }
+//
+//
+//
+//    if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
+//      let vc = WaitingStudyVC(studyModel: StudyModel(
+//        title: "1회차 같이 완주해요!",
+//        lectureID: "lectureID",
+//        lectureTitle: "UX/UI 디자인 올인원 패키지 Online.",
+//        chapterID: 1,
+//        unitID: 1,
+//        unitTitle: "01. 디자인 개론-01. 강사, 강의소개",
+//        unitDescription: """
+//        UX/UI 디자인 올인원 패키지의 첫번째 강의입니다.\n
+//        앞으로 공부할 UX/ UI의 기초개념을 알아보고 강사님을 소개합니다.
+//        """,
+//        date: Timestamp(date: Date(timeInterval: 3600, since: Date())),
+//        fixed: 10,
+//        rule: "욕설 비방 하지마세요\n질문 많이 올려주세요\n요약 무조건 올리기 입니다.",
+//        userIDs: ["중창", "업스", "현철", "현영", "예은"],
+//        qnaIDs: [],
+//        inProcess: .wait))
+//
+//      navigationController?.pushViewController(vc, animated: true)
+//    }
   }
 }
 
