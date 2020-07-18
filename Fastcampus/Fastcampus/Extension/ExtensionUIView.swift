@@ -26,4 +26,14 @@ extension UIView {
     self.layer.shadowOffset = .zero
     self.layer.shadowColor = UIColor.darkGray.cgColor
   }
+  
+  func setGradientBackground(colors: [UIColor]) {
+    let gradient: CAGradientLayer = CAGradientLayer()
+    gradient.colors = colors.map({ $0.cgColor })
+    gradient.locations = [0.0, 1.0]
+    gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+    gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+    gradient.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+    self.layer.insertSublayer(gradient, at: 0)
+  }
 }

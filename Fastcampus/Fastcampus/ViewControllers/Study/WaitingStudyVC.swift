@@ -42,9 +42,14 @@ class WaitingStudyVC: ViewController<WaitingView> {
     stopTimer()
   }
   
-  private func attribute() {
-    self.title = model.title
+  private func setNavigation() {
+    self.title = "입장 대기"
     self.navigationItem.largeTitleDisplayMode = .never
+    setBackButton()
+  }
+  
+  private func attribute() {
+    setNavigation()
     customView.updateContent(study: model)
   }
   
@@ -67,6 +72,7 @@ class WaitingStudyVC: ViewController<WaitingView> {
     guard timeInterval > 0 else {
       customView.updateTimer(timeInterval: timeInterval)
       stopTimer()
+      pushInProcessStudyVC()
       return
     }
     
@@ -74,7 +80,7 @@ class WaitingStudyVC: ViewController<WaitingView> {
   }
   
   private func pushInProcessStudyVC() {
-    let vc = InProcessStudyVC()
+    let vc = InProcessStudyVC(study: self.model)
     navigationController?.pushViewController(vc, animated: true)
   }
   

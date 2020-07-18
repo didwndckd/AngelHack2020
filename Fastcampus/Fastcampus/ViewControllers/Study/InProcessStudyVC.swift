@@ -13,6 +13,8 @@ class InProcessStudyVC: ViewController<InProcessView> {
   
   private var player: AVPlayer?
   private var timeObserverToken: Any?
+  private var model: StudyModel
+  
   private var qnas: [QnAModel] = [] {
     didSet {
       customView.reloadData(self.qnas)
@@ -20,22 +22,37 @@ class InProcessStudyVC: ViewController<InProcessView> {
   }
   var count = 0
   
+  init(study: StudyModel) {
+    self.model = study
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   // MARK: Setup
   override func viewDidLoad() {
     super.viewDidLoad()
     setupPlayer()
     customView.setupDelegate(vc: self)
+    setNavigation()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    player?.play()
+//    player?.play()
     addTimeObserver()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillAppear(animated)
     removeTimeObserver()
+  }
+  
+  private func setNavigation() {
+    navigationItem.setTitle(model.lectureTitle, subtitle: model.unitTitle)
+    setBackButton()
   }
   
   private func setupAsset() -> AVAsset? {
@@ -51,7 +68,9 @@ class InProcessStudyVC: ViewController<InProcessView> {
     let player = AVPlayer(playerItem: playerItem)
     let duration = asset.duration.value / Int64(asset.duration.timescale)
     self.player = player
+    let interval = Date().timeIntervalSince(model.dateValue)
     
+    seekPlayer(to: Int64(interval))
     setupPlayerView(player: player, duration: duration)
   }
   
@@ -90,6 +109,16 @@ class InProcessStudyVC: ViewController<InProcessView> {
     let orientation: UIInterfaceOrientation = isFull ? .landscapeRight: .portrait
     let value = orientation.rawValue
     UIDevice.current.setValue(value, forKey: "orientation")
+  }
+  
+  private func seekPlayer(to: Int64) {
+    let seekTime = CMTime(value: to * Int64(NSEC_PER_SEC), timescale: Int32(NSEC_PER_SEC))
+    guard let player = player else { return }
+    print(seekTime)
+    player.seek(to: seekTime, toleranceBefore: .zero, toleranceAfter: .zero)
+    if player.timeControlStatus.rawValue != 2 {
+      player.play()
+    }
   }
   
 }
@@ -143,22 +172,15 @@ extension InProcessStudyVC: InProcessViewDelegate {
 
 extension InProcessStudyVC: UITableViewDataSource {
   
-  func numberOfSections(in tableView: UITableView) -> Int {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     qnas.count
   }
   
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: QuestionCell.identifier) as! QuestionCell
-    headerView.configure(qna: qnas[section])
-    return headerView
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    qnas[section].messages.count
-  }
-  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    let cell = tableView.dequeueReusableCell(withIdentifier: QuestionCell.identifier, for: indexPath) as! QuestionCell
+    cell.configure(qna: qnas[indexPath.row])
+    return cell
   }
   
   
@@ -167,8 +189,6 @@ extension InProcessStudyVC: UITableViewDataSource {
 // MARK: UITableViewDelegate
 extension InProcessStudyVC: UITableViewDelegate {
   
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return tableView.bounds.height / 1.5
-  }
+  
 }
 

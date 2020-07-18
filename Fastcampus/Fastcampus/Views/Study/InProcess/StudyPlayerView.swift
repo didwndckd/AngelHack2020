@@ -10,7 +10,6 @@ import UIKit
 
 protocol StudyPlayerViewDelegate: class {
   func screenMode(_ sender: UIButton)
-  func question(_ sender: UIButton)
 }
 
 class StudyPlayerView: View {
@@ -21,7 +20,6 @@ class StudyPlayerView: View {
   
   private var playerLayer: CALayer?
   
-  private let questionButton = UIButton()
   private let screenModeButton = UIButton()
   
   private let informationView = UIView()
@@ -46,11 +44,9 @@ class StudyPlayerView: View {
     informationBackgroundView.backgroundColor = .black
     informationBackgroundView.alpha = 0.5
     
-    questionButton.setImage(UIImage(systemName: "lightbulb"), for: .normal)
-    questionButton.tintColor = .blue
-    
-    screenModeButton.setImage(UIImage(systemName: "square.fill"), for: .normal)
-    screenModeButton.setImage(UIImage(systemName: "square"), for: .selected)
+    screenModeButton.setImage(UIImage(named: "FullScreen"), for: .normal)
+    screenModeButton.setImage(UIImage(systemName: "square.fill"), for: .selected)
+    screenModeButton.tintColor = .white
     
     restTimeLabel.text = "00:00:00"
     restTimeLabel.textColor = .white
@@ -61,53 +57,46 @@ class StudyPlayerView: View {
     slider.maximumTrackTintColor = .white
     slider.minimumTrackTintColor = .red
     
-    questionButton.addTarget(self, action: #selector(didTapQuestionButton(_:)), for: .touchUpInside)
     screenModeButton.addTarget(self, action: #selector(didTapSreenModebutton(_:)), for: .touchUpInside)
     
   }
   
   override func setupUI() {
     super.setupUI()
+    
     [videoView, informationView].forEach({
       addSubview($0)
     })
     
-    [informationBackgroundView, questionButton, screenModeButton, slider, restTimeLabel].forEach({
+    
+    [informationBackgroundView, screenModeButton, slider, restTimeLabel].forEach({
       informationView.addSubview($0)
     })
     
-    informationBackgroundView.snp.makeConstraints({
-      $0.top.bottom.leading.trailing.equalToSuperview()
-    })
-    
-    videoView.snp.makeConstraints({
-      $0.top.bottom.leading.trailing.equalToSuperview()
-    })
     
     
     let margin: CGFloat = 8
     let progressMargin: CGFloat = 4
     
+    videoView.snp.makeConstraints({
+      $0.top.leading.bottom.trailing.equalToSuperview()
+    })
+    
     informationView.snp.makeConstraints({
       $0.top.bottom.leading.trailing.equalToSuperview()
     })
+    
     informationBackgroundView.snp.makeConstraints({
       $0.top.bottom.leading.trailing.equalToSuperview()
     })
     
     screenModeButton.snp.makeConstraints({
-      $0.bottom.equalToSuperview().offset(-margin)
+      $0.bottom.equalTo(restTimeLabel.snp.top).offset(-margin)
       $0.trailing.equalToSuperview().offset(-margin)
     })
     
-    questionButton.snp.makeConstraints({
-      $0.leading.equalToSuperview().offset(margin)
-      $0.bottom.equalTo(screenModeButton.snp.top).offset(-margin)
-    })
-    
     restTimeLabel.snp.makeConstraints({
-      $0.bottom.equalToSuperview().offset(-margin)
-      $0.trailing.equalTo(screenModeButton.snp.leading).offset(-margin)
+      $0.bottom.trailing.equalToSuperview().inset(margin)
     })
     
     slider.snp.makeConstraints({
@@ -115,6 +104,9 @@ class StudyPlayerView: View {
       $0.trailing.equalTo(restTimeLabel.snp.leading).offset(-progressMargin)
       $0.centerY.equalTo(restTimeLabel)
     })
+    
+    
+    
     
   }
   
@@ -136,9 +128,7 @@ class StudyPlayerView: View {
   
   // MARK: Action
   
-  @objc private func didTapQuestionButton(_ sender: UIButton) {
-    delegate?.question(sender)
-  }
+  
   
   @objc private func didTapSreenModebutton(_ sender: UIButton) {
     delegate?.screenMode(sender)
@@ -175,13 +165,15 @@ class StudyPlayerView: View {
   }
   
   private func addPin(_ playTime: Int64) {
-    let imageView = UIImageView(image: UIImage(systemName: "mappin"))
+    let imageView = UIImageView(image: UIImage(named: "pin"))
+    imageView.contentMode = .top
+    
     let multiplied = CGFloat(playTime) / CGFloat(slider.maximumValue)
     slider.addSubview(imageView)
-    print(multiplied)
     imageView.snp.makeConstraints({
-      $0.bottom.equalTo(slider.snp.top)
+      $0.bottom.equalTo(slider.snp.top).offset(-8)
       $0.centerX.equalTo(slider.snp.trailing).multipliedBy(multiplied)
+      $0.width.height.equalTo(24)
     })
   }
   

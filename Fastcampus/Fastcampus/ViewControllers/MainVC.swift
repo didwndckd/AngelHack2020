@@ -206,7 +206,7 @@ extension MainVC: UITableViewDelegate {
         UX/UI 디자인 올인원 패키지의 첫번째 강의입니다.\n
         앞으로 공부할 UX/ UI의 기초개념을 알아보고 강사님을 소개합니다.
         """,
-        date: Timestamp(date: Date(timeInterval: 3600, since: Date())),
+        date: Timestamp(date: Date(timeInterval: 10, since: Date())),
         fixed: 10,
         rule: "욕설 비방 하지마세요\n질문 많이 올려주세요\n요약 무조건 올리기 입니다.",
         userIDs: ["중창", "업스", "현철", "현영", "예은"],
