@@ -88,6 +88,7 @@ class LectureStartVC: UIViewController {
   private let lecture: Lecture
   private let chapter: ChapterModel
   private let unit: UnitModel
+  private var users: [UserModel] = []
   
   init(lecture: Lecture, chapter: ChapterModel, unit: UnitModel) {
     self.lecture = lecture
@@ -100,6 +101,7 @@ class LectureStartVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    getUserInfo()
     attribute()
     setupUI()
     
@@ -112,6 +114,14 @@ class LectureStartVC: UIViewController {
   
   private func getUserInfo() {
     //TODO:- Get All User Info
+    UserService.allUser { result in
+      switch result {
+        case .success(let users):
+          self.users = users
+        case .failure(let err):
+          print("[Log] Error :", err.localizedDescription)
+      }
+    }
   }
   
   private func getStudyList() {
@@ -291,11 +301,13 @@ extension LectureStartVC: UITableViewDataSource {
     if currentTab == .introduce {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureIntroduceCell.identifier, for: indexPath) as! LectureIntroduceCell
       cell.updateHeight(height: tableView.frame.height - self.view.safeAreaInsets.bottom)
+      cell.setProperties(title: lecture.title, description: unit.description)
       return cell
     } else if currentTab == .study {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureStudyCell.identifier, for: indexPath) as! LectureStudyCell
       cell.delegate = self
       cell.selectionStyle = .none
+      cell.setProperties(study: study[indexPath.row])
       cell.makeGradientJoinButton()
       return cell
     } else {
@@ -371,8 +383,20 @@ private extension LectureStartVC {
 }
 
 extension LectureStartVC: LectureStudyCellDelegate {
-  func joinStudy(studyID: Int) {
+  func joinStudy(studyID: String) {
     //TODO:- 참여하기 버튼 눌렀을 때
+    StudyService.getStudy(studyDocumentID: studyID) { [weak self] result in
+      guard let self = self else { return }
+      switch result {
+        case .success(let studyData):
+          let studyConfigureVC = StudyConfigureVC(lecture: self.lecture, chapter: self.chapter, unit: self.unit)
+          studyConfigureVC.modalPresentationStyle = .overFullScreen
+          studyConfigureVC.studyConfigureType = .join
+          self.present(studyConfigureVC, animated: true, completion: nil)
+        case .failure(let err):
+          print("[Log] Error :", err.localizedDescription)
+      }
+    }
   }
 }
 

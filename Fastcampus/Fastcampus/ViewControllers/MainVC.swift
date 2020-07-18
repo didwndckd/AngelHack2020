@@ -138,11 +138,6 @@ class MainVC: UIViewController {
       .forEach { headerContainerView.addSubview($0) }
     
     mainScrollView.snp.makeConstraints {
-      $0.top.leading.equalToSuperview()
-      $0.trailing.bottom.equalToSuperview().offset(-8)
-    }
-    
-    mainScrollView.snp.makeConstraints {
       $0.top.bottom.equalTo(guide)
       $0.leading.trailing.equalToSuperview()
     }

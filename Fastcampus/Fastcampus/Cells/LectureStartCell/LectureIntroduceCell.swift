@@ -39,6 +39,7 @@ class LectureIntroduceCell: UITableViewCell {
   
   private func attribute() {
     titleBgView.layer.cornerRadius = 8
+    titleBgView.clipsToBounds = true
     
     titleLabel.text = "UX/UI 디자인 올인원 패키지 Online."
     titleLabel.textColor = .white
@@ -51,6 +52,7 @@ class LectureIntroduceCell: UITableViewCell {
     
     contentsLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
     contentsLabel.bounces = false
+    contentsLabel.isEditable = false
     contentsLabel.text = """
     UX 디자인 사례 및 디자인이란 무엇인가?
     디자이너의 역할 : UI, UX, GUI, VD, IXD의 차이 학습
