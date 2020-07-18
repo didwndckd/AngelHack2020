@@ -68,9 +68,9 @@ class StudyConfigureView: View {
     }
     
     masterDisplayLabel.text = "방장"
-    masterBadgeLabel.text = "Lv.9"
+    masterBadgeLabel.text = "Lv.\(SignService.user.level)"
     masterBadgeLabel.font = .boldSystemFont(ofSize: 12)
-    masterNameLabel.text = "업쓰"
+    masterNameLabel.text = SignService.user.nickName
     
     titleDisplayLabel.text = "스터디 제목"
     titleTextField.font = .boldSystemFont(ofSize: 20)

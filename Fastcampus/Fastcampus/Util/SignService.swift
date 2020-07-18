@@ -13,6 +13,7 @@ import CodableFirebase
 class SignService {
   
   static var user: UserModel!
+  static var uid: String!
   
   class func signIn(email: String, password: String, completion: @escaping (Bool) -> Void) {
     Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
@@ -22,6 +23,8 @@ class SignService {
       }
       
       guard let uid = result?.user.uid else { return }
+      SignService.uid = uid
+      
       Firestore
         .firestore()
         .collection("User")

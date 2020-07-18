@@ -10,6 +10,7 @@ import Foundation
 
 struct UserModel: Codable {
   let nickName: String
+  let level: Int
   let lectures: [String]
   let studys: [String]
 }

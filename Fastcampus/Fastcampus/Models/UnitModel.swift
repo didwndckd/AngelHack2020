@@ -11,6 +11,7 @@ import Foundation
 struct UnitModel: Codable {
   let title: String
   let index: Int
+  let description: String
   let userIDs: [String]
   let studyIDs: [String]
   let memoIDs: [String]
