@@ -11,14 +11,15 @@ import FirebaseFirestore
 import CodableFirebase
 
 class ChapterVC: UIViewController {
-  
   private let tableView = UITableView(frame: .zero, style: .grouped)
-  
+  private var lectureTitle: String = ""
   private var chapters = [ChapterModel]()
   private var isFoldCache = [Int: Bool]()
   
-  init(lectureID: String) {
+  init(lectureTitle: String, lectureID: String) {
     super.init(nibName: nil, bundle: nil)
+    self.lectureTitle = lectureTitle
+    self.title = lectureTitle
     let db = Firestore.firestore().collection("Lecture").document(lectureID).collection("Chapter")
     
     db.getDocuments { (snapshot, _) in
@@ -30,7 +31,10 @@ class ChapterVC: UIViewController {
           let title = data["title"] as? String
           else { return }
         
-        let inDB = Firestore.firestore().collection("Lecture").document(lectureID).collection("Chapter").document(document.documentID).collection("Units")
+        let inDB = Firestore.firestore()
+          .collection("Lecture").document(lectureID)
+          .collection("Chapter").document(document.documentID)
+          .collection("Units")
         
         inDB.order(by: "index", descending: false).getDocuments { (snapshot, _) in
           guard let inDocuments = snapshot?.documents else { return }
@@ -59,8 +63,12 @@ class ChapterVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     attribute()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.navigationController?.isNavigationBarHidden = false
   }
   
   private func attribute() {
@@ -78,12 +86,13 @@ class ChapterVC: UIViewController {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     
     let guide = view.safeAreaLayoutGuide
+    let margins: CGFloat = 15
     view.addSubview(tableView)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       tableView.topAnchor.constraint(equalTo: guide.topAnchor),
-      tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-      tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+      tableView.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: margins),
+      tableView.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -margins),
       tableView.bottomAnchor.constraint(equalTo: guide.bottomAnchor)
     ])
   }
@@ -95,7 +104,7 @@ class ChapterVC: UIViewController {
 
 extension ChapterVC: UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
-    chapters.count
+    return chapters.count
   }
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     guard let isFold = isFoldCache[section] else { return 0 }
@@ -107,7 +116,7 @@ extension ChapterVC: UITableViewDataSource {
     
     let unit = chapters[indexPath.section].Units[indexPath.row]
     let unitIndex = String(format: "%02d", unit.index)
-    let text = unitIndex + ". " + unit.title
+    let text = "  " + unitIndex + ". " + unit.title
     cell.textLabel?.text = text
     cell.textLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
     cell.accessoryType = .disclosureIndicator
@@ -134,8 +143,15 @@ extension ChapterVC: UITableViewDelegate {
     return chapterHeaderView
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let chapter = chapters[indexPath.section]
+    let unit = chapter.Units[indexPath.row]
+    let subtitle = "\(chapter.title) - \(unit.title)"
+    let lectureStartVC = LectureStartVC(title: lectureTitle, subtitle: subtitle)
+    self.navigationController?.pushViewController(lectureStartVC, animated: true)
+  }
+  
   @objc private func sectionDidTap(_ sender: UITapGestureRecognizer) {
-    
     var indexPath = [IndexPath]()
     
     for row in chapters[sender.view!.tag].Units.indices {
@@ -171,7 +187,6 @@ extension ChapterVC: UITableViewDelegate {
 }
 
 class ChapterHeaderView: UIView {
-  private let containerView = UIView()
   private let titleLabel = UILabel()
   private let rightImageView = UIImageView()
   private let bottomSeparatorView = UIView()
@@ -187,7 +202,6 @@ class ChapterHeaderView: UIView {
   }
   
   func toggleBottomSeparatorView(isHidden: Bool) {
-    print("[Log] isHidden :", isHidden)
     bottomSeparatorView.isHidden = isHidden
   }
   
@@ -200,25 +214,19 @@ class ChapterHeaderView: UIView {
   
   private func setupUI() {
     let margins: CGFloat = 15
-    [containerView, titleLabel, rightImageView, bottomSeparatorView]
+    [titleLabel, rightImageView, bottomSeparatorView]
       .forEach { self.addSubview($0) }
     
-    containerView.snp.makeConstraints {
+    titleLabel.snp.makeConstraints {
       $0.top.equalTo(self).offset(margins / 3)
       $0.leading.equalTo(self).offset(margins)
-      $0.trailing.equalTo(self).offset(-margins)
+      $0.trailing.equalTo(rightImageView.snp.leading).offset(-margins)
       $0.bottom.equalTo(self).offset(-margins / 3)
     }
     
-    titleLabel.snp.makeConstraints {
-      $0.centerY.equalTo(containerView)
-      $0.leading.equalTo(containerView).offset(margins)
-      $0.trailing.equalTo(rightImageView.snp.leading).offset(-margins)
-    }
-    
     rightImageView.snp.makeConstraints {
-      $0.centerY.equalTo(containerView)
-      $0.trailing.equalTo(containerView).offset(-margins)
+      $0.centerY.equalTo(self)
+      $0.trailing.equalTo(self).offset(-margins)
       $0.width.height.equalTo(30)
     }
     

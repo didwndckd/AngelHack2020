@@ -61,6 +61,11 @@ class LectureStartVC: UIViewController {
   private let tabTableView = UITableView()
   private let makeStudyButton = UIButton()
   
+  init(title: String, subtitle: String) {
+    super.init(nibName: nil, bundle: nil)
+    self.navigationItem.setTitle(title, subtitle: subtitle)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     attribute()
@@ -98,7 +103,6 @@ class LectureStartVC: UIViewController {
   
   private func attribute() {
     self.view.backgroundColor = .white
-    self.navigationItem.setTitle("UX/UI 디자인 올인원 패키지 Online.", subtitle: "01. 디자인 개론 - 01. Intro - 01. 강사, 강의 소개")
     
     videoView.backgroundColor = .black
     
@@ -190,6 +194,10 @@ class LectureStartVC: UIViewController {
       $0.width.equalToSuperview().multipliedBy(0.4)
       $0.height.equalTo(36)
     }
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }
 
