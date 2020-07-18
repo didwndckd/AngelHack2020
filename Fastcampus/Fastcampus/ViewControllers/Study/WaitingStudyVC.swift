@@ -45,7 +45,7 @@ class WaitingStudyVC: ViewController<WaitingView> {
   private func setNavigation() {
     self.title = "입장 대기"
     self.navigationItem.largeTitleDisplayMode = .never
-    setBackButton()
+    setBackButton(selector: #selector(popViewController(sender:)))
   }
   
   private func attribute() {
@@ -82,6 +82,10 @@ class WaitingStudyVC: ViewController<WaitingView> {
   private func pushInProcessStudyVC() {
     let vc = InProcessStudyVC(study: self.model)
     navigationController?.pushViewController(vc, animated: true)
+  }
+  
+  @objc private func popViewController(sender: UIBarButtonItem) {
+    navigationController?.popViewController(animated: true)
   }
   
   

@@ -41,18 +41,20 @@ class InProcessStudyVC: ViewController<InProcessView> {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-//    player?.play()
-    addTimeObserver()
+    let interval = Date().timeIntervalSince(model.dateValue)
+    seekPlayer(to: Int64(interval))
+    addObservers()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    removeTimeObserver()
+    player?.pause()
+    removeObservers()
   }
   
   private func setNavigation() {
     navigationItem.setTitle(model.lectureTitle, subtitle: model.unitTitle)
-    setBackButton()
+    setBackButton(selector: #selector(popRootViewController(sender:)))
   }
   
   private func setupAsset() -> AVAsset? {
@@ -68,15 +70,22 @@ class InProcessStudyVC: ViewController<InProcessView> {
     let player = AVPlayer(playerItem: playerItem)
     let duration = asset.duration.value / Int64(asset.duration.timescale)
     self.player = player
-    let interval = Date().timeIntervalSince(model.dateValue)
     
-    seekPlayer(to: Int64(interval))
     setupPlayerView(player: player, duration: duration)
   }
   
   private func setupPlayerView(player: AVPlayer, duration: Int64) {
     let playerLayer = AVPlayerLayer(player: player)
     customView.configurePlayerView(maximumValue: duration, layer: playerLayer)
+  }
+  
+  private func addObservers() {
+    addPlayerDidPlayToEndTimeObserver()
+    addTimeObserver()
+  }
+  
+  private func addPlayerDidPlayToEndTimeObserver() {
+    NotificationCenter.default.addObserver(self, selector: #selector(pushStudyReviewVC), name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
   }
   
   private func addTimeObserver() {
@@ -95,6 +104,11 @@ class InProcessStudyVC: ViewController<InProcessView> {
     player?.removeTimeObserver(token)
     timeObserverToken = nil
     print(#function)
+  }
+  
+  private func removeObservers() {
+    removeTimeObserver()
+    NotificationCenter.default.removeObserver(self)
   }
   
   
@@ -119,6 +133,15 @@ class InProcessStudyVC: ViewController<InProcessView> {
     if player.timeControlStatus.rawValue != 2 {
       player.play()
     }
+  }
+  
+  @objc private func popRootViewController(sender: UIBarButtonItem) {
+    navigationController?.popToRootViewController(animated: true)
+  }
+  
+  @objc private func pushStudyReviewVC() {
+    let reviewVC = StudyReviewVC()
+    navigationController?.pushViewController(reviewVC, animated: true)
   }
   
 }

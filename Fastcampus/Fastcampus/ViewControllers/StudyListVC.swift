@@ -69,3 +69,13 @@ extension StudyListVC {
     return cell
   }
 }
+
+// MARK: - UITableViewDelegate
+
+extension StudyListVC {
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let study = studys[indexPath.row]
+    let studyVC = WaitingStudyVC(studyModel: study)
+    navigationController?.pushViewController(studyVC, animated: true)
+  }
+}
