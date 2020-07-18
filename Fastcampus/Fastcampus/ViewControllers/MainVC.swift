@@ -184,6 +184,7 @@ extension MainVC: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.identifier, for: indexPath) as! MainCell
+    cell.selectionStyle = .none
     cell.setProperties(lecture: lecture[indexPath.row])
     cell.setGradientBackground()
     return cell
@@ -192,11 +193,11 @@ extension MainVC: UITableViewDataSource {
 
 extension MainVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return tableView.frame.height / 2.2
+    return tableView.frame.height / 2.5
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if lecture[indexPath.row].id == 5 {
+    if lecture[indexPath.row].id == 2 {
       let chapterVC = ChapterVC(
         lectureTitle: lecture[indexPath.row].title,
         lectureID: "QEULxiXwlzDu5nOsH7Kl"

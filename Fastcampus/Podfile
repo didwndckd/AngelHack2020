@@ -8,6 +8,7 @@ target 'Fastcampus' do
   # Pods for Fastcampus
 
   pod 'SnapKit'
+  pod 'Kingfisher'
 
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'

@@ -66,6 +66,8 @@
 		CF7F563A24C300840041DAAD /* LectureStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563924C300840041DAAD /* LectureStartVC.swift */; };
 		CF7F563C24C3039D0041DAAD /* LectureStudyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563B24C3039D0041DAAD /* LectureStudyCell.swift */; };
 		CF7F563F24C3151F0041DAAD /* LectureSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */; };
+		CF88703924C34B8100430387 /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF88703824C34B8100430387 /* Summary.swift */; };
+		CF88703B24C34F9700430387 /* ExtensionUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF88703A24C34F9700430387 /* ExtensionUITableView.swift */; };
 		CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A624BC6482009E8E2F /* MainCell.swift */; };
 		CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A824BC6603009E8E2F /* Lecture.swift */; };
 		CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9AA24BC660E009E8E2F /* User.swift */; };
@@ -142,6 +144,8 @@
 		CF7F563924C300840041DAAD /* LectureStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureStartVC.swift; sourceTree = "<group>"; };
 		CF7F563B24C3039D0041DAAD /* LectureStudyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureStudyCell.swift; sourceTree = "<group>"; };
 		CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureSummaryCell.swift; sourceTree = "<group>"; };
+		CF88703824C34B8100430387 /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
+		CF88703A24C34F9700430387 /* ExtensionUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUITableView.swift; sourceTree = "<group>"; };
 		CFE3C9A624BC6482009E8E2F /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		CFE3C9A824BC6603009E8E2F /* Lecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lecture.swift; sourceTree = "<group>"; };
 		CFE3C9AA24BC660E009E8E2F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -225,6 +229,7 @@
 				4F575D7024C1B3E200F35888 /* ExtensionUIColor.swift */,
 				314AD16324C243F5002A22B7 /* DateExtension.swift */,
 				CF7F562C24C22B2D0041DAAD /* ExtensionUINavigationItem.swift */,
+				CF88703A24C34F9700430387 /* ExtensionUITableView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 				4F88E3AD24C0111C000967EE /* UnitModel.swift */,
 				4F88E3A524C010D6000967EE /* StudyModel.swift */,
 				4F88E3AB24C0110D000967EE /* QnAModel.swift */,
+				CF88703824C34B8100430387 /* Summary.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -559,7 +565,9 @@
 				CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */,
 				4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */,
 				314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */,
+				CF88703B24C34F9700430387 /* ExtensionUITableView.swift in Sources */,
 				4F6CD20824C21F31004E26B6 /* SignInCollectionViewCell.swift in Sources */,
+				CF88703924C34B8100430387 /* Summary.swift in Sources */,
 				314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */,
 				CF7F562F24C238640041DAAD /* SummaryEditorVC.swift in Sources */,
 				4F8838FC24BEB0DB009EF09A /* StudyConfigureView.swift in Sources */,
@@ -738,6 +746,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Fastcampus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
