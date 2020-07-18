@@ -145,6 +145,7 @@ class LectureStartVC: UIViewController {
     makeStudyButton.layer.borderWidth = 2
     makeStudyButton.layer.borderColor = UIColor.myRed.cgColor
     makeStudyButton.layer.cornerRadius = 14
+    makeStudyButton.addTarget(self, action: #selector(touchUpMakeButton), for: .touchUpInside)
   }
   
   private func setupUI() {
@@ -251,6 +252,20 @@ private extension LectureStartVC {
     tabTableView.reloadData()
     makeStudyButton.setTitle("요약본 올리기  >", for: .normal)
     updateSelectButtonStyle(lectureTabType: .summary)
+  }
+  
+  @objc private func touchUpMakeButton() {
+    switch currentTab {
+      case .introduce:
+        break
+      case .study:
+        //TODO:- 스터디 만들기
+        break
+      case .summary:
+        //TODO:- 요약본 올리기
+        break
+        
+    }
   }
 }
 
