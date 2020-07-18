@@ -30,22 +30,13 @@ class LectureSummaryCell: UITableViewCell {
     setupUI()
   }
   
-  func setProperties(summary: Summary) {
+  func setProperties(summary: Summary, user: UserModel) {
     titleLabel.text = summary.title
-    
-    UserService.getData(uid: summary.userID) { [weak self] result in
-      guard let self = self else { return }
-      switch result {
-        case .success(let user):
-          self.nameLabel.text = "작성자 \(user.nickName)"
-          self.nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-          let attributedStr = NSMutableAttributedString(string: self.nameLabel.text!)
-          attributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: (self.nameLabel.text! as NSString as NSString).range(of: "작성자"))
-          self.nameLabel.attributedText = attributedStr
-        case .failure(let err):
-          print("[Log] Error :", err.localizedDescription)
-      }
-    }
+    self.nameLabel.text = "작성자 \(user.nickName)"
+    self.nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    let attributedStr = NSMutableAttributedString(string: self.nameLabel.text!)
+    attributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: (self.nameLabel.text! as NSString as NSString).range(of: "작성자"))
+    self.nameLabel.attributedText = attributedStr
   }
   
   private func attribute() {

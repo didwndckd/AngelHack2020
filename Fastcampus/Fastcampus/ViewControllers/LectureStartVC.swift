@@ -101,27 +101,13 @@ class LectureStartVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getUserInfo()
     attribute()
     setupUI()
-    
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.isNavigationBarHidden = false
-  }
-  
-  private func getUserInfo() {
-    //TODO:- Get All User Info
-    UserService.allUser { result in
-      switch result {
-        case .success(let users):
-          self.users = users
-        case .failure(let err):
-          print("[Log] Error :", err.localizedDescription)
-      }
-    }
   }
   
   private func getStudyList() {
@@ -230,7 +216,7 @@ class LectureStartVC: UIViewController {
     makeStudyButton.backgroundColor = .white
     makeStudyButton.layer.borderWidth = 2
     makeStudyButton.layer.borderColor = UIColor.myRed.cgColor
-    makeStudyButton.layer.cornerRadius = 14
+    makeStudyButton.layer.cornerRadius = 8
     makeStudyButton.addTarget(self, action: #selector(touchUpMakeButton), for: .touchUpInside)
     
     makeStudyButton.isHidden = true
@@ -307,14 +293,24 @@ extension LectureStartVC: UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureStudyCell.identifier, for: indexPath) as! LectureStudyCell
       cell.delegate = self
       cell.selectionStyle = .none
-      cell.setProperties(study: study[indexPath.row])
-      cell.makeGradientJoinButton()
+      if study[indexPath.row].userIDs.count != study[indexPath.row].fixed {
+        cell.makeGradientJoinButton()
+      }
+      if let allUser = UserService.allUser {
+        let user = allUser.filter { $0.uid == study[indexPath.row].userIDs[0] }.first!
+        cell.setProperties(study: study[indexPath.row], user: user)
+      }
+      
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureSummaryCell.identifier, for: indexPath) as! LectureSummaryCell
       cell.delegate = self
       cell.selectionStyle = .none
-      cell.setProperties(summary: summary[indexPath.row])
+      if let allUser = UserService.allUser {
+        let user = allUser.filter { $0.uid == study[indexPath.row].userIDs[0] }.first!
+        cell.setProperties(summary: summary[indexPath.row], user: user)
+      }
+      
       return cell
     }
   }
