@@ -15,12 +15,16 @@ class StudyService {
   class func createStudy(studyModel: StudyModel, completion: @escaping () -> Void) {
     guard let model = try? FirestoreEncoder().encode(studyModel) else { return }
     
-    Firestore
+    let studyDocumenID = Firestore
       .firestore()
       .collection("Study")
       .addDocument(data: model) { (error) in
         completion()
-    }
+    }.documentID
+    
+    Firestore.firestore().collection("Lecture").document(studyModel.lectureID)
+    
+    
   }
   
   class func getStudy(completion: @escaping () -> Void) {

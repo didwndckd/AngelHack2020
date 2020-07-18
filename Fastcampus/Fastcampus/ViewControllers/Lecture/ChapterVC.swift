@@ -12,16 +12,16 @@ import CodableFirebase
 
 class ChapterVC: UIViewController {
   private let tableView = UITableView(frame: .zero, style: .grouped)
-  private var lectureTitle: String = ""
+  private var lecture: Lecture
   private var chapters = [ChapterModel]()
   private var isFoldCache = [Int: Bool]()
   
-  init(lectureTitle: String, lectureID: String) {
+  init(lecture: Lecture) {
+    self.lecture = lecture
     super.init(nibName: nil, bundle: nil)
-    self.lectureTitle = lectureTitle
-    self.title = lectureTitle
-    let db = Firestore.firestore().collection("Lecture").document(lectureID).collection("Chapter")
+    self.title = lecture.title
     
+    let db = Firestore.firestore().collection("Lecture").document(lecture.documentID).collection("Chapter")
     db.getDocuments { (snapshot, _) in
       guard let documents = snapshot?.documents else { return }
       for document in documents {
@@ -32,7 +32,7 @@ class ChapterVC: UIViewController {
           else { return }
         
         let inDB = Firestore.firestore()
-          .collection("Lecture").document(lectureID)
+          .collection("Lecture").document(lecture.documentID)
           .collection("Chapter").document(document.documentID)
           .collection("Units")
         
@@ -146,8 +146,7 @@ extension ChapterVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let chapter = chapters[indexPath.section]
     let unit = chapter.Units[indexPath.row]
-    let subtitle = "\(chapter.title) - \(unit.title)"
-    let lectureStartVC = LectureStartVC(title: lectureTitle, subtitle: subtitle)
+    let lectureStartVC = LectureStartVC(lecture: lecture, chapter: chapter, unit: unit)
     self.navigationController?.pushViewController(lectureStartVC, animated: true)
   }
   

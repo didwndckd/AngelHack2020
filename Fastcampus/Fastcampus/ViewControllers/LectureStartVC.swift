@@ -61,9 +61,17 @@ class LectureStartVC: UIViewController {
   private let tabTableView = UITableView()
   private let makeStudyButton = UIButton()
   
-  init(title: String, subtitle: String) {
+  private let lecture: Lecture
+  private let chapter: ChapterModel
+  private let unit: UnitModel
+  
+  init(lecture: Lecture, chapter: ChapterModel, unit: UnitModel) {
+    self.lecture = lecture
+    self.chapter = chapter
+    self.unit = unit
+    let subtitle = "\(chapter.title) - \(unit.title)"
     super.init(nibName: nil, bundle: nil)
-    self.navigationItem.setTitle(title, subtitle: subtitle)
+    self.navigationItem.setTitle(chapter.title, subtitle: subtitle)
   }
   
   override func viewDidLoad() {
@@ -268,10 +276,9 @@ private extension LectureStartVC {
         break
       case .study:
         //TODO:- 스터디 만들기
-        let vcStudyConfigre = StudyConfigureVC()
+        let vcStudyConfigre = StudyConfigureVC(lecture: lecture, chapter: chapter, unit: unit)
         vcStudyConfigre.modalPresentationStyle = .overFullScreen
         present(vcStudyConfigre, animated: true)
-        
         
         break
       case .summary:

@@ -12,7 +12,10 @@ import Firebase
 
 struct StudyModel: Codable {
   let title: String
+  let lectureID: String
   let lectureTitle: String
+  let chapterID: Int
+  let unitID: Int
   let unitTitle: String
   let unitDescription: String
   let date: Timestamp

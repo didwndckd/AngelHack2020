@@ -11,6 +11,21 @@ import Firebase
 
 class StudyConfigureVC: ViewController<StudyConfigureView> {
   
+  private let lecture: Lecture
+  private let chapter: ChapterModel
+  private let unit: UnitModel
+  
+  init(lecture: Lecture, chapter: ChapterModel, unit: UnitModel) {
+    self.lecture = lecture
+    self.chapter = chapter
+    self.unit = unit
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -74,34 +89,25 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
     
     
     guard let rule = rule else {
-      alertNormal(title: "규틱을 정해주세요")
+      alertNormal(title: "규칙을 정해주세요")
       return
     }
-    
+    let unitTitle = "\(chapter.title) - \(unit.title)"
     let mStudy = StudyModel(
       title: title,
-      lectureTitle: "아직 연결안됌",
-      unitTitle: "아직 연결안됌",
-      unitDescription: "자료없음",
+      lectureID: lecture.documentID,
+      lectureTitle: lecture.title,
+      chapterID: chapter.index,
+      unitID: unit.index,
+      unitTitle: unitTitle,
+      unitDescription: unit.description,
       date: Timestamp(date: date),
       fixed: fixed,
       rule: rule,
-      userIDs: ["방장uid"],
+      userIDs: [SignService.uid],
       qnaIDs: [String](),
       inProcess: .wait
     )
-    
-    
-//    (
-//      documentID: "test",
-//      title: title,
-//      date: Timestamp(date: date),
-//      fixed: fixed,
-//      rule: rule,
-//      userIDs: ["방장uuid"],
-//      qnaIDs: [String](),
-//      inProcess: .wait
-//    )
     
     presentIndicatorViewController()
     StudyService.createStudy(studyModel: mStudy) {

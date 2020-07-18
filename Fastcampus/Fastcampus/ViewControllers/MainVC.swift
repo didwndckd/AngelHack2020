@@ -196,11 +196,8 @@ extension MainVC: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if lecture[indexPath.row].id == 5 {
-      let chapterVC = ChapterVC(
-        lectureTitle: lecture[indexPath.row].title,
-        lectureID: "QEULxiXwlzDu5nOsH7Kl"
-      )
+    if lecture[indexPath.row].id == 2 {
+      let chapterVC = ChapterVC(lecture: lecture[indexPath.row])
       self.navigationController?.pushViewController(chapterVC, animated: true)
     }
     
@@ -209,7 +206,10 @@ extension MainVC: UITableViewDelegate {
     if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
       let vc = WaitingStudyVC(studyModel: StudyModel(
         title: "1회차 같이 완주해요!",
+        lectureID: "lectureID",
         lectureTitle: "UX/UI 디자인 올인원 패키지 Online.",
+        chapterID: 1,
+        unitID: 1,
         unitTitle: "01. 디자인 개론-01. 강사, 강의소개",
         unitDescription: """
         UX/UI 디자인 올인원 패키지의 첫번째 강의입니다.\n
