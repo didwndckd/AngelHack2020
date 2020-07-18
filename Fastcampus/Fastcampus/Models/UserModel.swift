@@ -13,3 +13,4 @@ struct UserModel: Codable {
   let lectures: [String]
   let studys: [String]
 }
+ 

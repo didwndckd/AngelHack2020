@@ -10,11 +10,6 @@ import UIKit
 
 class SignVC: ViewController<SignView> {
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-  }
-  
   func signIn(emailTextField: UITextField, passwordTextField: UITextField) {
     guard let email = emailTextField.text, !email.isEmpty else {
       alertNormal(title: "이메일을 입력해 주세요") { _ in
@@ -31,9 +26,16 @@ class SignVC: ViewController<SignView> {
     }
     
     presentIndicatorViewController()
-    SignService.signIn(email: email, password: password) {
+    SignService.signIn(email: email, password: password) { result in
       self.dismissIndicatorViewController()
-      WindowManager.set(.main)
+      
+      switch result {
+      case true:
+        WindowManager.set(.main)
+        
+      case false:
+        self.alertNormal(title: "잠시 후 다시 시도해주세요")
+      }
     }
   }
 }
