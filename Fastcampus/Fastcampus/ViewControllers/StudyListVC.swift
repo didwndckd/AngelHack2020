@@ -11,13 +11,7 @@ import Firebase
 
 class StudyListVC: UITableViewController {
   
-  let models = [
-    StudyModel(title: "1회차 같이 완주해주세요!", lectureID: "lectureID", lectureTitle: "꼼꼼한 재은씨", chapterID: 1, unitID: 1, unitTitle: "애플의 새로운 언어, 스위프트", unitDescription: "애플에서 만든 새로운 언어 스위프트는 정말 깔끔하고 좋습니다. 개발에 아주 완벽한 언어입니다", date: Timestamp(), fixed: 8, rule: "친목 도모 x\n스터디 시간 지키기\n질문 최소 2개 이상 올리기", userIDs: ["유저ㅑㅇ"], qnaIDs: [], inProcess: .wait),
-    StudyModel(title: "1회차 같이 완주해주세요!", lectureID: "lectureID", lectureTitle: "꼼꼼한 재은씨", chapterID: 1, unitID: 1, unitTitle: "애플의 새로운 언어, 스위프트", unitDescription: "애플에서 만든 새로운 언어 스위프트는 정말 깔끔하고 좋습니다. 개발에 아주 완벽한 언어입니다", date: Timestamp(), fixed: 8, rule: "친목 도모 x\n스터디 시간 지키기\n질문 최소 2개 이상 올리기", userIDs: ["유저ㅑㅇ"], qnaIDs: [], inProcess: .wait),
-    StudyModel(title: "1회차 같이 완주해주세요!", lectureID: "lectureID", lectureTitle: "꼼꼼한 재은씨", chapterID: 1, unitID: 1, unitTitle: "애플의 새로운 언어, 스위프트", unitDescription: "애플에서 만든 새로운 언어 스위프트는 정말 깔끔하고 좋습니다. 개발에 아주 완벽한 언어입니다", date: Timestamp(), fixed: 8, rule: "친목 도모 x\n스터디 시간 지키기\n질문 최소 2개 이상 올리기", userIDs: ["유저ㅑㅇ"], qnaIDs: [], inProcess: .wait),
-    StudyModel(title: "1회차 같이 완주해주세요!", lectureID: "lectureID", lectureTitle: "꼼꼼한 재은씨", chapterID: 1, unitID: 1, unitTitle: "애플의 새로운 언어, 스위프트", unitDescription: "애플에서 만든 새로운 언어 스위프트는 정말 깔끔하고 좋습니다. 개발에 아주 완벽한 언어입니다", date: Timestamp(), fixed: 8, rule: "친목 도모 x\n스터디 시간 지키기\n질문 최소 2개 이상 올리기", userIDs: ["유저ㅑㅇ"], qnaIDs: [], inProcess: .wait)
-  ]
-  
+  private var studys = [StudyModel]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,6 +19,33 @@ class StudyListVC: UITableViewController {
     tableView.contentInset.top = 40
     tableView.separatorStyle = .none
     tableView.register(StudyListTableViewCell.self, forCellReuseIdentifier: StudyListTableViewCell.identifier)
+    
+  }
+  
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    getStudyList()
+  }
+  
+  
+  private func getStudyList() {
+    SignService.user.studys.forEach { studyID in
+      self.studys.forEach { study in
+        guard study.title == studyID else { return }
+        StudyService.getStudyList(studyDocumentID: studyID) { (result) in
+          switch result {
+          case .failure(let error):
+            self.alertNormal(title: error.localizedDescription)
+            
+          case .success(let data):
+            self.studys.append(data)
+            self.tableView.reloadData()
+          }
+        }
+      }
+    }
   }
   
 }
@@ -35,12 +56,12 @@ class StudyListVC: UITableViewController {
 
 extension StudyListVC {
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    models.count
+    studys.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: StudyListTableViewCell.identifier, for: indexPath) as! StudyListTableViewCell
-    cell.configure(data: models[indexPath.row])
+    cell.configure(data: studys[indexPath.row])
     return cell
   }
 }

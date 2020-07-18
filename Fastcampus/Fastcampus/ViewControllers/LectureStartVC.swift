@@ -303,4 +303,3 @@ extension LectureStartVC: LectureSummaryCellDelegate {
     sender.isSelected.toggle()
   }
 }
-
