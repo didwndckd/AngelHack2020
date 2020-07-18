@@ -61,7 +61,7 @@
 		CF7F563624C23CDF0041DAAD /* KeyboardControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563524C23CDF0041DAAD /* KeyboardControllable.swift */; };
 		CF7F563824C240EE0041DAAD /* SummaryEditorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563724C240EE0041DAAD /* SummaryEditorCell.swift */; };
 		CF7F563A24C300840041DAAD /* LectureStartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563924C300840041DAAD /* LectureStartVC.swift */; };
-		CF7F563C24C3039D0041DAAD /* LectureStartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563B24C3039D0041DAAD /* LectureStartCell.swift */; };
+		CF7F563C24C3039D0041DAAD /* LectureStudyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563B24C3039D0041DAAD /* LectureStudyCell.swift */; };
 		CF7F563F24C3151F0041DAAD /* LectureSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */; };
 		CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A624BC6482009E8E2F /* MainCell.swift */; };
 		CFE3C9A924BC6603009E8E2F /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE3C9A824BC6603009E8E2F /* Lecture.swift */; };
@@ -134,7 +134,7 @@
 		CF7F563524C23CDF0041DAAD /* KeyboardControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardControllable.swift; sourceTree = "<group>"; };
 		CF7F563724C240EE0041DAAD /* SummaryEditorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEditorCell.swift; sourceTree = "<group>"; };
 		CF7F563924C300840041DAAD /* LectureStartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureStartVC.swift; sourceTree = "<group>"; };
-		CF7F563B24C3039D0041DAAD /* LectureStartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureStartCell.swift; sourceTree = "<group>"; };
+		CF7F563B24C3039D0041DAAD /* LectureStudyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureStudyCell.swift; sourceTree = "<group>"; };
 		CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureSummaryCell.swift; sourceTree = "<group>"; };
 		CFE3C9A624BC6482009E8E2F /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		CFE3C9A824BC6603009E8E2F /* Lecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lecture.swift; sourceTree = "<group>"; };
@@ -382,7 +382,7 @@
 		CF7F563D24C314D70041DAAD /* LectureStartCell */ = {
 			isa = PBXGroup;
 			children = (
-				CF7F563B24C3039D0041DAAD /* LectureStartCell.swift */,
+				CF7F563B24C3039D0041DAAD /* LectureStudyCell.swift */,
 				CF7F563E24C3151F0041DAAD /* LectureSummaryCell.swift */,
 			);
 			path = LectureStartCell;
@@ -576,7 +576,7 @@
 				314AD16424C243F5002A22B7 /* DateExtension.swift in Sources */,
 				CFE3C9C624BF4E12009E8E2F /* MypageCell.swift in Sources */,
 				CF29217A24BC05C7001318CB /* SampleView.swift in Sources */,
-				CF7F563C24C3039D0041DAAD /* LectureStartCell.swift in Sources */,
+				CF7F563C24C3039D0041DAAD /* LectureStudyCell.swift in Sources */,
 				4F6CD20A24C21F3A004E26B6 /* SignUpCollectionViewCell.swift in Sources */,
 				CFE3C9CC24C060B1009E8E2F /* SummaryVC.swift in Sources */,
 				4F88E3AE24C0111C000967EE /* UnitModel.swift in Sources */,

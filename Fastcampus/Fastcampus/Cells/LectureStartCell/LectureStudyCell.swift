@@ -8,8 +8,13 @@
 
 import UIKit
 
-class LectureStartCell: UITableViewCell {
-  static let identifier = "LectureStartCell"
+protocol LectureStudyCellDelegate: class {
+  func joinStudy(studyID: Int)
+}
+
+class LectureStudyCell: UITableViewCell {
+  static let identifier = "LectureStudyCell"
+  weak var delegate: LectureStudyCellDelegate?
   private let levelButton = UIButton()
   private let nameLabel = UILabel()
   private let titleLabel = UILabel()
@@ -37,6 +42,7 @@ class LectureStartCell: UITableViewCell {
     joinButton.layer.insertSublayer(gradient, at: 0)
     joinButton.layer.cornerRadius = 8
     joinButton.clipsToBounds = true
+    joinButton.addTarget(self, action: #selector(touchUpJoinButton), for: .touchUpInside)
   }
   
   private func attribute() {
@@ -114,5 +120,11 @@ class LectureStartCell: UITableViewCell {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+}
+
+private extension LectureStudyCell {
+  @objc private func touchUpJoinButton() {
+    delegate?.joinStudy(studyID: 0)
   }
 }
