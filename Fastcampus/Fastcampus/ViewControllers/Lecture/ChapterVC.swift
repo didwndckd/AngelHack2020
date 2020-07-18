@@ -43,10 +43,10 @@ class ChapterVC: UIViewController {
             let tempUnit = try! FirestoreDecoder().decode(UnitModel.self, from: inDocument.data())
             tempUnits.append(tempUnit)
           }
-          
+
           let tempChapter = ChapterModel(title: title, index: index, Units: tempUnits)
           self.chapters.append(tempChapter)
-          
+
           // 마지막 데이터 완료 시 테이블뷰 리로드
           if self.chapters.count == documents.count {
             self.chapters.sort { $0.index < $1.index }
