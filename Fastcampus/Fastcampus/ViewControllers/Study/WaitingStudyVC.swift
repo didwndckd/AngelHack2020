@@ -13,11 +13,11 @@ class WaitingStudyVC: ViewController<WaitingView> {
   
   typealias UnitInformation = (title: String, content: String)
   
-  private var model: StudyModel
+  private var model: Study
   private var timer: Timer?
   
-  init(studyModel: StudyModel) {
-    self.model = studyModel
+  init(study: Study) {
+    self.model = study
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -50,7 +50,7 @@ class WaitingStudyVC: ViewController<WaitingView> {
   
   private func attribute() {
     setNavigation()
-    customView.updateContent(study: model)
+    customView.updateContent(study: model.data)
   }
   
   private func startTimer() {
@@ -67,7 +67,7 @@ class WaitingStudyVC: ViewController<WaitingView> {
   }
   
   @objc private func timerCallBack(_ sender: Timer) {
-    let timeInterval = model.date.dateValue().timeIntervalSince(Date())
+    let timeInterval = model.data.date.dateValue().timeIntervalSince(Date())
     
     guard timeInterval > 0 else {
       customView.updateTimer(timeInterval: timeInterval)

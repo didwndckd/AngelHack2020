@@ -76,7 +76,7 @@ extension StudyListVC {
 extension StudyListVC {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let study = studys[indexPath.row]
-    let studyVC = WaitingStudyVC(studyModel: study)
+    let studyVC = WaitingStudyVC(study: study)
     navigationController?.pushViewController(studyVC, animated: true)
   }
 }

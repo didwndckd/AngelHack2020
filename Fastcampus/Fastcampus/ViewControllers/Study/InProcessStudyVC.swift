@@ -13,7 +13,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
   
   private var player: AVPlayer?
   private var timeObserverToken: Any?
-  private var model: StudyModel
+  private var model: Study
   
   private var qnas: [QnAModel] = [] {
     didSet {
@@ -21,7 +21,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
     }
   }
   
-  init(study: StudyModel) {
+  init(study: Study) {
     self.model = study
     super.init(nibName: nil, bundle: nil)
   }
@@ -40,7 +40,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    let interval = Date().timeIntervalSince(model.dateValue)
+    let interval = Date().timeIntervalSince(model.data.dateValue)
     seekPlayer(to: Int64(interval))
     addObservers()
   }
@@ -52,7 +52,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
   }
   
   private func setNavigation() {
-    navigationItem.setTitle(model.lectureTitle, subtitle: model.unitTitle)
+    navigationItem.setTitle(model.data.lectureTitle, subtitle: model.data.unitTitle)
     setBackButton(selector: #selector(popRootViewController(sender:)))
   }
   
@@ -139,8 +139,8 @@ class InProcessStudyVC: ViewController<InProcessView> {
   }
   
   @objc private func pushStudyReviewVC() {
-    let reviewVC = StudyReviewVC()
-    navigationController?.pushViewController(reviewVC, animated: true)
+//    let reviewVC = StudyReviewVC()
+//    navigationController?.pushViewController(reviewVC, animated: true)
   }
   
 }
