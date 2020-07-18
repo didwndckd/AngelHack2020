@@ -65,7 +65,9 @@ class LectureStartVC: UIViewController {
       } else {
         tabTableView.restore()
       }
-      tabTableView.reloadData()
+      DispatchQueue.main.async {
+        self.tabTableView.reloadData()
+      }
     }
   }
   private var summary: [Summary] = [] {
@@ -78,7 +80,9 @@ class LectureStartVC: UIViewController {
       } else {
         tabTableView.restore()
       }
-      tabTableView.reloadData()
+      DispatchQueue.main.async {
+        self.tabTableView.reloadData()
+      }
     }
   }
   private let lecture: Lecture
@@ -218,6 +222,8 @@ class LectureStartVC: UIViewController {
     makeStudyButton.layer.borderColor = UIColor.myRed.cgColor
     makeStudyButton.layer.cornerRadius = 14
     makeStudyButton.addTarget(self, action: #selector(touchUpMakeButton), for: .touchUpInside)
+    
+    makeStudyButton.isHidden = true
   }
   
   private func setupUI() {
@@ -284,15 +290,18 @@ extension LectureStartVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if currentTab == .introduce {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureIntroduceCell.identifier, for: indexPath) as! LectureIntroduceCell
+      cell.updateHeight(height: tableView.frame.height - self.view.safeAreaInsets.bottom)
       return cell
     } else if currentTab == .study {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureStudyCell.identifier, for: indexPath) as! LectureStudyCell
       cell.delegate = self
+      cell.selectionStyle = .none
       cell.makeGradientJoinButton()
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureSummaryCell.identifier, for: indexPath) as! LectureSummaryCell
       cell.delegate = self
+      cell.selectionStyle = .none
       cell.setProperties(summary: summary[indexPath.row])
       return cell
     }
@@ -319,6 +328,7 @@ private extension LectureStartVC {
     currentTab = .introduce
     tabTableView.reloadData()
     updateSelectButtonStyle(lectureTabType: .introduce)
+    makeStudyButton.isHidden = true
   }
   
   @objc private func touchUpStudyButton() {
@@ -328,6 +338,7 @@ private extension LectureStartVC {
     makeStudyButton.setTitle("스터디 만들기  >", for: .normal)
     updateSelectButtonStyle(lectureTabType: .study)
     getStudyList()
+    makeStudyButton.isHidden = false
   }
   
   @objc private func touchUpSummaryButton() {
@@ -337,6 +348,7 @@ private extension LectureStartVC {
     makeStudyButton.setTitle("요약본 올리기  >", for: .normal)
     updateSelectButtonStyle(lectureTabType: .summary)
     getSummaryList()
+    makeStudyButton.isHidden = false
   }
   
   @objc private func touchUpMakeButton() {
