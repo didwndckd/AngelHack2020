@@ -40,7 +40,13 @@ class StudyListTableViewCell: UITableViewCell {
     lectureLabel.text = data.lectureTitle
     unitLabel.text = data.unitTitle
     badgeLabel.text = "Lv.2"
-    masterLabel.text = data.userIDs[0]
+    UserService.getData(uid: data.userIDs[0]) { (result) in
+      switch result {
+      case .failure: break
+      case .success(let data):
+        self.masterLabel.text = data.nickName
+      }
+    }
     titleLabel.text = data.title
     
     let formatter = DateFormatter()
@@ -86,7 +92,7 @@ class StudyListTableViewCell: UITableViewCell {
     badgeLabel.font = .systemFont(ofSize: 12)
     
     masterLabel.textColor = .darkGray
-    masterLabel.font = .systemFont(ofSize: 14)
+    masterLabel.font = .boldSystemFont(ofSize: 17)
     
     titleLabel.font = .boldSystemFont(ofSize: 17)
     
