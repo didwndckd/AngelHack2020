@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import CodableFirebase
 
 enum LectureTabType {
   case introduce
@@ -18,38 +20,30 @@ class LectureStartVC: UIViewController {
   private var currentTab: LectureTabType = .introduce {
     didSet {
       if currentTab == .introduce {
-        UIView.animate(withDuration: 2) { [weak self] in
-          guard let self = self else { return }
-          self.buttonUnderlineView.snp.remakeConstraints {
-            $0.top.equalTo(self.buttonStackView.snp.bottom)
-            $0.centerX.equalTo(self.introduceButton.snp.centerX)
-            $0.width.equalTo(self.underlineWidth)
-            $0.height.equalTo(5)
-          }
+        buttonUnderlineView.snp.remakeConstraints {
+          $0.top.equalTo(buttonStackView.snp.bottom)
+          $0.centerX.equalTo(introduceButton.snp.centerX)
+          $0.width.equalTo(underlineWidth)
+          $0.height.equalTo(5)
         }
       } else if currentTab == .study {
-        UIView.animate(withDuration: 2) { [weak self] in
-          guard let self = self else { return }
-          self.buttonUnderlineView.snp.remakeConstraints {
-            $0.top.equalTo(self.buttonStackView.snp.bottom)
-            $0.centerX.equalTo(self.studyButton.snp.centerX)
-            $0.width.equalTo(self.underlineWidth)
-            $0.height.equalTo(5)
-          }
+        buttonUnderlineView.snp.remakeConstraints {
+          $0.top.equalTo(buttonStackView.snp.bottom)
+          $0.centerX.equalTo(studyButton.snp.centerX)
+          $0.width.equalTo(underlineWidth)
+          $0.height.equalTo(5)
         }
       } else {
-        UIView.animate(withDuration: 2) { [weak self] in
-          guard let self = self else { return }
-          self.buttonUnderlineView.snp.remakeConstraints {
-            $0.top.equalTo(self.buttonStackView.snp.bottom)
-            $0.centerX.equalTo(self.summaryButton.snp.centerX)
-            $0.width.equalTo(self.underlineWidth)
-            $0.height.equalTo(5)
-          }
+        buttonUnderlineView.snp.remakeConstraints {
+          $0.top.equalTo(buttonStackView.snp.bottom)
+          $0.centerX.equalTo(summaryButton.snp.centerX)
+          $0.width.equalTo(underlineWidth)
+          $0.height.equalTo(5)
         }
       }
     }
   }
+  private let db = Firestore.firestore()
   private var underlineWidth: CGFloat = 0
   private let videoView = UIView()
   private lazy var buttonStackView = UIStackView(arrangedSubviews: [introduceButton, studyButton, summaryButton])
@@ -61,6 +55,19 @@ class LectureStartVC: UIViewController {
   private let tabTableView = UITableView()
   private let makeStudyButton = UIButton()
   
+  private var summary: [Summary] = [] {
+    didSet {
+      if summary.count == 0 {
+        tabTableView.setEmptyView(
+          title: "요약 없음",
+          message: "작성된 요약이 없어요 ㅠㅠ\n요약본을 올려보세요."
+        )
+      } else {
+        tabTableView.restore()
+      }
+      tabTableView.reloadData()
+    }
+  }
   private let lecture: Lecture
   private let chapter: ChapterModel
   private let unit: UnitModel
@@ -78,11 +85,31 @@ class LectureStartVC: UIViewController {
     super.viewDidLoad()
     attribute()
     setupUI()
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.isNavigationBarHidden = false
+  }
+  
+  private func getUserInfo() {
+    //TODO:- Get All User Info
+  }
+  
+  private func getSummaryList() {
+    summary = []
+    
+    db.collection("Summary")
+      .document("\(lecture.id)")
+      .collection("\(chapter.index)").getDocuments { [weak self] (querySnapshot, err) in
+      guard let self = self else { return }
+      if let err = err {
+        print("[Log] Error :", err.localizedDescription)
+      } else {
+        self.summary = try! querySnapshot!.decoded()
+      }
+    }
   }
   
   private func updateSelectButtonStyle(lectureTabType: LectureTabType) {
@@ -211,7 +238,7 @@ class LectureStartVC: UIViewController {
 
 extension LectureStartVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 6
+    return summary.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -227,6 +254,7 @@ extension LectureStartVC: UITableViewDataSource {
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureSummaryCell.identifier, for: indexPath) as! LectureSummaryCell
       cell.delegate = self
+      cell.setProperties(summary: summary[indexPath.row])
       return cell
     }
   }
@@ -268,6 +296,7 @@ private extension LectureStartVC {
     tabTableView.reloadData()
     makeStudyButton.setTitle("요약본 올리기  >", for: .normal)
     updateSelectButtonStyle(lectureTabType: .summary)
+    getSummaryList()
   }
   
   @objc private func touchUpMakeButton() {
@@ -303,4 +332,3 @@ extension LectureStartVC: LectureSummaryCellDelegate {
     sender.isSelected.toggle()
   }
 }
-

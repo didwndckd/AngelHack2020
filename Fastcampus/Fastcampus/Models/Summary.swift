@@ -8,9 +8,8 @@
 
 import Foundation
 
-struct Summary {
+struct Summary: Codable {
   let userID: String
-  let chapterID: Int
   let unitID: Int
   let title: String
   let contents: String

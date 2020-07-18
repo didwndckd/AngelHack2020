@@ -58,6 +58,7 @@
 		CF29217624BC053B001318CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217524BC053B001318CB /* ViewController.swift */; };
 		CF29217824BC056C001318CB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217724BC056C001318CB /* View.swift */; };
 		CF29217A24BC05C7001318CB /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217924BC05C7001318CB /* SampleView.swift */; };
+		CF65FFF424C37D4F00B5B8AE /* DecodedExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65FFF324C37D4F00B5B8AE /* DecodedExtension.swift */; };
 		CF7F562D24C22B2D0041DAAD /* ExtensionUINavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F562C24C22B2D0041DAAD /* ExtensionUINavigationItem.swift */; };
 		CF7F562F24C238640041DAAD /* SummaryEditorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F562E24C238640041DAAD /* SummaryEditorVC.swift */; };
 		CF7F563124C239E80041DAAD /* SummaryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F563024C239E80041DAAD /* SummaryEditorView.swift */; };
@@ -136,6 +137,7 @@
 		CF29217524BC053B001318CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CF29217724BC056C001318CB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		CF29217924BC05C7001318CB /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		CF65FFF324C37D4F00B5B8AE /* DecodedExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodedExtension.swift; sourceTree = "<group>"; };
 		CF7F562C24C22B2D0041DAAD /* ExtensionUINavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUINavigationItem.swift; sourceTree = "<group>"; };
 		CF7F562E24C238640041DAAD /* SummaryEditorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEditorVC.swift; sourceTree = "<group>"; };
 		CF7F563024C239E80041DAAD /* SummaryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryEditorView.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				314AD16324C243F5002A22B7 /* DateExtension.swift */,
 				CF7F562C24C22B2D0041DAAD /* ExtensionUINavigationItem.swift */,
 				CF88703A24C34F9700430387 /* ExtensionUITableView.swift */,
+				CF65FFF324C37D4F00B5B8AE /* DecodedExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				4F88E3AC24C0110D000967EE /* QnAModel.swift in Sources */,
 				4FD71D9024C2FF83003EFD30 /* SplashVC.swift in Sources */,
+				CF65FFF424C37D4F00B5B8AE /* DecodedExtension.swift in Sources */,
 				314AD16224C23960002A22B7 /* CircleView.swift in Sources */,
 				CF7F563324C23A140041DAAD /* DisignableTextField.swift in Sources */,
 				4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */,
@@ -746,6 +750,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Fastcampus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
