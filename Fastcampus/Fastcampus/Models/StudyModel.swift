@@ -12,7 +12,6 @@ import Firebase
 
 struct StudyModel: Codable {
   let title: String
-  let documentID: String
   let lectureTitle: String
   let unitTitle: String
   let unitDescription: String

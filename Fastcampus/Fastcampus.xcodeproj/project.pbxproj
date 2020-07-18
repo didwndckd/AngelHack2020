@@ -245,9 +245,9 @@
 		4F575D6B24C156CD00F35888 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				4F575D6C24C1573D00F35888 /* BadgeLabel.swift */,
 				4F575D6E24C1965300F35888 /* DropButtonView.swift */,
 				4F575D7224C1DFDD00F35888 /* IndicatorViewController.swift */,
+				4F575D6C24C1573D00F35888 /* BadgeLabel.swift */,
 				4F26281E24C2292200D20BF7 /* WindowManager.swift */,
 				314AD16124C23960002A22B7 /* CircleView.swift */,
 				CF7F563224C23A140041DAAD /* DisignableTextField.swift */,

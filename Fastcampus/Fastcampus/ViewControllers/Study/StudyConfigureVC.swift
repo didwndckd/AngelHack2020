@@ -78,7 +78,21 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
       return
     }
     
-//    let mStudy = StudyModel(
+    let mStudy = StudyModel(
+      title: title,
+      lectureTitle: "아직 연결안됌",
+      unitTitle: "아직 연결안됌",
+      unitDescription: "자료없음",
+      date: Timestamp(date: date),
+      fixed: fixed,
+      rule: rule,
+      userIDs: ["방장uid"],
+      qnaIDs: [String](),
+      inProcess: .wait
+    )
+    
+    
+//    (
 //      documentID: "test",
 //      title: title,
 //      date: Timestamp(date: date),
@@ -89,11 +103,11 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
 //      inProcess: .wait
 //    )
     
-//    presentIndicatorViewController()
-//    StudyService.createStudy(studyModel: mStudy) {
-//      self.dismissIndicatorViewController()
-//      self.dismiss(animated: true)
-//    }
+    presentIndicatorViewController()
+    StudyService.createStudy(studyModel: mStudy) {
+      self.dismissIndicatorViewController()
+      self.dismiss(animated: true)
+    }
   }
 }
 

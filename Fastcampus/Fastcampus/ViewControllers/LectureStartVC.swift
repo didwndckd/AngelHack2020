@@ -260,6 +260,11 @@ private extension LectureStartVC {
         break
       case .study:
         //TODO:- 스터디 만들기
+        let vcStudyConfigre = StudyConfigureVC()
+        vcStudyConfigre.modalPresentationStyle = .overFullScreen
+        present(vcStudyConfigre, animated: true)
+        
+        
         break
       case .summary:
         //TODO:- 요약본 올리기

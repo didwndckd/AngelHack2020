@@ -44,7 +44,7 @@ class MainVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    createStudy()
+    
     populatorLectureData()
     makeTitleStackView()
     attribute()
@@ -199,7 +199,6 @@ extension MainVC: UITableViewDelegate {
     if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
       let vc = WaitingStudyVC(studyModel: StudyModel(
         title: "1회차 같이 완주해요!",
-        documentID: "documentID",
         lectureTitle: "UX/UI 디자인 올인원 패키지 Online.",
         unitTitle: "01. 디자인 개론-01. 강사, 강의소개",
         unitDescription: """
@@ -233,10 +232,6 @@ extension MainVC: UITableViewDelegate {
 // MARK: - 임시 스터디 생성 / 작성자: UPs
 
 private extension MainVC {
-  private func createStudy() {
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "스터디 생성", style: .done, target: self, action: #selector(createStudyDidTap))
-  }
-  
   @objc private func sideMenuDidTap() {
     let summaryVC = SummaryVC()
     summaryVC.modalPresentationStyle = .fullScreen
@@ -244,20 +239,6 @@ private extension MainVC {
 //    let sideMenuVC = SideMenuVC()
 //    sideMenuVC.modalPresentationStyle = .overFullScreen
 //    self.present(sideMenuVC, animated: false)
-  }
-  
-  @objc private func createStudyDidTap() {
-    do {
-      try SignService.signOut()
-      WindowManager.set(.splash)
-      
-    } catch {
-      print("Sign Out", error.localizedDescription)
-    }
-    
-//    let studyConfigureVC = StudyConfigureVC()
-//    studyConfigureVC.modalPresentationStyle = .overFullScreen
-//    self.present(studyConfigureVC, animated: true)
   }
   
   @objc private func menuDidTap(_ sender: UIButton) {

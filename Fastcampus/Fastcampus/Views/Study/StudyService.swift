@@ -45,6 +45,14 @@ class StudyService {
     }
   }
   
+  
+  class func join(documnetID: String, completion: @escaping () -> Void) {
+    Firestore
+      .firestore()
+      .collection("Study")
+      .document(documnetID)
+  }
+  
 }
 
 
