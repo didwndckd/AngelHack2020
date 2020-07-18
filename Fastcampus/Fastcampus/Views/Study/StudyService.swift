@@ -89,7 +89,7 @@ class StudyService {
     
   }
   
-  class func getStudyList(studyDocumentID: String, completion: @escaping (Result<StudyModel, Error>) -> Void) {
+  class func getStudy(studyDocumentID: String, completion: @escaping (Result<StudyModel, Error>) -> Void) {
     Firestore
       .firestore()
       .collection("Study")

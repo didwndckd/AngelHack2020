@@ -16,7 +16,12 @@ class StudyListVC: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    tableView.contentInset.top = 40
+    navigationItem.title = "참여중인 스터디"
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController?.navigationBar.shadowImage = UIImage()
+    navigationController?.navigationBar.barTintColor = .white
+    
+    tableView.contentInset.top = 16
     tableView.separatorStyle = .none
     tableView.register(StudyListTableViewCell.self, forCellReuseIdentifier: StudyListTableViewCell.identifier)
     
@@ -31,18 +36,17 @@ class StudyListVC: UITableViewController {
   
   
   private func getStudyList() {
+    studys.removeAll()
     SignService.user.studys.forEach { studyID in
-      self.studys.forEach { study in
-        guard study.title == studyID else { return }
-        StudyService.getStudyList(studyDocumentID: studyID) { (result) in
-          switch result {
-          case .failure(let error):
-            self.alertNormal(title: error.localizedDescription)
-            
-          case .success(let data):
-            self.studys.append(data)
-            self.tableView.reloadData()
-          }
+      StudyService.getStudy(studyDocumentID: studyID) { (result) in
+        switch result {
+        case .failure(let error):
+          self.alertNormal(title: error.localizedDescription)
+          
+        case .success(let data):
+          self.studys.append(data)
+          self.studys.sort { $0.dateValue < $1.dateValue }
+          self.tableView.reloadData()
         }
       }
     }
@@ -64,12 +68,4 @@ extension StudyListVC {
     cell.configure(data: studys[indexPath.row])
     return cell
   }
-}
-
-
-
-// MARK: - UITableViewDelegate
-
-extension StudyListVC {
-  
 }
