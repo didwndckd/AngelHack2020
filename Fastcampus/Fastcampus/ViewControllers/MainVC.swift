@@ -22,13 +22,18 @@ class MainVC: UIViewController {
   private let titleList: [String] = ["전체목록", "수강예정", "수강중", "수강완료"]
   private var currentCategory: MainCategory = .all {
     didSet {
-      print("[Log] currentCategory :", currentCategory)
-      if currentCategory == .finish {
-//        self.navigationController?.pushViewController(SummaryVC(), animated: true)
-        self.navigationController?.pushViewController(LectureStartVC(), animated: true)
-      } else if currentCategory == .studying {
-        self.navigationController?.pushViewController(SummaryEditorVC(), animated: true)
+      switch currentCategory {
+        case .all:
+          break
+        case .expected:
+          break
+        case .studying:
+          self.navigationController?.pushViewController(SummaryEditorVC(), animated: true)
+          break
+        case .finish:
+          break
       }
+      print("[Log] currentCategory :", currentCategory)
     }
   }
   private var lecture: [Lecture] = [] {
@@ -192,9 +197,14 @@ extension MainVC: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if lecture[indexPath.row].id == 5 {
-      let vc = ChapterVC(lectureID: "QEULxiXwlzDu5nOsH7Kl")
-      self.navigationController?.pushViewController(vc, animated: true)
+      let chapterVC = ChapterVC(
+        lectureTitle: lecture[indexPath.row].title,
+        lectureID: "QEULxiXwlzDu5nOsH7Kl"
+      )
+      self.navigationController?.pushViewController(chapterVC, animated: true)
     }
+    
+    
     
     if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
       let vc = WaitingStudyVC(studyModel: StudyModel(
