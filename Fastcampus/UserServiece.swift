@@ -13,6 +13,30 @@ import CodableFirebase
 
 class UserService {
   
+  class func allUser(completion: @escaping (Result<[UserModel], Error>) -> Void) {
+    Firestore
+      .firestore()
+      .collection("User")
+      .getDocuments(completion: { (snapshot, error) in
+        
+        if let error = error {
+          completion(.failure(error))
+          
+        } else {
+          guard let documents = snapshot?.documents else { return }
+          
+          var allUser = [UserModel]()
+          
+          for document in documents {
+            let model = try! FirestoreDecoder().decode(UserModel.self, from: document.data())
+            allUser.append(model)
+          }
+          
+          completion(.success(allUser))
+        }
+      })
+  }
+  
   class func getData(uid: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
     Firestore
       .firestore()
@@ -35,7 +59,6 @@ class UserService {
           completion(.success(model))
         }
     }
-  
   }
   
 }
