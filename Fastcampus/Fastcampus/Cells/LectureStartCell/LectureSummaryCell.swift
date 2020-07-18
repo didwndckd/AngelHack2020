@@ -30,8 +30,9 @@ class LectureSummaryCell: UITableViewCell {
     setupUI()
   }
   
-  func setProperties() {
-    
+  func setProperties(summary: Summary) {
+    titleLabel.text = summary.title
+    nameLabel.text = "작성자 \(summary.userID)"
   }
   
   private func attribute() {

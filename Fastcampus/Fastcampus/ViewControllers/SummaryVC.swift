@@ -51,6 +51,10 @@ class SummaryVC: UITableViewController {
     let summaryHeaderView = SummaryHeaderView()
     return summaryHeaderView
   }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+  }
 }
 
 extension SummaryVC: CommentInputCellDelegate {

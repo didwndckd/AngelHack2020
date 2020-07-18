@@ -22,13 +22,18 @@ class MainVC: UIViewController {
   private let titleList: [String] = ["전체목록", "수강예정", "수강중", "수강완료"]
   private var currentCategory: MainCategory = .all {
     didSet {
-      print("[Log] currentCategory :", currentCategory)
-      if currentCategory == .finish {
-//        self.navigationController?.pushViewController(SummaryVC(), animated: true)
-        self.navigationController?.pushViewController(LectureStartVC(), animated: true)
-      } else if currentCategory == .studying {
-        self.navigationController?.pushViewController(SummaryEditorVC(), animated: true)
+      switch currentCategory {
+        case .all:
+          break
+        case .expected:
+          break
+        case .studying:
+          self.navigationController?.pushViewController(SummaryEditorVC(), animated: true)
+          break
+        case .finish:
+          break
       }
+      print("[Log] currentCategory :", currentCategory)
     }
   }
   private var lecture: [Lecture] = [] {
@@ -44,7 +49,7 @@ class MainVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    createStudy()
+    
     populatorLectureData()
     makeTitleStackView()
     attribute()
@@ -133,6 +138,11 @@ class MainVC: UIViewController {
       .forEach { headerContainerView.addSubview($0) }
     
     mainScrollView.snp.makeConstraints {
+      $0.top.leading.equalToSuperview()
+      $0.trailing.bottom.equalToSuperview().offset(-8)
+    }
+    
+    mainScrollView.snp.makeConstraints {
       $0.top.bottom.equalTo(guide)
       $0.leading.trailing.equalToSuperview()
     }
@@ -179,6 +189,7 @@ extension MainVC: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.identifier, for: indexPath) as! MainCell
+    cell.selectionStyle = .none
     cell.setProperties(lecture: lecture[indexPath.row])
     cell.setGradientBackground()
     return cell
@@ -187,34 +198,43 @@ extension MainVC: UITableViewDataSource {
 
 extension MainVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return tableView.frame.height / 2.2
+    return tableView.frame.height / 2.5
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if lecture[indexPath.row].id == 5 {
-      let vc = ChapterVC(lectureID: "QEULxiXwlzDu5nOsH7Kl")
-      self.navigationController?.pushViewController(vc, animated: true)
-    }
+    let chapterVC = ChapterVC(lecture: lecture[indexPath.row])
+    self.navigationController?.pushViewController(chapterVC, animated: true)
+  
     
-    if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
-      let vc = WaitingStudyVC(studyModel: StudyModel(
-        title: "1회차 같이 완주해요!",
-        documentID: "documentID",
-        lectureTitle: "UX/UI 디자인 올인원 패키지 Online.",
-        unitTitle: "01. 디자인 개론-01. 강사, 강의소개",
-        unitDescription: """
-        UX/UI 디자인 올인원 패키지의 첫번째 강의입니다.\n
-        앞으로 공부할 UX/ UI의 기초개념을 알아보고 강사님을 소개합니다.
-        """,
-        date: Timestamp(date: Date(timeInterval: 10, since: Date())),
-        fixed: 10,
-        rule: "욕설 비방 하지마세요\n질문 많이 올려주세요\n요약 무조건 올리기 입니다.",
-        userIDs: ["중창", "업스", "현철", "현영", "예은"],
-        qnaIDs: [],
-        inProcess: .wait))
-      
-      navigationController?.pushViewController(vc, animated: true)
-    }
+//    if lecture[indexPath.row].id == 2 {
+//      let chapterVC = ChapterVC(lecture: lecture[indexPath.row])
+//      self.navigationController?.pushViewController(chapterVC, animated: true)
+//    }
+//
+//
+//
+//    if indexPath.row == 2 { // 스터디 화면 테스트용 입니다.
+//      let vc = WaitingStudyVC(studyModel: StudyModel(
+//        title: "1회차 같이 완주해요!",
+//        lectureID: "lectureID",
+//        lectureTitle: "UX/UI 디자인 올인원 패키지 Online.",
+//        chapterID: 1,
+//        unitID: 1,
+//        unitTitle: "01. 디자인 개론-01. 강사, 강의소개",
+//        unitDescription: """
+//        UX/UI 디자인 올인원 패키지의 첫번째 강의입니다.\n
+//        앞으로 공부할 UX/ UI의 기초개념을 알아보고 강사님을 소개합니다.
+//        """,
+//        date: Timestamp(date: Date(timeInterval: 3600, since: Date())),
+//        fixed: 10,
+//        rule: "욕설 비방 하지마세요\n질문 많이 올려주세요\n요약 무조건 올리기 입니다.",
+//        userIDs: ["중창", "업스", "현철", "현영", "예은"],
+//        qnaIDs: [],
+//        inProcess: .wait))
+//
+//      navigationController?.pushViewController(vc, animated: true)
+//    }
+
   }
 }
 
@@ -233,10 +253,6 @@ extension MainVC: UITableViewDelegate {
 // MARK: - 임시 스터디 생성 / 작성자: UPs
 
 private extension MainVC {
-  private func createStudy() {
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "스터디 생성", style: .done, target: self, action: #selector(createStudyDidTap))
-  }
-  
   @objc private func sideMenuDidTap() {
     let summaryVC = SummaryVC()
     summaryVC.modalPresentationStyle = .fullScreen
@@ -244,20 +260,6 @@ private extension MainVC {
 //    let sideMenuVC = SideMenuVC()
 //    sideMenuVC.modalPresentationStyle = .overFullScreen
 //    self.present(sideMenuVC, animated: false)
-  }
-  
-  @objc private func createStudyDidTap() {
-    do {
-      try SignService.signOut()
-      WindowManager.set(.splash)
-      
-    } catch {
-      print("Sign Out", error.localizedDescription)
-    }
-    
-//    let studyConfigureVC = StudyConfigureVC()
-//    studyConfigureVC.modalPresentationStyle = .overFullScreen
-//    self.present(studyConfigureVC, animated: true)
   }
   
   @objc private func menuDidTap(_ sender: UIButton) {

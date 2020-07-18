@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct QnAModel: Codable {
   let documentID: String
   let playTime: Int64

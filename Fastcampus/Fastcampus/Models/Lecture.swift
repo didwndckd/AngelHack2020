@@ -14,4 +14,5 @@ struct Lecture: Codable {
   let imageURL: String
   let type: String
   let chapters: [ChapterModel]?
+  let documentID: String
 }

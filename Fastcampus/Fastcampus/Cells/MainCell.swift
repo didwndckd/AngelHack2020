@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MainCell: UITableViewCell {
   static let identifier = "MainCell"
@@ -37,6 +38,10 @@ class MainCell: UITableViewCell {
   }
   
   func setProperties(lecture: Lecture) {
+    if let url = URL(string: lecture.imageURL) {
+      lectureImageView.kf.setImage(with: url)
+    }
+    
     lectureTitleLabel.text = lecture.title
     kindLabel.setTitle("\(lecture.type)강의", for: .normal)
   }
@@ -44,10 +49,11 @@ class MainCell: UITableViewCell {
   private func attribute() {
     lectureContainerView.layer.cornerRadius = 5
     lectureContainerView.clipsToBounds = true
-    
     lectureImageView.backgroundColor = #colorLiteral(red: 0.8062266707, green: 0.8064672351, blue: 0.8251868486, alpha: 1)
 
     textContainerView.alpha = 0.3
+    
+    lectureImageView.contentMode = .scaleToFill
         
     enterImageView.image = #imageLiteral(resourceName: "icon_enter_white")
     
@@ -82,6 +88,7 @@ class MainCell: UITableViewCell {
     
     [lectureContainerView, enterImageView]
       .forEach { contentView.addSubview($0) }
+    
     [lectureImageView, textContainerView, lectureStatusStackView, lectureTitleLabel, lectureProgressBar]
       .forEach { lectureContainerView.addSubview($0) }
     

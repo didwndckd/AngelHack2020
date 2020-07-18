@@ -23,15 +23,17 @@ final class WindowManager {
         return SignVC()
         
       case .main:
-        let mainVC = MainVC()
-        let studyListVC = StudyListVC()
-        let mypageVC = MypageVC()
-        mainVC.tabBarItem = UITabBarItem(title: "참여중인 스터디", image: #imageLiteral(resourceName: "icon_lecture_deselected"), selectedImage: #imageLiteral(resourceName: "icon_lecture_selected"))
-        studyListVC.tabBarItem = UITabBarItem(title: "나의 강의", image: #imageLiteral(resourceName: "icon_lecture_deselected"), selectedImage: #imageLiteral(resourceName: "icon_lecture_selected"))
+        let studyListVC = UINavigationController(rootViewController: StudyListVC())
+        let mainVC = UINavigationController(rootViewController: MainVC())
+        let mypageVC = UINavigationController(rootViewController: MypageVC())
+        
+        studyListVC.tabBarItem = UITabBarItem(title: "참여중인 스터디", image: #imageLiteral(resourceName: "icon_lecture_deselected"), selectedImage: #imageLiteral(resourceName: "icon_lecture_selected"))
+        mainVC.tabBarItem = UITabBarItem(title: "나의 강의", image: #imageLiteral(resourceName: "icon_lecture_deselected"), selectedImage: #imageLiteral(resourceName: "icon_lecture_selected"))
         mypageVC.tabBarItem = UITabBarItem(title: "마이페이지", image: #imageLiteral(resourceName: "icon_mypage_selected"), selectedImage: #imageLiteral(resourceName: "icon_mypage_selected"))
+
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [mainVC, studyListVC, mypageVC]
-        return UINavigationController(rootViewController: tabBarController)
+        tabBarController.viewControllers = [studyListVC, mainVC, mypageVC]
+        return tabBarController
       }
     }
   }
