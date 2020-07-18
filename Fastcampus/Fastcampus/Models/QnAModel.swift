@@ -9,7 +9,6 @@
 import Foundation
 
 struct QnAModel: Codable {
-  let documentID: String
   let playTime: Int64
   let title: String
   let userID: String

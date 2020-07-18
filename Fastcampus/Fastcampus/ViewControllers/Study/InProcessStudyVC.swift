@@ -18,7 +18,6 @@ class InProcessStudyVC: ViewController<InProcessView> {
       customView.reloadData(self.qnas)
     }
   }
-  var count = 0
   
   // MARK: Setup
   override func viewDidLoad() {
@@ -124,16 +123,14 @@ extension InProcessStudyVC: InProcessViewDelegate {
     
     let playTime = playCMTime.value / Int64(playCMTime.timescale)
     let qna = QnAModel(
-      documentID: "documentid: \(count)",
       playTime: playTime,
       title: title,
-      userID: "userID \(count)",
+      userID: SignService.user.nickName,
       isDone: false,
       messages: []
     )
-    qnas.append(qna)
-    count += 1
     
+    StudyService.qnaUpdate(model: qna)
   }
   
   
