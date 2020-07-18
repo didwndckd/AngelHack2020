@@ -12,6 +12,9 @@
 		314AD16224C23960002A22B7 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AD16124C23960002A22B7 /* CircleView.swift */; };
 		314AD16424C243F5002A22B7 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AD16324C243F5002A22B7 /* DateExtension.swift */; };
 		314AD16624C246F5002A22B7 /* StudyInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AD16524C246F5002A22B7 /* StudyInformationView.swift */; };
+		314AD16824C341A5002A22B7 /* QuestionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AD16724C341A5002A22B7 /* QuestionButton.swift */; };
+		314AD16A24C37F09002A22B7 /* StudyReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AD16924C37F09002A22B7 /* StudyReviewVC.swift */; };
+		314AD16C24C37F38002A22B7 /* StudyReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314AD16B24C37F38002A22B7 /* StudyReviewView.swift */; };
 		314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */; };
 		314E84EA24BCA07800A6D492 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84E924BCA07800A6D492 /* WaitingView.swift */; };
 		314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84EB24BCA1FD00A6D492 /* TimerView.swift */; };
@@ -84,6 +87,9 @@
 		314AD16124C23960002A22B7 /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		314AD16324C243F5002A22B7 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		314AD16524C246F5002A22B7 /* StudyInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyInformationView.swift; sourceTree = "<group>"; };
+		314AD16724C341A5002A22B7 /* QuestionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionButton.swift; sourceTree = "<group>"; };
+		314AD16924C37F09002A22B7 /* StudyReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyReviewVC.swift; sourceTree = "<group>"; };
+		314AD16B24C37F38002A22B7 /* StudyReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyReviewView.swift; sourceTree = "<group>"; };
 		314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingStudyVC.swift; sourceTree = "<group>"; };
 		314E84E924BCA07800A6D492 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		314E84EB24BCA1FD00A6D492 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 				314E84E724BCA03A00A6D492 /* WaitingStudyVC.swift */,
 				314E84F924BCD24A00A6D492 /* InProcessStudyVC.swift */,
 				4F8838F924BEB0A7009EF09A /* StudyConfigureVC.swift */,
+				314AD16924C37F09002A22B7 /* StudyReviewVC.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -194,6 +201,7 @@
 				314E84FC24BCD2B100A6D492 /* InProcess */,
 				314E84FB24BCD29800A6D492 /* Waiting */,
 				314E84ED24BCA29600A6D492 /* StudyFrameView.swift */,
+				314AD16B24C37F38002A22B7 /* StudyReviewView.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -214,6 +222,7 @@
 			children = (
 				314E84FD24BCD2DA00A6D492 /* InProcessView.swift */,
 				314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */,
+				314AD16724C341A5002A22B7 /* QuestionButton.swift */,
 			);
 			path = InProcess;
 			sourceTree = "<group>";
@@ -556,6 +565,7 @@
 				CFE3C9AD24BC6CAF009E8E2F /* SampleVC.swift in Sources */,
 				314E84F824BCBC9A00A6D492 /* WaitingStudyContentView.swift in Sources */,
 				CF7F562D24C22B2D0041DAAD /* ExtensionUINavigationItem.swift in Sources */,
+				314AD16824C341A5002A22B7 /* QuestionButton.swift in Sources */,
 				4F88E3B524C01B51000967EE /* ChapterVC.swift in Sources */,
 				314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */,
 				CF7F563824C240EE0041DAAD /* SummaryEditorCell.swift in Sources */,
@@ -574,12 +584,14 @@
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				4F88E3AC24C0110D000967EE /* QnAModel.swift in Sources */,
 				4FD71D9024C2FF83003EFD30 /* SplashVC.swift in Sources */,
+				314AD16A24C37F09002A22B7 /* StudyReviewVC.swift in Sources */,
 				314AD16224C23960002A22B7 /* CircleView.swift in Sources */,
 				CF7F563324C23A140041DAAD /* DisignableTextField.swift in Sources */,
 				4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */,
 				CFE3C9AB24BC660E009E8E2F /* User.swift in Sources */,
 				4F575D7A24C1F7AA00F35888 /* SignView.swift in Sources */,
 				CFE3C9CE24C07395009E8E2F /* SummaryCell.swift in Sources */,
+				314AD16C24C37F38002A22B7 /* StudyReviewView.swift in Sources */,
 				312AA94824C0BE0400032507 /* QuestionCell.swift in Sources */,
 				4F575D6D24C1573D00F35888 /* BadgeLabel.swift in Sources */,
 				314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */,
