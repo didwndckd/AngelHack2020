@@ -9,6 +9,7 @@
 import Foundation
 
 struct Summary: Codable {
+  var documentID: String?
   let userID: String
   let unitID: Int
   let title: String

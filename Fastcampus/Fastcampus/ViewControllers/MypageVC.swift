@@ -22,9 +22,13 @@ class MypageVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getUserInfo()
     attribute()
     setupUI()
+  }
+  
+  init() {
+    super.init(nibName: nil, bundle: nil)
+    self.getUserInfo()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +71,10 @@ class MypageVC: UIViewController {
       $0.leading.trailing.equalToSuperview()
       $0.bottom.equalTo(guide)
     }
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }
 

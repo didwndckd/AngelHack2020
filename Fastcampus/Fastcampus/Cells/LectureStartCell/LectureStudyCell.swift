@@ -10,6 +10,7 @@ import UIKit
 
 protocol LectureStudyCellDelegate: class {
   func joinStudy(studyID: String)
+  func notice()
 }
 
 class LectureStudyCell: UITableViewCell {
@@ -22,6 +23,7 @@ class LectureStudyCell: UITableViewCell {
   private let startDateBgView = UIView()
   private let startDateLabel = UILabel()
   private let peopleLabel = UILabel()
+  private let noticeButton = UIButton()
   private let joinButton = UIButton()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -43,6 +45,14 @@ class LectureStudyCell: UITableViewCell {
       joinButton.setTitleColor(.darkGray, for: .normal)
       joinButton.backgroundColor = UIColor.lightGray
       joinButton.isUserInteractionEnabled = false
+      noticeButton.isHidden = false
+      
+      titleLabel.snp.remakeConstraints {
+        $0.top.equalTo(levelButton.snp.bottom).offset(15 / 3)
+        $0.leading.equalTo(contentView).offset(15)
+        $0.trailing.equalTo(noticeButton.snp.leading).offset(-15)
+      }
+      layoutIfNeeded()
     }
     
     if study.userIDs.contains(SignService.uid) {
@@ -50,9 +60,23 @@ class LectureStudyCell: UITableViewCell {
       joinButton.setTitleColor(.darkGray, for: .normal)
       joinButton.backgroundColor = UIColor.lightGray
       joinButton.isUserInteractionEnabled = false
+      noticeButton.isHidden = true
+      titleLabel.snp.remakeConstraints {
+        $0.top.equalTo(levelButton.snp.bottom).offset(15 / 3)
+        $0.leading.equalTo(contentView).offset(15)
+        $0.trailing.equalTo(joinButton.snp.leading).offset(-15)
+      }
+      layoutIfNeeded()
     } else {
       if study.userIDs.count != study.fixed {
         makeGradientJoinButton()
+        noticeButton.isHidden = true
+        titleLabel.snp.remakeConstraints {
+          $0.top.equalTo(levelButton.snp.bottom).offset(15 / 3)
+          $0.leading.equalTo(contentView).offset(15)
+          $0.trailing.equalTo(joinButton.snp.leading).offset(-15)
+        }
+        layoutIfNeeded()
       }
     }
     
@@ -95,15 +119,20 @@ class LectureStudyCell: UITableViewCell {
     peopleLabel.textColor = #colorLiteral(red: 0.5988813043, green: 0.5989002585, blue: 0.6190659404, alpha: 1)
     peopleLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     
+    noticeButton.setImage(#imageLiteral(resourceName: "icon_notice_color"), for: .normal)
+    noticeButton.contentMode = .scaleAspectFit
+    noticeButton.isHidden = true
+    noticeButton.addTarget(self, action: #selector(touchUpNoticeButton), for: .touchUpInside)
+    
     joinButton.setTitle("참여하기", for: .normal)
     joinButton.setTitleColor(.white, for: .normal)
     joinButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
-    joinButton.layer.cornerRadius = 14
+    joinButton.layer.cornerRadius = 8
   }
   
   private func setupUI() {
     let margins: CGFloat = 15
-    [levelButton, nameLabel, titleLabel, startDateBgView, startDateLabel, peopleLabel, joinButton]
+    [levelButton, nameLabel, titleLabel, startDateBgView, startDateLabel, peopleLabel, noticeButton, joinButton]
       .forEach { contentView.addSubview($0) }
     
     levelButton.snp.makeConstraints {
@@ -118,6 +147,7 @@ class LectureStudyCell: UITableViewCell {
     titleLabel.snp.makeConstraints {
       $0.top.equalTo(levelButton.snp.bottom).offset(margins / 3)
       $0.leading.equalTo(contentView).offset(margins)
+      $0.trailing.equalTo(joinButton.snp.leading).offset(-margins)
     }
     
     startDateLabel.snp.makeConstraints {
@@ -135,6 +165,12 @@ class LectureStudyCell: UITableViewCell {
       $0.top.equalTo(titleLabel.snp.bottom).offset(margins / 2)
       $0.leading.equalTo(startDateBgView.snp.trailing).offset(margins / 2)
       $0.bottom.equalTo(contentView).offset(-margins)
+    }
+    
+    noticeButton.snp.makeConstraints {
+      $0.centerY.equalTo(contentView)
+      $0.trailing.equalTo(joinButton.snp.leading).offset(-margins)
+      $0.width.height.equalTo(40)
     }
     
     joinButton.snp.makeConstraints {
@@ -155,5 +191,9 @@ private extension LectureStudyCell {
     if let studyID = studyID {
       delegate?.joinStudy(studyID: studyID)
     }
+  }
+  
+  @objc private func touchUpNoticeButton() {
+    delegate?.notice()
   }
 }

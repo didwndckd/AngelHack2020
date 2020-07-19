@@ -165,12 +165,4 @@ class StudyListTableViewCell: UITableViewCell {
       arrowImageView.widthAnchor.constraint(equalToConstant: 32)
     ])
   }
-  
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    
-  }
-  
 }
