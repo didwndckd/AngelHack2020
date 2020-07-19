@@ -15,17 +15,17 @@ enum StudyConfigureType {
 }
 
 class StudyConfigureVC: ViewController<StudyConfigureView> {
-  var studyConfigureType: StudyConfigureType = .create
-  private let lecture: Lecture
-  private let chapter: ChapterModel
-  private let unit: UnitModel
-  private var study: StudyModel? {
+  var studyConfigureType: StudyConfigureType = .create {
     didSet {
       if studyConfigureType == .join {
         customView.setJoinStyle(study: study!)
       }
     }
   }
+  private let lecture: Lecture
+  private let chapter: ChapterModel
+  private let unit: UnitModel
+  private var study: StudyModel?
   
   init(lecture: Lecture, chapter: ChapterModel, unit: UnitModel, study: StudyModel? = nil) {
     self.lecture = lecture
@@ -41,7 +41,6 @@ class StudyConfigureVC: ViewController<StudyConfigureView> {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     setUI()
     addKeyboardNotification()
   }
@@ -122,11 +121,17 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
       inProcess: .wait
     )
     
-    presentIndicatorViewController()
-    StudyService.createStudy(studyModel: mStudy) {
-      self.dismissIndicatorViewController()
-      self.dismiss(animated: true)
+    if studyConfigureType == .create {
+      presentIndicatorViewController()
+      StudyService.createStudy(studyModel: mStudy) {
+        self.dismissIndicatorViewController()
+        self.dismiss(animated: true)
+      }
+    } else {
+      //TODO:- 스터디 참여하기
     }
+    
+    
   }
 }
 

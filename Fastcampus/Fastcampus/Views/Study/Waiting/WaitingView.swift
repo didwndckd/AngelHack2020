@@ -9,16 +9,15 @@
 import UIKit
 
 class WaitingView: View {
-  
   private let headerView = TimerView()
   private let bodyView = WaitingStudyContentView()
   
   override func setupUI() {
     super.setupUI()
     
-    [headerView, bodyView].forEach({
+    [headerView, bodyView].forEach {
       addSubview($0)
-    })
+    }
     
     let guide = safeAreaLayoutGuide
     let topMargin: CGFloat = 32
@@ -34,7 +33,6 @@ class WaitingView: View {
       $0.top.equalTo(headerView.snp.bottom).offset(topMargin)
       $0.leading.trailing.bottom.equalTo(guide)
     })
-    
   }
   
   func updateTimer(timeInterval: Double) {
@@ -45,5 +43,4 @@ class WaitingView: View {
     headerView.configure(startTime: study.dateValue)
     bodyView.configure(study: study)
   }
-  
 }

@@ -9,7 +9,6 @@
 import UIKit
 
 class TimerView: View {
-  
   private let guideLabel = UILabel()
   private let startTimeGuideLabel = UILabel()
   
@@ -40,7 +39,6 @@ class TimerView: View {
     
     startTimeLabel.font = .systemFont(ofSize: 16, weight: .regular)
     startTimeLabel.textColor = #colorLiteral(red: 0.6431372549, green: 0.6431372549, blue: 0.662745098, alpha: 1)
-    
   }
   
   override func setupUI() {
@@ -76,9 +74,6 @@ class TimerView: View {
       $0.top.equalTo(startTimeGuideLabel.snp.bottom).offset(margin)
       $0.centerX.equalToSuperview()
     })
-    
-    
-    
   }
   
   func configure(timeInterval: Double) {
@@ -90,6 +85,4 @@ class TimerView: View {
     let startTime = startTime.dateToString(format: "MM.dd HH:mm")
     startTimeLabel.text = startTime
   }
-  
-  
 }
