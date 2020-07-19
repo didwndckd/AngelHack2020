@@ -49,6 +49,7 @@ class QuestionCell: UITableViewCell {
     
     deleteButton.setTitle("X", for: .normal)
     deleteButton.setTitleColor(.black, for: .normal)
+    deleteButton.isHidden = true
     
   }
   

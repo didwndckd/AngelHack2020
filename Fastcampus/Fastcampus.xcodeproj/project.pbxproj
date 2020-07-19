@@ -27,6 +27,8 @@
 		314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850524BCD8EE00A6D492 /* DoubleExtension.swift */; };
 		316C502E24BE129500D7F59A /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = 316C502D24BE129500D7F59A /* test.mov */; };
 		316C502F24BE169300D7F59A /* SODA_1594647376.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */; };
+		31B327C824C3B76700616995 /* QuestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B327C724C3B76700616995 /* QuestionCollectionViewCell.swift */; };
+		31B327CA24C3D6E300616995 /* ChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B327C924C3D6E300616995 /* ChattingCell.swift */; };
 		4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26281E24C2292200D20BF7 /* WindowManager.swift */; };
 		4F26282124C2377B00D20BF7 /* SignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26282024C2377B00D20BF7 /* SignService.swift */; };
 		4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */; };
@@ -108,6 +110,8 @@
 		314E850524BCD8EE00A6D492 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Fastcampus/Extension/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
 		316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SODA_1594647376.MP4; sourceTree = "<group>"; };
 		316C502D24BE129500D7F59A /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
+		31B327C724C3B76700616995 /* QuestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCollectionViewCell.swift; sourceTree = "<group>"; };
+		31B327C924C3D6E300616995 /* ChattingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCell.swift; sourceTree = "<group>"; };
 		4F26281E24C2292200D20BF7 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		4F26282024C2377B00D20BF7 /* SignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignService.swift; path = Fastcampus/Util/SignService.swift; sourceTree = SOURCE_ROOT; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -364,6 +368,8 @@
 				4F6CD20924C21F3A004E26B6 /* SignUpCollectionViewCell.swift */,
 				4FD71D9324C30AF8003EFD30 /* StudyListTableViewCell.swift */,
 				CF7F563D24C314D70041DAAD /* LectureStartCell */,
+				31B327C724C3B76700616995 /* QuestionCollectionViewCell.swift */,
+				31B327C924C3D6E300616995 /* ChattingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -564,6 +570,7 @@
 				4F88E3A624C010D6000967EE /* StudyModel.swift in Sources */,
 				4F85EF9924C3282500AEFB0A /* UserServiece.swift in Sources */,
 				CF7F563124C239E80041DAAD /* SummaryEditorView.swift in Sources */,
+				31B327C824C3B76700616995 /* QuestionCollectionViewCell.swift in Sources */,
 				4F575D7824C1F6F600F35888 /* SignVC.swift in Sources */,
 				314E84E824BCA03A00A6D492 /* WaitingStudyVC.swift in Sources */,
 				CF29217824BC056C001318CB /* View.swift in Sources */,
@@ -631,6 +638,7 @@
 				4F88E3B024C011BC000967EE /* UserModel.swift in Sources */,
 				314AD16624C246F5002A22B7 /* StudyInformationView.swift in Sources */,
 				4F649B2724BEEA5200E0B073 /* StudyService.swift in Sources */,
+				31B327CA24C3D6E300616995 /* ChattingCell.swift in Sources */,
 				4F26282124C2377B00D20BF7 /* SignService.swift in Sources */,
 				CFE3C9C424BF4A88009E8E2F /* MypageVC.swift in Sources */,
 			);
