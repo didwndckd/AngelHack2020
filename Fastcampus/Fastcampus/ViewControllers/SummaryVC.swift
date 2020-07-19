@@ -81,6 +81,7 @@ class SummaryVC: UITableViewController {
     let user = allUser.filter { $0.uid == summary.userID }.first!
     let summaryHeaderView = SummaryHeaderView()
     summaryHeaderView.setProperties(summary: summary, user: user)
+    summaryHeaderView.delegate = self
     return summaryHeaderView
   }
   
@@ -98,17 +99,50 @@ extension SummaryVC: CommentInputCellDelegate {
     //TODO:- 댓글 추가
 //    let commentsData = summary!.comments
 //    print("asdfasdasdf")
-//    db.collection("Summary")
-//      .document("\(lecture.id)")
-//      .collection("\(chapter.index)")
-//      .document(summary!.documentID!)
-//      .updateData(<#T##fields: [AnyHashable : Any]##[AnyHashable : Any]#>)
-//    print("[Log] :", text ?? "")
+    let summaryRefer = db.collection("Summary")
+      .document("\(lecture.id)")
+      .collection("\(chapter.index)")
+      .document(summary!.documentID!)
+    
+    Firestore.firestore().runTransaction({ (transAction, errorPointer) -> Any? in
+      let tempDocument: DocumentSnapshot
+      do {
+        try tempDocument = transAction.getDocument(summaryRefer)
+        
+      } catch let error as NSError {
+        debugPrint("Fetch error : ", error.localizedDescription)
+        return nil
+      }
+      
+      guard
+        let data = tempDocument.data(),
+        var comments = data["comments"] as? [String]
+        else { return nil }
+      
+      comments.append(text!)
+      
+      transAction.updateData(["comments": comments], forDocument: summaryRefer)
+      
+      return nil
+      
+    }) { (_, _) in }
+    
+    
+    print("[Log] :", text ?? "")
   }
 }
 
 private extension SummaryVC {
   @objc private func didTap() {
     self.view.endEditing(true)
+  }
+}
+
+extension SummaryVC: SummaryHeaderViewDelegate {
+  func isFavorite(sender: UIButton) {
+    sender.isSelected.toggle()
+    let image = sender.isSelected ? #imageLiteral(resourceName: "icon_favorite_selected") : #imageLiteral(resourceName: "icon_favorite_deselected")
+    sender.setImage(image, for: .normal)
+    
   }
 }

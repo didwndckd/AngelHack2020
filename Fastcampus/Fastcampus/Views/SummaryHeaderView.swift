@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol SummaryHeaderViewDelegate: class {
+  func isFavorite(sender: UIButton)
+}
+
 class SummaryHeaderView: View {
+  weak var delegate: SummaryHeaderViewDelegate?
   private let titleBgView = UIView()
   private let titleLabel = UILabel()
+  private let favoriteButton = UIButton()
   private let levelLabel = UIButton()
   private let userNameLabel = UILabel()
   private let contentsLabel = UILabel()
@@ -32,38 +38,31 @@ class SummaryHeaderView: View {
     super.attribute()
     titleBgView.backgroundColor = #colorLiteral(red: 1, green: 0.9529311061, blue: 0.9375221133, alpha: 1)
     
-    titleLabel.text = "2회차 요약본(UX위주)"
     titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
     titleLabel.numberOfLines = 0
     titleLabel.sizeToFit()
     titleLabel.adjustsFontSizeToFitWidth = true
     titleLabel.lineBreakMode = .byCharWrapping
-    titleLabel.setContentHuggingPriority(.init(rawValue: 100), for: .horizontal)
-    titleLabel.setContentCompressionResistancePriority(.init(rawValue: 500), for: .horizontal)
     
-    levelLabel.setTitle("Lv.9", for: .normal)
+    favoriteButton.setImage(#imageLiteral(resourceName: "icon_favorite_deselected"), for: .normal)
+    favoriteButton.addTarget(self, action: #selector(touchUpFavoriteButton(_:)), for: .touchUpInside)
+    
     levelLabel.setTitleColor(.red, for: .normal)
     levelLabel.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
     levelLabel.contentEdgeInsets = UIEdgeInsets(top: 2, left: 3, bottom: 2, right: 3)
     levelLabel.layer.borderColor = UIColor.red.cgColor
     levelLabel.layer.borderWidth = 1
-    levelLabel.setContentHuggingPriority(.init(rawValue: 200), for: .horizontal)
-    levelLabel.setContentCompressionResistancePriority(.init(rawValue: 750), for: .horizontal)
+    levelLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
     
-    userNameLabel.text = "조현철"
     userNameLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-    userNameLabel.setContentHuggingPriority(.init(rawValue: 300), for: .horizontal)
-    userNameLabel.setContentCompressionResistancePriority(.init(rawValue: 1000), for: .horizontal)
     
     contentsLabel.numberOfLines = 0
     contentsLabel.lineBreakMode = .byCharWrapping
     contentsLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
     
-    replyCountLabel.text = "댓글 2개"
     replyCountLabel.textColor = .lightGray
     replyCountLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
     
-    favoriteCountLabel.text = "저장 9개"
     favoriteCountLabel.textColor = .lightGray
     favoriteCountLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
   }
@@ -72,7 +71,7 @@ class SummaryHeaderView: View {
     super.setupUI()
     let margins: CGFloat = 15
     
-    [titleBgView, titleLabel, levelLabel, userNameLabel, contentsLabel, replyCountLabel, favoriteCountLabel]
+    [titleBgView, titleLabel, favoriteButton, levelLabel, userNameLabel, contentsLabel, replyCountLabel, favoriteCountLabel]
       .forEach { self.addSubview($0) }
     
     titleBgView.snp.makeConstraints {
@@ -83,7 +82,13 @@ class SummaryHeaderView: View {
     titleLabel.snp.makeConstraints {
       $0.top.bottom.equalTo(titleBgView)
       $0.leading.equalTo(self).offset(margins)
-      $0.trailing.equalTo(levelLabel.snp.leading).offset(-margins)
+      $0.width.lessThanOrEqualTo(UIScreen.main.bounds.width / 1.4)
+    }
+    
+    favoriteButton.snp.makeConstraints {
+      $0.centerY.equalTo(titleLabel)
+      $0.leading.equalTo(titleLabel.snp.trailing).offset(margins / 3)
+      $0.width.height.equalTo(44)
     }
     
     levelLabel.snp.makeConstraints {
@@ -116,5 +121,11 @@ class SummaryHeaderView: View {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+}
+
+private extension SummaryHeaderView {
+  @objc private func touchUpFavoriteButton(_ sender: UIButton) {
+    delegate?.isFavorite(sender: sender)
   }
 }

@@ -29,6 +29,15 @@ class StudyListVC: UIViewController {
   
   private let tableView = UITableView()
   
+  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    getStudyList()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -53,7 +62,6 @@ class StudyListVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    getStudyList()
     self.tabBarController?.tabBar.items?[0].badgeValue = nil
   }
   
