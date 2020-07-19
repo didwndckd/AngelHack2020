@@ -154,6 +154,26 @@ class StudyService {
     }
   }
   
+  class func getQnaList(studyDocumentID: String, completion: @escaping ([QnA]) -> Void) {
+    Firestore
+      .firestore()
+      .collection("QnA")
+      .whereField("studyDocumentID", isEqualTo: studyDocumentID)
+      .getDocuments { (snapshot, _) in
+        guard let documents = snapshot?.documents else { return }
+
+        var arr = [QnA]()
+        
+        for document in documents {
+          let data = try! FirestoreDecoder().decode(QnAModel.self, from: document.data())
+          let temp = QnA(documentID: document.documentID, data: data)
+          arr.append(temp)
+        }
+        
+        completion(arr)
+    }
+  }
+  
   class func qnaListenerRemove() {
     qnaListener?.remove()
   }
@@ -183,6 +203,7 @@ class StudyService {
   private static var messageListener: ListenerRegistration?
   
   class func messageAddListener(qnaDocumentID: String, completion: @escaping (Result<[MessageModel], Error>) -> Void) {
+    messageListenerRemove()
     messageListener = Firestore
       .firestore()
       .collection("QnA")
