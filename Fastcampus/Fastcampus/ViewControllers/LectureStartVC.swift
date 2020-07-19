@@ -70,7 +70,7 @@ class LectureStartVC: UIViewController {
       }
     }
   }
-  private var summary: [Summary] = [] {
+  var summary: [Summary] = [] {
     didSet {
       if summary.count == 0 {
         tabTableView.setEmptyView(
@@ -101,27 +101,14 @@ class LectureStartVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getUserInfo()
     attribute()
     setupUI()
-    
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.isNavigationBarHidden = false
-  }
-  
-  private func getUserInfo() {
-    //TODO:- Get All User Info
-    UserService.allUser { result in
-      switch result {
-        case .success(let users):
-          self.users = users
-        case .failure(let err):
-          print("[Log] Error :", err.localizedDescription)
-      }
-    }
+    self.tabBarController?.tabBar.isHidden = false
   }
   
   private func getStudyList() {
@@ -137,7 +124,8 @@ class LectureStartVC: UIViewController {
         } else {
           if let documents = querySnapshot?.documents {
             for document in documents {
-              let studyData = try! FirestoreDecoder().decode(StudyModel.self, from: document.data())
+              var studyData = try! FirestoreDecoder().decode(StudyModel.self, from: document.data())
+              studyData.documentID = document.documentID
               self.study.append(studyData)
             }
           }
@@ -216,7 +204,6 @@ class LectureStartVC: UIViewController {
     gradient.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 5)
     separatorView.layer.insertSublayer(gradient, at: 0)
     
-    tabTableView.bounces = false
     tabTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     tabTableView.dataSource = self
     tabTableView.delegate = self
@@ -230,7 +217,7 @@ class LectureStartVC: UIViewController {
     makeStudyButton.backgroundColor = .white
     makeStudyButton.layer.borderWidth = 2
     makeStudyButton.layer.borderColor = UIColor.myRed.cgColor
-    makeStudyButton.layer.cornerRadius = 14
+    makeStudyButton.layer.cornerRadius = 8
     makeStudyButton.addTarget(self, action: #selector(touchUpMakeButton), for: .touchUpInside)
     
     makeStudyButton.isHidden = true
@@ -307,14 +294,24 @@ extension LectureStartVC: UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureStudyCell.identifier, for: indexPath) as! LectureStudyCell
       cell.delegate = self
       cell.selectionStyle = .none
-      cell.setProperties(study: study[indexPath.row])
-      cell.makeGradientJoinButton()
+      if study[indexPath.row].userIDs.count != study[indexPath.row].fixed {
+        cell.makeGradientJoinButton()
+      }
+      if let allUser = UserService.allUser {
+        let user = allUser.filter { $0.uid == study[indexPath.row].userIDs[0] }.first!
+        cell.setProperties(study: study[indexPath.row], user: user)
+      }
+      
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: LectureSummaryCell.identifier, for: indexPath) as! LectureSummaryCell
       cell.delegate = self
       cell.selectionStyle = .none
-      cell.setProperties(summary: summary[indexPath.row])
+      if let allUser = UserService.allUser {
+        let user = allUser.filter { $0.uid == summary[indexPath.row].userID }.first!
+        cell.setProperties(summary: summary[indexPath.row], user: user)
+      }
+      
       return cell
     }
   }
@@ -328,7 +325,8 @@ extension LectureStartVC: UITableViewDelegate {
       case .study:
         break
       case .summary:
-        //TODO:- 요약정리 눌렀을 때 처리
+        let summaryVC = SummaryVC(lecture: lecture, chapter: chapter, unit: unit, summary: summary[indexPath.row])
+        self.navigationController?.pushViewController(summaryVC, animated: true)
         break
     }
   }
@@ -368,14 +366,14 @@ private extension LectureStartVC {
       case .introduce:
         break
       case .study:
-        //TODO:- 스터디 만들기
         let vcStudyConfigre = StudyConfigureVC(lecture: lecture, chapter: chapter, unit: unit)
         vcStudyConfigre.modalPresentationStyle = .overFullScreen
         present(vcStudyConfigre, animated: true)
         
         break
       case .summary:
-        //TODO:- 요약본 올리기
+        let summaryEditorVC = SummaryEditorVC(lecture: lecture, chapter: chapter, unit: unit)
+        self.navigationController?.pushViewController(summaryEditorVC, animated: true)
         break
         
     }
@@ -389,7 +387,7 @@ extension LectureStartVC: LectureStudyCellDelegate {
       guard let self = self else { return }
       switch result {
         case .success(let studyData):
-          let studyConfigureVC = StudyConfigureVC(lecture: self.lecture, chapter: self.chapter, unit: self.unit)
+          let studyConfigureVC = StudyConfigureVC(lecture: self.lecture, chapter: self.chapter, unit: self.unit, study: studyData)
           studyConfigureVC.modalPresentationStyle = .overFullScreen
           studyConfigureVC.studyConfigureType = .join
           self.present(studyConfigureVC, animated: true, completion: nil)
