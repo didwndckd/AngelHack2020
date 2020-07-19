@@ -22,9 +22,9 @@ class StudyPlayerView: View {
   
   private let screenModeButton = UIButton()
   
-  private let informationView = UIView()
+  let informationView = UIView()
   private let informationBackgroundView = UIView()
-  private let slider = UISlider()
+  let slider = UISlider()
   private let restTimeLabel = UILabel()
   
   private let videoView = UIView()
@@ -47,6 +47,10 @@ class StudyPlayerView: View {
     screenModeButton.setImage(UIImage(named: "FullScreen"), for: .normal)
     screenModeButton.setImage(UIImage(systemName: "square.fill"), for: .selected)
     screenModeButton.tintColor = .white
+    screenModeButton.contentVerticalAlignment = .bottom
+    screenModeButton.contentHorizontalAlignment = .right
+//    screenModeButton.contentHorizontalAlignment = .fill
+//    screenModeButton.contentHorizontalAlignment = .fill
     
     restTimeLabel.text = "00:00:00"
     restTimeLabel.textColor = .white
@@ -93,6 +97,7 @@ class StudyPlayerView: View {
     screenModeButton.snp.makeConstraints({
       $0.bottom.equalTo(restTimeLabel.snp.top).offset(-margin)
       $0.trailing.equalToSuperview().offset(-margin)
+      $0.height.width.equalTo(30)
     })
     
     restTimeLabel.snp.makeConstraints({

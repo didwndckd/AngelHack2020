@@ -55,6 +55,7 @@ class StudyReviewView: View {
     chattingTableView.register(ChattingCell.self, forCellReuseIdentifier: ChattingCell.identifier)
     chattingTableView.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
     chattingTableView.separatorStyle = .none
+    chattingTableView.allowsSelection = false
   }
   
   override func setupUI() {
@@ -90,6 +91,7 @@ class StudyReviewView: View {
     chattingTableView.delegate = delegate
     editingView.delegate = delegate
   }
+  
   
   
   // MARK: Action

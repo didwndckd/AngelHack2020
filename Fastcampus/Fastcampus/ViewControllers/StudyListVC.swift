@@ -63,6 +63,7 @@ class StudyListVC: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.tabBarController?.tabBar.items?[0].badgeValue = nil
+    getStudyList()
   }
   
   private func getStudyList() {
