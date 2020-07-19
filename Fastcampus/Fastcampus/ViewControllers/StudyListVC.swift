@@ -24,7 +24,6 @@ class StudyListVC: UITableViewController {
     tableView.contentInset.top = 16
     tableView.separatorStyle = .none
     tableView.register(StudyListTableViewCell.self, forCellReuseIdentifier: StudyListTableViewCell.identifier)
-    
   }
   
   
