@@ -84,6 +84,10 @@ class PlayerView: StudyPlayerView {
     
   }
   
+  func setPlayButton(isPlay: Bool) {
+    playButton.isSelected = isPlay
+  }
+  
   @objc private func didTapPlayButton(_ sender: UIButton) {
     sender.isSelected.toggle()
     controller?.play(isPlay: sender.isSelected)

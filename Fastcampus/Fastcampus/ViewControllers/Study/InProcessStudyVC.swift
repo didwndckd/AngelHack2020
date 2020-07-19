@@ -60,7 +60,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
   }
   
   private func setupAsset() -> AVAsset? {
-    guard let filePath = Bundle.main.path(forResource: "Study", ofType: "MP4") else { return nil }
+    guard let filePath = Bundle.main.path(forResource: "Study", ofType: "mov") else { return nil }
     let videoURL = URL(fileURLWithPath: filePath)
     let asset = AVAsset(url: videoURL)
     return asset
@@ -153,6 +153,13 @@ class InProcessStudyVC: ViewController<InProcessView> {
   }
   
   @objc private func pushStudyReviewVC() {
+    navigationController?.setNavigationBarHidden(false, animated: true)
+    
+    UIView.animate(withDuration: 0.3, animations: {
+      [weak self] in
+      self?.customView.switchScreenMode(isFull: false)
+    })
+    self.setLotation(isFull: false)
     let reviewVC = StudyReviewVC(study: model, qnas: qnas)
     navigationController?.pushViewController(reviewVC, animated: true)
   }

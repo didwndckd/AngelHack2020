@@ -23,24 +23,33 @@ class PlayerViewController: UIViewController {
     setupPlayer()
     playerView.controller = self
     playerView.delegate = self
+    addObservers()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    addObservers()
+    
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    player?.pause()
-    removeObservers()
+    
     
   }
   
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    
+  }
+  
+  deinit {
+    player?.pause()
+    removeObservers()
+  }
+  
+  
+  
   private func setupAsset() -> AVAsset? {
-    let fi = Bundle.main.path(forResource: "Lecture", ofType: "mov")
-    print("==========================================================================")
-    print("filePath: ", fi)
     guard let filePath = Bundle.main.path(forResource: "Lecture", ofType: "mov") else { return nil }
     print(filePath)
     let videoURL = URL(fileURLWithPath: filePath)
@@ -96,7 +105,8 @@ class PlayerViewController: UIViewController {
   }
  
   @objc private func endPlayer() {
-    
+    playerView.setPlayButton(isPlay: false)
+    seekPlayer(to: 0)
   }
   
   private func seekPlayer(to: Int64) {
