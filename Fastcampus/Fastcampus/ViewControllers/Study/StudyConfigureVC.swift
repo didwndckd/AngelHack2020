@@ -15,17 +15,17 @@ enum StudyConfigureType {
 }
 
 class StudyConfigureVC: ViewController<StudyConfigureView> {
-  var studyConfigureType: StudyConfigureType = .create {
+  var studyConfigureType: StudyConfigureType = .create
+  private let lecture: Lecture
+  private let chapter: ChapterModel
+  private let unit: UnitModel
+  private var study: StudyModel? {
     didSet {
       if studyConfigureType == .join {
         customView.setJoinStyle(study: study!)
       }
     }
   }
-  private let lecture: Lecture
-  private let chapter: ChapterModel
-  private let unit: UnitModel
-  private let study: StudyModel?
   
   init(lecture: Lecture, chapter: ChapterModel, unit: UnitModel, study: StudyModel? = nil) {
     self.lecture = lecture

@@ -95,19 +95,18 @@ class StudyService {
       .collection("Study")
       .document(studyDocumentID)
       .getDocument { (snapshot, error) in
-        
         if let error = error {
           completion(.failure(error))
           
         } else {
           guard
             let data = snapshot?.data(),
-            let model = try? FirestoreDecoder().decode(StudyModel.self, from: data)
+            var model = try? FirestoreDecoder().decode(StudyModel.self, from: data)
             else {
               completion(.failure(NSError(domain: "Parsing Errro", code: 0)))
               return
           }
-          
+          model.documentID = snapshot?.documentID
           completion(.success(model))
         }
     }
@@ -177,6 +176,59 @@ class StudyService {
   
   class func qnaListenerRemove() {
     qnaListener?.remove()
+  }
+  
+  
+  class func updateProcess(studyDocumentID: String, inProcess: Int) {
+    Firestore
+      .firestore()
+      .collection("Study")
+      .document(studyDocumentID)
+      .updateData(["inProcess": inProcess])
+  }
+  
+  
+  
+  
+  class func updateMessage(qnaDocumentID: String, message: MessageModel) {
+    guard let data = try? FirestoreEncoder().encode(message) else { return }
+    Firestore
+      .firestore()
+      .collection("QnA")
+      .document(qnaDocumentID)
+      .collection("Message")
+      .addDocument(data: data)
+  }
+  
+  private static var messageListener: ListenerRegistration?
+  
+  class func messageAddListener(qnaDocumentID: String, completion: @escaping (Result<[MessageModel], Error>) -> Void) {
+    messageListener = Firestore
+      .firestore()
+      .collection("QnA")
+      .document(qnaDocumentID)
+      .collection("Message")
+      .addSnapshotListener { (snapshot, error) in
+        if let error = error {
+          completion(.failure(error))
+          
+        } else {
+          guard let documents = snapshot?.documents else { return }
+          
+          var arr = [MessageModel]()
+          
+          for document in documents {
+            let model = try! FirestoreDecoder().decode(MessageModel.self, from: document.data())
+            arr.append(model)
+          }
+          
+          completion(.success(arr))
+        }
+    }
+  }
+  
+  class func messageListenerRemove() {
+    messageListener?.remove()
   }
 }
 

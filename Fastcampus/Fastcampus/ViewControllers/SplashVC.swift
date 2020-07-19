@@ -19,6 +19,7 @@ class SplashVC: UIViewController {
     setUI()
     setConstraint()
     checkSign()
+    getAllUser()
   }
 }
 
@@ -31,6 +32,10 @@ extension SplashVC {
     view.backgroundColor = .systemBackground
     logoImageView.image = UIImage(named: "Logo")
     view.addSubview(logoImageView)
+  }
+  
+  private func getAllUser() {
+    UserService.getAllUser()
   }
   
   private func setConstraint() {
