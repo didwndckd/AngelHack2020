@@ -17,6 +17,7 @@ class ChapterVC: UIViewController {
   private var isFoldCache = [Int: Bool]()
   
   init(lecture: Lecture) {
+    isFoldCache[0] = false
     self.lecture = lecture
     super.init(nibName: nil, bundle: nil)
     self.title = lecture.title
@@ -43,10 +44,10 @@ class ChapterVC: UIViewController {
             let tempUnit = try! FirestoreDecoder().decode(UnitModel.self, from: inDocument.data())
             tempUnits.append(tempUnit)
           }
-
+          
           let tempChapter = ChapterModel(title: title, index: index, Units: tempUnits)
           self.chapters.append(tempChapter)
-
+          
           // 마지막 데이터 완료 시 테이블뷰 리로드
           if self.chapters.count == documents.count {
             self.chapters.sort { $0.index < $1.index }
@@ -106,6 +107,7 @@ extension ChapterVC: UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return chapters.count
   }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     guard let isFold = isFoldCache[section] else { return 0 }
     return isFold ? 0 : chapters[section].Units.count
@@ -207,6 +209,11 @@ class ChapterHeaderView: UIView {
   private func attribute() {
     titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
     
+    rightImageView.image = UIImage(systemName: "chevron.down")
+    rightImageView.contentMode = .scaleAspectFit
+    rightImageView.preferredSymbolConfiguration = .init(textStyle: .footnote, scale: .small)
+    rightImageView.tintColor = .black
+    
     bottomSeparatorView.backgroundColor = .lightGray
     bottomSeparatorView.isHidden = true
   }
@@ -226,7 +233,7 @@ class ChapterHeaderView: UIView {
     rightImageView.snp.makeConstraints {
       $0.centerY.equalTo(self)
       $0.trailing.equalTo(self).offset(-margins)
-      $0.width.height.equalTo(30)
+      $0.width.height.equalTo(20)
     }
     
     bottomSeparatorView.snp.makeConstraints {
