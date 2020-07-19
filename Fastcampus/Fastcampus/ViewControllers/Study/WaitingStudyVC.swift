@@ -28,7 +28,7 @@ class WaitingStudyVC: ViewController<WaitingView> {
   override func viewDidLoad() {
     super.viewDidLoad()
     attribute()
-//    pushInProcessStudyVC()
+    //    pushInProcessStudyVC()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -87,8 +87,5 @@ class WaitingStudyVC: ViewController<WaitingView> {
   @objc private func popViewController(sender: UIBarButtonItem) {
     navigationController?.popViewController(animated: true)
   }
-  
-  
-  
 }
 

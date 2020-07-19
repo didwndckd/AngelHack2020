@@ -35,7 +35,7 @@ class StudyConfigureView: View {
   private let titleTextField = UITextField()
   
   private let dateDisplayLabel = UILabel()
-  private let mothDropView = DropButtonView(amount: 12, title: "월 ▾")
+  private let monthDropView = DropButtonView(amount: 12, title: "월 ▾")
   private let dayDropView = DropButtonView(amount: 31, title: "일 ▾")
   private let hourDropView = DropButtonView(amount: 24, title: "시 ▾")
   private let minuteDropView = DropButtonView(amount: 60, title: "분 ▾")
@@ -57,12 +57,22 @@ class StudyConfigureView: View {
   }
   
   func setJoinStyle(study: StudyModel) {
+    [titleTextField, monthDropView, dayDropView, hourDropView, minuteDropView, fixedDropView, ruleTextView].forEach {
+      $0.isUserInteractionEnabled = false
+    }
+    
     titleTextField.text = study.title
     let formatter = DateFormatter()
-    formatter.dateFormat = "YYYY년 M월 d일 h시 m분"
+    formatter.dateFormat = "M월 d일 H시 m분"
     let date = formatter.string(from: study.date.dateValue())
-    print(date)
-//    mothDropView.setTitle(<#T##title: String##String#>)
+    let dateList = date.split(separator: " ")
+    monthDropView.setTitle("\(dateList[0].dropLast())월 ▾")
+    dayDropView.setTitle("\(dateList[1].dropLast())일 ▾")
+    hourDropView.setTitle("\(dateList[2].dropLast())시 ▾")
+    minuteDropView.setTitle("\(dateList[3].dropLast())분 ▾")
+    fixedDropView.setTitle("\(study.fixed)명 ▾")
+    ruleTextView.text = study.rule
+    createButton.setTitle("스터디 참여하기", for: .normal)
   }
   
   override func attribute() {
@@ -82,7 +92,7 @@ class StudyConfigureView: View {
     masterNameLabel.text = SignService.user.nickName
     
     titleDisplayLabel.text = "스터디 제목"
-    titleTextField.font = .boldSystemFont(ofSize: 20)
+    titleTextField.font = .boldSystemFont(ofSize: 17)
     titleTextField.layer.cornerRadius = 4
     titleTextField.backgroundColor = .myGray
     titleTextField.delegate = self
@@ -125,7 +135,7 @@ class StudyConfigureView: View {
     
     [masterDisplayLabel, masterBadgeLabel, masterNameLabel,
      titleDisplayLabel, titleTextField,
-     dateDisplayLabel, mothDropView, dayDropView, hourDropView, minuteDropView,
+     dateDisplayLabel, monthDropView, dayDropView, hourDropView, minuteDropView,
      fixedDisplayLabel, fixedDropView,
      ruleDisplayLabel, ruleTextView,
      cancelButton, createButton].forEach {
@@ -139,7 +149,7 @@ class StudyConfigureView: View {
     let buttonHeight: CGFloat = 32
     let ySpace2: CGFloat = ySpace + toSpace + buttonHeight
     
-    let dateDropViews = [mothDropView, dayDropView, hourDropView, minuteDropView]
+    let dateDropViews = [monthDropView, dayDropView, hourDropView, minuteDropView]
       
     dateDropViews.enumerated().forEach {
       $1.delegate = self
@@ -198,7 +208,7 @@ class StudyConfigureView: View {
       
       fixedDropView.topAnchor.constraint(equalTo: fixedDisplayLabel.bottomAnchor, constant: toSpace),
       fixedDropView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
-      fixedDropView.widthAnchor.constraint(equalTo: mothDropView.widthAnchor),
+      fixedDropView.widthAnchor.constraint(equalTo: monthDropView.widthAnchor),
       
       
       
@@ -289,7 +299,7 @@ extension StudyConfigureView {
 extension StudyConfigureView: DropButtonViewDelegate {
   func selectedElement(_ view: UIView, _ element: Int) {
     switch view {
-    case mothDropView:    moth = element
+    case monthDropView:    moth = element
     case dayDropView:     day = element
     case hourDropView:    hour = element
     case minuteDropView:  minute = element
@@ -299,7 +309,7 @@ extension StudyConfigureView: DropButtonViewDelegate {
   }
   
   func titlButtonDidTap(_ view: UIView) {
-    let dropViews = [mothDropView, dayDropView, hourDropView, minuteDropView, fixedDropView]
+    let dropViews = [monthDropView, dayDropView, hourDropView, minuteDropView, fixedDropView]
     
     dropViews.forEach {
       guard $0 != view else { return }
