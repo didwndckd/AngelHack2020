@@ -9,6 +9,12 @@
 import UIKit
 
 class MypageVC: UIViewController {
+  
+  private var user: UserModel? {
+    didSet {
+      mypageTableView.reloadData()
+    }
+  }
   private let menuTitleList = ["요약본", "스터디 참여", "질문 내역"]
   private let menuList = [["내가 작성한 요약본", "저장한 요약본"], ["참여 예정 스터디", "스터디 참여 내역"], ["내가 한 질문", "저장한 질문"]]
   private let mypageHeaderView = MypageHeaderView()
@@ -16,6 +22,7 @@ class MypageVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    getUserInfo()
     attribute()
     setupUI()
   }
@@ -23,6 +30,18 @@ class MypageVC: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.isNavigationBarHidden = true
+  }
+  
+  private func getUserInfo() {
+    UserService.getData(uid: SignService.uid) { result in
+      switch result {
+        case .success(let user):
+          self.user = user
+          self.mypageHeaderView.setProperties(user: user)
+        case .failure(let err):
+          print("[Log] Error :", err.localizedDescription)
+      }
+    }
   }
   
   private func attribute() {
@@ -68,6 +87,7 @@ extension MypageVC: UITableViewDataSource {
       return cell
     } else {
       let cell = MypageCell()
+      cell.selectionStyle = .none
       cell.setProperties(title: menuList[indexPath.section][indexPath.row - 1])
       return cell
     }

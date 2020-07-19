@@ -36,7 +36,9 @@ class MainVC: UIViewController {
     }
   }
   private var lecture: [Lecture] = [] {
-    didSet { self.lectureTableView.reloadData() }
+    didSet {
+      self.lectureTableView.reloadData()
+    }
   }
   private let db = Firestore.firestore()
   private let mainScrollView = UIScrollView()
@@ -83,7 +85,6 @@ class MainVC: UIViewController {
       if let err = err {
         print("[Log] Error :", err.localizedDescription)
       } else {
-        //TODO:- append가 아니고 [Lecture]로 Decoding
         if let documents = querySnapshot?.documents {
           for document in documents {
             let model = try! FirestoreDecoder().decode(Lecture.self, from: document.data())

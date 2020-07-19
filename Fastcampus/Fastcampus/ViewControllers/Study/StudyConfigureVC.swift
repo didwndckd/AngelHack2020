@@ -126,7 +126,9 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
       presentIndicatorViewController()
       StudyService.createStudy(studyModel: mStudy) {
         if let tbc = self.presentingViewController as? MainTabBarVC {
-          tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "New"
+          tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "•"
+          tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeColor = .clear
+          tbc.viewControllers?[0].tabBarItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
         }
         self.dismissIndicatorViewController()
         self.dismiss(animated: true)
@@ -216,18 +218,17 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
         }
       }
       
-      
-      
       DispatchQueue.main.async(group: dispatchGroup) { [weak self] in
         guard let self = self else { return }
         dispatchGroup.notify(queue: .main) {
           self.alertNormal(title: "참여하기", message: "강의에 참가하기가 완료되었습니다.") { action in
             if let tbc = self.presentingViewController as? MainTabBarVC {
-              tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "New"
+              tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "•"
+              tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeColor = .clear
+              tbc.viewControllers?[0].tabBarItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
             }
             
-            self.dismiss(animated: true) {
-            }
+            self.dismiss(animated: true)
           }
         }
       }

@@ -55,7 +55,7 @@ class LectureStartVC: UIViewController {
   private let tabTableView = UITableView()
   private let makeStudyButton = UIButton()
   
-  private var study: [StudyModel] = [] {
+  var study: [StudyModel] = [] {
     didSet {
       if study.count == 0 {
         tabTableView.setEmptyView(
