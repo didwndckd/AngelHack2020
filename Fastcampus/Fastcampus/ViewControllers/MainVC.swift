@@ -197,6 +197,7 @@ extension MainVC: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let chapterVC = ChapterVC(lecture: lecture[indexPath.row])
+    chapterVC.hidesBottomBarWhenPushed = true
     self.navigationController?.pushViewController(chapterVC, animated: true)
   
     

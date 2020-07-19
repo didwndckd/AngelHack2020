@@ -9,9 +9,11 @@
 import UIKit
 import Firebase
 
-class StudyListVC: UITableViewController {
+class StudyListVC: UIViewController {
   
   private var studys = [Study]()
+  
+  private let tableView = UITableView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,6 +26,15 @@ class StudyListVC: UITableViewController {
     tableView.contentInset.top = 16
     tableView.separatorStyle = .none
     tableView.register(StudyListTableViewCell.self, forCellReuseIdentifier: StudyListTableViewCell.identifier)
+    tableView.dataSource = self
+    tableView.delegate = self
+    
+    view.addSubview(tableView)
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+    tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+    tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+    tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
   }
   
   
@@ -58,12 +69,12 @@ class StudyListVC: UITableViewController {
 
 // MARK: - UITableViewDataSource
 
-extension StudyListVC {
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension StudyListVC: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     studys.count
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: StudyListTableViewCell.identifier, for: indexPath) as! StudyListTableViewCell
     cell.configure(data: studys[indexPath.row].data)
     return cell
@@ -72,10 +83,11 @@ extension StudyListVC {
 
 // MARK: - UITableViewDelegate
 
-extension StudyListVC {
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension StudyListVC: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let study = studys[indexPath.row]
     let studyVC = WaitingStudyVC(study: study)
+    studyVC.hidesBottomBarWhenPushed = true
     navigationController?.pushViewController(studyVC, animated: true)
   }
 }

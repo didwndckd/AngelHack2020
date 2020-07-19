@@ -59,6 +59,8 @@
 		4FD71D9024C2FF83003EFD30 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD71D8F24C2FF83003EFD30 /* SplashVC.swift */; };
 		4FD71D9224C308D9003EFD30 /* StudyListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD71D9124C308D9003EFD30 /* StudyListVC.swift */; };
 		4FD71D9424C30AF8003EFD30 /* StudyListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD71D9324C30AF8003EFD30 /* StudyListTableViewCell.swift */; };
+		4FF2986F24C3DFF80078C1EC /* MainTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF2986E24C3DFF80078C1EC /* MainTabBarVC.swift */; };
+		4FF2987124C3E5060078C1EC /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF2987024C3E5060078C1EC /* PaddingLabel.swift */; };
 		CF29217624BC053B001318CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217524BC053B001318CB /* ViewController.swift */; };
 		CF29217824BC056C001318CB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217724BC056C001318CB /* View.swift */; };
 		CF29217A24BC05C7001318CB /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF29217924BC05C7001318CB /* SampleView.swift */; };
@@ -140,6 +142,8 @@
 		4FD71D8F24C2FF83003EFD30 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		4FD71D9124C308D9003EFD30 /* StudyListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListVC.swift; sourceTree = "<group>"; };
 		4FD71D9324C30AF8003EFD30 /* StudyListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListTableViewCell.swift; sourceTree = "<group>"; };
+		4FF2986E24C3DFF80078C1EC /* MainTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVC.swift; sourceTree = "<group>"; };
+		4FF2987024C3E5060078C1EC /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		6D620C247C720290D86C8893 /* Pods-Fastcampus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fastcampus.release.xcconfig"; path = "Target Support Files/Pods-Fastcampus/Pods-Fastcampus.release.xcconfig"; sourceTree = "<group>"; };
 		8CB106B0C03588AC2F402DA2 /* Pods_Fastcampus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fastcampus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A917C66ED4E895A9EED20662 /* Pods-Fastcampus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fastcampus.debug.xcconfig"; path = "Target Support Files/Pods-Fastcampus/Pods-Fastcampus.debug.xcconfig"; sourceTree = "<group>"; };
@@ -279,6 +283,7 @@
 				4F26281E24C2292200D20BF7 /* WindowManager.swift */,
 				314AD16124C23960002A22B7 /* CircleView.swift */,
 				CF7F563224C23A140041DAAD /* DisignableTextField.swift */,
+				4FF2987024C3E5060078C1EC /* PaddingLabel.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 				4FD71D8F24C2FF83003EFD30 /* SplashVC.swift */,
 				4FD71D9124C308D9003EFD30 /* StudyListVC.swift */,
 				CF7F563924C300840041DAAD /* LectureStartVC.swift */,
+				4FF2986E24C3DFF80078C1EC /* MainTabBarVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -574,6 +580,7 @@
 				314E84EC24BCA1FD00A6D492 /* TimerView.swift in Sources */,
 				4FD71D9224C308D9003EFD30 /* StudyListVC.swift in Sources */,
 				CFE3C9A724BC6482009E8E2F /* MainCell.swift in Sources */,
+				4FF2987124C3E5060078C1EC /* PaddingLabel.swift in Sources */,
 				4FB756D524BBFE5E0035BD5B /* MainVC.swift in Sources */,
 				314E84FA24BCD24A00A6D492 /* InProcessStudyVC.swift in Sources */,
 				CF88703B24C34F9700430387 /* ExtensionUITableView.swift in Sources */,
@@ -585,6 +592,7 @@
 				CF7F563624C23CDF0041DAAD /* KeyboardControllable.swift in Sources */,
 				314E84EE24BCA29600A6D492 /* StudyFrameView.swift in Sources */,
 				CF7F563A24C300840041DAAD /* LectureStartVC.swift in Sources */,
+				4FF2986F24C3DFF80078C1EC /* MainTabBarVC.swift in Sources */,
 				CFE3C9C824BF5282009E8E2F /* MypageHeaderView.swift in Sources */,
 				314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */,
 				4F88E3AC24C0110D000967EE /* QnAModel.swift in Sources */,
