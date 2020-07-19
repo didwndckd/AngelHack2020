@@ -11,7 +11,22 @@ import Firebase
 
 class StudyListVC: UIViewController {
   
-  private var studys = [Study]()
+  private var studys = [Study]() {
+    didSet {
+      if studys.count == 0 {
+        self.tableView.setEmptyView(
+          title: "참여중인 스터디 없음!",
+          message: """
+          현재 참여중인 스터디가 없습니다.
+          듣고 있는 강의의 스터디에 참가해보세요.
+          """
+        )
+      } else {
+        self.tableView.restore()
+      }
+      self.tableView.reloadData()
+    }
+  }
   
   private let tableView = UITableView()
   
