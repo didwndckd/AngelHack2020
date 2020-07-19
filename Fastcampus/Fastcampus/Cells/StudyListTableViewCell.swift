@@ -21,7 +21,7 @@ class StudyListTableViewCell: UITableViewCell {
   private let badgeLabel = BadgeLabel()
   private let masterLabel = UILabel()
   private let titleLabel = UILabel()
-  private let dateLabel = UILabel()
+  private let dateLabel = PaddingLabel()
   private let fixedLabel = UILabel()
   private let arrowImageView = UIImageView()
   
@@ -52,7 +52,7 @@ class StudyListTableViewCell: UITableViewCell {
     let formatter = DateFormatter()
     formatter.dateFormat = "MM.dd hh:mm"
     let stringDate = formatter.string(from: data.dateValue)
-    dateLabel.text = "  " + stringDate + " 시작" + "  "
+    dateLabel.text = stringDate + " 시작"
     
     let currentUserCount = data.userIDs.count
     fixedLabel.text = "\(currentUserCount)명 / \(data.fixed)명"
@@ -74,7 +74,7 @@ class StudyListTableViewCell: UITableViewCell {
       #colorLiteral(red: 0.9921568627, green: 0.4549019608, blue: 0.3137254902, alpha: 1).cgColor
     ]
     gradient.locations = [0, 1]
-    gradient.frame = CGRect(origin: .zero, size: CGSize(width: 400, height: 46))
+    gradient.frame = CGRect(origin: .zero, size: CGSize(width: 400, height: 100))
     gradient.superlayer?.cornerRadius = 4
     gradientView.layer.addSublayer(gradient)
     gradientView.layer.cornerRadius = 4
@@ -97,7 +97,11 @@ class StudyListTableViewCell: UITableViewCell {
     titleLabel.font = .boldSystemFont(ofSize: 17)
     
     dateLabel.backgroundColor = .myGray
+    dateLabel.layer.cornerRadius = 4
+    dateLabel.layer.masksToBounds = true
+    dateLabel.font = .boldSystemFont(ofSize: 15)
     
+    fixedLabel.font = .systemFont(ofSize: 15)
     
     arrowImageView.image = UIImage(systemName: "chevron.right")
     arrowImageView.contentMode = .left
@@ -131,7 +135,7 @@ class StudyListTableViewCell: UITableViewCell {
       gradientView.topAnchor.constraint(equalTo: baseView.topAnchor),
       gradientView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor),
       gradientView.trailingAnchor.constraint(equalTo: baseView.trailingAnchor),
-      gradientView.heightAnchor.constraint(equalToConstant: 56),
+      gradientView.heightAnchor.constraint(equalToConstant: 60),
       
       lectureLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       lectureLabel.bottomAnchor.constraint(equalTo: gradientView.centerYAnchor),
@@ -148,9 +152,9 @@ class StudyListTableViewCell: UITableViewCell {
       titleLabel.topAnchor.constraint(equalTo: badgeLabel.bottomAnchor, constant: toSpace),
       titleLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
-      dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: toSpace),
+      dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ySpace),
       dateLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
-      dateLabel.bottomAnchor.constraint(equalTo: baseView.bottomAnchor, constant: -ySpace),
+      dateLabel.bottomAnchor.constraint(equalTo: baseView.bottomAnchor, constant: -(ySpace * 2)),
       
       fixedLabel.centerYAnchor.constraint(equalTo: dateLabel.centerYAnchor),
       fixedLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: toSpace),

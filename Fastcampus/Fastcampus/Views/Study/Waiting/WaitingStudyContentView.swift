@@ -9,8 +9,6 @@
 import UIKit
 
 class WaitingStudyContentView: View {
-  
-  
   private let scrollView = UIScrollView()
   private let lectureTitleLabel = UILabel()
   private let unitTitleLabel = UILabel()
@@ -21,8 +19,6 @@ class WaitingStudyContentView: View {
   private let fixedLable = StudyInformationView(isLongType: false, title: "정원")
   private let unitDescriptionLabel = StudyInformationView(isLongType: true, title: "강의 정보")
   private let studyRuleLabel = StudyInformationView(isLongType: true, title: "스터디 규칙")
-  
-  
   
   override func attribute() {
     super.attribute()
@@ -36,9 +32,6 @@ class WaitingStudyContentView: View {
     unitTitleLabel.textAlignment = .center
     
     upperLine.backgroundColor = #colorLiteral(red: 0.5568627451, green: 0.5568627451, blue: 0.5764705882, alpha: 1)
-    
-    
-    
   }
   
   override func setupUI() {
@@ -88,21 +81,21 @@ class WaitingStudyContentView: View {
         if index == labels.count - 1 {
           $0.bottom.equalToSuperview().offset(-bottomMargin)
         }
-        
       })
     })
-    
   }
   
   func configure(study: StudyModel) {
     lectureTitleLabel.text = study.lectureTitle
     unitTitleLabel.text = study.unitTitle
-    masterUserLabel.configure(description: study.userIDs.first)
+    if let users = UserService.allUser {
+      let user = users.filter { $0.uid == study.userIDs.first! }.first!
+      let userName = user.nickName
+      masterUserLabel.configure(description: userName)
+    }
     studyTitleLabel.configure(description: study.title)
     fixedLable.configure(description: "\(study.userIDs.count)/\(study.fixed)")
     unitDescriptionLabel.configure(description: study.unitDescription)
     studyRuleLabel.configure(description: study.rule)
   }
-  
-  
 }
