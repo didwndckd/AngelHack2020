@@ -36,7 +36,15 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
     registerForKeyboardEvents()
     customView.setDelegate(delegate: self)
     updateMessages(0)
+    setNavigation()
 //    questCollectionUserInteraction() // 방장만 질문 스크롤 가능하게 함
+  }
+  
+  
+  private func setNavigation() {
+    let completeButton = UIBarButtonItem(title: "스터디 종료", style: .done, target: self, action: #selector(didTapCompleteButton(_:)))
+    completeButton.tintColor = .black
+    navigationItem.rightBarButtonItem = completeButton
   }
   
   private func questCollectionUserInteraction() {
@@ -109,6 +117,12 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
     })
   }
   
+  @objc private func didTapCompleteButton(_ sender: UIBarButtonItem) {
+    guard study.data.userIDs[0] == SignService.uid else { return }
+    var study = self.study.data
+    study.inProcess = .finished
+    navigationController?.popToRootViewController(animated: true)
+  }
   
 }
 

@@ -28,7 +28,12 @@ struct StudyModel: Codable {
   let rule: String
   var userIDs: [String]
   var qnaIDs: [String]
-  var inProcess: ProcessStatus
+  var inProcess: ProcessStatus {
+    didSet {
+      guard let documentID = self.documentID else { return }
+      StudyService.updateProcess(studyDocumentID: documentID, inProcess: self.inProcess.rawValue)
+    }
+  }
   
   var dateValue: Date {
     date.dateValue()
