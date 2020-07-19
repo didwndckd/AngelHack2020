@@ -56,7 +56,7 @@ class StudyListVC: UIViewController {
         case .success(let data):
           let temp = Study(documentID: studyID, data: data)
           self.studys.append(temp)
-          self.studys.sort { $0.data.dateValue < $1.data.dateValue }
+          self.studys.sort { $0.data.dateValue > $1.data.dateValue }
           self.tableView.reloadData()
         }
       }
