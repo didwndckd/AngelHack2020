@@ -67,7 +67,7 @@ class StudyReviewView: View {
     
     questionCollectionView.snp.makeConstraints({
       $0.top.leading.trailing.equalTo(guide)
-      $0.height.equalTo(guide).multipliedBy(0.35)
+      $0.height.equalTo(guide).multipliedBy(0.3)
     })
     
     chattingTableView.snp.makeConstraints({
@@ -139,9 +139,10 @@ class StudyReviewView: View {
       let indexPath = IndexPath(row: index, section: 0)
       self?.chattingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
-    
-    
   }
   
-  
+  func questionInteractionEnabled() {
+    questionCollectionView.isUserInteractionEnabled = true
+    questionCollectionView.isScrollEnabled = false
+  }
 }

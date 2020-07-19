@@ -154,23 +154,33 @@ class StudyService {
     }
   }
   
-  class func getQnaList(studyDocumentID: String, completion: @escaping ([QnA]) -> Void) {
+  class func getQnaList(studyDocumentID: String, completion: @escaping (Study, [QnA]) -> Void) {
     Firestore
       .firestore()
-      .collection("QnA")
-      .whereField("studyDocumentID", isEqualTo: studyDocumentID)
-      .getDocuments { (snapshot, _) in
-        guard let documents = snapshot?.documents else { return }
+      .collection("Study")
+      .document(studyDocumentID)
+      .getDocument { (snapshot, _) in
+        guard let data = snapshot?.data() else { return }
+        let temp = try! FirestoreDecoder().decode(StudyModel.self, from: data)
+        let study = Study(documentID: studyDocumentID, data: temp)
+        
+        Firestore
+          .firestore()
+          .collection("QnA")
+          .whereField("studyDocumentID", isEqualTo: studyDocumentID)
+          .getDocuments { (snapshot, _) in
+            guard let documents = snapshot?.documents else { return }
 
-        var arr = [QnA]()
-        
-        for document in documents {
-          let data = try! FirestoreDecoder().decode(QnAModel.self, from: document.data())
-          let temp = QnA(documentID: document.documentID, data: data)
-          arr.append(temp)
+            var arr = [QnA]()
+            
+            for document in documents {
+              let data = try! FirestoreDecoder().decode(QnAModel.self, from: document.data())
+              let temp = QnA(documentID: document.documentID, data: data)
+              arr.append(temp)
+            }
+            
+            completion(study, arr)
         }
-        
-        completion(arr)
     }
   }
   
