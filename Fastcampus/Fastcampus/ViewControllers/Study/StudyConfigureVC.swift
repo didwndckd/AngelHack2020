@@ -129,9 +129,14 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
           tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "•"
           tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeColor = .clear
           tbc.viewControllers?[0].tabBarItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
+          
+          if let nvc = tbc.viewControllers?[1] as? UINavigationController {
+            self.dismissIndicatorViewController()
+            self.dismiss(animated: true) {
+              nvc.popToRootViewController(animated: true)
+            }
+          }
         }
-        self.dismissIndicatorViewController()
-        self.dismiss(animated: true)
       }
     } else {
       let dispatchGroup = DispatchGroup()
@@ -228,9 +233,13 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
               tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "•"
               tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeColor = .clear
               tbc.viewControllers?[0].tabBarItem.setBadgeTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .normal)
+              
+              if let nvc = tbc.viewControllers?[1] as? UINavigationController {
+                self.dismiss(animated: true) {
+                  nvc.popToRootViewController(animated: true)
+                }
+              }
             }
-            
-            self.dismiss(animated: true)
           }
         }
       }
