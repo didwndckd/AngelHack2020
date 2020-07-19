@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 
 class StudyListVC: UIViewController {
-  
   private var studys = [Study]() {
     didSet {
       if studys.count == 0 {
@@ -52,13 +51,11 @@ class StudyListVC: UIViewController {
     tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
   }
   
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     getStudyList()
     self.tabBarController?.tabBar.items?[0].badgeValue = nil
   }
-  
   
   private func getStudyList() {
     studys.removeAll()

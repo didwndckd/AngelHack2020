@@ -55,18 +55,6 @@ class SummaryHeaderView: View {
     userNameLabel.setContentHuggingPriority(.init(rawValue: 300), for: .horizontal)
     userNameLabel.setContentCompressionResistancePriority(.init(rawValue: 1000), for: .horizontal)
     
-    contentsLabel.text = """
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa
-    qui officia deserunt mollit anim. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt
-    mollit anim.
-
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa
-    qui officia deserunt mollit anim.
-    qui officia deserunt mollit anim. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt
-    mollit anim.
-    """
     contentsLabel.numberOfLines = 0
     contentsLabel.lineBreakMode = .byCharWrapping
     contentsLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)

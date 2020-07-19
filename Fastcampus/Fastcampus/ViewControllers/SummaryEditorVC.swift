@@ -38,6 +38,18 @@ class SummaryEditorVC: ViewController<SummaryEditorView>, KeyboardObserving {
     self.navigationController?.isNavigationBarHidden = false
   }
   
+  private func getUserInfo() {
+     UserService.getData(uid: SignService.uid) { [weak self] result in
+      guard let self = self else { return }
+       switch result {
+         case .success(let user):
+          self.customView.setProperties(user: user)
+         case .failure(let err):
+           fatalError(err.localizedDescription)
+       }
+     }
+   }
+  
   func keyboardWillShow(_ notification: Notification) {
     customView.handleKeyboardWillShow(notification)
   }
