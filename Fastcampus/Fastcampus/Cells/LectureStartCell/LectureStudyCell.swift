@@ -44,8 +44,21 @@ class LectureStudyCell: UITableViewCell {
       joinButton.backgroundColor = UIColor.lightGray
       joinButton.isUserInteractionEnabled = false
     }
+    
+    if study.userIDs.contains(SignService.uid) {
+      joinButton.setTitle("참여완료", for: .normal)
+      joinButton.setTitleColor(.darkGray, for: .normal)
+      joinButton.backgroundColor = UIColor.lightGray
+      joinButton.isUserInteractionEnabled = false
+    } else {
+      if study.userIDs.count != study.fixed {
+        makeGradientJoinButton()
+      }
+    }
+    
     nameLabel.text = user.nickName
     studyID = study.documentID
+    levelButton.setTitle("Lv.\(user.level)", for: .normal)
   }
   
   func makeGradientJoinButton() {
@@ -65,25 +78,20 @@ class LectureStudyCell: UITableViewCell {
   }
   
   private func attribute() {
-    levelButton.setTitle("Lv.9", for: .normal)
     levelButton.setTitleColor(.red, for: .normal)
     levelButton.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
     levelButton.layer.borderColor = UIColor.red.cgColor
     levelButton.layer.borderWidth = 1
     levelButton.contentEdgeInsets = UIEdgeInsets(top: 1, left: 3, bottom: 1, right: 3)
     
-    nameLabel.text = "김예은"
     nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     
-    titleLabel.text = "1회차 같이 완주해요!"
     titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .black)
     
     startDateBgView.backgroundColor = #colorLiteral(red: 1, green: 0.9131416678, blue: 0.8906806111, alpha: 1)
     
-    startDateLabel.text = "07.14 16:00 시작"
     startDateLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
     
-    peopleLabel.text = "3명 / 6명"
     peopleLabel.textColor = #colorLiteral(red: 0.5988813043, green: 0.5989002585, blue: 0.6190659404, alpha: 1)
     peopleLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     

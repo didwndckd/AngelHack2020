@@ -18,7 +18,7 @@ class StudyConfigureView: View {
   weak var delegate: StudyConfigureViewDelegate?
   
   var title: String?
-  var moth: Int?
+  var month: Int?
   var day: Int?
   var hour: Int?
   var minute: Int?
@@ -246,7 +246,7 @@ private extension StudyConfigureView {
   @objc private func buttonDidTap(_ sender: UIButton) {
     sender == cancelButton ?
       delegate?.cancelDidTap() :
-      delegate?.createDidTap(title: title, moth: moth, day: day, hour: hour, minute: minute, fixed: fixed, rule: rule)
+      delegate?.createDidTap(title: title, moth: month, day: day, hour: hour, minute: minute, fixed: fixed, rule: rule)
   }
 }
 
@@ -299,7 +299,7 @@ extension StudyConfigureView {
 extension StudyConfigureView: DropButtonViewDelegate {
   func selectedElement(_ view: UIView, _ element: Int) {
     switch view {
-    case monthDropView:    moth = element
+    case monthDropView:    month = element
     case dayDropView:     day = element
     case hourDropView:    hour = element
     case minuteDropView:  minute = element

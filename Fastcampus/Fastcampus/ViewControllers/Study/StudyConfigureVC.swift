@@ -15,6 +15,7 @@ enum StudyConfigureType {
 }
 
 class StudyConfigureVC: ViewController<StudyConfigureView> {
+  private let db = Firestore.firestore()
   var studyConfigureType: StudyConfigureType = .create {
     didSet {
       if studyConfigureType == .join {
@@ -81,57 +82,156 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
   }
   
   func createDidTap(title: String?, moth: Int?, day: Int?, hour: Int?, minute: Int?, fixed: Int?, rule: String?) {
-    guard let title = title else {
-      alertNormal(title: "스터디 제목을 입력해주세요")
-      return
-    }
-    
-    guard
-      let moth = moth, let day = day, let hour = hour, let minute = minute,
-      let date = DateComponents(calendar: Calendar(identifier: .gregorian), year: 2020, month: moth, day: day, hour: hour, minute: minute).date
-      else {
-        alertNormal(title: "스터디 오픈 시간을 입력해주세요")
-        return
-    }
-    
-    guard let fixed = fixed else {
-      alertNormal(title: "정원을 정해주세요")
-      return
-    }
-    
-    
-    guard let rule = rule else {
-      alertNormal(title: "규칙을 정해주세요")
-      return
-    }
-    let unitTitle = "\(chapter.title) - \(unit.title)"
-    let mStudy = StudyModel(
-      title: title,
-      lectureID: lecture.documentID,
-      lectureTitle: lecture.title,
-      chapterID: chapter.index,
-      unitID: unit.index,
-      unitTitle: unitTitle,
-      unitDescription: unit.description,
-      date: Timestamp(date: date),
-      fixed: fixed,
-      rule: rule,
-      userIDs: [SignService.uid],
-      qnaIDs: [String](),
-      inProcess: .wait
-    )
-    
     if studyConfigureType == .create {
+      guard let title = title else {
+        alertNormal(title: "스터디 제목을 입력해주세요")
+        return
+      }
+      
+      guard
+        let moth = moth, let day = day, let hour = hour, let minute = minute,
+        let date = DateComponents(calendar: Calendar(identifier: .gregorian), year: 2020, month: moth, day: day, hour: hour, minute: minute).date
+        else {
+          alertNormal(title: "스터디 오픈 시간을 입력해주세요")
+          return
+      }
+      
+      guard let fixed = fixed else {
+        alertNormal(title: "정원을 정해주세요")
+        return
+      }
+      
+      
+      guard let rule = rule else {
+        alertNormal(title: "규칙을 정해주세요")
+        return
+      }
+      let unitTitle = "\(chapter.title) - \(unit.title)"
+      let mStudy = StudyModel(
+        title: title,
+        lectureID: lecture.documentID,
+        lectureTitle: lecture.title,
+        chapterID: chapter.index,
+        unitID: unit.index,
+        unitTitle: unitTitle,
+        unitDescription: unit.description,
+        date: Timestamp(date: date),
+        fixed: fixed,
+        rule: rule,
+        userIDs: [SignService.uid],
+        qnaIDs: [String](),
+        inProcess: .wait
+      )
+      
       presentIndicatorViewController()
       StudyService.createStudy(studyModel: mStudy) {
+        if let tbc = self.presentingViewController as? MainTabBarVC {
+          tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "New"
+        }
         self.dismissIndicatorViewController()
         self.dismiss(animated: true)
       }
     } else {
-      //TODO:- 스터디 참여하기
+      let dispatchGroup = DispatchGroup()
+      
+      DispatchQueue.global().async(group: dispatchGroup) { [weak self] in
+        guard let self = self else { return }
+        dispatchGroup.enter()
+        let sfReference = self.db.collection("User").document(SignService.uid)
+        self.db.runTransaction({ (transaction, errorPointer) -> Any? in
+          let sfDocument: DocumentSnapshot
+          do {
+            try sfDocument = transaction.getDocument(sfReference)
+          } catch let fetchError as NSError {
+            errorPointer?.pointee = fetchError
+            return nil
+          }
+          
+          guard var oldJoinedStudyPerson = sfDocument.data()?["studys"] as? [String] else {
+            let error = NSError(
+              domain: "AppErrorDomain",
+              code: -1,
+              userInfo: [
+                NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
+              ]
+            )
+            errorPointer?.pointee = error
+            return nil
+          }
+          
+          if !oldJoinedStudyPerson.contains(SignService.uid) {
+            oldJoinedStudyPerson.append(SignService.uid)
+            transaction.updateData(["studys": oldJoinedStudyPerson], forDocument: sfReference)
+          }
+          return nil
+        }) { (object, error) in
+          if let error = error {
+            print("Transaction failed: \(error)")
+            dispatchGroup.leave()
+          } else {
+            print("Transaction successfully committed!")
+            dispatchGroup.leave()
+          }
+        }
+      }
+      
+      DispatchQueue.global().async(group: dispatchGroup) { [weak self] in
+        dispatchGroup.enter()
+        guard let self = self else { return }
+        let sfReference = self.db.collection("Study").document(self.study!.documentID!)
+        self.db.runTransaction({ (transaction, errorPointer) -> Any? in
+          let sfDocument: DocumentSnapshot
+          do {
+            try sfDocument = transaction.getDocument(sfReference)
+          } catch let fetchError as NSError {
+            errorPointer?.pointee = fetchError
+            return nil
+          }
+          
+          guard var oldJoinedStudyPerson = sfDocument.data()?["userIDs"] as? [String] else {
+            let error = NSError(
+              domain: "AppErrorDomain",
+              code: -1,
+              userInfo: [
+                NSLocalizedDescriptionKey: "Unable to retrieve population from snapshot \(sfDocument)"
+              ]
+            )
+            errorPointer?.pointee = error
+            return nil
+          }
+          
+          if !oldJoinedStudyPerson.contains(SignService.uid) {
+            oldJoinedStudyPerson.append(SignService.uid)
+            transaction.updateData(["userIDs": oldJoinedStudyPerson], forDocument: sfReference)
+          }
+          return nil
+        }) { (object, error) in
+          if let error = error {
+            print("Transaction failed: \(error)")
+            dispatchGroup.leave()
+          } else {
+            print("Transaction successfully committed!")
+            dispatchGroup.leave()
+          }
+        }
+      }
+      
+      
+      
+      DispatchQueue.main.async(group: dispatchGroup) { [weak self] in
+        guard let self = self else { return }
+        dispatchGroup.notify(queue: .main) {
+          self.alertNormal(title: "참여하기", message: "강의에 참가하기가 완료되었습니다.") { action in
+            if let tbc = self.presentingViewController as? MainTabBarVC {
+              tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "New"
+            }
+            
+            self.dismiss(animated: true) {
+            }
+          }
+        }
+      }
     }
-    
-    
   }
 }
 
