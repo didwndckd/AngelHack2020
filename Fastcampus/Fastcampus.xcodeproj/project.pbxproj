@@ -25,12 +25,12 @@
 		314E84FE24BCD2DA00A6D492 /* InProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FD24BCD2DA00A6D492 /* InProcessView.swift */; };
 		314E850024BCD3BE00A6D492 /* StudyPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */; };
 		314E850624BCD8EE00A6D492 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314E850524BCD8EE00A6D492 /* DoubleExtension.swift */; };
-		316C502E24BE129500D7F59A /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = 316C502D24BE129500D7F59A /* test.mov */; };
-		316C502F24BE169300D7F59A /* SODA_1594647376.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */; };
 		31B327C824C3B76700616995 /* QuestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B327C724C3B76700616995 /* QuestionCollectionViewCell.swift */; };
 		31B327CA24C3D6E300616995 /* ChattingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B327C924C3D6E300616995 /* ChattingCell.swift */; };
 		31B327CC24C3FFF800616995 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B327CB24C3FFF800616995 /* PlayerViewController.swift */; };
 		31B327CE24C403DA00616995 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B327CD24C403DA00616995 /* PlayerView.swift */; };
+		4F18165724C44BCA005B5A13 /* Lecture.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4F18165524C44BC9005B5A13 /* Lecture.mov */; };
+		4F18165824C44BCA005B5A13 /* Study.mov in Resources */ = {isa = PBXBuildFile; fileRef = 4F18165624C44BCA005B5A13 /* Study.mov */; };
 		4F26281F24C2292200D20BF7 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26281E24C2292200D20BF7 /* WindowManager.swift */; };
 		4F26282124C2377B00D20BF7 /* SignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F26282024C2377B00D20BF7 /* SignService.swift */; };
 		4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */; };
@@ -110,12 +110,12 @@
 		314E84FD24BCD2DA00A6D492 /* InProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProcessView.swift; sourceTree = "<group>"; };
 		314E84FF24BCD3BE00A6D492 /* StudyPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyPlayerView.swift; sourceTree = "<group>"; };
 		314E850524BCD8EE00A6D492 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoubleExtension.swift; path = Fastcampus/Extension/DoubleExtension.swift; sourceTree = SOURCE_ROOT; };
-		316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SODA_1594647376.MP4; sourceTree = "<group>"; };
-		316C502D24BE129500D7F59A /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
 		31B327C724C3B76700616995 /* QuestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		31B327C924C3D6E300616995 /* ChattingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCell.swift; sourceTree = "<group>"; };
 		31B327CB24C3FFF800616995 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		31B327CD24C403DA00616995 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		4F18165524C44BC9005B5A13 /* Lecture.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Lecture.mov; sourceTree = "<group>"; };
+		4F18165624C44BCA005B5A13 /* Study.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Study.mov; sourceTree = "<group>"; };
 		4F26281E24C2292200D20BF7 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		4F26282024C2377B00D20BF7 /* SignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignService.swift; path = Fastcampus/Util/SignService.swift; sourceTree = SOURCE_ROOT; };
 		4F5329C424BC0D4D00CB5181 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 		314E84E324BC9CA100A6D492 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				316C502D24BE129500D7F59A /* test.mov */,
-				316C502C24BE124000D7F59A /* SODA_1594647376.MP4 */,
+				4F18165524C44BC9005B5A13 /* Lecture.mov */,
+				4F18165624C44BCA005B5A13 /* Study.mov */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -515,11 +515,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				316C502F24BE169300D7F59A /* SODA_1594647376.MP4 in Resources */,
-				316C502E24BE129500D7F59A /* test.mov in Resources */,
 				4FB756DD24BBFE5E0035BD5B /* LaunchScreen.storyboard in Resources */,
 				4FB756DA24BBFE5E0035BD5B /* Assets.xcassets in Resources */,
 				4F5329C524BC0D4D00CB5181 /* GoogleService-Info.plist in Resources */,
+				4F18165724C44BCA005B5A13 /* Lecture.mov in Resources */,
+				4F18165824C44BCA005B5A13 /* Study.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -786,7 +786,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZLN97H98PA;
 				INFOPLIST_FILE = Fastcampus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -806,6 +806,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZLN97H98PA;
 				INFOPLIST_FILE = Fastcampus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

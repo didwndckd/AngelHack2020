@@ -39,7 +39,11 @@ class PlayerViewController: UIViewController {
   }
   
   private func setupAsset() -> AVAsset? {
-    guard let filePath = Bundle.main.path(forResource: "test", ofType: "mov") else { return nil }
+    let fi = Bundle.main.path(forResource: "Lecture", ofType: "mov")
+    print("==========================================================================")
+    print("filePath: ", fi)
+    guard let filePath = Bundle.main.path(forResource: "Lecture", ofType: "mov") else { return nil }
+    print(filePath)
     let videoURL = URL(fileURLWithPath: filePath)
     let asset = AVAsset(url: videoURL)
     return asset

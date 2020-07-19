@@ -60,7 +60,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
   }
   
   private func setupAsset() -> AVAsset? {
-    guard let filePath = Bundle.main.path(forResource: "test", ofType: "mov") else { return nil }
+    guard let filePath = Bundle.main.path(forResource: "Study", ofType: "MP4") else { return nil }
     let videoURL = URL(fileURLWithPath: filePath)
     let asset = AVAsset(url: videoURL)
     return asset
