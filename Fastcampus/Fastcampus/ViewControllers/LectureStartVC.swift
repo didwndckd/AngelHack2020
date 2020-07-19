@@ -149,6 +149,10 @@ class LectureStartVC: PlayerViewController {
             model.documentID = document.documentID
             self.summary.append(model)
           }
+          if self.summary.isEmpty {
+            self.summary = []
+          }
+          
         }
       }
     }

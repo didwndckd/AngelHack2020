@@ -28,7 +28,6 @@ class PlayerViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     addObservers()
-    player?.play()
   }
   
   override func viewWillDisappear(_ animated: Bool) {

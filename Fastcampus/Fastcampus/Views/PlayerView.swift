@@ -86,7 +86,7 @@ class PlayerView: StudyPlayerView {
   
   @objc private func didTapPlayButton(_ sender: UIButton) {
     sender.isSelected.toggle()
-    controller?.play(isPlay: !sender.isSelected)
+    controller?.play(isPlay: sender.isSelected)
     
   }
   
