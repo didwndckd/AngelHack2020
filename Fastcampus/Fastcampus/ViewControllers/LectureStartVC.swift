@@ -140,7 +140,13 @@ class LectureStartVC: UIViewController {
       if let err = err {
         print("[Log] Error :", err.localizedDescription)
       } else {
-        self.summary = try! querySnapshot!.decoded()
+        if let documents = querySnapshot?.documents {
+          for document in documents {
+            var model = try! FirestoreDecoder().decode(Summary.self, from: document.data())
+            model.documentID = document.documentID
+            self.summary.append(model)
+          }
+        }
       }
     }
   }
@@ -374,6 +380,19 @@ private extension LectureStartVC {
 }
 
 extension LectureStartVC: LectureStudyCellDelegate {
+  func notice() {
+    let alert = UIAlertController(
+      title: "공석알림",
+      message: "모집이 마감된 스터디입니다.\n공석 알림을 설정하시겠습니까?",
+      preferredStyle: .alert
+    )
+    let cancelButton = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+    let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+    alert.addAction(cancelButton)
+    alert.addAction(okButton)
+    self.present(alert, animated: true, completion: nil)
+  }
+  
   func joinStudy(studyID: String) {
     StudyService.getStudy(studyDocumentID: studyID) { [weak self] result in
       guard let self = self else { return }

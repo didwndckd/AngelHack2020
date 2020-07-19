@@ -15,15 +15,22 @@ protocol SummaryEditorViewDelegate: class {
 class SummaryEditorView: View, KeyboardControllable {
   weak var delegate: SummaryEditorViewDelegate?
   private let summaryScrollView = UIScrollView()
-  private let titleLabel = UILabel()
-  private let titleTextField = DisignableTextField(placeHolder: "제목을 입력해 주세요.")
-  private let contextLabel = UILabel()
+  private let titleBgView = UIView()
+  private let titleTextField = UITextField()
+  private let levelLabel = UIButton()
+  private let userNameLabel = UILabel()
   private let contextTextView = UITextView()
+  
   private let cancelButton = UIButton()
   private let registButton = UIButton()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+  }
+  
+  func setProperties(user: UserModel) {
+    levelLabel.setTitle("Lv.\(user.level)", for: .normal)
+    userNameLabel.text = user.nickName
   }
   
   func handleKeyboardWillShow(_ notification: Notification) {
@@ -53,18 +60,29 @@ class SummaryEditorView: View, KeyboardControllable {
   
   override func attribute() {
     super.attribute()
-    titleLabel.text = "제목"
-    titleLabel.textColor = .black
-    titleLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+    titleBgView.backgroundColor = #colorLiteral(red: 1, green: 0.9529311061, blue: 0.9375221133, alpha: 1)
+
+    titleTextField.placeholder = "제목을 입력해 주세요."
+    titleTextField.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+    titleTextField.setContentHuggingPriority(.init(rawValue: 100), for: .horizontal)
+    titleTextField.setContentCompressionResistancePriority(.init(rawValue: 500), for: .horizontal)
+    titleTextField.backgroundColor = .clear
     
-    contextLabel.text = "내용"
-    contextLabel.textColor = .black
-    contextLabel.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+    levelLabel.setTitle("Lv.9", for: .normal)
+    levelLabel.setTitleColor(.red, for: .normal)
+    levelLabel.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+    levelLabel.contentEdgeInsets = UIEdgeInsets(top: 2, left: 3, bottom: 2, right: 3)
+    levelLabel.layer.borderColor = UIColor.red.cgColor
+    levelLabel.layer.borderWidth = 1
+    levelLabel.setContentHuggingPriority(.init(rawValue: 200), for: .horizontal)
+    levelLabel.setContentCompressionResistancePriority(.init(rawValue: 750), for: .horizontal)
     
-    contextTextView.layer.cornerRadius = 8
-    contextTextView.layer.borderWidth = 1
-    contextTextView.layer.borderColor = UIColor.lightGray.cgColor
-    contextTextView.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+    userNameLabel.text = "조현철"
+    userNameLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+    userNameLabel.setContentHuggingPriority(.init(rawValue: 300), for: .horizontal)
+    userNameLabel.setContentCompressionResistancePriority(.init(rawValue: 1000), for: .horizontal)
+    
+    contextTextView.font = UIFont.systemFont(ofSize: 13, weight: .regular)
     
     cancelButton.setTitle("취소", for: .normal)
     cancelButton.setTitleColor(.gray, for: .normal)
@@ -83,32 +101,36 @@ class SummaryEditorView: View, KeyboardControllable {
     let guide = self.safeAreaLayoutGuide
     let margins: CGFloat = 15
     
-    [titleLabel, titleTextField, contextLabel, contextTextView, cancelButton, registButton]
+    [titleBgView, titleTextField, levelLabel, userNameLabel, contextTextView, cancelButton, registButton]
       .forEach { self.addSubview($0) }
     
-    titleLabel.snp.makeConstraints {
-      $0.top.equalTo(guide.snp.top).offset(margins)
-      $0.leading.equalTo(self).offset(margins)
+    titleBgView.snp.makeConstraints {
+      $0.top.equalTo(guide.snp.top)
+      $0.leading.trailing.equalTo(self)
+      $0.height.equalTo(52)
     }
     
     titleTextField.snp.makeConstraints {
-      $0.top.equalTo(titleLabel.snp.bottom).offset(margins / 2)
+      $0.top.bottom.equalTo(titleBgView)
       $0.leading.equalTo(self).offset(margins)
-      $0.trailing.equalTo(self).offset(-margins)
-      $0.height.equalTo(44)
+      $0.trailing.equalTo(levelLabel.snp.leading).offset(-margins)
     }
     
-    contextLabel.snp.makeConstraints {
-      $0.top.equalTo(titleTextField.snp.bottom).offset(margins)
-      $0.leading.equalTo(self).offset(margins)
+    levelLabel.snp.makeConstraints {
+      $0.centerY.equalTo(titleTextField)
+      $0.trailing.equalTo(userNameLabel.snp.leading).offset(-margins / 3)
+    }
+    
+    userNameLabel.snp.makeConstraints {
+      $0.centerY.equalTo(titleTextField)
       $0.trailing.equalTo(self).offset(-margins)
     }
     
     contextTextView.snp.makeConstraints {
-      $0.top.equalTo(contextLabel.snp.bottom).offset(margins / 2)
+      $0.top.equalTo(titleBgView.snp.bottom).offset(margins * 2)
       $0.leading.equalTo(self).offset(margins)
       $0.trailing.equalTo(self).offset(-margins)
-      $0.bottom.equalTo(cancelButton.snp.top).offset(-margins / 2)
+      $0.bottom.equalTo(cancelButton.snp.top).offset(-margins * 3)
     }
     
     cancelButton.snp.makeConstraints {

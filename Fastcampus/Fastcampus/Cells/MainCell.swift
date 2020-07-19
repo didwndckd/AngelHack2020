@@ -75,7 +75,6 @@ class MainCell: UITableViewCell {
       $0.contentEdgeInsets = UIEdgeInsets(top: 2, left: 5, bottom: 2, right: 5)
     }
     
-    lectureTitleLabel.text = "Mastering RxSwift"
     lectureTitleLabel.textColor = .white
     lectureTitleLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
     
