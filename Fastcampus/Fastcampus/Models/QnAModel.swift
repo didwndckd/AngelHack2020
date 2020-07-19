@@ -14,11 +14,6 @@ struct QnA {
   let data: QnAModel
 }
 
-struct Qna {
-  let documentID: String
-  let data: QnAModel
-}
-
 struct QnAModel: Codable {
   let studyDocumentID: String
   let playTime: Int64

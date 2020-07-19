@@ -22,16 +22,33 @@ class StudyReviewView: View {
     return view
   }
 
-  private let questionCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+  private let questionCollectionView: UICollectionView
   private let chattingTableView = UITableView()
   private let editingView = ChattingInpuView()
-  
+  var collectionViewItemSize: CGFloat {
+    questionCollectionView.bounds.width - (8 * 2)
+  }
   
   // MARK: Setup
+  
+  override init(frame: CGRect) {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    self.questionCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    super.init(frame: frame)
+    
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func attribute() {
     super.attribute()
     questionCollectionView.backgroundColor = .myGray
+    questionCollectionView.register(QuestionCollectionViewCell.self, forCellWithReuseIdentifier: QuestionCollectionViewCell.idenifier)
+    
+    questionCollectionView.decelerationRate = .fast
   }
   
   override func setupUI() {
@@ -44,7 +61,7 @@ class StudyReviewView: View {
     
     questionCollectionView.snp.makeConstraints({
       $0.top.leading.trailing.equalTo(guide)
-      $0.height.equalTo(guide).multipliedBy(0.3)
+      $0.height.equalTo(guide).multipliedBy(0.4)
     })
     
     chattingTableView.snp.makeConstraints({

@@ -153,7 +153,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
   }
   
   @objc private func pushStudyReviewVC() {
-    let reviewVC = StudyReviewVC()
+    let reviewVC = StudyReviewVC(qnas: qnas)
     navigationController?.pushViewController(reviewVC, animated: true)
   }
   
