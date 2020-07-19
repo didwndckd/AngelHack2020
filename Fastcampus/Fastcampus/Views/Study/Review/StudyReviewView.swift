@@ -8,19 +8,20 @@
 
 import UIKit
 
-protocol StudyReviewViewDelegate: UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
-  
+protocol StudyReviewViewDelegate: ChattingInpuViewDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 }
 
 class StudyReviewView: View {
   
-  override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-    let view = super.hitTest(point, with: event)
-    if view == questionCollectionView || view == chattingTableView {
-      endEditing(true)
-    }
-    return view
-  }
+//  override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+//    let view = super.hitTest(point, with: event)
+//    if view != editingView {
+//      endEditing(true)
+//    }
+//    return view
+//  }
+  
+  
 
   private let questionCollectionView: UICollectionView
   private let chattingTableView = UITableView()
@@ -45,10 +46,15 @@ class StudyReviewView: View {
   
   override func attribute() {
     super.attribute()
-    questionCollectionView.backgroundColor = .myGray
+    addGesture()
+    questionCollectionView.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
     questionCollectionView.register(QuestionCollectionViewCell.self, forCellWithReuseIdentifier: QuestionCollectionViewCell.idenifier)
     
     questionCollectionView.decelerationRate = .fast
+    
+    chattingTableView.register(ChattingCell.self, forCellReuseIdentifier: ChattingCell.identifier)
+    chattingTableView.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
+    chattingTableView.separatorStyle = .none
   }
   
   override func setupUI() {
@@ -61,7 +67,7 @@ class StudyReviewView: View {
     
     questionCollectionView.snp.makeConstraints({
       $0.top.leading.trailing.equalTo(guide)
-      $0.height.equalTo(guide).multipliedBy(0.4)
+      $0.height.equalTo(guide).multipliedBy(0.35)
     })
     
     chattingTableView.snp.makeConstraints({
@@ -82,10 +88,19 @@ class StudyReviewView: View {
     questionCollectionView.dataSource = delegate
     chattingTableView.dataSource = delegate
     chattingTableView.delegate = delegate
+    editingView.delegate = delegate
   }
   
   
   // MARK: Action
+  
+  func addGesture() {
+    addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(gestureAction)))
+  }
+  
+  @objc private func gestureAction() {
+    endEditing(true)
+  }
   
   func switchEditingMode(isEditing: Bool, height: CGFloat) {
     if isEditing {
@@ -116,6 +131,17 @@ class StudyReviewView: View {
     layoutIfNeeded()
   }
   
+  func reLoadTableView(index: Int) {
+    DispatchQueue.main.async { [weak self] in
+      self?.chattingTableView.reloadData()
+      let index = index - 1
+      guard index >= 0 else { return }
+      let indexPath = IndexPath(row: index, section: 0)
+      self?.chattingTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
+    
+    
+  }
   
   
 }

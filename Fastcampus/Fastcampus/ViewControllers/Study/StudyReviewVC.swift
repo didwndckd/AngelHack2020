@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import Firebase
 
 class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyReviewViewDelegate {
   
   private var model: [QnA]
-  private var chat: [MessageModel] = [] {
+  private var messages: [MessageModel] = [] {
     didSet {
-      
+      customView.reLoadTableView(index: messages.count)
     }
   }
+  private var index = 0
   
   init(qnas: [QnA]) {
     self.model = qnas
@@ -31,7 +33,7 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
     setupNavigation()
     registerForKeyboardEvents()
     customView.setDelegate(delegate: self)
-    
+    updateMessages(0)
   }
   
   deinit {
@@ -54,7 +56,10 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
     print("duration", duration)
     UIView.animate(withDuration: duration, animations: {
       [weak self] in
-      self?.customView.switchEditingMode(isEditing: true, height: height)
+      guard let self = self else { return }
+      self.customView.switchEditingMode(isEditing: true, height: height)
+      guard !self.messages.isEmpty else { return }
+      self.customView.reLoadTableView(index: self.messages.count)
     })
     
   }
@@ -67,7 +72,10 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
     print("duration", duration)
     UIView.animate(withDuration: duration, animations: {
       [weak self] in
-      self?.customView.switchEditingMode(isEditing: false, height: height)
+      guard let self = self else { return }
+      self.customView.switchEditingMode(isEditing: false, height: height)
+      guard !self.messages.isEmpty else { return }
+      self.customView.reLoadTableView(index: self.messages.count)
     })
     
   }
@@ -78,7 +86,24 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
     navigationController?.popToRootViewController(animated: true)
   }
   
-  
+  func updateMessages(_ index: Int) {
+    print(#function, index)
+    guard index >= 0 && index < model.count else { return }
+    print("start request")
+    
+    let documentID = model[index].documentID
+    print("documentID", documentID)
+    StudyService.messageAddListener(qnaDocumentID: documentID, completion: {
+      result in
+      switch result {
+      case .failure(let e):
+        print(e.localizedDescription)
+      case .success(let messages):
+        print(messages)
+        self.messages = messages.sorted(by: {  $0.dateValue < $1.dateValue })
+      }
+    })
+  }
   
   
 }
@@ -88,11 +113,14 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
 
 extension StudyReviewVC {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    chat.count
+    messages.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    let cell = tableView.dequeueReusableCell(withIdentifier: ChattingCell.identifier, for: indexPath) as! ChattingCell
+    cell.configure(message: messages[indexPath.row])
+    
+    return cell
   }
   
 }
@@ -123,14 +151,17 @@ extension StudyReviewVC {
   }
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    guard let _ = scrollView as? UICollectionView else { return }
     let cellWidthIncludingSpacing = customView.collectionViewItemSize + 8
     let offset = scrollView.contentOffset
-    let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
-    print(index)
+    let index = Int((offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing)
+    self.index = index
+    updateMessages(index)
   }
   
   func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
     // item의 사이즈와 item 간의 간격 사이즈를 구해서 하나의 item 크기로 설정.
+    guard let _ = scrollView as? UICollectionView else { return }
     
     let cellWidthIncludingSpacing = customView.collectionViewItemSize + 8
     
@@ -186,6 +217,15 @@ extension StudyReviewVC: UICollectionViewDelegateFlowLayout {
     let height = collectionView.bounds.height - (inset * 2)
     let width = collectionView.bounds.width - (margin * 2)
     return CGSize(width: width, height: height)
+  }
+}
+
+// MARK: ChattingInputViewDelegate
+extension StudyReviewVC {
+  func sendMessage(_ message: String) {
+    let messageModel = MessageModel(date: Timestamp(date: Date()), userID: SignService.user.uid, message: message)
+    let qnaDocumentID = model[index].documentID
+    StudyService.updateMessage(qnaDocumentID: qnaDocumentID, message: messageModel)
   }
 }
 

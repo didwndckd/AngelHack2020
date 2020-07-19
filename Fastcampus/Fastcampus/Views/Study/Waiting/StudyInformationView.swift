@@ -8,9 +8,17 @@
 
 import UIKit
 
-class StudyInformationTitleLabel: UILabel {
-  var padding: UIEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+class InsetLabel: UILabel {
+  private let padding: UIEdgeInsets
   
+  init(_ insets: UIEdgeInsets) {
+    self.padding = insets
+      super.init(frame: .zero)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   override func drawText(in rect: CGRect) {
     let paddingRect = rect.inset(by: padding)
     super.drawText(in: paddingRect)
@@ -27,7 +35,7 @@ class StudyInformationTitleLabel: UILabel {
 
 class StudyInformationView: View {
 
-  private let titleLabel = StudyInformationTitleLabel()
+  private let titleLabel = InsetLabel(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
   private let contentLabel = UILabel()
   private let isLongType: Bool
   

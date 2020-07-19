@@ -203,6 +203,7 @@ class StudyService {
   private static var messageListener: ListenerRegistration?
   
   class func messageAddListener(qnaDocumentID: String, completion: @escaping (Result<[MessageModel], Error>) -> Void) {
+    messageListenerRemove()
     messageListener = Firestore
       .firestore()
       .collection("QnA")

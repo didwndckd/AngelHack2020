@@ -8,9 +8,13 @@
 
 import UIKit
 
+protocol ChattingInpuViewDelegate: class {
+  func sendMessage(_ message: String)
+}
 
 class ChattingInpuView: View {
   
+  weak var delegate: ChattingInpuViewDelegate?
   private let backgroundView = UIView()
   private let inputTextField = UITextField()
   private let sendButton = UIButton()
@@ -23,6 +27,8 @@ class ChattingInpuView: View {
     
     sendButton.setImage(UIImage(named: "Send"), for: .normal)
     sendButton.backgroundColor = .myRed
+    
+    sendButton.addTarget(self, action: #selector(didTapSendButton(_:)), for: .touchUpInside)
   }
   
   override func setupUI() {
@@ -57,6 +63,12 @@ class ChattingInpuView: View {
     super.layoutSubviews()
     backgroundView.layer.cornerRadius = backgroundView.bounds.height / 2
     sendButton.layer.cornerRadius = sendButton.bounds.width / 2
+  }
+  
+  
+  @objc private func didTapSendButton(_ sender: UIButton) {
+    delegate?.sendMessage(inputTextField.text ?? " ")
+    inputTextField.text = ""
   }
   
   
