@@ -13,17 +13,21 @@ class MypageHeaderView: View {
   private let levelLabel = UIButton()
   private let recommendLabel = UILabel()
   private let writingLabel = UILabel()
-  private let enterImageView = UIImageView()
   private let bottomSeparatorView = UIView()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
   
+  func setProperties(user: UserModel) {
+    nameLabel.text = "\(user.nickName) 님"
+    levelLabel.setTitle("Lv.\(user.level)", for: .normal)
+    recommendLabel.text = "받은 추천 수 : 0개"
+    writingLabel.text = "작성한 요약본 : 0개"
+  }
+  
   override func attribute() {
     self.backgroundColor = #colorLiteral(red: 1, green: 0.9529311061, blue: 0.9375221133, alpha: 1)
-    enterImageView.image = #imageLiteral(resourceName: "icon_enter_black")
-    enterImageView.contentMode = .scaleAspectFit
     
     nameLabel.text = "김패캠 님"
     nameLabel.textColor = .black
@@ -53,7 +57,7 @@ class MypageHeaderView: View {
   
   override func setupUI() {
     let margins: CGFloat = 15
-    [nameLabel, levelLabel, recommendLabel, writingLabel, enterImageView, bottomSeparatorView]
+    [nameLabel, levelLabel, recommendLabel, writingLabel, bottomSeparatorView]
       .forEach { self.addSubview($0) }
     
     nameLabel.snp.makeConstraints {
@@ -64,12 +68,6 @@ class MypageHeaderView: View {
     levelLabel.snp.makeConstraints {
       $0.centerY.equalTo(nameLabel)
       $0.leading.equalTo(nameLabel.snp.trailing).offset(margins / 2)
-    }
-    
-    enterImageView.snp.makeConstraints {
-      $0.centerY.equalTo(self.snp.centerY)
-      $0.trailing.equalTo(self).offset(-margins)
-      $0.width.height.equalTo(44)
     }
     
     recommendLabel.snp.makeConstraints {

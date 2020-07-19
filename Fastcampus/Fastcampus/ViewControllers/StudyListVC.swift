@@ -10,8 +10,22 @@ import UIKit
 import Firebase
 
 class StudyListVC: UIViewController {
-  
-  private var studys = [Study]()
+  private var studys = [Study]() {
+    didSet {
+      if studys.count == 0 {
+        self.tableView.setEmptyView(
+          title: "참여중인 스터디 없음!",
+          message: """
+          현재 참여중인 스터디가 없습니다.
+          듣고 있는 강의의 스터디에 참가해보세요.
+          """
+        )
+      } else {
+        self.tableView.restore()
+      }
+      self.tableView.reloadData()
+    }
+  }
   
   private let tableView = UITableView()
   
@@ -37,13 +51,11 @@ class StudyListVC: UIViewController {
     tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
   }
   
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
     getStudyList()
+    self.tabBarController?.tabBar.items?[0].badgeValue = nil
   }
-  
   
   private func getStudyList() {
     studys.removeAll()
@@ -56,7 +68,7 @@ class StudyListVC: UIViewController {
         case .success(let data):
           let temp = Study(documentID: studyID, data: data)
           self.studys.append(temp)
-          self.studys.sort { $0.data.dateValue < $1.data.dateValue }
+          self.studys.sort { $0.data.dateValue > $1.data.dateValue }
           self.tableView.reloadData()
         }
       }

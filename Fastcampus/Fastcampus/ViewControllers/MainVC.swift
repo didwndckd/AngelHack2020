@@ -19,6 +19,7 @@ enum MainCategory: Int {
 }
 
 class MainVC: UIViewController {
+  private var user: UserModel?
   private let titleList: [String] = ["전체목록", "수강예정", "수강중", "수강완료"]
   private var currentCategory: MainCategory = .all {
     didSet {
@@ -36,7 +37,9 @@ class MainVC: UIViewController {
     }
   }
   private var lecture: [Lecture] = [] {
-    didSet { self.lectureTableView.reloadData() }
+    didSet {
+      self.lectureTableView.reloadData()
+    }
   }
   private let db = Firestore.firestore()
   private let mainScrollView = UIScrollView()
@@ -48,7 +51,6 @@ class MainVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     populatorLectureData()
     makeTitleStackView()
     attribute()
@@ -58,6 +60,23 @@ class MainVC: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     self.navigationController?.isNavigationBarHidden = true
+    getUserInfo()
+  }
+  
+  private func getUserInfo() {
+    UserService.getData(uid: SignService.uid) { [weak self] result in
+      guard let self = self else { return }
+      switch result {
+        case .success(let user):
+          self.user = user
+          self.headerTitleLabel.text = "\(user.nickName) 님의 강의"
+          let attributedStr = NSMutableAttributedString(string: self.headerTitleLabel.text!)
+          attributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 17), range: (self.headerTitleLabel.text! as NSString as NSString).range(of: "님의 강의"))
+          self.headerTitleLabel.attributedText = attributedStr
+        case .failure(_):
+          fatalError("Error Get User Info")
+      }
+    }
   }
   
   private func makeTitleStackView() {
@@ -83,7 +102,6 @@ class MainVC: UIViewController {
       if let err = err {
         print("[Log] Error :", err.localizedDescription)
       } else {
-        //TODO:- append가 아니고 [Lecture]로 Decoding
         if let documents = querySnapshot?.documents {
           for document in documents {
             let model = try! FirestoreDecoder().decode(Lecture.self, from: document.data())
@@ -105,12 +123,8 @@ class MainVC: UIViewController {
     iconImageView.image = #imageLiteral(resourceName: "icon_logo_color")
     iconImageView.contentMode = .scaleAspectFit
     
-    headerTitleLabel.text = "김패캠 님의 강의"
     headerTitleLabel.textColor = .black
     headerTitleLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-    let attributedStr = NSMutableAttributedString(string: headerTitleLabel.text!)
-    attributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 17), range: (headerTitleLabel.text! as NSString as NSString).range(of: "님의 강의"))
-    headerTitleLabel.attributedText = attributedStr
     
     titleStackView.axis = .horizontal
     titleStackView.alignment = .fill

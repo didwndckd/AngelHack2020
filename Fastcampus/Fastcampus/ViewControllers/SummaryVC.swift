@@ -96,10 +96,14 @@ class SummaryVC: UITableViewController {
 extension SummaryVC: CommentInputCellDelegate {
   func addcomment(text: String?) {
     //TODO:- 댓글 추가
+//    let commentsData = summary!.comments
+//    print("asdfasdasdf")
 //    db.collection("Summary")
 //      .document("\(lecture.id)")
 //      .collection("\(chapter.index)")
-    print("[Log] :", text ?? "")
+//      .document(summary!.documentID!)
+//      .updateData(<#T##fields: [AnyHashable : Any]##[AnyHashable : Any]#>)
+//    print("[Log] :", text ?? "")
   }
 }
 

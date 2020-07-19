@@ -58,12 +58,12 @@ class LectureStartVC: PlayerViewController {
   private let tabTableView = UITableView()
   private let makeStudyButton = UIButton()
   
-  private var study: [StudyModel] = [] {
+  var study: [StudyModel] = [] {
     didSet {
       if study.count == 0 {
         tabTableView.setEmptyView(
-          title: "요약 없음",
-          message: "작성된 요약이 없어요 ㅠㅠ\n요약본을 올려보세요."
+          title: "스터디 없음",
+          message: "신청된 스터디가 없어요 ㅠㅠ\n스터디를 만들어보세요."
         )
       } else {
         tabTableView.restore()
@@ -143,7 +143,13 @@ class LectureStartVC: PlayerViewController {
       if let err = err {
         print("[Log] Error :", err.localizedDescription)
       } else {
-        self.summary = try! querySnapshot!.decoded()
+        if let documents = querySnapshot?.documents {
+          for document in documents {
+            var model = try! FirestoreDecoder().decode(Summary.self, from: document.data())
+            model.documentID = document.documentID
+            self.summary.append(model)
+          }
+        }
       }
     }
   }
@@ -209,9 +215,8 @@ class LectureStartVC: PlayerViewController {
     tabTableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     tabTableView.dataSource = self
     tabTableView.delegate = self
-    tabTableView.register(LectureStudyCell.self, forCellReuseIdentifier: LectureStudyCell.identifier)
-    tabTableView.register(LectureSummaryCell.self, forCellReuseIdentifier: LectureSummaryCell.identifier)
     tabTableView.register(LectureIntroduceCell.self, forCellReuseIdentifier: LectureIntroduceCell.identifier)
+    tabTableView.register(LectureSummaryCell.self, forCellReuseIdentifier: LectureSummaryCell.identifier)
     
     makeStudyButton.setTitle("스터디 만들기  >", for: .normal)
     makeStudyButton.setTitleColor(UIColor.myRed, for: .normal)
@@ -315,12 +320,9 @@ extension LectureStartVC: UITableViewDataSource {
       cell.setProperties(title: lecture.title, description: unit.description)
       return cell
     } else if currentTab == .study {
-      let cell = tableView.dequeueReusableCell(withIdentifier: LectureStudyCell.identifier, for: indexPath) as! LectureStudyCell
+      let cell = LectureStudyCell()
       cell.delegate = self
       cell.selectionStyle = .none
-      if study[indexPath.row].userIDs.count != study[indexPath.row].fixed {
-        cell.makeGradientJoinButton()
-      }
       if let allUser = UserService.allUser {
         let user = allUser.filter { $0.uid == study[indexPath.row].userIDs[0] }.first!
         cell.setProperties(study: study[indexPath.row], user: user)
@@ -393,20 +395,30 @@ private extension LectureStartVC {
         let vcStudyConfigre = StudyConfigureVC(lecture: lecture, chapter: chapter, unit: unit)
         vcStudyConfigre.modalPresentationStyle = .overFullScreen
         present(vcStudyConfigre, animated: true)
-        
         break
       case .summary:
         let summaryEditorVC = SummaryEditorVC(lecture: lecture, chapter: chapter, unit: unit)
         self.navigationController?.pushViewController(summaryEditorVC, animated: true)
         break
-        
     }
   }
 }
 
 extension LectureStartVC: LectureStudyCellDelegate {
+  func notice() {
+    let alert = UIAlertController(
+      title: "공석알림",
+      message: "모집이 마감된 스터디입니다.\n공석 알림을 설정하시겠습니까?",
+      preferredStyle: .alert
+    )
+    let cancelButton = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+    let okButton = UIAlertAction(title: "확인", style: .default, handler: nil)
+    alert.addAction(cancelButton)
+    alert.addAction(okButton)
+    self.present(alert, animated: true, completion: nil)
+  }
+  
   func joinStudy(studyID: String) {
-    //TODO:- 참여하기 버튼 눌렀을 때
     StudyService.getStudy(studyDocumentID: studyID) { [weak self] result in
       guard let self = self else { return }
       switch result {
