@@ -21,7 +21,7 @@ class StudyListTableViewCell: UITableViewCell {
   private let badgeLabel = BadgeLabel()
   private let masterLabel = UILabel()
   private let titleLabel = UILabel()
-  private let dateLabel = UILabel()
+  private let dateLabel = PaddingLabel()
   private let fixedLabel = UILabel()
   private let arrowImageView = UIImageView()
   
@@ -52,7 +52,7 @@ class StudyListTableViewCell: UITableViewCell {
     let formatter = DateFormatter()
     formatter.dateFormat = "MM.dd hh:mm"
     let stringDate = formatter.string(from: data.dateValue)
-    dateLabel.text = "  " + stringDate + " 시작" + "  "
+    dateLabel.text = stringDate + " 시작"
     
     let currentUserCount = data.userIDs.count
     fixedLabel.text = "\(currentUserCount)명 / \(data.fixed)명"
@@ -97,7 +97,11 @@ class StudyListTableViewCell: UITableViewCell {
     titleLabel.font = .boldSystemFont(ofSize: 17)
     
     dateLabel.backgroundColor = .myGray
-    dateLabel.font = .boldSystemFont(ofSize: 14)
+    dateLabel.layer.cornerRadius = 4
+    dateLabel.layer.masksToBounds = true
+    dateLabel.font = .boldSystemFont(ofSize: 15)
+    
+    fixedLabel.font = .systemFont(ofSize: 15)
     
     arrowImageView.image = UIImage(systemName: "chevron.right")
     arrowImageView.contentMode = .left
@@ -148,7 +152,7 @@ class StudyListTableViewCell: UITableViewCell {
       titleLabel.topAnchor.constraint(equalTo: badgeLabel.bottomAnchor, constant: toSpace),
       titleLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       
-      dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: toSpace),
+      dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ySpace),
       dateLabel.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: xSpace),
       dateLabel.bottomAnchor.constraint(equalTo: baseView.bottomAnchor, constant: -(ySpace * 2)),
       
