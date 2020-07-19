@@ -125,6 +125,9 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
       
       presentIndicatorViewController()
       StudyService.createStudy(studyModel: mStudy) {
+        if let tbc = self.presentingViewController as? MainTabBarVC {
+          tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "New"
+        }
         self.dismissIndicatorViewController()
         self.dismiss(animated: true)
       }
@@ -219,17 +222,11 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
         guard let self = self else { return }
         dispatchGroup.notify(queue: .main) {
           self.alertNormal(title: "참여하기", message: "강의에 참가하기가 완료되었습니다.") { action in
-            //TODO:- PVC 찾아서 화면 이동할 것
-            self.tabBarController?.tabBar.items?[0].badgeValue = "New"
-            print("[Log] :", self.tabBarController?.viewControllers)
-            print("=========")
-            print("[Log] :", self.presentingViewController as? UITabBarController)
-            dump(self.presentingViewController)
-
+            if let tbc = self.presentingViewController as? MainTabBarVC {
+              tbc.viewControllers?[0].tabBarController?.tabBar.items?[0].badgeValue = "New"
+            }
             
             self.dismiss(animated: true) {
-              print("[Log] :", self.navigationController?.viewControllers)
-              print("[Log] :", self.tabBarController?.tabBar)
             }
           }
         }
