@@ -87,12 +87,8 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
   }
   
   func updateMessages(_ index: Int) {
-    print(#function, index)
     guard index >= 0 && index < model.count else { return }
-    print("start request")
-    
     let documentID = model[index].documentID
-    print("documentID", documentID)
     StudyService.messageAddListener(qnaDocumentID: documentID, completion: {
       result in
       switch result {

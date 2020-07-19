@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseFirestore
 import CodableFirebase
+import AVFoundation
 
 enum LectureTabType {
   case introduce
@@ -16,7 +17,7 @@ enum LectureTabType {
   case summary
 }
 
-class LectureStartVC: UIViewController {
+class LectureStartVC: PlayerViewController {
   private var currentTab: LectureTabType = .introduce {
     didSet {
       if currentTab == .introduce {
@@ -43,6 +44,8 @@ class LectureStartVC: UIViewController {
       }
     }
   }
+  
+  
   private let db = Firestore.firestore()
   private var underlineWidth: CGFloat = 0
   private let videoView = UIView()
@@ -172,7 +175,7 @@ class LectureStartVC: UIViewController {
   private func attribute() {
     self.view.backgroundColor = .white
     
-    videoView.backgroundColor = .black
+    playerView.backgroundColor = .black
     
     [introduceButton, studyButton, summaryButton].forEach {
       let title = $0 == introduceButton ? "강의 소개" : $0 == studyButton ? "스터디" : "요약"
@@ -225,17 +228,17 @@ class LectureStartVC: UIViewController {
   private func setupUI() {
     let guide = self.view.safeAreaLayoutGuide
     let margins: CGFloat = 15
-    [videoView, buttonStackView, buttonUnderlineView, separatorView, tabTableView, makeStudyButton]
+    [playerView, buttonStackView, buttonUnderlineView, separatorView, tabTableView, makeStudyButton]
       .forEach { self.view.addSubview($0) }
     
-    videoView.snp.makeConstraints {
+    playerView.snp.makeConstraints {
       $0.top.equalTo(guide.snp.top)
       $0.leading.trailing.equalToSuperview()
       $0.height.equalToSuperview().multipliedBy(0.3)
     }
     
     buttonStackView.snp.makeConstraints {
-      $0.top.equalTo(videoView.snp.bottom)
+      $0.top.equalTo(playerView.snp.bottom)
       $0.leading.trailing.equalToSuperview()
     }
     
@@ -264,6 +267,28 @@ class LectureStartVC: UIViewController {
       $0.width.equalToSuperview().multipliedBy(0.4)
       $0.height.equalTo(36)
     }
+  }
+  
+  override func changeFullScreen() {
+    super.changeFullScreen()
+    view.bringSubviewToFront(playerView)
+    let guide = view.safeAreaLayoutGuide
+    view.backgroundColor = .black
+    playerView.snp.remakeConstraints({
+      $0.leading.top.trailing.bottom.equalTo(guide)
+    })
+    view.layoutIfNeeded()
+  }
+  
+  override func changeMiniScreen() {
+    super.changeMiniScreen()
+    view.backgroundColor = .white
+    playerView.snp.remakeConstraints({
+      let guide = view.safeAreaLayoutGuide
+      $0.top.leading.trailing.equalTo(guide)
+      $0.height.equalTo(guide).multipliedBy(0.3)
+    })
+    view.layoutIfNeeded()
   }
   
   required init?(coder: NSCoder) {
@@ -404,4 +429,9 @@ extension LectureStartVC: LectureSummaryCellDelegate {
     sender.setImage(image, for: .normal)
     sender.isSelected.toggle()
   }
+}
+
+extension LectureStartVC {
+  
+  
 }
