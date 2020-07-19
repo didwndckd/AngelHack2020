@@ -15,6 +15,7 @@ struct Study {
 }
 
 struct StudyModel: Codable {
+  var documentID: String? = nil
   let title: String
   let lectureID: String
   let lectureTitle: String

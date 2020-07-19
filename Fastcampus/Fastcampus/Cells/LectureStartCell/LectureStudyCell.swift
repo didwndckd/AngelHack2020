@@ -15,7 +15,7 @@ protocol LectureStudyCellDelegate: class {
 class LectureStudyCell: UITableViewCell {
   static let identifier = "LectureStudyCell"
   weak var delegate: LectureStudyCellDelegate?
-  private var studyID: String = ""
+  private var studyID: String?
   private let levelButton = UIButton()
   private let nameLabel = UILabel()
   private let titleLabel = UILabel()
@@ -31,7 +31,6 @@ class LectureStudyCell: UITableViewCell {
   }
   
   func setProperties(study: StudyModel, user: UserModel) {
-    self.studyID = study.
     titleLabel.text = study.title
     let formatter = DateFormatter()
     formatter.dateFormat = "MM월 dd일 HH시 mm분"
@@ -45,7 +44,8 @@ class LectureStudyCell: UITableViewCell {
       joinButton.backgroundColor = UIColor.lightGray
       joinButton.isUserInteractionEnabled = false
     }
-    self.nameLabel.text = user.nickName
+    nameLabel.text = user.nickName
+    studyID = study.documentID
   }
   
   func makeGradientJoinButton() {
@@ -144,6 +144,8 @@ class LectureStudyCell: UITableViewCell {
 
 private extension LectureStudyCell {
   @objc private func touchUpJoinButton() {
-    delegate?.joinStudy(studyID: "0")
+    if let studyID = studyID {
+      delegate?.joinStudy(studyID: studyID)
+    }
   }
 }

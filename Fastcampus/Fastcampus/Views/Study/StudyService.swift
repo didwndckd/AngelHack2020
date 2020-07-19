@@ -95,19 +95,18 @@ class StudyService {
       .collection("Study")
       .document(studyDocumentID)
       .getDocument { (snapshot, error) in
-        
         if let error = error {
           completion(.failure(error))
           
         } else {
           guard
             let data = snapshot?.data(),
-            let model = try? FirestoreDecoder().decode(StudyModel.self, from: data)
+            var model = try? FirestoreDecoder().decode(StudyModel.self, from: data)
             else {
               completion(.failure(NSError(domain: "Parsing Errro", code: 0)))
               return
           }
-          
+          model.documentID = snapshot?.documentID
           completion(.success(model))
         }
     }

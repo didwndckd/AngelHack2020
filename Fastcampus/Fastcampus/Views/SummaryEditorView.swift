@@ -8,7 +8,12 @@
 
 import UIKit
 
+protocol SummaryEditorViewDelegate: class {
+  func uploadSummary(title: String, contents: String)
+}
+
 class SummaryEditorView: View, KeyboardControllable {
+  weak var delegate: SummaryEditorViewDelegate?
   private let summaryScrollView = UIScrollView()
   private let titleLabel = UILabel()
   private let titleTextField = DisignableTextField(placeHolder: "제목을 입력해 주세요.")
@@ -69,6 +74,7 @@ class SummaryEditorView: View, KeyboardControllable {
     registButton.setTitle("요약본 올리기", for: .normal)
     registButton.setTitleColor(.white, for: .normal)
     registButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+    registButton.addTarget(self, action: #selector(touchUpRegistButton), for: .touchUpInside)
     registButton.makeGradient()
   }
   
@@ -127,5 +133,14 @@ class SummaryEditorView: View, KeyboardControllable {
   override func draw(_ rect: CGRect) {
     super.draw(rect)
     registButton.makeGradient()
+  }
+}
+
+private extension SummaryEditorView {
+  @objc private func touchUpRegistButton() {
+    delegate?.uploadSummary(
+      title: titleTextField.text ?? "",
+      contents: contextTextView.text
+    )  
   }
 }

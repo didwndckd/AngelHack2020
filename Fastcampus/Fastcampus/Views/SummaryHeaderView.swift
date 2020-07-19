@@ -21,9 +21,16 @@ class SummaryHeaderView: View {
     super.init(frame: frame)
   }
   
+  func setProperties(summary: Summary, user: UserModel) {
+    titleLabel.text = summary.title
+    contentsLabel.text = summary.contents
+    userNameLabel.text = user.nickName
+    levelLabel.setTitle("Lv.\(user.level)", for: .normal)
+  }
+  
   override func attribute() {
     super.attribute()
-    titleBgView.backgroundColor = #colorLiteral(red: 0.9456093907, green: 0.9452782273, blue: 0.9634839892, alpha: 1)
+    titleBgView.backgroundColor = #colorLiteral(red: 1, green: 0.9529311061, blue: 0.9375221133, alpha: 1)
     
     titleLabel.text = "2회차 요약본(UX위주)"
     titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)

@@ -28,7 +28,6 @@ class MainVC: UIViewController {
         case .expected:
           break
         case .studying:
-          self.navigationController?.pushViewController(SummaryEditorVC(), animated: true)
           break
         case .finish:
           break
@@ -249,9 +248,9 @@ extension MainVC: UITableViewDelegate {
 
 private extension MainVC {
   @objc private func sideMenuDidTap() {
-    let summaryVC = SummaryVC()
-    summaryVC.modalPresentationStyle = .fullScreen
-    self.present(summaryVC, animated: true, completion: nil)
+//    let summaryVC = SummaryVC()
+//    summaryVC.modalPresentationStyle = .fullScreen
+//    self.present(summaryVC, animated: true, completion: nil)
 //    let sideMenuVC = SideMenuVC()
 //    sideMenuVC.modalPresentationStyle = .overFullScreen
 //    self.present(sideMenuVC, animated: false)
