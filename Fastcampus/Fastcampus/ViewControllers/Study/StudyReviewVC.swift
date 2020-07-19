@@ -11,6 +11,7 @@ import Firebase
 
 class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyReviewViewDelegate {
   
+  private var study: Study
   private var model: [QnA]
   private var messages: [MessageModel] = [] {
     didSet {
@@ -19,8 +20,9 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
   }
   private var index = 0
   
-  init(qnas: [QnA]) {
+  init(study: Study, qnas: [QnA]) {
     self.model = qnas
+    self.study = study
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -34,6 +36,12 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
     registerForKeyboardEvents()
     customView.setDelegate(delegate: self)
     updateMessages(0)
+//    questCollectionUserInteraction() // 방장만 질문 스크롤 가능하게 함
+  }
+  
+  private func questCollectionUserInteraction() {
+    guard SignService.uid != study.data.userIDs[0] else { return }
+    customView.questionInteractionEnabled()
   }
   
   deinit {
@@ -233,8 +241,8 @@ extension StudyReviewVC {
 extension StudyReviewVC {
   static func pushStudyReviewVC(viewController: UIViewController, studyDocumentID: String) {
     StudyService.getQnaList(studyDocumentID: studyDocumentID, completion: {
-      qnas in
-      let vc = StudyReviewVC(qnas: qnas)
+      (study, qnas) in
+      let vc = StudyReviewVC(study: study, qnas: qnas)
       viewController.navigationController?.pushViewController(vc, animated: true)
     })
   }
