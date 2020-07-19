@@ -19,6 +19,10 @@ class SummaryCell: UITableViewCell {
     setupUI()
   }
   
+  func setProperties(comment: String) {
+    commentLabel.text = comment
+  }
+  
   private func attribute() {
     contentView.backgroundColor = #colorLiteral(red: 0.9452976584, green: 0.9455571771, blue: 0.9636406302, alpha: 1)
     profileImageView.backgroundColor = .lightGray
@@ -56,7 +60,7 @@ class SummaryCell: UITableViewCell {
 }
 
 protocol CommentInputCellDelegate: class {
-  func addcomment(text: String)
+  func addcomment(text: String?)
 }
 
 class CommentInputCell: UITableViewCell {
@@ -85,9 +89,7 @@ class CommentInputCell: UITableViewCell {
 
 extension CommentInputCell: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if let text = textField.text {
-      delegate?.addcomment(text: text)
-    }
+    delegate?.addcomment(text: textField.text)
     return true
   }
 }

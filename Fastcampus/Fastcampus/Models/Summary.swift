@@ -14,4 +14,5 @@ struct Summary: Codable {
   let title: String
   let contents: String
   let isOpen: Bool
+  let comments: [String]?
 }

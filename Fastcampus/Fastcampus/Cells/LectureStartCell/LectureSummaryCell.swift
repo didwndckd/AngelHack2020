@@ -30,28 +30,21 @@ class LectureSummaryCell: UITableViewCell {
     setupUI()
   }
   
-  func setProperties(summary: Summary) {
+  func setProperties(summary: Summary, user: UserModel) {
     titleLabel.text = summary.title
-    
-    UserService.getData(uid: summary.userID) { [weak self] result in
-      guard let self = self else { return }
-      switch result {
-        case .success(let user):
-          self.nameLabel.text = "작성자 \(user.nickName)"
-          self.nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-          let attributedStr = NSMutableAttributedString(string: self.nameLabel.text!)
-          attributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: (self.nameLabel.text! as NSString as NSString).range(of: "작성자"))
-          self.nameLabel.attributedText = attributedStr
-        case .failure(let err):
-          print("[Log] Error :", err.localizedDescription)
-      }
-    }
+    nameLabel.text = "작성자 \(user.nickName)"
+    nameLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    let attributedStr = NSMutableAttributedString(string: self.nameLabel.text!)
+    attributedStr.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: (self.nameLabel.text! as NSString as NSString).range(of: "작성자"))
+    nameLabel.attributedText = attributedStr
+    commentsCountLabel.text = "댓글수 : \(summary.comments?.count ?? 0)개"
   }
   
   private func attribute() {
     titleLabel.textColor = .black
     titleLabel.numberOfLines = 0
     titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+    titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     
     pageLabel.text = "3페이지"
     pageLabel.textColor = #colorLiteral(red: 0.676876843, green: 0.6769082546, blue: 0.6965678334, alpha: 1)
@@ -128,7 +121,7 @@ class LectureSummaryCell: UITableViewCell {
     
     enterImageView.snp.makeConstraints {
       $0.centerY.equalTo(contentView)
-      $0.trailing.equalTo(contentView).offset(-margins * 2)
+      $0.trailing.equalTo(contentView).offset(-margins)
       $0.width.height.equalTo(44)
     }
   }

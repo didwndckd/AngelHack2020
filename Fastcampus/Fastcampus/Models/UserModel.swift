@@ -13,5 +13,6 @@ struct UserModel: Codable {
   let level: Int
   let lectures: [String]
   var studys: [String]
+  let uid: String
 }
  
