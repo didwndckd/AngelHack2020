@@ -81,6 +81,7 @@ class SummaryVC: UITableViewController {
     let user = allUser.filter { $0.uid == summary.userID }.first!
     let summaryHeaderView = SummaryHeaderView()
     summaryHeaderView.setProperties(summary: summary, user: user)
+    summaryHeaderView.delegate = self
     return summaryHeaderView
   }
   
@@ -134,5 +135,14 @@ extension SummaryVC: CommentInputCellDelegate {
 private extension SummaryVC {
   @objc private func didTap() {
     self.view.endEditing(true)
+  }
+}
+
+extension SummaryVC: SummaryHeaderViewDelegate {
+  func isFavorite(sender: UIButton) {
+    sender.isSelected.toggle()
+    let image = sender.isSelected ? #imageLiteral(resourceName: "icon_favorite_selected") : #imageLiteral(resourceName: "icon_favorite_deselected")
+    sender.setImage(image, for: .normal)
+    
   }
 }

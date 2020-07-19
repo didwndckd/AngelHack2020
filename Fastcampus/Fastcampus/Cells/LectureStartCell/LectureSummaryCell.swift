@@ -16,7 +16,6 @@ class LectureSummaryCell: UITableViewCell {
   static let identifier = "LectureSummaryCell"
   weak var delegate: LectureSummaryCellDelegate?
   private let titleLabel = UILabel()
-  private let pageLabel = UILabel()
   private let nameLabel = UILabel()
   private let levelButton = UIButton()
   private let recommendCountLabel = UILabel()
@@ -46,10 +45,6 @@ class LectureSummaryCell: UITableViewCell {
     titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     
-    pageLabel.text = "3페이지"
-    pageLabel.textColor = #colorLiteral(red: 0.676876843, green: 0.6769082546, blue: 0.6965678334, alpha: 1)
-    pageLabel.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-    
     nameLabel.text = "작성자"
     nameLabel.textColor = .black
     
@@ -78,17 +73,12 @@ class LectureSummaryCell: UITableViewCell {
 
   private func setupUI() {
     let margins: CGFloat = 15
-    [titleLabel, pageLabel, nameLabel, levelButton, recommendCountLabel, commentsCountLabel, favoriteButton, enterImageView]
+    [titleLabel, nameLabel, levelButton, recommendCountLabel, commentsCountLabel, favoriteButton, enterImageView]
       .forEach { contentView.addSubview($0) }
     
     titleLabel.snp.makeConstraints {
       $0.top.leading.equalTo(contentView).offset(margins)
-    }
-    
-    pageLabel.snp.makeConstraints {
-      $0.centerY.equalTo(titleLabel)
-      $0.leading.equalTo(titleLabel.snp.trailing).offset(margins)
-      $0.trailing.equalTo(favoriteButton.snp.leading)
+      $0.trailing.equalTo(favoriteButton.snp.leading).offset(-margins)
     }
     
     nameLabel.snp.makeConstraints {
