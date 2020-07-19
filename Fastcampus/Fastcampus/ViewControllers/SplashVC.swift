@@ -55,7 +55,7 @@ extension SplashVC {
 
 extension SplashVC {
   private func checkSign() {
-    switch Auth.auth().currentUser == nil {
+    switch UserDefaults.standard.string(forKey: "email") == nil {
     case true:
       DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
         WindowManager.set(.sign)

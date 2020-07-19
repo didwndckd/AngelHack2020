@@ -159,9 +159,11 @@ extension StudyConfigureVC: StudyConfigureViewDelegate {
             return nil
           }
           
-          if !oldJoinedStudyPerson.contains(SignService.uid) {
-            oldJoinedStudyPerson.append(SignService.uid)
+          if !oldJoinedStudyPerson.contains(self.study!.documentID!) {
+            oldJoinedStudyPerson.append(self.study!.documentID!)
             transaction.updateData(["studys": oldJoinedStudyPerson], forDocument: sfReference)
+            
+            SignService.user.studys.append(self.study!.documentID!)
           }
           return nil
         }) { (object, error) in

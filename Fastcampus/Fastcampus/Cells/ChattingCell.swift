@@ -119,7 +119,7 @@ class ChattingCell: UITableViewCell {
         $0.leading.equalTo(profileView.snp.trailing).offset(padding)
       })
       messageLabel.snp.remakeConstraints({
-        $0.top.equalTo(nameLabel.snp.bottom).offset(-padding)
+        $0.top.equalTo(nameLabel.snp.bottom).offset(padding)
         $0.leading.equalTo(nameLabel)
 //        $0.trailing.equalToSuperview().offset(-inset)
         $0.bottom.equalToSuperview().offset(-inset)
