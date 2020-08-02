@@ -51,7 +51,7 @@ class PlayerView: StudyPlayerView {
     rewindButton.addTarget(self, action: #selector(didTapRewindButton(_:)), for: .touchUpInside)
     
     slider.setThumbImage(UIImage(systemName: "circle.fill"), for: .normal)
-    slider.tintColor = .white
+    slider.tintColor = .darkGray
     slider.isEnabled = true
     slider.addTarget(self, action: #selector(sliderChangeValue(_:)), for: .valueChanged)
     slider.addTarget(self, action: #selector(startSlide), for: .touchDown)

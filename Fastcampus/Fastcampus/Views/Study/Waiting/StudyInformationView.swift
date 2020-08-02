@@ -49,6 +49,7 @@ class StudyInformationView: View {
     fatalError("init(coder:) has not been implemented")
   }
   
+  
   override func attribute() {
     super.attribute()
     

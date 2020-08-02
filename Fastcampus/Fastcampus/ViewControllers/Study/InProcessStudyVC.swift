@@ -37,6 +37,19 @@ class InProcessStudyVC: ViewController<InProcessView> {
     customView.setupDelegate(vc: self)
     setNavigation()
     setupQnAModel()
+    test()
+  }
+  
+  // MARK: Test
+  
+  func test() {
+    let gesture = UITapGestureRecognizer(target: self, action: #selector(testAction))
+    gesture.numberOfTapsRequired = 2
+    self.view.addGestureRecognizer(gesture)
+  }
+  @objc func testAction() {
+    print(#function)
+    seekPlayer(to: 0)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -82,7 +95,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
   }
   
   private func addObservers() {
-    addPlayerDidPlayToEndTimeObserver()
+//    addPlayerDidPlayToEndTimeObserver()
     addTimeObserver()
   }
   

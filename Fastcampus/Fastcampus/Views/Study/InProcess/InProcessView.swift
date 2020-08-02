@@ -50,7 +50,8 @@ class InProcessView: View {
     
     bodyView.snp.makeConstraints({
       $0.bottom.leading.trailing.equalTo(guide)
-      $0.height.equalTo(guide).multipliedBy(0.7)
+//      $0.height.equalTo(guide).multipliedBy(0.7)
+      $0.top.equalTo(playerView.snp.bottom)
     })
     
     questionButton.snp.makeConstraints({
@@ -94,15 +95,15 @@ class InProcessView: View {
     let guide = safeAreaLayoutGuide
     backgroundColor = .black
     playerView.snp.remakeConstraints({
-      $0.leading.top.trailing.bottom.equalTo(guide)
+      $0.leading.top.trailing.bottom.equalToSuperview()
     })
     self.layoutIfNeeded()
   }
   
   private func changeMiniScreen() {
     backgroundColor = .white
+    let guide = safeAreaLayoutGuide
     playerView.snp.remakeConstraints({
-      let guide = safeAreaLayoutGuide
       $0.top.leading.trailing.equalTo(guide)
       $0.height.equalTo(guide).multipliedBy(0.3)
     })

@@ -190,7 +190,9 @@ extension StudyReviewVC {
     var offset = targetContentOffset.pointee
     let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
     var roundedIndex = round(index)
-//    print("index", index)
+    print("pointee:", offset)
+    print("index", index)
+    print("priority RoundedIndex", roundedIndex)
     
     
     // scrollView, targetContentOffset의 좌표 값으로 스크롤 방향을 알 수 있다.
@@ -201,7 +203,7 @@ extension StudyReviewVC {
     } else {
       roundedIndex = ceil(index)
     }
-//    print("roundedIndex", roundedIndex)
+    print("roundedIndex", roundedIndex)
     
     // 위 코드를 통해 페이징 될 좌표값을 targetContentOffset에 대입하면 된다.
     offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)

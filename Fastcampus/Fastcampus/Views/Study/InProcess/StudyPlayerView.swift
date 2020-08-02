@@ -42,10 +42,11 @@ class StudyPlayerView: View {
     backgroundColor = .black
     
     informationBackgroundView.backgroundColor = .black
-    informationBackgroundView.alpha = 0.5
+    informationBackgroundView.alpha = 0.3
+    
     
     screenModeButton.setImage(UIImage(named: "FullScreen"), for: .normal)
-    screenModeButton.setImage(UIImage(systemName: "square.fill"), for: .selected)
+    screenModeButton.setImage(UIImage(named: "NormalScreen"), for: .selected)
     screenModeButton.tintColor = .white
     screenModeButton.contentVerticalAlignment = .bottom
     screenModeButton.contentHorizontalAlignment = .right
@@ -57,9 +58,9 @@ class StudyPlayerView: View {
     restTimeLabel.font = .systemFont(ofSize: 12)
     
     slider.setThumbImage(UIImage(), for: .normal)
-    slider.isEnabled = false
+//    slider.isEnabled = false
     slider.maximumTrackTintColor = .white
-    slider.minimumTrackTintColor = .red
+    slider.minimumTrackTintColor = .darkGray
     
     screenModeButton.addTarget(self, action: #selector(didTapSreenModebutton(_:)), for: .touchUpInside)
     
@@ -82,6 +83,8 @@ class StudyPlayerView: View {
     let margin: CGFloat = 8
     let progressMargin: CGFloat = 4
     
+    let guide = safeAreaLayoutGuide
+    
     videoView.snp.makeConstraints({
       $0.top.leading.bottom.trailing.equalToSuperview()
     })
@@ -96,16 +99,17 @@ class StudyPlayerView: View {
     
     screenModeButton.snp.makeConstraints({
       $0.bottom.equalTo(restTimeLabel.snp.top).offset(-margin)
-      $0.trailing.equalToSuperview().offset(-margin)
+      $0.trailing.equalTo(guide).offset(-margin)
       $0.height.width.equalTo(30)
     })
     
+    
     restTimeLabel.snp.makeConstraints({
-      $0.bottom.trailing.equalToSuperview().inset(margin)
+      $0.bottom.trailing.equalTo(guide).inset(margin)
     })
     
     slider.snp.makeConstraints({
-      $0.leading.equalToSuperview().offset(margin)
+      $0.leading.equalTo(guide).offset(margin)
       $0.trailing.equalTo(restTimeLabel.snp.leading).offset(-progressMargin)
       $0.centerY.equalTo(restTimeLabel)
     })

@@ -25,7 +25,7 @@ class QuestionButton: UIButton {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    setGradientBackground(colors: [.red, .orange])
+    makeGradient()
   }
   
   private func attribute() {
