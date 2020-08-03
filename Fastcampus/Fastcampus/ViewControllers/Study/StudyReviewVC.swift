@@ -179,9 +179,11 @@ extension StudyReviewVC {
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     guard let _ = scrollView as? UICollectionView else { return }
-    let cellWidthIncludingSpacing = questionItemWidth(scrollView: scrollView)
-    let offset = scrollView.contentOffset
-    let index = Int((offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing)
+    let offsetX = scrollView.contentOffset.x
+    
+    let pageWidth = questionItemWidth(scrollView: scrollView) + questionItemSpacing
+    
+    let index = Int(((offsetX + questionItemMargin) / pageWidth))
     self.index = index
     updateMessages(index)
 //    print(scrollView.contentOffset.x)
@@ -192,15 +194,25 @@ extension StudyReviewVC {
     // item의 사이즈와 item 간의 간격 사이즈를 구해서 하나의 item 크기로 설정.
     guard let _ = scrollView as? UICollectionView else { return }
     
-    let offsetX = targetContentOffset.pointee.x
+    let offsetX = scrollView.contentOffset.x
     
     let pageWidth = questionItemWidth(scrollView: scrollView) + questionItemSpacing
     
     let index = ((offsetX + questionItemMargin) / pageWidth)
-    let multiplier = round(index)
+    var multiplier = round(index)
     
-    print("contentOffset:", offsetX)
+    print("=====================================================================")
+    print("contentOffset:", scrollView.contentOffset.x)
     print("pointeeOffset:", targetContentOffset.pointee.x)
+    print("index", index)
+    print("ceil", ceil(index), "floor", floor(index), "multiplier", multiplier)
+    print("velocity", velocity)
+    
+    if velocity.x > 0 {
+      multiplier = ceil(index)
+    } else if velocity.x < 0 {
+      multiplier = floor(index)
+    } 
     
     let updateOffsetX = (pageWidth * multiplier) - questionItemMargin
     
