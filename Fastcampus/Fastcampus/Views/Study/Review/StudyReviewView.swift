@@ -26,9 +26,6 @@ class StudyReviewView: View {
   private let questionCollectionView: UICollectionView
   private let chattingTableView = UITableView()
   private let editingView = ChattingInpuView()
-  var collectionViewItemSize: CGFloat {
-    questionCollectionView.bounds.width - (8 * 2)
-  }
   
   // MARK: Setup
   

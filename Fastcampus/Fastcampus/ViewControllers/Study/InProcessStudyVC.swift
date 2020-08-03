@@ -95,7 +95,7 @@ class InProcessStudyVC: ViewController<InProcessView> {
   }
   
   private func addObservers() {
-//    addPlayerDidPlayToEndTimeObserver()
+    addPlayerDidPlayToEndTimeObserver()
     addTimeObserver()
   }
   

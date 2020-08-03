@@ -20,6 +20,9 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
   }
   private var index = 0
   
+  private let questionItemMargin: CGFloat = 8
+  private let questionItemSpacing: CGFloat = 8
+  
   init(study: Study, qnas: [QnA]) {
     self.model = qnas
     self.study = study
@@ -111,7 +114,7 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
       case .failure(let e):
         print(e.localizedDescription)
       case .success(let messages):
-        print(messages)
+//        print(messages)
         self.messages = messages.sorted(by: {  $0.dateValue < $1.dateValue })
       }
     })
@@ -122,6 +125,12 @@ class StudyReviewVC: ViewController<StudyReviewView>, KeyboardObserving, StudyRe
     var study = self.study.data
     study.inProcess = .finished
     navigationController?.popToRootViewController(animated: true)
+  }
+  
+  private func questionItemWidth(scrollView: UIScrollView) -> CGFloat {
+    let margin = questionItemMargin * 2
+    let spacing = questionItemSpacing * 2
+    return scrollView.bounds.width - margin - spacing
   }
   
 }
@@ -170,46 +179,32 @@ extension StudyReviewVC {
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     guard let _ = scrollView as? UICollectionView else { return }
-    let cellWidthIncludingSpacing = customView.collectionViewItemSize + 8
+    let cellWidthIncludingSpacing = questionItemWidth(scrollView: scrollView)
     let offset = scrollView.contentOffset
     let index = Int((offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing)
     self.index = index
     updateMessages(index)
+//    print(scrollView.contentOffset.x)
   }
+  
   
   func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
     // item의 사이즈와 item 간의 간격 사이즈를 구해서 하나의 item 크기로 설정.
     guard let _ = scrollView as? UICollectionView else { return }
     
-    let cellWidthIncludingSpacing = customView.collectionViewItemSize + 8
+    let offsetX = targetContentOffset.pointee.x
     
-//    print("cellWidthIncludingSpacing", cellWidthIncludingSpacing)
+    let pageWidth = questionItemWidth(scrollView: scrollView) + questionItemSpacing
     
-    // targetContentOff을 이용하여 x좌표가 얼마나 이동했는지 확인
-    // 이동한 x좌표 값과 item의 크기를 비교하여 몇 페이징이 될 것인지 값 설정
-    var offset = targetContentOffset.pointee
-    let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
-    var roundedIndex = round(index)
-    print("pointee:", offset)
-    print("index", index)
-    print("priority RoundedIndex", roundedIndex)
+    let index = ((offsetX + questionItemMargin) / pageWidth)
+    let multiplier = round(index)
     
+    print("contentOffset:", offsetX)
+    print("pointeeOffset:", targetContentOffset.pointee.x)
     
-    // scrollView, targetContentOffset의 좌표 값으로 스크롤 방향을 알 수 있다.
-    // index를 반올림하여 사용하면 item의 절반 사이즈만큼 스크롤을 해야 페이징이 된다.
-    // 스크로로 방향을 체크하여 올림,내림을 사용하면 좀 더 자연스러운 페이징 효과를 낼 수 있다.
-    if scrollView.contentOffset.x > targetContentOffset.pointee.x {
-      roundedIndex = floor(index)
-    } else {
-      roundedIndex = ceil(index)
-    }
-    print("roundedIndex", roundedIndex)
+    let updateOffsetX = (pageWidth * multiplier) - questionItemMargin
     
-    // 위 코드를 통해 페이징 될 좌표값을 targetContentOffset에 대입하면 된다.
-    offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
-    targetContentOffset.pointee = offset
-//    print("offset", offset)
-    
+    targetContentOffset.pointee = CGPoint(x: updateOffsetX, y: 0)
   }
   
 }
@@ -232,10 +227,9 @@ extension StudyReviewVC: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let margin: CGFloat = 8
     let inset: CGFloat = 8
     let height = collectionView.bounds.height - (inset * 2)
-    let width = collectionView.bounds.width - (margin * 2)
+    let width = questionItemWidth(scrollView: collectionView)
     return CGSize(width: width, height: height)
   }
 }
