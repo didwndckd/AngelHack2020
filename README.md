@@ -27,7 +27,7 @@
 
 #### 화면
 
-![목업](https://github.com/Team-QED/AngelHack2020/blob/master/Assets/screenshot.png)
+![목업](/Assets/screenshot.png)
 
 #### 주요 기능
 
@@ -50,11 +50,11 @@ $ cd FastCampus
 $ pod install
 ```
 
-![1](https://github.com/Team-QED/AngelHack2020/blob/master/Assets/1.png)
+![1](/Assets/1.png)
 
-![2](https://github.com/Team-QED/AngelHack2020/blob/master/Assets/2.png)
+![2](/Assets/2.png)
 
-![3](https://github.com/Team-QED/AngelHack2020/blob/master/Assets/3.png)
+![3](/Assets/3.png)
 
 #### Description
 
